@@ -1,0 +1,25 @@
+{
+  "name": "babel-polyfill-provider-regenerator",
+  "version": "0.1.0",
+  "description": "TODO",
+  "repository": "https://github.com/babel/TODO",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "keywords": [
+    "babel-plugin"
+  ],
+  "dependencies": {
+    "@babel/helper-plugin-utils": "^7.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-inject-polyfills": "^0.1.0"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-inject-polyfills": "^0.1.0"
+  }
+}
