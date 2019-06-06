@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "build": "gulp build",
-    "clean": "",
+    "clean": "rimraf packages/*/lib",
+    "clean-all": "rimraf packages/*/lib packages/*/node_modules node_modules",
     "flow": "flow check --strip-root",
     "lint": "eslint packages '*.js' --format=codeframe",
     "postinstall": "lerna bootstrap",

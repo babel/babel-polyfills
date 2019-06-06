@@ -1,0 +1,12 @@
+[ignore]
+<PROJECT_ROOT>/packages/.*/lib
+<PROJECT_ROOT>/packages/.*/test
+
+[include]
+packages/*/src
+
+[options]
+include_warnings=true
+suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
+suppress_type=$FlowIgnore
+module.name_mapper='^@babel\/plugin-inject-polyfills$' -> '<PROJECT_ROOT>/packages/babel-plugin-inject-polyfills/src/index'

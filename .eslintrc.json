@@ -1,0 +1,25 @@
+{
+  "root": true,
+  "plugins": ["prettier", "@babel/development", "import"],
+  "extends": "babel",
+  "rules": {
+    "prettier/prettier": "error"
+  },
+  "env": { "node": true },
+  "overrides": [
+    {
+      "files": ["packages/*/src/**/*.js"],
+      "rules": {
+        "@babel/development/no-undefined-identifier": "error",
+        "@babel/development/no-deprecated-clone": "error",
+        "import/no-extraneous-dependencies": "error",
+        "eqeqeq": ["error", "always", { "null": "ignore" }],
+        "guard-for-in": "error"
+      }
+    },
+    {
+      "files": ["packages/*/test/**/*.js"],
+      "env": { "jest": true }
+    }
+  ]
+}
