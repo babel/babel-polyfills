@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    [
+      "@babel/plugin-inject-polyfills",
+      {
+        "method": "entry-global",
+        "providers": ["module:./packages/babel-polyfill-provider-regenerator"]
+      }
+    ]
+  ],
+  "presets": [["@babel/preset-env", { "targets": { "chrome": 40 } }]]
+}

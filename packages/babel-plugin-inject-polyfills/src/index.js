@@ -6,7 +6,9 @@ import * as traverse from "@babel/traverse";
 import { type NodePath } from "@babel/traverse";
 
 import getTargets from "@babel/preset-env/lib/targets-parser";
-import filterItems from "@babel/preset-env/lib/filter-items";
+import filterItems, {
+  isPluginRequired,
+} from "@babel/preset-env/lib/filter-items";
 
 import {
   getImportSource,
@@ -73,6 +75,9 @@ export default declare((api, options) => {
             defaultInclude,
             defaultExclude,
           );
+        },
+        isPolyfillRequired(support) {
+          return isPluginRequired(targets, support);
         },
       };
 
