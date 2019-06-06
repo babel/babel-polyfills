@@ -16,16 +16,21 @@ export default ({ getUtils, method, targets, filterPolyfills }) => {
     getPlatformSpecificDefaultFor(targets),
   );
 
+  const babelPolyfillPaths = new Set();
+
   return {
     entryGlobal(meta, utils, path) {
       if (
         meta.kind === "import" &&
         (meta.source === "@babel/polyfill" || meta.source === "core-js")
       ) {
-        path.remove();
         for (const name of polyfills) {
           utils.injectGlobalImport(`core-js/modules/${name}`);
         }
+
+        // We can't remove this now because it is also used as an entry
+        // point by the core-js polyfill. We will remove it on Program:exit.
+        babelPolyfillPaths.add(path);
       }
     },
 
@@ -64,13 +69,18 @@ export default ({ getUtils, method, targets, filterPolyfills }) => {
       }
     },
 
-    visitor: method === "usage-global" && {
-      // yield*
-      YieldExpression(path: NodePath) {
-        if (path.node.delegate) {
-          getUtils(path).injectGlobalImport("core-js/web.dom.iterable");
-        }
+    visitor: {
+      Program: {
+        exit: () => babelPolyfillPaths.forEach(p => p.node && p.remove()),
       },
+      ...(method === "usage-global" && {
+        // yield*
+        YieldExpression(path: NodePath) {
+          if (path.node.delegate) {
+            getUtils(path).injectGlobalImport("core-js/web.dom.iterable");
+          }
+        },
+      }),
     },
   };
 };
