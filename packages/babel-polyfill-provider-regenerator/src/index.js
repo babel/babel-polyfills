@@ -23,7 +23,7 @@ export default () => {
     },
     visitor: {
       Program: {
-        exit: () => babelPolyfillPaths.forEach(p => p.remove()),
+        exit: () => babelPolyfillPaths.forEach(p => p.node && p.remove()),
       },
     },
   };
