@@ -6,11 +6,15 @@ import {
   StaticProperties,
   InstanceProperties,
 } from "./built-in-definitions";
+import getPlatformSpecificDefaultFor from "./get-platform-specific-default";
 
 const has = Function.call.bind(Object.hasOwnProperty);
 
-export default ({ getUtils, method }) => {
-  const polyfills = corejs2Polyfills;
+export default ({ getUtils, method, targets, filterPolyfills }) => {
+  const polyfills = filterPolyfills(
+    corejs2Polyfills,
+    getPlatformSpecificDefaultFor(targets),
+  );
 
   return {
     entryGlobal(meta, utils, path) {
@@ -19,10 +23,7 @@ export default ({ getUtils, method }) => {
         (meta.source === "@babel/polyfill" || meta.source === "core-js")
       ) {
         path.remove();
-
-        for (const name of Object.keys(polyfills)) {
-          utils.injectGlobalImport(name);
-        }
+        for (const name of polyfills) utils.injectGlobalImport(name);
       }
     },
 

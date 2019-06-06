@@ -5,6 +5,9 @@ import { types as t } from "@babel/core";
 import * as traverse from "@babel/traverse";
 import { type NodePath } from "@babel/traverse";
 
+import getTargets from "@babel/preset-env/lib/targets-parser";
+import filterItems from "@babel/preset-env/lib/filter-items";
+
 import {
   getImportSource,
   getRequireSource,
@@ -18,7 +21,13 @@ export { resolveProvider } from "./config";
 export default declare((api, options) => {
   api.assertVersion(7);
 
-  const { method, providers } = options;
+  const {
+    method,
+    providers,
+    targets: targetsOption,
+    ignoreBrowserslistConfig,
+    configPath,
+  } = options;
 
   let methodName;
   if (method === "usage-global") methodName = "usageGlobal";
@@ -37,11 +46,39 @@ export default declare((api, options) => {
     throw new Error(".providers must be an array with at least one element.");
   }
 
+  const targets = getTargets(targetsOption, {
+    ignoreBrowserslistConfig,
+    configPath,
+  });
+
   const providersDescriptors = createProviderDescriptors(providers);
 
-  const resolvedProviders = providersDescriptors.map(({ value, options }) => {
-    return value({ getUtils, method }, options);
-  });
+  const resolvedProviders = providersDescriptors.map(
+    ({ value, options = {} }) => {
+      const include = new Set(options.include || []);
+      const exclude = new Set(options.exclude || []);
+
+      const api = {
+        getUtils,
+        method,
+        targets,
+        include,
+        exclude,
+        filterPolyfills(polyfills, defaultInclude, defaultExclude) {
+          return filterItems(
+            polyfills,
+            include,
+            exclude,
+            targets,
+            defaultInclude,
+            defaultExclude,
+          );
+        },
+      };
+
+      return value(api, options);
+    },
+  );
 
   const storage: WeakMap<NodePath, *> = new WeakMap();
 
