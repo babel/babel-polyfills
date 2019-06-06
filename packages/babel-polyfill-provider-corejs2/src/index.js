@@ -23,7 +23,9 @@ export default ({ getUtils, method, targets, filterPolyfills }) => {
         (meta.source === "@babel/polyfill" || meta.source === "core-js")
       ) {
         path.remove();
-        for (const name of polyfills) utils.injectGlobalImport(name);
+        for (const name of polyfills) {
+          utils.injectGlobalImport(`core-js/modules/${name}`);
+        }
       }
     },
 
