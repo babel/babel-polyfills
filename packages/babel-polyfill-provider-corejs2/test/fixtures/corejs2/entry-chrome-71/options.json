@@ -4,12 +4,8 @@
       "@babel/plugin-inject-polyfills",
       {
         "method": "entry-global",
-        "providers": [
-          [
-            "module:./packages/babel-polyfill-provider-corejs2",
-            { "targets": { "chrome": 71 } }
-          ]
-        ]
+        "targets": { "chrome": 71 },
+        "providers": ["module:./packages/babel-polyfill-provider-corejs2"]
       }
     ]
   ]

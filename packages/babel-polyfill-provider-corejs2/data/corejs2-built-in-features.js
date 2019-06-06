@@ -26,7 +26,7 @@ const typedArrayMethods = [
   "typed arrays / %TypedArray%[Symbol.species]",
 ];
 
-const es = {
+module.exports = {
   // compat-table missing babel6 mapping
   // "es6.array.concat": {
   //   features: [
@@ -329,7 +329,3 @@ const es = {
 
   "es6.weak-set": "WeakSet",
 };
-
-const proposals = require("./shipped-proposals").builtIns;
-
-module.exports = Object.assign({}, es, proposals);

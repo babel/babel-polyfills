@@ -143,3 +143,6 @@ import "es6.typed.float32-array";
 import "es6.typed.float64-array";
 import "es6.weak-map";
 import "es6.weak-set";
+import "web.timers";
+import "web.immediate";
+import "web.dom.iterable";

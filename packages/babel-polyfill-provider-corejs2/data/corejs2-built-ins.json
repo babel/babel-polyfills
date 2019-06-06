@@ -78,7 +78,7 @@
     "node": "11",
     "ios": "12",
     "opera": "56",
-    "electron": "4"
+    "electron": "4.2"
   },
   "es6.array.for-each": {
     "chrome": "5",
