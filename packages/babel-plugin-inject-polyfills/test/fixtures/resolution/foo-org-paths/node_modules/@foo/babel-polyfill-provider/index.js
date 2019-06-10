@@ -1,3 +1,7 @@
 module.exports = function() {
-  return {};
+  return {
+    name: "test",
+    entryGlobal() {},
+    usageGlobal() {},
+  };
 };

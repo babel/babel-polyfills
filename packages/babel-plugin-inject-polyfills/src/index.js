@@ -56,7 +56,7 @@ export default declare((api, options) => {
   const providersDescriptors = createProviderDescriptors(providers);
 
   const resolvedProviders = providersDescriptors.map(
-    ({ value, options = {} }) => {
+    ({ value, options = {}, alias }) => {
       const include = new Set(options.include || []);
       const exclude = new Set(options.exclude || []);
 
@@ -81,7 +81,16 @@ export default declare((api, options) => {
         },
       };
 
-      return value(api, options);
+      const provider = value(api, options);
+
+      if (typeof provider[methodName] !== "function") {
+        throw new Error(
+          `The "${provider.name || alias}" provider doesn't ` +
+            `support the "${method}" polyfilling method.`,
+        );
+      }
+
+      return provider;
     },
   );
 
