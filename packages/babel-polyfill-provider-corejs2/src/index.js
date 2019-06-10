@@ -1,5 +1,3 @@
-import { types as t } from "@babel/core";
-
 import corejs2Polyfills from "../data/corejs2-built-ins.json";
 import {
   BuiltIns,
@@ -15,6 +13,16 @@ export default ({ getUtils, method, targets, filterPolyfills }) => {
     corejs2Polyfills,
     getPlatformSpecificDefaultFor(targets),
   );
+
+  function inject(name, utils) {
+    if (typeof name === "string") {
+      if (polyfills.has(name)) {
+        utils.injectGlobalImport(`core-js/modules/${name}`);
+      }
+    } else {
+      name.forEach(n => inject(n, utils));
+    }
+  }
 
   const babelPolyfillPaths = new Set();
 
@@ -34,37 +42,28 @@ export default ({ getUtils, method, targets, filterPolyfills }) => {
       }
     },
 
-    usageGlobal(meta, utils, path) {
-      function inject(name) {
-        if (typeof name === "string") {
-          utils.injectGlobalImport("core-js/" + name);
-        } else {
-          name.forEach(name => utils.injectGlobalImport("core-js/" + name));
-        }
-      }
-
+    usageGlobal(meta, utils) {
       if (meta.kind === "in" && meta.key === "Symbol.iterator") {
-        utils.injectGlobalImport("core-js/web.dom.iterable");
+        utils.injectGlobalImport("core-js/modules/web.dom.iterable");
       } else if (meta.kind === "global") {
-        if (t.isMemberExpression(path.parent)) return;
         if (!has(BuiltIns, meta.name)) return;
 
-        inject(BuiltIns[meta.name]);
+        inject(BuiltIns[meta.name], utils);
       } else if (meta.kind === "property") {
         if (meta.placement === "static" && has(StaticProperties, meta.object)) {
           const BuiltInProperties = StaticProperties[meta.object];
           if (has(BuiltInProperties, meta.key)) {
-            inject(BuiltInProperties[meta.key]);
+            inject(BuiltInProperties[meta.key], utils);
           }
         } else if (has(InstanceProperties, meta.key)) {
           let InstancePropertyDependencies = InstanceProperties[meta.key];
-          if (meta.object) {
+          if (meta.object && meta.placement === "instance") {
             const low = meta.object.toLowerCase();
             InstancePropertyDependencies = InstancePropertyDependencies.filter(
               module => module.includes(low),
             );
           }
-          inject(InstancePropertyDependencies);
+          inject(InstancePropertyDependencies, utils);
         }
       }
     },
@@ -77,7 +76,9 @@ export default ({ getUtils, method, targets, filterPolyfills }) => {
         // yield*
         YieldExpression(path: NodePath) {
           if (path.node.delegate) {
-            getUtils(path).injectGlobalImport("core-js/web.dom.iterable");
+            getUtils(path).injectGlobalImport(
+              "core-js/modules/web.dom.iterable",
+            );
           }
         },
       }),
