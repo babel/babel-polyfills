@@ -17,7 +17,7 @@ describe("entry-global", () => {
     expect(() =>
       transform("", {
         method: "entry-global",
-        providers: [provider({})],
+        providers: [provider({ entryGlobal() {} })],
       }),
     ).not.toThrow();
   });
@@ -35,6 +35,15 @@ describe("entry-global", () => {
     expect(entryGlobal).toHaveBeenCalled();
     expect(usageGlobal).not.toHaveBeenCalled();
     expect(usagePure).not.toHaveBeenCalled();
+  });
+
+  it("not supported", () => {
+    expect(() => {
+      transform("", {
+        method: "entry-global",
+        providers: [provider({ usageGlobal() {}, usagePure() {} })],
+      });
+    }).toThrow(/support/);
   });
 
   it("import declaration", () => {
@@ -95,7 +104,7 @@ describe("usage-global", () => {
     expect(() =>
       transform("", {
         method: "usage-global",
-        providers: [provider({})],
+        providers: [provider({ usageGlobal() {} })],
       }),
     ).not.toThrow();
   });
@@ -113,6 +122,15 @@ describe("usage-global", () => {
     expect(entryGlobal).not.toHaveBeenCalled();
     expect(usageGlobal).toHaveBeenCalled();
     expect(usagePure).not.toHaveBeenCalled();
+  });
+
+  it("not supported", () => {
+    expect(() => {
+      transform("", {
+        method: "usage-global",
+        providers: [provider({ entryGlobal() {}, usagePure() {} })],
+      });
+    }).toThrow(/support/);
   });
 
   it("global", () => {
@@ -192,7 +210,7 @@ describe("usage-pure", () => {
     expect(() =>
       transform("", {
         method: "usage-pure",
-        providers: [provider({})],
+        providers: [provider({ usagePure() {} })],
       }),
     ).not.toThrow();
   });
@@ -210,6 +228,15 @@ describe("usage-pure", () => {
     expect(entryGlobal).not.toHaveBeenCalled();
     expect(usageGlobal).not.toHaveBeenCalled();
     expect(usagePure).toHaveBeenCalled();
+  });
+
+  it("not supported", () => {
+    expect(() => {
+      transform("", {
+        method: "usage-pure",
+        providers: [provider({ entryGlobal() {}, usageGlobal() {} })],
+      });
+    }).toThrow(/support/);
   });
 
   it("global", () => {
