@@ -44,7 +44,7 @@ export default ({ getUtils, method, targets, filterPolyfills }) => {
 
     usageGlobal(meta, utils) {
       if (meta.kind === "in" && meta.key === "Symbol.iterator") {
-        utils.injectGlobalImport("core-js/modules/web.dom.iterable");
+        inject("web.dom.iterable", utils);
       } else if (meta.kind === "global") {
         if (!has(BuiltIns, meta.name)) return;
 
@@ -76,9 +76,7 @@ export default ({ getUtils, method, targets, filterPolyfills }) => {
         // yield*
         YieldExpression(path: NodePath) {
           if (path.node.delegate) {
-            getUtils(path).injectGlobalImport(
-              "core-js/modules/web.dom.iterable",
-            );
+            inject("web.dom.iterable", getUtils(path));
           }
         },
       }),

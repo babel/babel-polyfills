@@ -1,0 +1,19 @@
+{
+  "plugins": [
+    [
+      "@babel/plugin-inject-polyfills",
+      {
+        "method": "entry-global",
+        "targets": { "chrome": 55 },
+        "providers": [
+          [
+            "module:./packages/babel-polyfill-provider-corejs2",
+            {
+              "include": ["es6.map", "es6.set"]
+            }
+          ]
+        ]
+      }
+    ]
+  ]
+}
