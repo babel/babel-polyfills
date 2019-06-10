@@ -8,7 +8,7 @@ function transform(code, options) {
   });
 }
 
-function getDescriptor(code, kind, useEntry) {
+function getDescriptor(code, filter, useEntry) {
   const fn = jest.fn();
   const provider = () => ({ entryGlobal: fn, usageGlobal: fn });
 
@@ -18,8 +18,12 @@ function getDescriptor(code, kind, useEntry) {
   });
 
   let args;
-  if (kind) {
-    args = fn.mock.calls.find(([d]) => d.kind === kind);
+  if (filter) {
+    const test =
+      typeof filter === "string"
+        ? ([d]) => d.kind === filter
+        : ([d]) => filter(d);
+    args = fn.mock.calls.find(test);
   } else {
     expect(fn).toHaveBeenCalledTimes(1);
     args = fn.mock.calls[0];
@@ -111,7 +115,7 @@ describe("descriptors", () => {
   it("symbol property", () => {
     const [desc, path] = getDescriptor(
       "NodeList.prototype[Symbol.iterator];",
-      "property",
+      d => d.object === "NodeList",
     );
 
     expect(desc).toEqual({

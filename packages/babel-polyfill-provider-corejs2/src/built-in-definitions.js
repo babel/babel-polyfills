@@ -8,7 +8,11 @@ const ArrayNatureIterators = [
   "web.dom.iterable",
 ];
 
-const CommonIterators = ["es6.string.iterator", ...ArrayNatureIterators];
+const CommonIterators = [
+  "es6.symbol",
+  "es6.string.iterator",
+  ...ArrayNatureIterators,
+];
 
 const PromiseDependencies = ["es6.object.to-string", "es6.promise"];
 
@@ -24,7 +28,7 @@ export const BuiltIns: ObjectMap<string | string[]> = {
   Promise: PromiseDependencies,
   RegExp: ["es6.regexp.constructor"],
   Set: ["es6.set", ...CommonIterators],
-  Symbol: ["es6.symbol", "es7.symbol.async-iterator"],
+  Symbol: "es6.symbol",
   Uint8Array: "es6.typed.uint8-array",
   Uint8ClampedArray: "es6.typed.uint8-clamped-array",
   Uint16Array: "es6.typed.uint16-array",
@@ -101,7 +105,7 @@ export const InstanceProperties: ObjectMap<string[]> = {
 
 export const StaticProperties: ObjectMap<ObjectMap<string | string[]>> = {
   Array: {
-    from: ["es6.array.from", "es6.string.iterator"],
+    from: ["es6.symbol", "es6.array.from", ...CommonIterators],
     isArray: "es6.array.is-array",
     of: "es6.array.of",
   },
@@ -186,5 +190,11 @@ export const StaticProperties: ObjectMap<ObjectMap<string | string[]>> = {
     preventExtensions: "es6.reflect.prevent-extensions",
     set: "es6.reflect.set",
     setPrototypeOf: "es6.reflect.set-prototype-of",
+  },
+
+  Symbol: {
+    asyncIterator: "es7.symbol.async-iterator",
+    match: "es6.regexp.match",
+    iterator: CommonIterators,
   },
 };
