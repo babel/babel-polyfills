@@ -1,7 +1,7 @@
 // @flow
 
 import { declare } from "@babel/helper-plugin-utils";
-import { types as t } from "@babel/core";
+import { types as t, template } from "@babel/core";
 import * as traverse from "@babel/traverse";
 import { type NodePath } from "@babel/traverse";
 
@@ -146,9 +146,18 @@ export default declare((api, options) => {
         const imports = storage.get(path.node);
         if (!imports) return;
 
+        const { sourceType } = path.node;
+
         const nodes = [];
         imports.forEach((ids, url) => {
           const specifiers = [];
+
+          if (sourceType === "script" && ids.size !== 0) {
+            throw new Error(
+              `Named polyfill imports are not supported in scripts. (${url})`,
+            );
+          }
+
           ids.forEach((local, imported) => {
             if (imported === "default") {
               // This needs to be the first specifier, otherwise @babel/generator has problems
@@ -159,7 +168,13 @@ export default declare((api, options) => {
               );
             }
           });
-          nodes.push(t.importDeclaration(specifiers, t.stringLiteral(url)));
+
+          const source = t.stringLiteral(url);
+          nodes.push(
+            sourceType === "script"
+              ? template.statement.ast`require(${source})`
+              : t.importDeclaration(specifiers, source),
+          );
         });
 
         path.unshiftContainer("body", nodes);

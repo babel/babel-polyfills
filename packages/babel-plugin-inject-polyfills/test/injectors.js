@@ -2,7 +2,7 @@ import * as babel from "@babel/core";
 import thisPlugin from "../lib";
 import astToCode from "./helpers/ast-to-code-serializer.js";
 
-function withUtils(code, fn) {
+function withUtils(code, fn, opts) {
   let result;
 
   const provider = () => ({
@@ -16,6 +16,8 @@ function withUtils(code, fn) {
     plugins: [[thisPlugin, { method: "usage-global", providers: [provider] }]],
     ast: true,
     code: false,
+    sourceType: "module",
+    ...opts,
   });
 
   return { ast, result };
@@ -25,13 +27,29 @@ expect.addSnapshotSerializer(astToCode);
 
 describe("injectors", () => {
   describe("injectGlobalImport", () => {
-    it("single import", () => {
-      const { ast, result } = withUtils("foo", utils => {
-        utils.injectGlobalImport("./polyfill/foo");
-      });
+    it("in module", () => {
+      const { ast, result } = withUtils("foo", utils =>
+        utils.injectGlobalImport("./polyfill/foo"),
+      );
 
       expect(ast).toMatchInlineSnapshot(`
         import "./polyfill/foo";
+        foo;
+      `);
+
+      expect(result).toBeUndefined();
+    });
+
+    it("in script", () => {
+      const { ast, result } = withUtils(
+        "foo",
+        utils => utils.injectGlobalImport("./polyfill/foo"),
+        { sourceType: "script" },
+      );
+
+      expect(ast).toMatchInlineSnapshot(`
+        require("./polyfill/foo");
+
         foo;
       `);
 
@@ -77,7 +95,7 @@ describe("injectors", () => {
       );
     });
 
-    it("single import", () => {
+    it("in script", () => {
       const { ast } = withUtils("foo", utils => {
         utils.injectNamedImport("./polyfill/foo", "fooPolyfill");
       });
@@ -86,6 +104,16 @@ describe("injectors", () => {
         import { fooPolyfill as _fooPolyfill } from "./polyfill/foo";
         foo;
       `);
+    });
+
+    it("in script", () => {
+      expect(() => {
+        withUtils(
+          "foo",
+          utils => utils.injectNamedImport("./polyfill/foo", "fooPolyfill"),
+          { sourceType: "script" },
+        );
+      }).toThrow();
     });
 
     it("respects name hint", () => {
@@ -173,7 +201,7 @@ describe("injectors", () => {
       );
     });
 
-    it("single import", () => {
+    it("in module", () => {
       const { ast } = withUtils("foo", utils => {
         utils.injectDefaultImport("./polyfill/foo");
       });
@@ -182,6 +210,14 @@ describe("injectors", () => {
         import _polyfillFoo from "./polyfill/foo";
         foo;
       `);
+    });
+
+    it("in script", () => {
+      expect(() => {
+        withUtils("foo", utils => utils.injectDefaultImport("./polyfill/foo"), {
+          sourceType: "script",
+        });
+      }).toThrow();
     });
 
     it("respects name hint", () => {
