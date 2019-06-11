@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    [
+      "@babel/plugin-inject-polyfills",
+      {
+        "method": "usage-global",
+        "targets": { "node": "4.0.0" },
+        "providers": [
+          [
+            "module:./packages/babel-polyfill-provider-corejs3",
+            { "shippedProposals": true }
+          ]
+        ]
+      }
+    ]
+  ]
+}
