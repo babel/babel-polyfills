@@ -216,7 +216,7 @@ export default declare((api, options) => {
         obj = parentPath.get("right");
         // !function ({ keys, values }) {...} (Object)
         // resolution does not work after properties transform :-(
-      } else if (parentPath.isFunctionExpression()) {
+      } else if (parentPath.isFunction()) {
         const grand = parentPath.parentPath;
         if (grand.isCallExpression() || grand.isNewExpression()) {
           if (grand.node.callee === parent) {
@@ -225,14 +225,14 @@ export default declare((api, options) => {
         }
       }
 
-      if (!obj) return;
-
-      const source = resolveSource(obj);
+      let id = null;
+      let placement = null;
+      if (obj) ({ id, placement } = resolveSource(obj));
 
       for (const prop of path.get("properties")) {
         if (prop.isObjectProperty()) {
           const key = resolveKey(prop.get("key"));
-          property(source.id, key, source.placement, prop);
+          property(id, key, placement, prop);
         }
       }
     },

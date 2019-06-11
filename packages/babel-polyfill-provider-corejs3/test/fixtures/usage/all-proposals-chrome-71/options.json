@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    [
+      "@babel/plugin-inject-polyfills",
+      {
+        "method": "usage-global",
+        "targets": { "chrome": 71 },
+        "providers": [
+          [
+            "module:./packages/babel-polyfill-provider-corejs3",
+            { "proposals": true }
+          ]
+        ]
+      }
+    ]
+  ]
+}
