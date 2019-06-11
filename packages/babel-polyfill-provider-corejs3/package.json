@@ -17,12 +17,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
-    "@babel/plugin-inject-polyfills": "^0.1.0",
     "@babel/helper-plugin-test-runner": "^7.1.0",
-    "lodash": "^4.17.11",
-    "semver": "^6.1.1",
-    "electron-to-chromium": "^1.3.148",
-    "compat-table": "kangax/compat-table#45cbb3a3778815c973c5b09d69bf7d1f7ed0c316"
+    "@babel/plugin-inject-polyfills": "^0.1.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0-0",

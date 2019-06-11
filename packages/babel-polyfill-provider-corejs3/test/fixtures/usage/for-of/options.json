@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    [
+      "@babel/plugin-inject-polyfills",
+      {
+        "method": "usage-global",
+        "providers": ["module:./packages/babel-polyfill-provider-corejs3"]
+      }
+    ]
+  ]
+}
