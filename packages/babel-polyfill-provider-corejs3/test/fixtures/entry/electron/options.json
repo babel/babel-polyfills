@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    [
+      "@babel/plugin-inject-polyfills",
+      {
+        "method": "entry-global",
+        "targets": { "electron": "1.4" },
+        "providers": ["module:./packages/babel-polyfill-provider-corejs3"]
+      }
+    ]
+  ]
+}
