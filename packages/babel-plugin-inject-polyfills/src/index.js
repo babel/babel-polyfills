@@ -3,7 +3,7 @@
 import { declare } from "@babel/helper-plugin-utils";
 import { types as t, template } from "@babel/core";
 import * as traverse from "@babel/traverse";
-import { type NodePath } from "@babel/traverse";
+import type { NodePath } from "@babel/traverse";
 
 import getTargets from "@babel/preset-env/lib/targets-parser";
 import filterItems, {
@@ -20,7 +20,18 @@ import { createProviderDescriptors } from "./config";
 
 export { resolveProvider } from "./config";
 
-export default declare((api, options) => {
+import type {
+  ProviderApi,
+  Utils,
+  Options,
+  Targets,
+  MetaDescriptor,
+  PolyfillProvider,
+} from "./types";
+
+export type { PolyfillProvider };
+
+export default declare((api, options: Options) => {
   api.assertVersion(7);
 
   const {
@@ -48,7 +59,7 @@ export default declare((api, options) => {
     throw new Error(".providers must be an array with at least one element.");
   }
 
-  const targets = getTargets(targetsOption, {
+  const targets: Targets = getTargets(targetsOption, {
     ignoreBrowserslistConfig,
     configPath,
   });
@@ -60,7 +71,7 @@ export default declare((api, options) => {
       const include = new Set(options.include || []);
       const exclude = new Set(options.exclude || []);
 
-      const api = {
+      const api: ProviderApi = {
         getUtils,
         method,
         targets,
@@ -96,7 +107,7 @@ export default declare((api, options) => {
 
   const storage: WeakMap<NodePath, *> = new WeakMap();
 
-  function getUtils(path) {
+  function getUtils(path: NodePath): Utils {
     const programPath = path.findParent(p => p.isProgram());
     if (!storage.has(programPath.node)) {
       storage.set(programPath.node, new Map());
@@ -127,10 +138,11 @@ export default declare((api, options) => {
     };
   }
 
-  function callProviders(payload, path) {
+  function callProviders(payload: MetaDescriptor, path: NodePath) {
     const utils = getUtils(path);
 
     resolvedProviders.every(provider => {
+      // $FlowIgnore
       provider[methodName](payload, utils, path);
       return !!path.node;
     });
@@ -247,7 +259,7 @@ export default declare((api, options) => {
       for (const prop of path.get("properties")) {
         if (prop.isObjectProperty()) {
           const key = resolveKey(prop.get("key"));
-          property(id, key, placement, prop);
+          if (key) property(id, key, placement, prop);
         }
       }
     },
@@ -257,6 +269,8 @@ export default declare((api, options) => {
 
       const source = resolveSource(path.get("right"));
       const key = resolveKey(path.get("left"), true);
+
+      if (!key) return;
 
       callProviders(
         {

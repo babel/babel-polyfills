@@ -1,3 +1,5 @@
+// @flow
+
 import corejs2Polyfills from "../data/corejs2-built-ins.json";
 import {
   BuiltIns,
@@ -6,9 +8,12 @@ import {
 } from "./built-in-definitions";
 import getPlatformSpecificDefaultFor from "./get-platform-specific-default";
 
+import type { PolyfillProvider } from "@babel/plugin-inject-polyfills";
+
+// $FlowIgnore
 const has = Function.call.bind(Object.hasOwnProperty);
 
-export default ({ getUtils, method, targets, filterPolyfills }) => {
+export default (({ getUtils, method, targets, filterPolyfills }) => {
   const polyfills = filterPolyfills(
     corejs2Polyfills,
     getPlatformSpecificDefaultFor(targets),
@@ -27,6 +32,8 @@ export default ({ getUtils, method, targets, filterPolyfills }) => {
   const babelPolyfillPaths = new Set();
 
   return {
+    name: "corejs2",
+
     entryGlobal(meta, utils, path) {
       if (
         meta.kind === "import" &&
@@ -72,9 +79,11 @@ export default ({ getUtils, method, targets, filterPolyfills }) => {
       Program: {
         exit: () => babelPolyfillPaths.forEach(p => p.node && p.remove()),
       },
+
+      // $FlowIgnore
       ...(method === "usage-global" && {
         // yield*
-        YieldExpression(path: NodePath) {
+        YieldExpression(path) {
           if (path.node.delegate) {
             inject("web.dom.iterable", getUtils(path));
           }
@@ -82,4 +91,4 @@ export default ({ getUtils, method, targets, filterPolyfills }) => {
       }),
     },
   };
-};
+}: PolyfillProvider<>);

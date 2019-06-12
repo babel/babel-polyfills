@@ -3,15 +3,15 @@
 // @flow
 
 import { loadProvider } from "./loader";
+import type { ProviderOptions, PolyfillProvider } from "../types";
 
 // Represents a plugin or presets at a given location in a config object.
 // At this point these have been resolved to a specific object or function,
 // but have not yet been executed to call functions with options.
 export type UnloadedDescriptor = {
   name: string | void,
-  value: {} | Function,
-  options: {} | void | false,
-  dirname: string,
+  value: PolyfillProvider<*>,
+  options: ProviderOptions | void,
   alias: string,
   file?: {
     request: string,
@@ -20,12 +20,10 @@ export type UnloadedDescriptor = {
 };
 
 export function createProviderDescriptors(
-  items: *, //PluginList,
-  dirname: string,
-  alias: string,
+  items: *, //PluginList
 ): Array<UnloadedDescriptor> {
   const descriptors = items.map((item, index) =>
-    createDescriptor(item, dirname, `${alias}$${index}`),
+    createDescriptor(item, `$${index}`),
   );
 
   assertNoDuplicates(descriptors);
@@ -35,7 +33,6 @@ export function createProviderDescriptors(
 
 function createDescriptor(
   pair: *, // PluginItem,
-  dirname: string,
   alias: string,
 ): UnloadedDescriptor {
   let name;
@@ -54,7 +51,7 @@ function createDescriptor(
   if (typeof value === "string") {
     const request = value;
 
-    ({ filepath, value } = loadProvider(value, dirname));
+    ({ filepath, value } = loadProvider(value));
 
     file = {
       request,
@@ -94,9 +91,8 @@ function createDescriptor(
   return {
     name,
     alias: filepath || alias,
-    value,
+    value: (value: Function),
     options,
-    dirname,
     file,
   };
 }

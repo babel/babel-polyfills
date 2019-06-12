@@ -1,11 +1,16 @@
+// @flow
+
+import type { PolyfillProvider } from "@babel/plugin-inject-polyfills";
 import support from "../data/generators.json";
 
-export default ({ isPolyfillRequired }) => {
+export default (({ isPolyfillRequired }) => {
   const babelPolyfillPaths = new Set();
 
   const required = isPolyfillRequired(support);
 
   return {
+    name: "regenerator",
+
     entryGlobal(meta, utils, path) {
       if (meta.kind !== "import") return;
       if (meta.source === "@babel/polyfill") {
@@ -34,7 +39,7 @@ export default ({ isPolyfillRequired }) => {
       },
     },
   };
-};
+}: PolyfillProvider<>);
 
 const isRegenerator = meta =>
   meta.kind === "global" && meta.name === "regeneratorRuntime";

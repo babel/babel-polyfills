@@ -1,3 +1,5 @@
+// @flow
+
 import corejs3Polyfills from "core-js-compat/data";
 import corejs3ShippedProposalsList from "./shipped-proposals";
 import corejsEntries from "core-js-compat/entries";
@@ -12,6 +14,9 @@ import {
   InstanceProperties,
 } from "./built-in-definitions";
 
+import type { PolyfillProvider } from "@babel/plugin-inject-polyfills";
+
+// $FlowIgnore
 const has = Function.call.bind(Object.hasOwnProperty);
 
 const corejs3PolyfillsWithoutProposals = Object.keys(corejs3Polyfills)
@@ -43,7 +48,15 @@ function coreJSModule(name) {
   return `core-js/modules/${name}`;
 }
 
-export default (
+type Options = {
+  version?: number | String,
+  proposals?: boolean,
+  shippedProposals?: Boolean,
+  include?: string[],
+  exclude?: string[],
+};
+
+export default ((
   { filterPolyfills, getUtils, method },
   { version = 3, proposals, shippedProposals },
 ) => {
@@ -73,6 +86,8 @@ export default (
   }
 
   return {
+    name: "corejs3",
+
     entryGlobal(meta, utils, path) {
       if (meta.kind !== "import") return;
 
@@ -99,7 +114,7 @@ export default (
         const { placement, object, key } = meta;
 
         if (placement === "static") {
-          if (PossibleGlobalObjects.has(object)) {
+          if (object && PossibleGlobalObjects.has(object)) {
             injectBuiltInDependencies(key, utils);
             return;
           }
@@ -164,4 +179,4 @@ export default (
       },
     },
   };
-};
+}: PolyfillProvider<Options>);

@@ -1,3 +1,5 @@
+// @flow
+
 // NOTE: This code is mostly copied from packages/babel-core/src/config/files/plugins.js
 // I want to implement this plugin without modifying @babel/core since it is experimental,
 // but when it will become "stable" this code should be deduped.
@@ -27,7 +29,7 @@ const ORG_DEFAULT_RE = /^(@[^/]+)$/;
 
 export function loadProvider(
   name: string,
-  dirname: string,
+  dirname?: string,
 ): { filepath: string, value: mixed } {
   const filepath = resolveProvider(name, dirname);
   const value = requireModule(filepath);
@@ -54,7 +56,10 @@ function standardizeName(name: string) {
   );
 }
 
-export function resolveProvider(name: string, dirname: string = process.cwd()) {
+export function resolveProvider(
+  name: string,
+  dirname?: string = process.cwd(),
+) {
   const standardizedName = standardizeName(name);
 
   try {
@@ -91,7 +96,7 @@ function requireModule(name: string): mixed {
 
   try {
     LOADING_MODULES.add(name);
-    // $FlowIssue
+    // $FlowIgnore
     return require(name);
   } finally {
     LOADING_MODULES.delete(name);
