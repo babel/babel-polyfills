@@ -68,7 +68,7 @@ export default (
 
   function injectBuiltInDependencies(builtIn, utils) {
     if (has(BuiltIns, builtIn)) {
-      inject(BuiltIns[builtIn], utils);
+      inject(BuiltIns[builtIn].global, utils);
     }
   }
 
@@ -93,7 +93,7 @@ export default (
       if (meta.kind === "global") {
         if (!has(BuiltIns, meta.name)) return;
 
-        inject(BuiltIns[meta.name], utils);
+        inject(BuiltIns[meta.name].global, utils);
       }
       if (meta.kind === "property" || meta.kind === "in") {
         const { placement, object, key } = meta;
@@ -107,16 +107,16 @@ export default (
           if (has(StaticProperties, object)) {
             const BuiltInProperties = StaticProperties[object];
             if (has(BuiltInProperties, key)) {
-              inject(BuiltInProperties[key], utils);
+              inject(BuiltInProperties[key].global, utils);
             }
             return;
           }
         }
 
         if (!has(InstanceProperties, key)) return;
-        let InstancePropertyDependencies = InstanceProperties[key];
+        let InstancePropertyDependencies = InstanceProperties[key].global;
 
-        // Don't add polfyiils for other classes.
+        // Don't add polfyills for other classes.
         // e.g. [].includes -> YES es.array.includes, NO es.string.includes
         if (object && placement === "prototype") {
           const low = object.toLowerCase();
