@@ -1,4 +1,7 @@
+// @flow
+
 import { types as t } from "@babel/core";
+import type NodePath from "@babel/traverse";
 
 function getType(target: any): string {
   return Object.prototype.toString.call(target).slice(8, -1);
@@ -18,7 +21,7 @@ function resolveId(path) {
   }
 }
 
-export function resolveKey(path, computed) {
+export function resolveKey(path: NodePath, computed: boolean = false) {
   const { node, parent, scope } = path;
   if (path.isStringLiteral()) return node.value;
   const { name } = node;
@@ -41,7 +44,7 @@ export function resolveKey(path, computed) {
   }
 }
 
-export function resolveSource(obj) {
+export function resolveSource(obj: NodePath) {
   if (
     obj.isMemberExpression() &&
     obj.get("property").isIdentifier({ name: "prototype" })
