@@ -119,7 +119,11 @@ export default declare((api, options: Options) => {
     return {
       injectGlobalImport(url) {
         if (!imports.has(url)) imports.set(url, new Map());
-        programPath.requeue();
+
+        // TODO: Hack.
+        // The modules transform injects some new things during
+        // Program:exit, and we need to re-inject polyfill imports.
+        if (method === "usage-pure") programPath.requeue();
       },
       injectNamedImport(url, name, hint = name) {
         this.injectGlobalImport(url);
