@@ -14,6 +14,8 @@ import {
   InstanceProperties,
 } from "./built-in-definitions";
 
+import { types as t } from "@babel/core";
+
 import type { PolyfillProvider } from "@babel/plugin-inject-polyfills";
 
 // $FlowIgnore
@@ -68,6 +70,9 @@ export default ((
       : corejs3PolyfillsWithoutProposals,
   );
   const available = new Set(getModulesListForTargetVersion(version));
+  const coreJSBase = proposals
+    ? "@babel/runtime-corejs3/core-js"
+    : "@babel/runtime-corejs3/core-js-stable";
 
   function inject(name, utils) {
     if (typeof name === "string") {
@@ -83,6 +88,39 @@ export default ((
     if (has(BuiltIns, builtIn)) {
       inject(BuiltIns[builtIn].global, utils);
     }
+  }
+
+  function maybeInjectPure(desc, name, utils, object) {
+    if (!desc.pure) return;
+    if (object && desc.exclude && desc.exclude.includes(object)) return;
+    if (
+      !desc.support ||
+      (polyfills.has(desc.support) && available.has(desc.support))
+    ) {
+      return utils.injectDefaultImport(`${coreJSBase}/${desc.pure}`, name);
+    }
+  }
+
+  function callMethod(path, id) {
+    const { object } = path.node;
+
+    let context1, context2;
+    if (t.isIdentifier(object)) {
+      context1 = object;
+      context2 = t.cloneNode(object);
+    } else {
+      context1 = path.scope.generateDeclaredUidIdentifier("context");
+      context2 = t.assignmentExpression("=", context1, object);
+    }
+
+    path.replaceWith(
+      t.memberExpression(
+        t.callExpression(id, [context2]),
+        t.identifier("call"),
+      ),
+    );
+
+    path.parentPath.unshiftContainer("arguments", context1);
   }
 
   return {
@@ -141,6 +179,106 @@ export default ((
         }
 
         inject(InstancePropertyDependencies, utils);
+      }
+    },
+
+    usagePure(meta, utils, path) {
+      if (meta.kind === "global" && has(BuiltIns, meta.name)) {
+        const id = maybeInjectPure(BuiltIns[meta.name], meta.name, utils);
+        if (id) path.replaceWith(id);
+      }
+      if (meta.kind === "property") {
+        // We can't compile destructuring.
+        if (!path.isMemberExpression()) return;
+        if (!path.isReferenced()) return;
+
+        const { placement, object, key } = meta;
+        const isCall = path.parentPath.isCallExpression({ callee: path.node });
+
+        if (key === "Symbol.iterator") {
+          if (!polyfills.has("es.symbol.iterator")) return;
+
+          if (isCall) {
+            if (path.parent.arguments.length === 0) {
+              path.parentPath.replaceWith(
+                t.callExpression(
+                  utils.injectDefaultImport(
+                    `@babel/runtime-corejs3/core-js/get-iterator`,
+                    "getIterator",
+                  ),
+                  [path.node.object],
+                ),
+              );
+              path.skip();
+            } else {
+              callMethod(
+                path,
+                utils.injectDefaultImport(
+                  `@babel/runtime-corejs3/core-js/get-iterator-method`,
+                  "getIteratorMethod",
+                ),
+              );
+            }
+          } else {
+            path.replaceWith(
+              t.callExpression(
+                utils.injectDefaultImport(
+                  `@babel/runtime-corejs3/core-js/get-iterator-method`,
+                  "getIteratorMethod",
+                ),
+                [path.node.object],
+              ),
+            );
+          }
+
+          return;
+        }
+
+        if (placement === "static") {
+          if (has(StaticProperties, object)) {
+            const BuiltInProperties = StaticProperties[object];
+            if (has(BuiltInProperties, key)) {
+              const id = maybeInjectPure(
+                BuiltInProperties[key],
+                `${object}$${key}`,
+                utils,
+                object,
+              );
+              if (id) path.replaceWith(id);
+              return;
+            }
+          }
+        }
+
+        if (!has(InstanceProperties, key)) return;
+
+        const id = maybeInjectPure(
+          InstanceProperties[key],
+          `${key}InstanceProperty`,
+          utils,
+          object,
+        );
+        if (!id) return;
+
+        if (isCall) {
+          callMethod(path, id);
+        } else {
+          path.replaceWith(t.callExpression(id, [path.node.object]));
+        }
+      }
+
+      if (meta.kind === "in") {
+        if (meta.key === "Symbol.iterator") {
+          path.replaceWith(
+            t.callExpression(
+              utils.injectDefaultImport(
+                `@babel/runtime-corejs3/core-js/is-iterable`,
+                "isIterable",
+              ),
+              [path.node.right],
+            ),
+          );
+        }
       }
     },
 

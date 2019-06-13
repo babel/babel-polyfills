@@ -119,6 +119,7 @@ export default declare((api, options: Options) => {
     return {
       injectGlobalImport(url) {
         if (!imports.has(url)) imports.set(url, new Map());
+        programPath.requeue();
       },
       injectNamedImport(url, name, hint = name) {
         this.injectGlobalImport(url);
@@ -157,20 +158,28 @@ export default declare((api, options: Options) => {
       exit(path) {
         const imports = storage.get(path.node);
         if (!imports) return;
+        storage.delete(path.node);
 
         const { sourceType } = path.node;
+
+        let defaultId;
 
         const nodes = [];
         imports.forEach((ids, url) => {
           const specifiers = [];
 
-          if (sourceType === "script" && ids.size !== 0) {
-            throw new Error(
-              `Named polyfill imports are not supported in scripts. (${url})`,
-            );
-          }
-
           ids.forEach((local, imported) => {
+            if (sourceType === "script") {
+              if (imported === "default") {
+                defaultId = t.identifier(local);
+                return;
+              }
+
+              throw new Error(
+                `Named polyfill imports are not supported in scripts. (${url})`,
+              );
+            }
+
             if (imported === "default") {
               // This needs to be the first specifier, otherwise @babel/generator has problems
               specifiers.unshift(t.importDefaultSpecifier(t.identifier(local)));
@@ -182,11 +191,18 @@ export default declare((api, options: Options) => {
           });
 
           const source = t.stringLiteral(url);
-          nodes.push(
-            sourceType === "script"
-              ? template.statement.ast`require(${source})`
-              : t.importDeclaration(specifiers, source),
-          );
+
+          if (sourceType === "script") {
+            const requireCall = defaultId
+              ? template.statement.ast`
+                var ${defaultId} = require(${source})
+              `
+              : template.statement.ast`require(${source})`;
+            requireCall._blockHoist = 3;
+            nodes.push(requireCall);
+          } else {
+            nodes.push(t.importDeclaration(specifiers, source));
+          }
         });
 
         path.unshiftContainer("body", nodes);
@@ -222,7 +238,7 @@ export default declare((api, options: Options) => {
     },
 
     MemberExpression: {
-      exit(path: NodePath) {
+      [method === "usage-pure" ? "enter" : "exit"](path: NodePath) {
         const key = resolveKey(path.get("property"), path.node.computed);
         if (!key || key === "prototype") return;
 
