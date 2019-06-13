@@ -95,7 +95,7 @@ describe("injectors", () => {
       );
     });
 
-    it("in script", () => {
+    it("in module", () => {
       const { ast } = withUtils("foo", utils => {
         utils.injectNamedImport("./polyfill/foo", "fooPolyfill");
       });
@@ -213,11 +213,17 @@ describe("injectors", () => {
     });
 
     it("in script", () => {
-      expect(() => {
-        withUtils("foo", utils => utils.injectDefaultImport("./polyfill/foo"), {
-          sourceType: "script",
-        });
-      }).toThrow();
+      const { ast } = withUtils(
+        "foo",
+        utils => utils.injectDefaultImport("./polyfill/foo", "foo"),
+        { sourceType: "script" },
+      );
+
+      expect(ast).toMatchInlineSnapshot(`
+        var _foo = require("./polyfill/foo");
+
+        foo;
+      `);
     });
 
     it("respects name hint", () => {
