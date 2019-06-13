@@ -19,6 +19,7 @@ import {
 import { createProviderDescriptors } from "./config";
 
 export { resolveProvider } from "./config";
+import ImportsCache from "./imports-cache";
 
 import type {
   ProviderApi,
@@ -105,40 +106,48 @@ export default declare((api, options: Options) => {
     },
   );
 
-  const storage: WeakMap<NodePath, *> = new WeakMap();
+  const cache = new ImportsCache();
+
+  function hoist(node) {
+    node._blockHoist = 3;
+    return node;
+  }
 
   function getUtils(path: NodePath): Utils {
     const programPath = path.findParent(p => p.isProgram());
-    if (!storage.has(programPath.node)) {
-      storage.set(programPath.node, new Map());
-    }
-
-    // $FlowIgnore
-    const imports = (storage.get(programPath.node): Map<*, *>);
 
     return {
       injectGlobalImport(url) {
-        if (!imports.has(url)) imports.set(url, new Map());
-
-        // TODO: Hack.
-        // The modules transform injects some new things during
-        // Program:exit, and we need to re-inject polyfill imports.
-        if (method === "usage-pure") programPath.requeue();
+        cache.store(programPath, url, "", (isScript, source) => ({
+          node: isScript
+            ? template.statement.ast`require(${source})`
+            : t.importDeclaration([], source),
+          name: "",
+        }));
       },
       injectNamedImport(url, name, hint = name) {
-        this.injectGlobalImport(url);
-
-        // $FlowIgnore
-        const m = (imports.get(url): Map<*, *>);
-
-        if (!m.has(name)) {
-          m.set(name, programPath.scope.generateUid(hint));
-        }
-
-        return t.identifier(m.get(name));
+        return cache.store(programPath, url, name, (isScript, source, name) => {
+          const id = programPath.scope.generateUidIdentifier(hint);
+          return {
+            node: isScript
+              ? hoist(template.statement.ast`
+                  var ${id} = require(${source}).${name}
+                `)
+              : t.importDeclaration([t.importSpecifier(id, name)], source),
+            name: id.name,
+          };
+        });
       },
       injectDefaultImport(url, hint = url) {
-        return this.injectNamedImport(url, "default", hint);
+        return cache.store(programPath, url, "default", (isScript, source) => {
+          const id = programPath.scope.generateUidIdentifier(hint);
+          return {
+            node: isScript
+              ? hoist(template.statement.ast`var ${id} = require(${source})`)
+              : t.importDeclaration([t.importDefaultSpecifier(id)], source),
+            name: id.name,
+          };
+        });
       },
     };
   }
@@ -156,63 +165,6 @@ export default declare((api, options: Options) => {
   function property(object, key, placement, path) {
     return callProviders({ kind: "property", object, key, placement }, path);
   }
-
-  const visitor = {
-    Program: {
-      exit(path) {
-        const imports = storage.get(path.node);
-        if (!imports) return;
-        storage.delete(path.node);
-
-        const { sourceType } = path.node;
-
-        let defaultId;
-
-        const nodes = [];
-        imports.forEach((ids, url) => {
-          const specifiers = [];
-
-          ids.forEach((local, imported) => {
-            if (sourceType === "script") {
-              if (imported === "default") {
-                defaultId = t.identifier(local);
-                return;
-              }
-
-              throw new Error(
-                `Named polyfill imports are not supported in scripts. (${url})`,
-              );
-            }
-
-            if (imported === "default") {
-              // This needs to be the first specifier, otherwise @babel/generator has problems
-              specifiers.unshift(t.importDefaultSpecifier(t.identifier(local)));
-            } else {
-              specifiers.push(
-                t.importSpecifier(t.identifier(local), t.identifier(imported)),
-              );
-            }
-          });
-
-          const source = t.stringLiteral(url);
-
-          if (sourceType === "script") {
-            const requireCall = defaultId
-              ? template.statement.ast`
-                var ${defaultId} = require(${source})
-              `
-              : template.statement.ast`require(${source})`;
-            requireCall._blockHoist = 3;
-            nodes.push(requireCall);
-          } else {
-            nodes.push(t.importDeclaration(specifiers, source));
-          }
-        });
-
-        path.unshiftContainer("body", nodes);
-      },
-    },
-  };
 
   const entryVisitor = {
     ImportDeclaration(path) {
@@ -304,10 +256,7 @@ export default declare((api, options: Options) => {
     },
   };
 
-  const visitors = [
-    visitor,
-    method === "entry-global" ? entryVisitor : usageVisitor,
-  ];
+  const visitors = [method === "entry-global" ? entryVisitor : usageVisitor];
   resolvedProviders.forEach(p => p.visitor && visitors.push(p.visitor));
 
   return {

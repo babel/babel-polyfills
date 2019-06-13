@@ -107,13 +107,18 @@ describe("injectors", () => {
     });
 
     it("in script", () => {
-      expect(() => {
-        withUtils(
-          "foo",
-          utils => utils.injectNamedImport("./polyfill/foo", "fooPolyfill"),
-          { sourceType: "script" },
-        );
-      }).toThrow();
+      const { ast } = withUtils(
+        "foo",
+        utils =>
+          utils.injectNamedImport("./polyfill/foo", "foo", "fooPolyfill"),
+        { sourceType: "script" },
+      );
+
+      expect(ast).toMatchInlineSnapshot(`
+        var _fooPolyfill = require("./polyfill/foo").foo;
+
+        foo;
+      `);
     });
 
     it("respects name hint", () => {
@@ -150,8 +155,10 @@ describe("injectors", () => {
         utils.injectNamedImport("./polyfill/foo", "barPolyfill"),
       ]);
 
+      // This is sub-optimal, but it is ok.
       expect(ast).toMatchInlineSnapshot(`
-        import { fooPolyfill as _fooPolyfill, barPolyfill as _barPolyfill } from "./polyfill/foo";
+        import { fooPolyfill as _fooPolyfill } from "./polyfill/foo";
+        import { barPolyfill as _barPolyfill } from "./polyfill/foo";
         foo;
       `);
 
@@ -278,8 +285,12 @@ describe("injectors", () => {
         utils.injectGlobalImport("./polyfill/foo"),
       ]);
 
+      // This is sub-optimal, but it is ok
       expect(ast).toMatchInlineSnapshot(`
-        import _polyfillFoo, { foo as _foo, bar as _bar } from "./polyfill/foo";
+        import { foo as _foo } from "./polyfill/foo";
+        import { bar as _bar } from "./polyfill/foo";
+        import _polyfillFoo from "./polyfill/foo";
+        import "./polyfill/foo";
         foo;
       `);
     });
