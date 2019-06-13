@@ -12,6 +12,8 @@ var _exportNames = {
 };
 exports.exp = void 0;
 
+var _includes = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/includes"));
+
 var _bar = _interopRequireDefault(require("bar"));
 
 var _fuz = require("fuz");
@@ -28,3 +30,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const exp = _bar.default + _fuz.baz;
 exports.exp = exp;
+(0, _includes.default)(_bar.default);
