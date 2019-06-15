@@ -193,14 +193,12 @@ export default declare((api, options: Options) => {
       callProviders({ kind: "global", name }, path);
     },
 
-    MemberExpression: {
-      [method === "usage-pure" ? "enter" : "exit"](path: NodePath) {
-        const key = resolveKey(path.get("property"), path.node.computed);
-        if (!key || key === "prototype") return;
+    MemberExpression(path: NodePath) {
+      const key = resolveKey(path.get("property"), path.node.computed);
+      if (!key || key === "prototype") return;
 
-        const source = resolveSource(path.get("object"));
-        return property(source.id, key, source.placement, path);
-      },
+      const source = resolveSource(path.get("object"));
+      return property(source.id, key, source.placement, path);
     },
 
     ObjectPattern(path: NodePath) {
