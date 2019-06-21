@@ -6,7 +6,7 @@
         "method": "usage-global",
         "providers": [
           [
-            "../../../../../../packages/babel-polyfill-provider-corejs3",
+            "@@/babel-polyfill-provider-corejs3",
             { "proposals": true }
           ]
         ]

@@ -5,7 +5,7 @@
       {
         "method": "usage-global",
         "targets": { "node": 7 },
-        "providers": ["../../../../../../packages/babel-polyfill-provider-corejs2"]
+        "providers": ["@@/babel-polyfill-provider-corejs2"]
       }
     ]
   ]

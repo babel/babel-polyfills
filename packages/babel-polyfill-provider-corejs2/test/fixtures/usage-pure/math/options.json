@@ -5,10 +5,7 @@
       {
         "method": "usage-pure",
         "providers": [
-          [
-            "../../../../../../packages/babel-polyfill-provider-corejs2",
-            { "version": "^7.0.2" }
-          ]
+          ["@@/babel-polyfill-provider-corejs2", { "version": "^7.0.2" }]
         ]
       }
     ]

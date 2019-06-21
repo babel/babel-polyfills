@@ -5,7 +5,7 @@
       {
         "method": "usage-global",
         "targets": { "node": 6 },
-        "providers": ["../../../../../../packages/babel-polyfill-provider-regenerator"]
+        "providers": ["@@/babel-polyfill-provider-regenerator"]
       }
     ]
   ],
