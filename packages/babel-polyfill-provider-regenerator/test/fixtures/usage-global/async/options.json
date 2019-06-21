@@ -5,8 +5,8 @@
       {
         "method": "usage-global",
         "providers": [
-          "module:./packages/babel-polyfill-provider-regenerator",
-          "module:./packages/babel-polyfill-provider-corejs2"
+          "../../../../../../packages/babel-polyfill-provider-regenerator",
+          "../../../../../../packages/babel-polyfill-provider-corejs2"
         ]
       }
     ]

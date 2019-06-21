@@ -4,7 +4,7 @@
       "@babel/plugin-inject-polyfills",
       {
         "method": "usage-global",
-        "providers": ["module:./packages/babel-polyfill-provider-corejs3"]
+        "providers": ["../../../../../../packages/babel-polyfill-provider-corejs3"]
       }
     ],
     "@babel/plugin-syntax-dynamic-import"

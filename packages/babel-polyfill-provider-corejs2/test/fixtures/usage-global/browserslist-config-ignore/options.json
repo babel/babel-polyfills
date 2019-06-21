@@ -6,7 +6,7 @@
         "method": "usage-global",
         "targets": { "esmodules": true },
         "configPath": "../fixtures/preset-options-add-used-built-ins/browserslist-config-ignore",
-        "providers": ["module:./packages/babel-polyfill-provider-corejs2"]
+        "providers": ["../../../../../../packages/babel-polyfill-provider-corejs2"]
       }
     ]
   ]

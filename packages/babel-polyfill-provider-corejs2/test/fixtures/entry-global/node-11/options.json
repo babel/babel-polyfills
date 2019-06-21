@@ -5,7 +5,7 @@
       {
         "method": "entry-global",
         "targets": { "node": 11 },
-        "providers": ["module:./packages/babel-polyfill-provider-corejs2"]
+        "providers": ["../../../../../../packages/babel-polyfill-provider-corejs2"]
       }
     ]
   ]
