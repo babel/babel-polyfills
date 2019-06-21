@@ -4,7 +4,7 @@
       "@babel/plugin-inject-polyfills",
       {
         "method": "usage-pure",
-        "providers": ["../../../../../../packages/babel-polyfill-provider-corejs3"]
+        "providers": ["@@/babel-polyfill-provider-corejs3"]
       }
     ],
     ["@babel/plugin-transform-modules-commonjs", { "loose": true }]

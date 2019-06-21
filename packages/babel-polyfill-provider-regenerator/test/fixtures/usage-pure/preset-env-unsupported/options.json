@@ -5,7 +5,7 @@
       {
         "method": "usage-pure",
         "targets": { "chrome": 40 },
-        "providers": ["../../../../../../packages/babel-polyfill-provider-regenerator"]
+        "providers": ["@@/babel-polyfill-provider-regenerator"]
       }
     ]
   ],

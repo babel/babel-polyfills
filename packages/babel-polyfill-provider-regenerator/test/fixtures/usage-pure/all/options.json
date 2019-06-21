@@ -4,7 +4,7 @@
       "@babel/plugin-inject-polyfills",
       {
         "method": "usage-pure",
-        "providers": ["../../../../../../packages/babel-polyfill-provider-regenerator"]
+        "providers": ["@@/babel-polyfill-provider-regenerator"]
       }
     ]
   ]
