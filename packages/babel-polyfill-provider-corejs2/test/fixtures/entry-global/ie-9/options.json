@@ -5,7 +5,7 @@
       {
         "method": "entry-global",
         "targets": { "ie": 9 },
-        "providers": ["module:./packages/babel-polyfill-provider-corejs2"]
+        "providers": ["../../../../../../packages/babel-polyfill-provider-corejs2"]
       }
     ]
   ]

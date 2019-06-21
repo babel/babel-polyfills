@@ -7,7 +7,7 @@
         "targets": { "chrome": 63 },
         "providers": [
           [
-            "module:./packages/babel-polyfill-provider-corejs2",
+            "../../../../../../packages/babel-polyfill-provider-corejs2",
             {
               "exclude": [
                 "es7.array.flat-map",
