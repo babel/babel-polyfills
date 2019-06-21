@@ -2,28 +2,32 @@
 
 type ObjectMap<V> = { [name: string]: V };
 
-export type PolyfillDescriptor = {
-  stable: boolean,
+type PolyfillDescriptor<T> = {
+  name: string,
   pure: ?string,
   global: string[],
-  support: string,
+  meta: ?T,
 };
 
-const descriptor = (stable: boolean) => (
-  pure: ?string,
-  global: string[],
-  support: string = global[0],
+type CoreJSMeta = {
+  stable: boolean,
   exclude: ?(string[]),
-): PolyfillDescriptor => ({
-  stable,
-  pure,
-  global,
-  support,
-  exclude,
-});
+};
 
-const stable = descriptor(true);
-const proposal = descriptor(false);
+const define = <T>(
+  name: string,
+  pure: ?string,
+  global: string[] = [],
+  meta: ?T,
+): PolyfillDescriptor<T> => {
+  return { name, pure, global, meta };
+};
+
+const stable = (pure, global, name = global[0], exclude) =>
+  define<CoreJSMeta>(name, pure, global, { stable: true, exclude });
+
+const proposal = (pure, global, name = global[0], exclude) =>
+  define<CoreJSMeta>(name, pure, global, { stable: false, exclude });
 
 const typed = (name: string) => stable(null, [name, ...TypedArrayDependencies]);
 
@@ -142,7 +146,7 @@ const WeakSetDependencies = [
 
 const URLSearchParamsDependencies = ["web.url", ...CommonIteratorsWithTag];
 
-export const BuiltIns: ObjectMap<PolyfillDescriptor> = {
+export const BuiltIns: ObjectMap<PolyfillDescriptor<CoreJSMeta>> = {
   AggregateError: proposal("aggregate-error", [
     "esnext.aggregate-error",
     ...CommonIterators,
@@ -201,7 +205,9 @@ export const BuiltIns: ObjectMap<PolyfillDescriptor> = {
   setTimeout: stable("set-timeout", ["web.timers"]),
 };
 
-export const StaticProperties: ObjectMap<ObjectMap<PolyfillDescriptor>> = {
+export const StaticProperties: ObjectMap<
+  ObjectMap<PolyfillDescriptor<CoreJSMeta>>,
+> = {
   Array: {
     from: stable("array/from", ["es.array.from", "es.string.iterator"]),
     isArray: stable("array/is-array", ["es.array.is-array"]),
