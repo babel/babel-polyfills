@@ -21,9 +21,10 @@ export type UnloadedDescriptor = {
 
 export function createProviderDescriptors(
   items: *, //PluginList
+  dirname: string,
 ): Array<UnloadedDescriptor> {
   const descriptors = items.map((item, index) =>
-    createDescriptor(item, `$${index}`),
+    createDescriptor(item, `$${index}`, dirname),
   );
 
   assertNoDuplicates(descriptors);
@@ -34,6 +35,7 @@ export function createProviderDescriptors(
 function createDescriptor(
   pair: *, // PluginItem,
   alias: string,
+  dirname: string,
 ): UnloadedDescriptor {
   let name;
   let options;
@@ -51,7 +53,7 @@ function createDescriptor(
   if (typeof value === "string") {
     const request = value;
 
-    ({ filepath, value } = loadProvider(value));
+    ({ filepath, value } = loadProvider(value, dirname));
 
     file = {
       request,

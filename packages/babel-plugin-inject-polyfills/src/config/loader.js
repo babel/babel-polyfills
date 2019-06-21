@@ -29,7 +29,7 @@ const ORG_DEFAULT_RE = /^(@[^/]+)$/;
 
 export function loadProvider(
   name: string,
-  dirname?: string,
+  dirname: string,
 ): { filepath: string, value: mixed } {
   const filepath = resolveProvider(name, dirname);
   const value = requireModule(filepath);
@@ -56,10 +56,7 @@ function standardizeName(name: string) {
   );
 }
 
-export function resolveProvider(
-  name: string,
-  dirname?: string = process.cwd(),
-) {
+export function resolveProvider(name: string, dirname: string) {
   const standardizedName = standardizeName(name);
 
   try {

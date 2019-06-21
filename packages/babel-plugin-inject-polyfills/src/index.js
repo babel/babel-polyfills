@@ -32,7 +32,7 @@ import type {
 
 export type { PolyfillProvider };
 
-export default declare((api, options: Options) => {
+export default declare((api, options: Options, dirname: string) => {
   api.assertVersion(7);
 
   const {
@@ -65,7 +65,7 @@ export default declare((api, options: Options) => {
     configPath,
   });
 
-  const providersDescriptors = createProviderDescriptors(providers);
+  const providersDescriptors = createProviderDescriptors(providers, dirname);
 
   const resolvedProviders = providersDescriptors.map(
     ({ value, options = {}, alias }) => {
