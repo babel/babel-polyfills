@@ -51,9 +51,9 @@ function coreJSModule(name) {
 }
 
 type Options = {
-  version?: number | String,
+  version?: number | string,
   proposals?: boolean,
-  shippedProposals?: Boolean,
+  shippedProposals?: boolean,
   include?: string[],
   exclude?: string[],
 };
