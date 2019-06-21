@@ -19,14 +19,19 @@ export default (({ getUtils, method, targets, filterPolyfills }) => {
     getPlatformSpecificDefaultFor(targets),
   );
 
-  function inject(name, utils) {
-    if (typeof name === "string") {
+  function inject(desc, utils) {
+    if (typeof desc === "string") {
+      if (polyfills.has(desc)) {
+        utils.injectGlobalImport(`core-js/modules/${desc}`);
+      }
+      return;
+    }
+
+    desc.global.forEach(name => {
       if (polyfills.has(name)) {
         utils.injectGlobalImport(`core-js/modules/${name}`);
       }
-    } else {
-      name.forEach(n => inject(n, utils));
-    }
+    });
   }
 
   const babelPolyfillPaths = new Set();

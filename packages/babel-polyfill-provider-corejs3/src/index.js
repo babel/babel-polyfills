@@ -92,11 +92,11 @@ export default ((
 
   function maybeInjectPure(desc, name, utils, object) {
     if (!desc.pure) return;
-    if (object && desc.exclude && desc.exclude.includes(object)) return;
-    if (
-      !desc.support ||
-      (polyfills.has(desc.support) && available.has(desc.support))
-    ) {
+    if (object && desc.meta.exclude && desc.meta.exclude.includes(object)) {
+      return;
+    }
+    if (!proposals && !desc.meta.stable) return;
+    if (!desc.name || (polyfills.has(desc.name) && available.has(desc.name))) {
       return utils.injectDefaultImport(`${coreJSBase}/${desc.pure}`, name);
     }
   }
