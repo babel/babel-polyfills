@@ -282,5 +282,3 @@ export default ((
     },
   };
 }: PolyfillProvider<Options>);
-
-// This is at the end because it breaks my VSCode's syntax highlighting
