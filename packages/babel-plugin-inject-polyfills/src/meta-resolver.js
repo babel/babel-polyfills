@@ -23,7 +23,7 @@ const PossibleGlobalObjects = new Set<string>([
   "window",
 ]);
 
-export function createResolver<T>(
+export default function createMetaResolver<T>(
   polyfills: ResolverPolyfills<T>,
 ): ResolverFn<T> {
   const { static: staticP, instance: instanceP, global: globalP } = polyfills;

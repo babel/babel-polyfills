@@ -3,6 +3,10 @@
 import { types as t } from "@babel/core";
 import type NodePath from "@babel/traverse";
 
+export function has(object: Object, key: string) {
+  return Object.prototype.hasOwnProperty.call(object, key);
+}
+
 function getType(target: any): string {
   return Object.prototype.toString.call(target).slice(8, -1);
 }
