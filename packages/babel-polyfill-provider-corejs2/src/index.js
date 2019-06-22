@@ -9,11 +9,17 @@ import {
 import getPlatformSpecificDefaultFor from "./get-platform-specific-default";
 import { hasMinVersion } from "./helpers";
 
-import type { PolyfillProvider } from "@babel/plugin-inject-polyfills";
+import {
+  createMetaResolver,
+  type PolyfillProvider,
+} from "@babel/plugin-inject-polyfills";
 import { types as t } from "@babel/core";
 
-// $FlowIgnore
-const has = Function.call.bind(Object.hasOwnProperty);
+const resolve = createMetaResolver({
+  global: BuiltIns,
+  static: StaticProperties,
+  instance: InstanceProperties,
+});
 
 type Options = {
   version?: number | string,
@@ -45,19 +51,21 @@ export default ((
     });
   }
 
-  function maybeInjectPure(desc, name, utils) {
-    if (!desc.pure) return;
+  function maybeInjectPure(desc, hint, utils) {
+    const { pure, meta, name } = desc;
+
+    if (!pure) return;
     if (
-      desc.meta &&
-      desc.meta.minRuntimeVersion &&
-      !hasMinVersion(desc.meta.minRuntimeVersion, runtimeVersion)
+      meta &&
+      meta.minRuntimeVersion &&
+      !hasMinVersion(meta.minRuntimeVersion, runtimeVersion)
     ) {
       return;
     }
-    if (polyfills.has(desc.name)) {
+    if (polyfills.has(name)) {
       return utils.injectDefaultImport(
-        `@babel/runtime-corejs2/core-js/${desc.pure}`,
-        name,
+        `@babel/runtime-corejs2/core-js/${pure}`,
+        hint,
       );
     }
   }
@@ -85,47 +93,39 @@ export default ((
     usageGlobal(meta, utils) {
       if (meta.kind === "in" && meta.key === "Symbol.iterator") {
         inject("web.dom.iterable", utils);
-      } else if (meta.kind === "global") {
-        if (!has(BuiltIns, meta.name)) return;
-
-        inject(BuiltIns[meta.name], utils);
-      } else if (meta.kind === "property") {
-        if (meta.placement === "static" && has(StaticProperties, meta.object)) {
-          const BuiltInProperties = StaticProperties[meta.object];
-          if (has(BuiltInProperties, meta.key)) {
-            inject(BuiltInProperties[meta.key], utils);
-          }
-        } else if (has(InstanceProperties, meta.key)) {
-          let InstancePropertyDependencies = InstanceProperties[meta.key];
-          if (meta.object && meta.placement === "instance") {
-            const low = meta.object.toLowerCase();
-            InstancePropertyDependencies = InstancePropertyDependencies.filter(
-              module => module.includes(low),
-            );
-          }
-          inject(InstancePropertyDependencies, utils);
-        }
+      } else {
+        const resolved = resolve(meta);
+        if (resolved) inject(resolved.desc, utils);
       }
     },
 
     usagePure(meta, utils, path) {
-      if (meta.kind === "global" && has(BuiltIns, meta.name)) {
-        const id = maybeInjectPure(BuiltIns[meta.name], meta.name, utils);
-        if (id) path.replaceWith(id);
+      if (meta.kind === "in") {
+        if (meta.key === "Symbol.iterator") {
+          path.replaceWith(
+            t.callExpression(
+              utils.injectDefaultImport(
+                `@babel/runtime-corejs2/core-js/is-iterable`,
+                "isIterable",
+              ),
+              [path.node.right],
+            ),
+          );
+        }
+
+        return;
       }
+
       if (meta.kind === "property") {
         // We can't compile destructuring.
         if (!path.isMemberExpression()) return;
         if (!path.isReferenced()) return;
 
-        const { placement, object, key } = meta;
-        const isCall = path.parentPath.isCallExpression({ callee: path.node });
-
         if (
-          isCall &&
-          key === "Symbol.iterator" &&
-          path.parent.arguments.length === 0 &&
-          polyfills.has("es6.symbol")
+          meta.key === "Symbol.iterator" &&
+          polyfills.has("es6.symbol") &&
+          path.parentPath.isCallExpression({ callee: path.node }) &&
+          path.parent.arguments.length === 0
         ) {
           path.parentPath.replaceWith(
             t.callExpression(
@@ -140,37 +140,13 @@ export default ((
 
           return;
         }
-
-        if (placement === "static") {
-          if (has(StaticProperties, object)) {
-            const BuiltInProperties = StaticProperties[object];
-            if (has(BuiltInProperties, key)) {
-              const id = maybeInjectPure(
-                BuiltInProperties[key],
-                `${object}$${key}`,
-                utils,
-              );
-              if (id) path.replaceWith(id);
-            }
-          }
-        }
-
-        return;
       }
 
-      if (meta.kind === "in") {
-        if (meta.key === "Symbol.iterator") {
-          path.replaceWith(
-            t.callExpression(
-              utils.injectDefaultImport(
-                `@babel/runtime-corejs2/core-js/is-iterable`,
-                "isIterable",
-              ),
-              [path.node.right],
-            ),
-          );
-        }
-      }
+      const resolved = resolve(meta);
+      if (!resolved) return;
+
+      const id = maybeInjectPure(resolved.desc, resolved.name, utils);
+      if (id) path.replaceWith(id);
     },
 
     visitor: {
