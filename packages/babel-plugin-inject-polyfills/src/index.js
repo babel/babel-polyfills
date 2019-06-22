@@ -17,8 +17,6 @@ import {
   resolveSource,
 } from "./utils";
 import { createProviderDescriptors } from "./config";
-
-export { resolveProvider } from "./config";
 import ImportsCache from "./imports-cache";
 
 import type {
@@ -30,6 +28,8 @@ import type {
   PolyfillProvider,
 } from "./types";
 
+export { resolveProvider } from "./config";
+export { default as createMetaResolver } from "./meta-resolver";
 export type { PolyfillProvider, MetaDescriptor };
 
 export default declare((api, options: Options, dirname: string) => {

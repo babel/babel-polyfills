@@ -15,10 +15,12 @@ import {
 } from "./built-in-definitions";
 
 import { types as t } from "@babel/core";
-import { createResolver } from "./resolver";
 import { has, callMethod } from "./utils";
 
-import type { PolyfillProvider } from "@babel/plugin-inject-polyfills";
+import {
+  createMetaResolver,
+  type PolyfillProvider,
+} from "@babel/plugin-inject-polyfills";
 
 const corejs3PolyfillsWithoutProposals = Object.keys(corejs3Polyfills)
   .filter(name => !name.startsWith("esnext."))
@@ -59,7 +61,7 @@ type Options = {
 
 // Without the space after > it breaks my editor's syntax highlighting
 // prettier-ignore
-const resolve = createResolver<CoreJSPolyfillDescriptor> ({
+const resolve = createMetaResolver<CoreJSPolyfillDescriptor> ({
   global: BuiltIns,
   static: StaticProperties,
   instance: InstanceProperties,
