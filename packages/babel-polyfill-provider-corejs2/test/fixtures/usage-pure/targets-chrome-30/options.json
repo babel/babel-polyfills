@@ -5,7 +5,7 @@
       {
         "method": "usage-pure",
         "targets": { "chrome": 30 },
-        "providers": ["@@/babel-polyfill-provider-corejs2"]
+        "providers": ["@@/corejs2"]
       }
     ]
   ]

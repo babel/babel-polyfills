@@ -5,7 +5,7 @@
       {
         "method": "usage-pure",
         "targets": { "chrome": 70 },
-        "providers": ["@@/babel-polyfill-provider-regenerator"]
+        "providers": ["@@/regenerator"]
       }
     ]
   ],

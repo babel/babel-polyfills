@@ -4,7 +4,7 @@
       "@babel/plugin-inject-polyfills",
       {
         "method": "usage-pure",
-        "providers": ["@@/babel-polyfill-provider-corejs2"]
+        "providers": ["@@/corejs2"]
       }
     ],
     "@babel/plugin-transform-modules-commonjs"

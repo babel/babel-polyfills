@@ -5,8 +5,8 @@
       {
         "method": "entry-global",
         "providers": [
-          "@@/babel-polyfill-provider-regenerator",
-          "@@/babel-polyfill-provider-corejs2"
+          "@@/regenerator",
+          "@@/corejs2"
         ]
       }
     ]

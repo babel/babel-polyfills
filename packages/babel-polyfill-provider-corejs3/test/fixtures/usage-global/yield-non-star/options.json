@@ -5,7 +5,7 @@
       {
         "method": "usage-global",
         "targets": { "chrome": 55 },
-        "providers": ["@@/babel-polyfill-provider-corejs3"]
+        "providers": ["@@/corejs3"]
       }
     ]
   ]

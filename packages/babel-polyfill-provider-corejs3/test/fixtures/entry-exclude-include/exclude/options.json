@@ -7,7 +7,7 @@
         "targets": { "chrome": 63 },
         "providers": [
           [
-            "@@/babel-polyfill-provider-corejs3",
+            "@@/corejs3",
             {
               "exclude": [
                 "es.string.pad-start",

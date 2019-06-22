@@ -6,7 +6,7 @@
         "method": "usage-pure",
         "providers": [
           [
-            "@@/babel-polyfill-provider-corejs3",
+            "@@/corejs3",
             { "proposals": true }
           ]
         ]

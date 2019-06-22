@@ -7,7 +7,7 @@
         "targets": { "chrome": 55 },
         "providers": [
           [
-            "@@/babel-polyfill-provider-corejs2",
+            "@@/corejs2",
             {
               "exclude": ["es6.string.repeat"],
               "include": ["es6.map"]
