@@ -30,7 +30,7 @@ import type {
   PolyfillProvider,
 } from "./types";
 
-export type { PolyfillProvider };
+export type { PolyfillProvider, MetaDescriptor };
 
 export default declare((api, options: Options, dirname: string) => {
   api.assertVersion(7);

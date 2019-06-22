@@ -6,7 +6,7 @@ type PolyfillDescriptor<T> = {
   name: string,
   pure: ?string,
   global: string[],
-  meta: ?T,
+  meta: T,
 };
 
 type CoreJSMeta = {
@@ -14,11 +14,13 @@ type CoreJSMeta = {
   exclude: ?(string[]),
 };
 
+export type CoreJSPolyfillDescriptor = PolyfillDescriptor<CoreJSMeta>;
+
 const define = <T>(
   name: string,
   pure: ?string,
   global: string[] = [],
-  meta: ?T,
+  meta: T,
 ): PolyfillDescriptor<T> => {
   return { name, pure, global, meta };
 };
@@ -575,11 +577,4 @@ export const CommonInstanceDependencies = new Set<string>([
   "es.object.lookup-getter",
   "es.object.lookup-setter",
   "es.regexp.exec",
-]);
-
-export const PossibleGlobalObjects = new Set<string>([
-  "global",
-  "globalThis",
-  "self",
-  "window",
 ]);

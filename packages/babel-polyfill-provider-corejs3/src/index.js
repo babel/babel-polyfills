@@ -9,17 +9,16 @@ import {
   CommonIterators,
   CommonInstanceDependencies,
   PromiseDependencies,
-  PossibleGlobalObjects,
   StaticProperties,
   InstanceProperties,
+  type CoreJSPolyfillDescriptor,
 } from "./built-in-definitions";
 
 import { types as t } from "@babel/core";
+import { createResolver } from "./resolver";
+import { has, callMethod } from "./utils";
 
 import type { PolyfillProvider } from "@babel/plugin-inject-polyfills";
-
-// $FlowIgnore
-const has = Function.call.bind(Object.hasOwnProperty);
 
 const corejs3PolyfillsWithoutProposals = Object.keys(corejs3Polyfills)
   .filter(name => !name.startsWith("esnext."))
@@ -58,6 +57,14 @@ type Options = {
   exclude?: string[],
 };
 
+// Without the space after > it breaks my editor's syntax highlighting
+// prettier-ignore
+const resolve = createResolver<CoreJSPolyfillDescriptor> ({
+  global: BuiltIns,
+  static: StaticProperties,
+  instance: InstanceProperties,
+});
+
 export default ((
   { filterPolyfills, getUtils, method },
   { version = 3, proposals, shippedProposals },
@@ -74,53 +81,32 @@ export default ((
     ? "@babel/runtime-corejs3/core-js"
     : "@babel/runtime-corejs3/core-js-stable";
 
-  function inject(name, utils) {
-    if (typeof name === "string") {
-      if (polyfills.has(name) && available.has(name)) {
-        utils.injectGlobalImport(coreJSModule(name));
+  function shouldInject(name, meta, object) {
+    if (meta) {
+      if (object && meta.exclude && meta.exclude.includes(object)) {
+        return false;
       }
-    } else {
-      name.forEach(n => inject(n, utils));
+      if (!proposals && !meta.stable) return false;
+    }
+
+    return !name || (polyfills.has(name) && available.has(name));
+  }
+
+  function maybeInjectGlobal(names: string[], utils) {
+    for (const name of names) {
+      if (shouldInject(name)) utils.injectGlobalImport(coreJSModule(name));
     }
   }
 
-  function injectBuiltInDependencies(builtIn, utils) {
-    if (has(BuiltIns, builtIn)) {
-      inject(BuiltIns[builtIn].global, utils);
+  function maybeInjectPure(
+    desc: CoreJSPolyfillDescriptor,
+    hint,
+    utils,
+    object,
+  ) {
+    if (desc.pure && shouldInject(desc.name, desc.meta, object)) {
+      return utils.injectDefaultImport(`${coreJSBase}/${desc.pure}`, hint);
     }
-  }
-
-  function maybeInjectPure(desc, name, utils, object) {
-    if (!desc.pure) return;
-    if (object && desc.meta.exclude && desc.meta.exclude.includes(object)) {
-      return;
-    }
-    if (!proposals && !desc.meta.stable) return;
-    if (!desc.name || (polyfills.has(desc.name) && available.has(desc.name))) {
-      return utils.injectDefaultImport(`${coreJSBase}/${desc.pure}`, name);
-    }
-  }
-
-  function callMethod(path, id) {
-    const { object } = path.node;
-
-    let context1, context2;
-    if (t.isIdentifier(object)) {
-      context1 = object;
-      context2 = t.cloneNode(object);
-    } else {
-      context1 = path.scope.generateDeclaredUidIdentifier("context");
-      context2 = t.assignmentExpression("=", context1, object);
-    }
-
-    path.replaceWith(
-      t.memberExpression(
-        t.callExpression(id, [context2]),
-        t.identifier("call"),
-      ),
-    );
-
-    path.parentPath.unshiftContainer("arguments", context1);
   }
 
   return {
@@ -138,64 +124,56 @@ export default ((
         return;
       }
 
-      inject(modules, utils);
+      maybeInjectGlobal(modules, utils);
       path.remove();
     },
 
     usageGlobal(meta, utils) {
-      if (meta.kind === "global") {
-        if (!has(BuiltIns, meta.name)) return;
+      const resolved = resolve(meta);
+      if (!resolved) return;
 
-        inject(BuiltIns[meta.name].global, utils);
+      let deps = resolved.desc.global;
+
+      if (
+        resolved.kind !== "global" &&
+        meta.object &&
+        meta.placement === "prototype"
+      ) {
+        const low = meta.object.toLowerCase();
+        deps = deps.filter(
+          m => m.includes(low) || CommonInstanceDependencies.has(m),
+        );
       }
-      if (meta.kind === "property" || meta.kind === "in") {
-        const { placement, object, key } = meta;
 
-        if (placement === "static") {
-          if (object && PossibleGlobalObjects.has(object)) {
-            injectBuiltInDependencies(key, utils);
-            return;
-          }
-
-          if (has(StaticProperties, object)) {
-            const BuiltInProperties = StaticProperties[object];
-            if (has(BuiltInProperties, key)) {
-              inject(BuiltInProperties[key].global, utils);
-            }
-            return;
-          }
-        }
-
-        if (!has(InstanceProperties, key)) return;
-        let InstancePropertyDependencies = InstanceProperties[key].global;
-
-        // Don't add polfyills for other classes.
-        // e.g. [].includes -> YES es.array.includes, NO es.string.includes
-        if (object && placement === "prototype") {
-          const low = object.toLowerCase();
-          InstancePropertyDependencies = InstancePropertyDependencies.filter(
-            m => m.includes(low) || CommonInstanceDependencies.has(m),
-          );
-        }
-
-        inject(InstancePropertyDependencies, utils);
-      }
+      maybeInjectGlobal(deps, utils);
     },
 
     usagePure(meta, utils, path) {
-      if (meta.kind === "global" && has(BuiltIns, meta.name)) {
-        const id = maybeInjectPure(BuiltIns[meta.name], meta.name, utils);
-        if (id) path.replaceWith(id);
+      if (meta.kind === "in") {
+        if (meta.key === "Symbol.iterator") {
+          path.replaceWith(
+            t.callExpression(
+              utils.injectDefaultImport(
+                `@babel/runtime-corejs3/core-js/is-iterable`,
+                "isIterable",
+              ),
+              [path.node.right],
+            ),
+          );
+        }
+        return;
       }
+
+      let isCall: ?boolean;
+
       if (meta.kind === "property") {
         // We can't compile destructuring.
         if (!path.isMemberExpression()) return;
         if (!path.isReferenced()) return;
 
-        const { placement, object, key } = meta;
-        const isCall = path.parentPath.isCallExpression({ callee: path.node });
+        isCall = path.parentPath.isCallExpression({ callee: path.node });
 
-        if (key === "Symbol.iterator") {
+        if (meta.key === "Symbol.iterator") {
           if (!polyfills.has("es.symbol.iterator")) return;
 
           if (isCall) {
@@ -233,30 +211,30 @@ export default ((
 
           return;
         }
+      }
 
-        if (placement === "static") {
-          if (has(StaticProperties, object)) {
-            const BuiltInProperties = StaticProperties[object];
-            if (has(BuiltInProperties, key)) {
-              const id = maybeInjectPure(
-                BuiltInProperties[key],
-                `${object}$${key}`,
-                utils,
-                object,
-              );
-              if (id) path.replaceWith(id);
-              return;
-            }
-          }
-        }
+      const resolved = resolve(meta);
+      if (!resolved) return;
 
-        if (!has(InstanceProperties, key)) return;
-
+      if (resolved.kind === "global") {
+        const id = maybeInjectPure(resolved.desc, resolved.name, utils);
+        if (id) path.replaceWith(id);
+      } else if (resolved.kind === "static") {
         const id = maybeInjectPure(
-          InstanceProperties[key],
-          `${key}InstanceProperty`,
+          resolved.desc,
+          resolved.name,
           utils,
-          object,
+          // $FlowIgnore
+          meta.object,
+        );
+        if (id) path.replaceWith(id);
+      } else if (resolved.kind === "instance") {
+        const id = maybeInjectPure(
+          resolved.desc,
+          `${resolved.name}InstanceProperty`,
+          utils,
+          // $FlowIgnore
+          meta.object,
         );
         if (!id) return;
 
@@ -266,55 +244,43 @@ export default ((
           path.replaceWith(t.callExpression(id, [path.node.object]));
         }
       }
-
-      if (meta.kind === "in") {
-        if (meta.key === "Symbol.iterator") {
-          path.replaceWith(
-            t.callExpression(
-              utils.injectDefaultImport(
-                `@babel/runtime-corejs3/core-js/is-iterable`,
-                "isIterable",
-              ),
-              [path.node.right],
-            ),
-          );
-        }
-      }
     },
 
     visitor: method === "usage-global" && {
       // import("foo")
       CallExpression(path) {
         if (path.get("callee").isImport()) {
-          inject(PromiseDependencies, getUtils(path));
+          maybeInjectGlobal(PromiseDependencies, getUtils(path));
         }
       },
 
       // (async function () { }).finally(...)
       Function(path) {
         if (path.node.async) {
-          inject(PromiseDependencies, getUtils(path));
+          maybeInjectGlobal(PromiseDependencies, getUtils(path));
         }
       },
 
       // for-of, [a, b] = c
       "ForOfStatement|ArrayPattern"(path) {
-        inject(CommonIterators, getUtils(path));
+        maybeInjectGlobal(CommonIterators, getUtils(path));
       },
 
       // [...spread]
       SpreadElement(path) {
         if (!path.parentPath.isObjectExpression()) {
-          inject(CommonIterators, getUtils(path));
+          maybeInjectGlobal(CommonIterators, getUtils(path));
         }
       },
 
       // yield*
       YieldExpression(path) {
         if (path.node.delegate) {
-          inject(CommonIterators, getUtils(path));
+          maybeInjectGlobal(CommonIterators, getUtils(path));
         }
       },
     },
   };
 }: PolyfillProvider<Options>);
+
+// This is at the end because it breaks my VSCode's syntax highlighting
