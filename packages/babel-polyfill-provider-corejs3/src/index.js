@@ -59,9 +59,7 @@ type Options = {
   exclude?: string[],
 };
 
-// Without the space after > it breaks my editor's syntax highlighting
-// prettier-ignore
-const resolve = createMetaResolver<CoreJSPolyfillDescriptor> ({
+const resolve = createMetaResolver({
   global: BuiltIns,
   static: StaticProperties,
   instance: InstanceProperties,
