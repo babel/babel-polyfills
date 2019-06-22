@@ -6,6 +6,8 @@ var _Array$of = require("@babel/runtime-corejs2/core-js/array/of");
 
 var _Date$now = require("@babel/runtime-corejs2/core-js/date/now");
 
+var _JSON$stringify = require("@babel/runtime-corejs2/core-js/json/stringify");
+
 var _Number$EPSILON = require("@babel/runtime-corejs2/core-js/number/epsilon");
 
 var _Number$MAX_SAFE_INTEGER = require("@babel/runtime-corejs2/core-js/number/max-safe-integer");
@@ -36,9 +38,15 @@ var _Object$entries = require("@babel/runtime-corejs2/core-js/object/entries");
 
 var _Object$freeze = require("@babel/runtime-corejs2/core-js/object/freeze");
 
+var _Object$getOwnPropertyDescriptor = require("@babel/runtime-corejs2/core-js/object/get-own-property-descriptor");
+
 var _Object$getOwnPropertyDescriptors = require("@babel/runtime-corejs2/core-js/object/get-own-property-descriptors");
 
+var _Object$getOwnPropertyNames = require("@babel/runtime-corejs2/core-js/object/get-own-property-names");
+
 var _Object$getOwnPropertySymbols = require("@babel/runtime-corejs2/core-js/object/get-own-property-symbols");
+
+var _Object$getPrototypeOf = require("@babel/runtime-corejs2/core-js/object/get-prototype-of");
 
 var _Object$isExtensible = require("@babel/runtime-corejs2/core-js/object/is-extensible");
 
@@ -90,15 +98,37 @@ var _String$raw = require("@babel/runtime-corejs2/core-js/string/raw");
 
 var _Symbol = require("@babel/runtime-corejs2/core-js/symbol");
 
+var _Symbol$for = require("@babel/runtime-corejs2/core-js/symbol/for");
+
+var _Symbol$hasInstance = require("@babel/runtime-corejs2/core-js/symbol/has-instance");
+
+var _Symbol$isConcatSpreadable = require("@babel/runtime-corejs2/core-js/symbol/is-concat-spreadable");
+
 var _Symbol$iterator = require("@babel/runtime-corejs2/core-js/symbol/iterator");
 
+var _Symbol$keyFor = require("@babel/runtime-corejs2/core-js/symbol/key-for");
+
 var _Symbol$match = require("@babel/runtime-corejs2/core-js/symbol/match");
+
+var _Symbol$replace = require("@babel/runtime-corejs2/core-js/symbol/replace");
+
+var _Symbol$search = require("@babel/runtime-corejs2/core-js/symbol/search");
+
+var _Symbol$species = require("@babel/runtime-corejs2/core-js/symbol/species");
+
+var _Symbol$split = require("@babel/runtime-corejs2/core-js/symbol/split");
+
+var _Symbol$toPrimitive = require("@babel/runtime-corejs2/core-js/symbol/to-primitive");
+
+var _Symbol$toStringTag = require("@babel/runtime-corejs2/core-js/symbol/to-string-tag");
+
+var _Symbol$unscopables = require("@babel/runtime-corejs2/core-js/symbol/unscopables");
 
 _Array$from;
 _Array$isArray;
 _Array$of;
 _Date$now;
-JSON.stringify;
+_JSON$stringify;
 _Number$EPSILON;
 _Number$MAX_SAFE_INTEGER;
 _Number$MIN_SAFE_INTEGER;
@@ -116,11 +146,11 @@ _Object$defineProperty;
 _Object$entries;
 _Object$freeze;
 Object.fromEntries;
-Object.getOwnPropertyDescriptor;
+_Object$getOwnPropertyDescriptor;
 _Object$getOwnPropertyDescriptors;
-Object.getOwnPropertyNames;
+_Object$getOwnPropertyNames;
 _Object$getOwnPropertySymbols;
-Object.getPrototypeOf;
+_Object$getPrototypeOf;
 _Object$isExtensible;
 _Object$isFrozen;
 _Object$isSealed;
@@ -156,21 +186,21 @@ _String$fromCodePoint;
 _String$raw;
 _Symbol.asyncIterator;
 _Symbol.dispose;
-_Symbol.for;
-_Symbol.hasInstance;
-_Symbol.isConcatSpreadable;
+_Symbol$for;
+_Symbol$hasInstance;
+_Symbol$isConcatSpreadable;
 _Symbol$iterator;
-_Symbol.keyFor;
+_Symbol$keyFor;
 _Symbol$match;
 _Symbol.observable;
 _Symbol.patternMatch;
-_Symbol.replace;
-_Symbol.search;
-_Symbol.species;
-_Symbol.split;
-_Symbol.toPrimitive;
-_Symbol.toStringTag;
-_Symbol.unscopables;
+_Symbol$replace;
+_Symbol$search;
+_Symbol$species;
+_Symbol$split;
+_Symbol$toPrimitive;
+_Symbol$toStringTag;
+_Symbol$unscopables;
 Foo.bar;
 Array.something;
 Date.something;

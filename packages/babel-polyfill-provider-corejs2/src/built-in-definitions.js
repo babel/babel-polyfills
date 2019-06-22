@@ -157,7 +157,7 @@ export const StaticProperties: ObjectMap<
   },
 
   JSON: {
-    string: pureOnly("json/stringify"),
+    stringify: pureOnly("json/stringify", "es6.symbol"),
   },
 
   Math: {
@@ -211,16 +211,23 @@ export const StaticProperties: ObjectMap<
     ]),
     entries: pureAndGlobal("object/entries", ["es7.object.entries"]),
     freeze: pureAndGlobal("object/freeze", ["es6.object.freeze"]),
-    getOwnPropertyDescriptor: pureOnly("object/get-own-property-descriptor"),
+    getOwnPropertyDescriptor: pureAndGlobal(
+      "object/get-own-property-descriptor",
+      ["es6.object.get-own-property-descriptor"],
+    ),
     getOwnPropertyDescriptors: pureAndGlobal(
       "object/get-own-property-descriptors",
       ["es7.object.get-own-property-descriptors"],
     ),
-    getOwnPropertyNames: pureOnly("object/get-own-property-names"),
+    getOwnPropertyNames: pureAndGlobal("object/get-own-property-names", [
+      "es6.object.get-own-property-names",
+    ]),
     getOwnPropertySymbols: pureAndGlobal("object/get-own-property-symbols", [
       "es6.symbol",
     ]),
-    getPrototypeOf: pureOnly("object/get-prototype-of"),
+    getPrototypeOf: pureAndGlobal("object/get-prototype-of", [
+      "es6.object.get-prototype-of",
+    ]),
     is: pureAndGlobal("object/is", ["es6.object.is"]),
     isExtensible: pureAndGlobal("object/is-extensible", [
       "es6.object.is-extensible",
@@ -285,18 +292,18 @@ export const StaticProperties: ObjectMap<
   Symbol: {
     // FIXME: Pure disabled to work around zloirock/core-js#262.
     asyncIterator: globalOnly(["es7.symbol.async-iterator"]),
-    for: pureOnly("symbol/for"),
-    hasInstance: pureOnly("symbol/has-instance"),
-    isConcatSpreadable: pureOnly("symbol/is-concat-spreadable"),
+    for: pureOnly("symbol/for", "es6.symbol"),
+    hasInstance: pureOnly("symbol/has-instance", "es6.symbol"),
+    isConcatSpreadable: pureOnly("symbol/is-concat-spreadable", "es6.symbol"),
     iterator: pureAndGlobal("symbol/iterator", CommonIterators),
-    keyFor: pureOnly("symbol/key-for"),
+    keyFor: pureOnly("symbol/key-for", "es6.symbol"),
     match: pureAndGlobal("symbol/match", ["es6.regexp.match"]),
-    replace: pureOnly("symbol/replace"),
-    search: pureOnly("symbol/search"),
-    species: pureOnly("symbol/species"),
-    split: pureOnly("symbol/split"),
-    toPrimitive: pureOnly("symbol/to-primitive"),
-    toStringTag: pureOnly("symbol/to-string-tag"),
-    unscopables: pureOnly("symbol/unscopables"),
+    replace: pureOnly("symbol/replace", "es6.symbol"),
+    search: pureOnly("symbol/search", "es6.symbol"),
+    species: pureOnly("symbol/species", "es6.symbol"),
+    split: pureOnly("symbol/split", "es6.symbol"),
+    toPrimitive: pureOnly("symbol/to-primitive", "es6.symbol"),
+    toStringTag: pureOnly("symbol/to-string-tag", "es6.symbol"),
+    unscopables: pureOnly("symbol/unscopables", "es6.symbol"),
   },
 };
