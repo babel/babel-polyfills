@@ -5,7 +5,7 @@
       {
         "method": "usage-pure",
         "providers": [
-          ["@@/babel-polyfill-provider-corejs2", { "version": "^7.0.2" }]
+          ["@@/corejs2", { "version": "^7.0.2" }]
         ]
       }
     ]

@@ -6,7 +6,7 @@
         "method": "usage-global",
         "providers": [
           [
-            "@@/babel-polyfill-provider-corejs3",
+            "@@/corejs3",
             { "shippedProposals": true }
           ]
         ]

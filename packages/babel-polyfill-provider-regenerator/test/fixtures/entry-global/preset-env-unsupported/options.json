@@ -5,7 +5,7 @@
       {
         "method": "entry-global",
         "targets": { "chrome": 40 },
-        "providers": ["@@/babel-polyfill-provider-regenerator"]
+        "providers": ["@@/regenerator"]
       }
     ]
   ]

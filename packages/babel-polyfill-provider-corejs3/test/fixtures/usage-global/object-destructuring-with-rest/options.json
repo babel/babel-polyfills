@@ -5,7 +5,7 @@
       {
         "method": "usage-global",
         "targets": { "node": "8.10.0" },
-        "providers": ["@@/babel-polyfill-provider-corejs3"]
+        "providers": ["@@/corejs3"]
       }
     ]
   ]

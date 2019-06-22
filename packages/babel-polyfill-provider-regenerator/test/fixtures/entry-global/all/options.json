@@ -4,7 +4,7 @@
       "@babel/plugin-inject-polyfills",
       {
         "method": "entry-global",
-        "providers": ["@@/babel-polyfill-provider-regenerator"]
+        "providers": ["@@/regenerator"]
       }
     ]
   ]

@@ -7,7 +7,7 @@
         "targets": { "node": "4.0.0" },
         "providers": [
           [
-            "@@/babel-polyfill-provider-corejs3",
+            "@@/corejs3",
             { "shippedProposals": true }
           ]
         ]

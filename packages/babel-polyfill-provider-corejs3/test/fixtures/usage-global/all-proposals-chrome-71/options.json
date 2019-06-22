@@ -7,7 +7,7 @@
         "targets": { "chrome": 71 },
         "providers": [
           [
-            "@@/babel-polyfill-provider-corejs3",
+            "@@/corejs3",
             { "proposals": true }
           ]
         ]

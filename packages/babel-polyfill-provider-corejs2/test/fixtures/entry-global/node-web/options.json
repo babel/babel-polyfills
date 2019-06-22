@@ -5,7 +5,7 @@
       {
         "method": "entry-global",
         "targets": { "chrome": "55", "node": "7.6" },
-        "providers": ["@@/babel-polyfill-provider-corejs2"]
+        "providers": ["@@/corejs2"]
       }
     ]
   ]

@@ -5,7 +5,7 @@
       {
         "method": "usage-global",
         "targets": { "browsers": "ie > 10" },
-        "providers": ["@@/babel-polyfill-provider-corejs3"]
+        "providers": ["@@/corejs3"]
       }
     ]
   ]
