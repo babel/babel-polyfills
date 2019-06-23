@@ -39,11 +39,7 @@ const ArrayNatureIterators = [
   "web.dom.iterable",
 ];
 
-const CommonIterators = [
-  "es6.symbol",
-  "es6.string.iterator",
-  ...ArrayNatureIterators,
-];
+const CommonIterators = ["es6.string.iterator", ...ArrayNatureIterators];
 
 const PromiseDependencies = ["es6.object.to-string", "es6.promise"];
 
@@ -295,7 +291,7 @@ export const StaticProperties: ObjectMap<
     for: pureOnly("symbol/for", "es6.symbol"),
     hasInstance: pureOnly("symbol/has-instance", "es6.symbol"),
     isConcatSpreadable: pureOnly("symbol/is-concat-spreadable", "es6.symbol"),
-    iterator: pureAndGlobal("symbol/iterator", CommonIterators),
+    iterator: define("es6.symbol", "symbol/iterator", CommonIterators),
     keyFor: pureOnly("symbol/key-for", "es6.symbol"),
     match: pureAndGlobal("symbol/match", ["es6.regexp.match"]),
     replace: pureOnly("symbol/replace", "es6.symbol"),
