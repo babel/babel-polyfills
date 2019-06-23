@@ -55,7 +55,7 @@ export const BuiltIns: ObjectMap<PolyfillDescriptor<CoreJS2Meta>> = {
   Promise: pureAndGlobal("promise", PromiseDependencies),
   RegExp: globalOnly(["es6.regexp.constructor"]),
   Set: pureAndGlobal("set", ["es6.set", ...CommonIterators]),
-  Symbol: pureAndGlobal("symbol", ["es6.symbol"]),
+  Symbol: pureAndGlobal("symbol", ["es6.symbol", "es7.symbol.async-iterator"]),
   Uint8Array: globalOnly(["es6.typed.uint8-array"]),
   Uint8ClampedArray: globalOnly(["es6.typed.uint8-clamped-array"]),
   Uint16Array: globalOnly(["es6.typed.uint16-array"]),
