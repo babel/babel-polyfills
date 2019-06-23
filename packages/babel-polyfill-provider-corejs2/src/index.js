@@ -91,25 +91,21 @@ export default ((
     },
 
     usageGlobal(meta, utils) {
-      if (meta.kind === "in" && meta.key === "Symbol.iterator") {
-        inject("web.dom.iterable", utils);
-      } else {
-        const resolved = resolve(meta);
-        if (!resolved) return;
+      const resolved = resolve(meta);
+      if (!resolved) return;
 
-        let deps = resolved.desc.global;
+      let deps = resolved.desc.global;
 
-        if (
-          resolved.kind !== "global" &&
-          meta.object &&
-          meta.placement === "prototype"
-        ) {
-          const low = meta.object.toLowerCase();
-          deps = deps.filter(m => m.includes(low));
-        }
-
-        inject(deps, utils);
+      if (
+        resolved.kind !== "global" &&
+        meta.object &&
+        meta.placement === "prototype"
+      ) {
+        const low = meta.object.toLowerCase();
+        deps = deps.filter(m => m.includes(low));
       }
+
+      inject(deps, utils);
     },
 
     usagePure(meta, utils, path) {
