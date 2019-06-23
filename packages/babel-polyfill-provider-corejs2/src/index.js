@@ -44,7 +44,7 @@ export default ((
       return;
     }
 
-    desc.global.forEach(name => {
+    desc.forEach(name => {
       if (polyfills.has(name)) {
         utils.injectGlobalImport(`core-js/modules/${name}`);
       }
@@ -95,7 +95,20 @@ export default ((
         inject("web.dom.iterable", utils);
       } else {
         const resolved = resolve(meta);
-        if (resolved) inject(resolved.desc, utils);
+        if (!resolved) return;
+
+        let deps = resolved.desc.global;
+
+        if (
+          resolved.kind !== "global" &&
+          meta.object &&
+          meta.placement === "prototype"
+        ) {
+          const low = meta.object.toLowerCase();
+          deps = deps.filter(m => m.includes(low));
+        }
+
+        inject(deps, utils);
       }
     },
 

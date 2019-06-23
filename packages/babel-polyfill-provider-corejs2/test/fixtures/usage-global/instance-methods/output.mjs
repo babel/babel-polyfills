@@ -29,7 +29,7 @@ a.includes(); // method call
 
 b['find']; // computed string?
 
-c.prototype.findIndex(); // .prototype
+Array.prototype.findIndex(); // .prototype
 
 d.fill.bind(); //.bind
 
