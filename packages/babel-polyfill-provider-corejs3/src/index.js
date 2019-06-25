@@ -118,7 +118,11 @@ export default ((
       const modules = isCoreJSSource(meta.source);
       if (!modules) return;
 
-      if (modules.length === 1 && meta.source === coreJSModule(modules[0])) {
+      if (
+        modules.length === 1 &&
+        meta.source === coreJSModule(modules[0]) &&
+        shouldInject(modules[0])
+      ) {
         // Avoid infinite loop: do not replace imports with a new copy of
         // themselves.
         return;
