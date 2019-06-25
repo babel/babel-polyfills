@@ -21,15 +21,24 @@ const resolve = createMetaResolver({
   instance: InstanceProperties,
 });
 
-type Options = {
+const presetEnvCompat: "#__secret_key__@babel/preset-env__compatibility" =
+  "#__secret_key__@babel/preset-env__compatibility";
+
+type Options = {|
   version?: number | string,
+  [typeof presetEnvCompat]: void | {
+    entryInjectRegenerator: boolean,
+  },
   include?: string[],
   exclude?: string[],
-};
+|};
 
 export default ((
   { getUtils, method, targets, filterPolyfills },
-  { version: runtimeVersion = "7.0.0-beta.0" },
+  {
+    version: runtimeVersion = "7.0.0-beta.0",
+    [presetEnvCompat]: { entryInjectRegenerator } = {},
+  },
 ) => {
   const polyfills = filterPolyfills(
     corejs2Polyfills,
@@ -70,23 +79,19 @@ export default ((
     }
   }
 
-  const babelPolyfillPaths = new Set();
-
   return {
     name: "corejs2",
 
     entryGlobal(meta, utils, path) {
-      if (
-        meta.kind === "import" &&
-        (meta.source === "@babel/polyfill" || meta.source === "core-js")
-      ) {
+      if (meta.kind === "import" && meta.source === "core-js") {
         for (const name of polyfills) {
           utils.injectGlobalImport(`core-js/modules/${name}`);
         }
+        if (entryInjectRegenerator) {
+          utils.injectGlobalImport("regenerator-runtime/runtime");
+        }
 
-        // We can't remove this now because it is also used as an entry
-        // point by the core-js polyfill. We will remove it on Program:exit.
-        babelPolyfillPaths.add(path);
+        path.remove();
       }
     },
 
@@ -158,20 +163,13 @@ export default ((
       if (id) path.replaceWith(id);
     },
 
-    visitor: {
-      Program: {
-        exit: () => babelPolyfillPaths.forEach(p => p.node && p.remove()),
+    visitor: method === "usage-global" && {
+      // yield*
+      YieldExpression(path) {
+        if (path.node.delegate) {
+          inject("web.dom.iterable", getUtils(path));
+        }
       },
-
-      // $FlowIgnore
-      ...(method === "usage-global" && {
-        // yield*
-        YieldExpression(path) {
-          if (path.node.delegate) {
-            inject("web.dom.iterable", getUtils(path));
-          }
-        },
-      }),
     },
   };
 }: PolyfillProvider<Options>);

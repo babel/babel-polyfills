@@ -1,4 +1,4 @@
-import "@babel/polyfill";
+import "core-js";
 
 const foo = {
   a: true,

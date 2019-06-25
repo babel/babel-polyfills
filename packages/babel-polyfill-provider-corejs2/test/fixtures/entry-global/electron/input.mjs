@@ -1,3 +1,3 @@
-import "@babel/polyfill";
+import "core-js";
 
 a ** b;
