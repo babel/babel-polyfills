@@ -5,8 +5,14 @@
       {
         "method": "entry-global",
         "providers": [
-          "@@/corejs2",
-          "@@/regenerator"
+          [
+            "@@/corejs2",
+            {
+              "#__secret_key__@babel/preset-env__compatibility": {
+                "entryInjectRegenerator": true
+              }
+            }
+          ]
         ]
       }
     ]

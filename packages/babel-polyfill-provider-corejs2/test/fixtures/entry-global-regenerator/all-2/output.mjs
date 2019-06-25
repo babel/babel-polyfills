@@ -1,4 +1,3 @@
-import "regenerator-runtime/runtime";
 import "core-js/modules/es6.array.copy-within";
 import "core-js/modules/es6.array.every";
 import "core-js/modules/es6.array.fill";
@@ -147,3 +146,4 @@ import "core-js/modules/es6.weak-set";
 import "core-js/modules/web.timers";
 import "core-js/modules/web.immediate";
 import "core-js/modules/web.dom.iterable";
+import "regenerator-runtime/runtime";

@@ -52,7 +52,7 @@ export type ProviderResult = {|
   entryGlobal?: (meta: MetaDescriptor, utils: Utils, path: NodePath) => void,
   usageGlobal?: (meta: MetaDescriptor, utils: Utils, path: NodePath) => void,
   usagePure?: (meta: MetaDescriptor, utils: Utils, path: NodePath) => void,
-  visitor: Object,
+  visitor?: Object,
 |};
 
 export type MetaDescriptor =

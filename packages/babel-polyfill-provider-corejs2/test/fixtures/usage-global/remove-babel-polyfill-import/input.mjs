@@ -1,4 +1,4 @@
-import "@babel/polyfill";
-import "@babel/polyfill";
+import "core-js";
+import "core-js";
 require("@babel/polyfill");
 require("@babel/polyfill");
