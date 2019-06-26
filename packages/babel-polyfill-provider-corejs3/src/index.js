@@ -2,7 +2,6 @@
 
 import corejs3Polyfills from "core-js-compat/data";
 import corejs3ShippedProposalsList from "./shipped-proposals";
-import corejsEntries from "core-js-compat/entries";
 import getModulesListForTargetVersion from "core-js-compat/get-modules-list-for-target-version";
 import {
   BuiltIns,
@@ -15,41 +14,12 @@ import {
 } from "./built-in-definitions";
 
 import { types as t } from "@babel/core";
-import { has, callMethod } from "./utils";
+import { callMethod, coreJSModule, isCoreJSSource } from "./utils";
 
 import {
   createMetaResolver,
   type PolyfillProvider,
 } from "@babel/plugin-inject-polyfills";
-
-const corejs3PolyfillsWithoutProposals = Object.keys(corejs3Polyfills)
-  .filter(name => !name.startsWith("esnext."))
-  .reduce((memo, key) => {
-    memo[key] = corejs3Polyfills[key];
-    return memo;
-  }, {});
-
-const corejs3PolyfillsWithShippedProposals = corejs3ShippedProposalsList.reduce(
-  (memo, key) => {
-    memo[key] = corejs3Polyfills[key];
-    return memo;
-  },
-  { ...corejs3PolyfillsWithoutProposals },
-);
-
-function isCoreJSSource(source) {
-  if (typeof source === "string") {
-    source = source
-      .replace(/\\/g, "/")
-      .replace(/(\/(index)?)?(\.js)?$/i, "")
-      .toLowerCase();
-  }
-  return has(corejsEntries, source) && corejsEntries[source];
-}
-
-function coreJSModule(name) {
-  return `core-js/modules/${name}`;
-}
 
 type Options = {
   version?: number | string,
@@ -66,35 +36,19 @@ const resolve = createMetaResolver({
 });
 
 export default ((
-  { filterPolyfills, getUtils, method },
+  { getUtils, method, shouldInjectPolyfill },
   { version = 3, proposals, shippedProposals },
 ) => {
-  const polyfills = filterPolyfills(
-    proposals || method === "entry-global"
-      ? corejs3Polyfills
-      : shippedProposals
-      ? corejs3PolyfillsWithShippedProposals
-      : corejs3PolyfillsWithoutProposals,
-  );
   const available = new Set(getModulesListForTargetVersion(version));
   const coreJSBase = proposals
     ? "@babel/runtime-corejs3/core-js"
     : "@babel/runtime-corejs3/core-js-stable";
 
-  function shouldInject(name, meta, object) {
-    if (meta) {
-      if (object && meta.exclude && meta.exclude.includes(object)) {
-        return false;
-      }
-      if (!proposals && !meta.stable) return false;
-    }
-
-    return !name || (polyfills.has(name) && available.has(name));
-  }
-
   function maybeInjectGlobal(names: string[], utils) {
     for (const name of names) {
-      if (shouldInject(name)) utils.injectGlobalImport(coreJSModule(name));
+      if (shouldInjectPolyfill(name)) {
+        utils.injectGlobalImport(coreJSModule(name));
+      }
     }
   }
 
@@ -104,13 +58,29 @@ export default ((
     utils,
     object,
   ) {
-    if (desc.pure && shouldInject(desc.name, desc.meta, object)) {
+    if (
+      desc.pure &&
+      (proposals || desc.meta.stable) &&
+      !(object && desc.meta.exclude && desc.meta.exclude.includes(object)) &&
+      (!desc.name || shouldInjectPolyfill(desc.name))
+    ) {
       return utils.injectDefaultImport(`${coreJSBase}/${desc.pure}`, hint);
     }
   }
 
   return {
     name: "corejs3",
+
+    polyfills: corejs3Polyfills,
+
+    filterPolyfills(name) {
+      if (!available.has(name)) return false;
+      if (proposals || method === "entry-global") return true;
+      if (shippedProposals && corejs3ShippedProposalsList.has(name)) {
+        return true;
+      }
+      return !name.startsWith("esnext.");
+    },
 
     entryGlobal(meta, utils, path) {
       if (meta.kind !== "import") return;
@@ -121,7 +91,7 @@ export default ((
       if (
         modules.length === 1 &&
         meta.source === coreJSModule(modules[0]) &&
-        shouldInject(modules[0])
+        shouldInjectPolyfill(modules[0])
       ) {
         // Avoid infinite loop: do not replace imports with a new copy of
         // themselves.
@@ -178,7 +148,7 @@ export default ((
         isCall = path.parentPath.isCallExpression({ callee: path.node });
 
         if (meta.key === "Symbol.iterator") {
-          if (!polyfills.has("es.symbol.iterator")) return;
+          if (!shouldInjectPolyfill("es.symbol.iterator")) return;
 
           if (isCall) {
             if (path.parent.arguments.length === 0) {

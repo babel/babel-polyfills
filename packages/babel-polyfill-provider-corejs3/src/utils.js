@@ -1,9 +1,7 @@
 // @flow
 
 import { types as t } from "@babel/core";
-
-export const has = (o: Object, k: string): boolean =>
-  Object.hasOwnProperty.call(o, k);
+import corejsEntries from "core-js-compat/entries";
 
 export function callMethod(path: *, id: t.Identifier) {
   const { object } = path.node;
@@ -22,4 +20,19 @@ export function callMethod(path: *, id: t.Identifier) {
   );
 
   path.parentPath.unshiftContainer("arguments", context1);
+}
+
+export function isCoreJSSource(source: string) {
+  if (typeof source === "string") {
+    source = source
+      .replace(/\\/g, "/")
+      .replace(/(\/(index)?)?(\.js)?$/i, "")
+      .toLowerCase();
+  }
+
+  return hasOwnProperty.call(corejsEntries, source) && corejsEntries[source];
+}
+
+export function coreJSModule(name: string) {
+  return `core-js/modules/${name}`;
 }
