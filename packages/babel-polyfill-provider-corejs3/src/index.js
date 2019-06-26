@@ -60,9 +60,8 @@ export default ((
   ) {
     if (
       desc.pure &&
-      (proposals || desc.meta.stable) &&
-      !(object && desc.meta.exclude && desc.meta.exclude.includes(object)) &&
-      (!desc.name || shouldInjectPolyfill(desc.name))
+      !(object && desc.exclude && desc.exclude.includes(object)) &&
+      shouldInjectPolyfill(desc.name)
     ) {
       return utils.injectDefaultImport(`${coreJSBase}/${desc.pure}`, hint);
     }
