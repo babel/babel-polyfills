@@ -6,9 +6,7 @@ import * as traverse from "@babel/traverse";
 import type { NodePath } from "@babel/traverse";
 
 import getTargets from "@babel/preset-env/lib/targets-parser";
-import filterItems, {
-  isPluginRequired,
-} from "@babel/preset-env/lib/filter-items";
+import { isPluginRequired } from "@babel/preset-env/lib/filter-items";
 
 import {
   getImportSource,
@@ -31,6 +29,32 @@ import type {
 export { resolveProvider } from "./config";
 export { default as createMetaResolver } from "./meta-resolver";
 export type { PolyfillProvider, MetaDescriptor };
+
+function validateIncludeExclude(provider, names, include, exclude) {
+  for (const name of exclude) {
+    if (!names.has(name)) {
+      throw new Error(
+        `The "${provider}" provider doesn't ` +
+          `support the "${name}" polyfill (used in "exclude").`,
+      );
+    }
+  }
+
+  for (const name of include) {
+    if (!names.has(name)) {
+      throw new Error(
+        `The "${provider}" provider doesn't ` +
+          `support the "${name}" polyfill (used in "include").`,
+      );
+    }
+    if (exclude.has(name)) {
+      throw new Error(
+        `The "${name}" polyfill is both included and excluded ` +
+          `(in the "${provider}" provider)`,
+      );
+    }
+  }
+}
 
 export default declare((api, options: Options, dirname: string) => {
   api.assertVersion(7);
@@ -71,6 +95,9 @@ export default declare((api, options: Options, dirname: string) => {
     ({ value, options = {}, alias }) => {
       const include = new Set(options.include || []);
       const exclude = new Set(options.exclude || []);
+      let polyfillsSupport;
+      let polyfillsNames;
+      let filterPolyfills;
 
       const api: ProviderApi = {
         getUtils,
@@ -78,18 +105,26 @@ export default declare((api, options: Options, dirname: string) => {
         targets,
         include,
         exclude,
-        filterPolyfills(polyfills, defaultInclude, defaultExclude) {
-          return filterItems(
-            polyfills,
-            include,
-            exclude,
-            targets,
-            defaultInclude,
-            defaultExclude,
-          );
-        },
-        isPolyfillRequired(support) {
-          return isPluginRequired(targets, support);
+        shouldInjectPolyfill(name) {
+          if (polyfillsNames === undefined) {
+            throw new Error(
+              `Internal error in the ${alias} provider: ` +
+                `shouldInjectPolyfill() can't be called during initialization.`,
+            );
+          }
+          if (!polyfillsNames.has(name)) {
+            throw new Error(
+              `Internal error in the ${provider.name} provider: ` +
+                `unknown polyfill "${name}".`,
+            );
+          }
+
+          if (filterPolyfills && !filterPolyfills(name)) return false;
+          if (include.has(name)) return true;
+          if (exclude.has(name)) return false;
+          if (!polyfillsSupport) return true;
+
+          return isPluginRequired(targets, polyfillsSupport[name]);
         },
       };
 
@@ -101,6 +136,24 @@ export default declare((api, options: Options, dirname: string) => {
             `support the "${method}" polyfilling method.`,
         );
       }
+
+      if (Array.isArray(provider.polyfills)) {
+        polyfillsNames = new Set(provider.polyfills);
+        filterPolyfills = provider.filterPolyfills;
+      } else if (provider.polyfills) {
+        polyfillsNames = new Set(Object.keys(provider.polyfills));
+        polyfillsSupport = provider.polyfills;
+        filterPolyfills = provider.filterPolyfills;
+      } else {
+        polyfillsNames = new Set();
+      }
+
+      validateIncludeExclude(
+        provider.name || alias,
+        polyfillsNames,
+        include,
+        exclude,
+      );
 
       return provider;
     },

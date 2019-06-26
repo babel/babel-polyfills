@@ -30,7 +30,7 @@ const pureAndGlobal = (
 
 const globalOnly = (global: string[]) => define(global[0], null, global);
 
-const pureOnly = (pure: string, name: string = "TODO__UNSUPPORTED") =>
+const pureOnly = (pure: string, name: string) =>
   define<CoreJS2Meta>(name, pure, []);
 
 const ArrayNatureIterators = [
@@ -63,10 +63,10 @@ export const BuiltIns: ObjectMap<PolyfillDescriptor<CoreJS2Meta>> = {
   WeakMap: pureAndGlobal("weak-map", ["es6.weak-map", ...CommonIterators]),
   WeakSet: pureAndGlobal("weak-set", ["es6.weak-set", ...CommonIterators]),
 
-  setImmediate: pureOnly("set-immediate"),
-  clearImmediate: pureOnly("clear-immediate"),
-  parseFloat: pureOnly("parse-float"),
-  parseInt: pureOnly("parse-int"),
+  setImmediate: pureOnly("set-immediate", "web.immediate"),
+  clearImmediate: pureOnly("clear-immediate", "web.immediate"),
+  parseFloat: pureOnly("parse-float", "es6.parse-float"),
+  parseInt: pureOnly("parse-int", "es6.parse-int"),
 };
 
 export const InstanceProperties: ObjectMap<PolyfillDescriptor<CoreJS2Meta>> = {
@@ -278,7 +278,7 @@ export const StaticProperties: ObjectMap<
   },
 
   String: {
-    at: pureOnly("string/at"),
+    at: pureOnly("string/at", "es7.string.at"),
     fromCodePoint: pureAndGlobal("string/from-code-point", [
       "es6.string.from-code-point",
     ]),

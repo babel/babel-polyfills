@@ -1,13 +1,13 @@
 import semver from "semver";
 
 export function hasMinVersion(
-  minVersion: string,
+  minVersion: ?string,
   runtimeVersion: ?(string | number),
 ) {
   // If the range is unavailable, we're running the script during Babel's
   // build process, and we want to assume that all versions are satisfied so
   // that the built output will include all definitions.
-  if (!runtimeVersion) return true;
+  if (!runtimeVersion || !minVersion) return true;
 
   // semver.intersects() has some surprising behavior with comparing ranges
   // with preprelease versions. We add '^' to ensure that we are always

@@ -33,12 +33,7 @@ export type ProviderApi = {|
   include: Set<string>,
   exclude: Set<string>,
   getUtils(path: NodePath): Utils,
-  filterPolyfills(
-    list: { [feature: string]: Targets },
-    defaultIncludes?: Array<string>,
-    defaultExcludes?: Array<string>,
-  ): Set<string>,
-  isPolyfillRequired(supportedEnvironments: Targets): boolean,
+  shouldInjectPolyfill(name: string): boolean,
 |};
 
 export type Utils = {|
@@ -49,6 +44,8 @@ export type Utils = {|
 
 export type ProviderResult = {|
   name: string,
+  polyfills?: string[] | { [name: string]: Targets },
+  filterPolyfills?: (name: string) => boolean,
   entryGlobal?: (meta: MetaDescriptor, utils: Utils, path: NodePath) => void,
   usageGlobal?: (meta: MetaDescriptor, utils: Utils, path: NodePath) => void,
   usagePure?: (meta: MetaDescriptor, utils: Utils, path: NodePath) => void,

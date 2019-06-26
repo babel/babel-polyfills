@@ -10,6 +10,14 @@ var _WeakMap = require("@babel/runtime-corejs2/core-js/weak-map");
 
 var _WeakSet = require("@babel/runtime-corejs2/core-js/weak-set");
 
+var _clearImmediate = require("@babel/runtime-corejs2/core-js/clear-immediate");
+
+var _parseFloat = require("@babel/runtime-corejs2/core-js/parse-float");
+
+var _parseInt = require("@babel/runtime-corejs2/core-js/parse-int");
+
+var _setImmediate = require("@babel/runtime-corejs2/core-js/set-immediate");
+
 AggregateError;
 _Map;
 Observable;
@@ -20,14 +28,14 @@ URL;
 URLSearchParams;
 _WeakMap;
 _WeakSet;
-clearImmediate;
+_clearImmediate;
 compositeKey;
 compositeSymbol;
 globalThis;
-parseFloat;
-parseInt;
+_parseFloat;
+_parseInt;
 queueMicrotask;
-setImmediate;
+_setImmediate;
 setInterval;
 setTimeout;
 Array;

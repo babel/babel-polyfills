@@ -6,7 +6,7 @@ import {
   StaticProperties,
   InstanceProperties,
 } from "./built-in-definitions";
-import getPlatformSpecificDefaultFor from "./get-platform-specific-default";
+import addPlatformSpecificPolyfills from "./add-platform-specific-polyfills";
 import { hasMinVersion } from "./helpers";
 
 import {
@@ -34,59 +34,55 @@ type Options = {|
 |};
 
 export default ((
-  { getUtils, method, targets, filterPolyfills },
+  { getUtils, method, targets, shouldInjectPolyfill },
   {
     version: runtimeVersion = "7.0.0-beta.0",
     [presetEnvCompat]: { entryInjectRegenerator } = {},
   },
 ) => {
-  const polyfills = filterPolyfills(
+  const polyfills = addPlatformSpecificPolyfills(
+    targets,
+    method,
     corejs2Polyfills,
-    getPlatformSpecificDefaultFor(targets),
   );
 
-  function inject(desc, utils) {
-    if (typeof desc === "string") {
-      if (polyfills.has(desc)) {
-        utils.injectGlobalImport(`core-js/modules/${desc}`);
+  function inject(name, utils) {
+    if (typeof name === "string") {
+      if (shouldInjectPolyfill(name)) {
+        utils.injectGlobalImport(`core-js/modules/${name}`);
       }
       return;
     }
 
-    desc.forEach(name => {
-      if (polyfills.has(name)) {
-        utils.injectGlobalImport(`core-js/modules/${name}`);
-      }
-    });
+    name.forEach(name => inject(name, utils));
   }
 
   function maybeInjectPure(desc, hint, utils) {
     const { pure, meta, name } = desc;
 
-    if (!pure) return;
     if (
-      meta &&
-      meta.minRuntimeVersion &&
-      !hasMinVersion(meta.minRuntimeVersion, runtimeVersion)
+      !pure ||
+      !hasMinVersion(meta && meta.minRuntimeVersion, runtimeVersion) ||
+      !shouldInjectPolyfill(name)
     ) {
       return;
     }
-    if (polyfills.has(name)) {
-      return utils.injectDefaultImport(
-        `@babel/runtime-corejs2/core-js/${pure}`,
-        hint,
-      );
-    }
+
+    return utils.injectDefaultImport(
+      `@babel/runtime-corejs2/core-js/${pure}`,
+      hint,
+    );
   }
 
   return {
     name: "corejs2",
 
+    polyfills,
+
     entryGlobal(meta, utils, path) {
       if (meta.kind === "import" && meta.source === "core-js") {
-        for (const name of polyfills) {
-          utils.injectGlobalImport(`core-js/modules/${name}`);
-        }
+        inject(Object.keys(polyfills), utils);
+
         if (entryInjectRegenerator) {
           utils.injectGlobalImport("regenerator-runtime/runtime");
         }
@@ -137,7 +133,7 @@ export default ((
 
         if (
           meta.key === "Symbol.iterator" &&
-          polyfills.has("es6.symbol") &&
+          shouldInjectPolyfill("es6.symbol") &&
           path.parentPath.isCallExpression({ callee: path.node }) &&
           path.parent.arguments.length === 0
         ) {
