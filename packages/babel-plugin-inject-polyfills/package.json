@@ -20,7 +20,8 @@
     "@babel/preset-env": "7.4.5",
     "@babel/traverse": "^7.4.5",
     "debug": "^4.1.1",
-    "resolve": "^1.11.1"
+    "resolve": "^1.11.1",
+    "semver": "^6.1.2"
   },
   "peerDependencies": {
     "@babel/core": "^7.4.0-0"

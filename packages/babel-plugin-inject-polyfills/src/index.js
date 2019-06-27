@@ -16,6 +16,12 @@ import {
 } from "./utils";
 import { createProviderDescriptors } from "./config";
 import ImportsCache from "./imports-cache";
+import {
+  filterTargets,
+  stringifyTargets,
+  stringifyTargetsMultiline,
+  presetEnvSilentDebugHeader,
+} from "./debug-utils";
 
 import type {
   ProviderApi,
@@ -91,6 +97,9 @@ export default declare((api, options: Options, dirname: string) => {
 
   const providersDescriptors = createProviderDescriptors(providers, dirname);
 
+  let debugLog = new Map();
+  const getUtils = createUtilsGetter(new ImportsCache());
+
   const resolvedProviders = providersDescriptors.map(
     ({ value, options = {}, alias }) => {
       const include = new Set(options.include || []);
@@ -98,6 +107,7 @@ export default declare((api, options: Options, dirname: string) => {
       let polyfillsSupport;
       let polyfillsNames;
       let filterPolyfills;
+      const thisDebugLog = new Map();
 
       const api: ProviderApi = {
         getUtils,
@@ -127,7 +137,11 @@ export default declare((api, options: Options, dirname: string) => {
           return isPluginRequired(targets, polyfillsSupport[name]);
         },
         debug(name: string) {
-          if (debug) void name;
+          if (!debug) return;
+          // $FlowIgnore
+          const thisDebugLog: Map<*, *> = debugLog.get(provider.name);
+          if (thisDebugLog.has(provider.name)) return;
+          thisDebugLog.set(name, polyfillsSupport && polyfillsSupport[name]);
         },
       };
 
@@ -158,11 +172,11 @@ export default declare((api, options: Options, dirname: string) => {
         exclude,
       );
 
+      debugLog.set(provider.name, thisDebugLog);
+
       return provider;
     },
   );
-
-  const getUtils = createUtilsGetter(new ImportsCache());
 
   function callProviders(payload: MetaDescriptor, path: NodePath) {
     const utils = getUtils(path);
@@ -269,8 +283,57 @@ export default declare((api, options: Options, dirname: string) => {
   const visitors = [method === "entry-global" ? entryVisitor : usageVisitor];
   resolvedProviders.forEach(p => p.visitor && visitors.push(p.visitor));
 
+  if (debug && debug !== presetEnvSilentDebugHeader) {
+    console.log("@babel/plugin-inject-polyfills: `DEBUG` option");
+    console.log(`\nUsing targets: ${stringifyTargetsMultiline(targets)}`);
+    console.log(`\nUsing polyfills with \`${method}\` method:`);
+  }
+
   return {
     name: "inject-polyfills",
     visitor: traverse.visitors.merge(visitors),
+    pre() {
+      debugLog = new Map(
+        resolvedProviders.map(({ name }) => [name, new Map()]),
+      );
+    },
+    post() {
+      if (!debug) return;
+
+      if (this.filename) console.log(`\n[${this.filename}]`);
+
+      for (const [provider, polyfills] of debugLog) {
+        if (!polyfills.size) {
+          const reason =
+            method === "entry-global" ? "code and targets" : "targets";
+          console.log(
+            `Based on your ${reason}, the ${provider} provider did not add any polyfill.`,
+          );
+          continue;
+        }
+
+        if (method === "entry-global") {
+          console.log(
+            `The ${provider} provider entry has been replaced with ` +
+              `the following polyfills:`,
+          );
+        } else {
+          console.log(
+            `The ${provider} provider added the following polyfills:`,
+          );
+        }
+
+        for (const [name, support] of polyfills) {
+          if (support) {
+            const filteredTargets = filterTargets(targets, support);
+            const formattedTargets = stringifyTargets(filteredTargets);
+
+            console.log(`  ${name} ${formattedTargets}`);
+          } else {
+            console.log(`  ${name}`);
+          }
+        }
+      }
+    },
   };
 });

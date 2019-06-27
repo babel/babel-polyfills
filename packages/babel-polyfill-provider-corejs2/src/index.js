@@ -34,7 +34,7 @@ type Options = {|
 |};
 
 export default ((
-  { getUtils, method, targets, shouldInjectPolyfill },
+  { getUtils, method, targets, shouldInjectPolyfill, debug },
   {
     version: runtimeVersion = "7.0.0-beta.0",
     [presetEnvCompat]: { entryInjectRegenerator } = {},
@@ -49,6 +49,7 @@ export default ((
   function inject(name, utils) {
     if (typeof name === "string") {
       if (shouldInjectPolyfill(name)) {
+        debug(name);
         utils.injectGlobalImport(`core-js/modules/${name}`);
       }
       return;

@@ -2,12 +2,15 @@
 
 import type { PolyfillProvider } from "@babel/plugin-inject-polyfills";
 
-export default (() => {
+export default (({ debug }) => {
   return {
     name: "regenerator",
 
+    polyfills: ["regenerator-runtime"],
+
     usageGlobal(meta, utils) {
       if (isRegenerator(meta)) {
+        debug("regenerator-runtime");
         utils.injectGlobalImport("regenerator-runtime/runtime");
       }
     },
