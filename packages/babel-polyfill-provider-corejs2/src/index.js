@@ -82,6 +82,8 @@ export default ((
 
     entryGlobal(meta, utils, path) {
       if (meta.kind === "import" && meta.source === "core-js") {
+        debug(null);
+
         inject(Object.keys(polyfills), utils);
 
         if (entryInjectRegenerator) {
