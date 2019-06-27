@@ -97,7 +97,7 @@ export default declare((api, options: Options, dirname: string) => {
 
   const providersDescriptors = createProviderDescriptors(providers, dirname);
 
-  let debugLog = new Map();
+  let debugLog;
   const getUtils = createUtilsGetter(new ImportsCache());
 
   const resolvedProviders = providersDescriptors.map(
@@ -107,7 +107,6 @@ export default declare((api, options: Options, dirname: string) => {
       let polyfillsSupport;
       let polyfillsNames;
       let filterPolyfills;
-      const thisDebugLog = new Map();
 
       const api: ProviderApi = {
         getUtils,
@@ -136,12 +135,18 @@ export default declare((api, options: Options, dirname: string) => {
 
           return isPluginRequired(targets, polyfillsSupport[name]);
         },
-        debug(name: string) {
-          if (!debug) return;
+        debug(name) {
+          debugLog.providers.add(provider.name);
+
+          if (!debug || !name) return;
+
           // $FlowIgnore
-          const thisDebugLog: Map<*, *> = debugLog.get(provider.name);
+          const thisDebugLog: Map<*, *> = debugLog.polyfills.get(provider.name);
           if (thisDebugLog.has(provider.name)) return;
-          thisDebugLog.set(name, polyfillsSupport && polyfillsSupport[name]);
+          thisDebugLog.set(
+            name,
+            polyfillsSupport && name && polyfillsSupport[name],
+          );
         },
       };
 
@@ -171,8 +176,6 @@ export default declare((api, options: Options, dirname: string) => {
         include,
         exclude,
       );
-
-      debugLog.set(provider.name, thisDebugLog);
 
       return provider;
     },
@@ -293,21 +296,26 @@ export default declare((api, options: Options, dirname: string) => {
     name: "inject-polyfills",
     visitor: traverse.visitors.merge(visitors),
     pre() {
-      debugLog = new Map(
-        resolvedProviders.map(({ name }) => [name, new Map()]),
-      );
+      debugLog = {
+        polyfills: new Map(
+          resolvedProviders.map(({ name }) => [name, new Map()]),
+        ),
+        providers: new Set(),
+      };
     },
     post() {
       if (!debug) return;
 
       if (this.filename) console.log(`\n[${this.filename}]`);
 
-      for (const [provider, polyfills] of debugLog) {
+      for (const [provider, polyfills] of debugLog.polyfills) {
         if (!polyfills.size) {
-          const reason =
-            method === "entry-global" ? "code and targets" : "targets";
           console.log(
-            `Based on your ${reason}, the ${provider} provider did not add any polyfill.`,
+            method === "entry-global"
+              ? debugLog.providers.has(provider)
+                ? `Based on your targets, the ${provider} provider did not add any polyfill.`
+                : `The entry point for the ${provider} provider has not been found.`
+              : `Based on your code and targets, the ${provider} provider did not add any polyfill.`,
           );
           continue;
         }

@@ -37,7 +37,7 @@ export type ProviderApi = {|
   exclude: Set<string>,
   getUtils(path: NodePath): Utils,
   shouldInjectPolyfill(name: string): boolean,
-  debug(name: string): void,
+  debug(name: string | null): void,
 |};
 
 export type Utils = {|

@@ -95,6 +95,7 @@ export default ((
       ) {
         // Avoid infinite loop: do not replace imports with a new copy of
         // themselves.
+        debug(null);
         return;
       }
 
