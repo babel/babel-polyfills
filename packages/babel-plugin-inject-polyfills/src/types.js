@@ -11,6 +11,7 @@ export type Options = {
   targets?: { browsers: string | string[], [target: string]: string | number },
   ignoreBrowserslistConfig?: boolean,
   configPath?: string,
+  debug?: boolean,
 };
 
 export type ProviderOptions = {
@@ -36,6 +37,7 @@ export type ProviderApi = {|
   exclude: Set<string>,
   getUtils(path: NodePath): Utils,
   shouldInjectPolyfill(name: string): boolean,
+  debug(name: string): void,
 |};
 
 export type Utils = {|

@@ -36,7 +36,7 @@ const resolve = createMetaResolver({
 });
 
 export default ((
-  { getUtils, method, shouldInjectPolyfill },
+  { getUtils, method, shouldInjectPolyfill, debug },
   { version = 3, proposals, shippedProposals },
 ) => {
   const available = new Set(getModulesListForTargetVersion(version));
@@ -47,6 +47,7 @@ export default ((
   function maybeInjectGlobal(names: string[], utils) {
     for (const name of names) {
       if (shouldInjectPolyfill(name)) {
+        debug(name);
         utils.injectGlobalImport(coreJSModule(name));
       }
     }
