@@ -1,20 +1,14 @@
 // @flow
 
-import type { MetaDescriptor } from "@babel/plugin-inject-polyfills";
+import type {
+  MetaDescriptor,
+  ResolverPolyfills,
+  ResolvedPolyfill,
+} from "./types";
 
 import { has } from "./utils";
 
-type ObjectMap<T> = { [k: string]: T };
-
-type ResolverPolyfills<T> = {
-  global?: ObjectMap<T>,
-  static?: ObjectMap<ObjectMap<T>>,
-  instance?: ObjectMap<T>,
-};
-
-type ResolverFn<T> = (
-  meta: MetaDescriptor,
-) => void | { kind: "global" | "static" | "instance", desc: T, name: string };
+type ResolverFn<T> = (meta: MetaDescriptor) => void | ResolvedPolyfill<T>;
 
 const PossibleGlobalObjects = new Set<string>([
   "global",

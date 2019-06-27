@@ -3,6 +3,8 @@
 import type { NodePath } from "@babel/traverse";
 import { types as t } from "@babel/core";
 
+type ObjectMap<T> = { [k: string]: T };
+
 export type Options = {
   method: MethodString,
   providers: Array<string | [string] | [string, ProviderOptions]>,
@@ -67,3 +69,15 @@ export type MetaDescriptor =
       object: ?string,
       key: string,
     |};
+
+export type ResolverPolyfills<T> = {
+  global?: ObjectMap<T>,
+  static?: ObjectMap<ObjectMap<T>>,
+  instance?: ObjectMap<T>,
+};
+
+export type ResolvedPolyfill<T> = {
+  kind: "global" | "static" | "instance",
+  name: string,
+  desc: T,
+};
