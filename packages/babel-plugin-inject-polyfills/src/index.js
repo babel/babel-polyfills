@@ -1,7 +1,6 @@
 // @flow
 
 import { declare } from "@babel/helper-plugin-utils";
-import { types as t, template } from "@babel/core";
 import * as traverse from "@babel/traverse";
 import type { NodePath } from "@babel/traverse";
 
@@ -13,13 +12,13 @@ import {
   getRequireSource,
   resolveKey,
   resolveSource,
+  createUtilsGetter,
 } from "./utils";
 import { createProviderDescriptors } from "./config";
 import ImportsCache from "./imports-cache";
 
 import type {
   ProviderApi,
-  Utils,
   Options,
   Targets,
   MetaDescriptor,
@@ -65,6 +64,7 @@ export default declare((api, options: Options, dirname: string) => {
     targets: targetsOption,
     ignoreBrowserslistConfig,
     configPath,
+    debug,
   } = options;
 
   let methodName;
@@ -126,6 +126,9 @@ export default declare((api, options: Options, dirname: string) => {
 
           return isPluginRequired(targets, polyfillsSupport[name]);
         },
+        debug(name: string) {
+          if (debug) void name;
+        },
       };
 
       const provider = value(api, options);
@@ -159,51 +162,7 @@ export default declare((api, options: Options, dirname: string) => {
     },
   );
 
-  const cache = new ImportsCache();
-
-  function hoist(node) {
-    node._blockHoist = 3;
-    return node;
-  }
-
-  function getUtils(path: NodePath): Utils {
-    const programPath = path.findParent(p => p.isProgram());
-
-    return {
-      injectGlobalImport(url) {
-        cache.store(programPath, url, "", (isScript, source) => ({
-          node: isScript
-            ? template.statement.ast`require(${source})`
-            : t.importDeclaration([], source),
-          name: "",
-        }));
-      },
-      injectNamedImport(url, name, hint = name) {
-        return cache.store(programPath, url, name, (isScript, source, name) => {
-          const id = programPath.scope.generateUidIdentifier(hint);
-          return {
-            node: isScript
-              ? hoist(template.statement.ast`
-                  var ${id} = require(${source}).${name}
-                `)
-              : t.importDeclaration([t.importSpecifier(id, name)], source),
-            name: id.name,
-          };
-        });
-      },
-      injectDefaultImport(url, hint = url) {
-        return cache.store(programPath, url, "default", (isScript, source) => {
-          const id = programPath.scope.generateUidIdentifier(hint);
-          return {
-            node: isScript
-              ? hoist(template.statement.ast`var ${id} = require(${source})`)
-              : t.importDeclaration([t.importDefaultSpecifier(id)], source),
-            name: id.name,
-          };
-        });
-      },
-    };
-  }
+  const getUtils = createUtilsGetter(new ImportsCache());
 
   function callProviders(payload: MetaDescriptor, path: NodePath) {
     const utils = getUtils(path);
