@@ -1,7 +1,9 @@
 // @flow
 
-import { types as t } from "@babel/core";
+import { types as t, template } from "@babel/core";
 import type NodePath from "@babel/traverse";
+import type { Utils } from "./types";
+import type ImportsCache from "./imports-cache";
 
 export function has(object: Object, key: string) {
   return Object.prototype.hasOwnProperty.call(object, key);
@@ -88,4 +90,50 @@ export function getRequireSource({ node }: NodePath) {
     expression.arguments.length === 1 &&
     t.isStringLiteral(expression.arguments[0]);
   if (isRequire) return expression.arguments[0].value;
+}
+
+function hoist(node: t.Node) {
+  node._blockHoist = 3;
+  return node;
+}
+
+export function createUtilsGetter(cache: ImportsCache) {
+  return (path: NodePath): Utils => {
+    const programPath = path.findParent(p => p.isProgram());
+
+    return {
+      injectGlobalImport(url) {
+        cache.store(programPath, url, "", (isScript, source) => ({
+          node: isScript
+            ? template.statement.ast`require(${source})`
+            : t.importDeclaration([], source),
+          name: "",
+        }));
+      },
+      injectNamedImport(url, name, hint = name) {
+        return cache.store(programPath, url, name, (isScript, source, name) => {
+          const id = programPath.scope.generateUidIdentifier(hint);
+          return {
+            node: isScript
+              ? hoist(template.statement.ast`
+                  var ${id} = require(${source}).${name}
+                `)
+              : t.importDeclaration([t.importSpecifier(id, name)], source),
+            name: id.name,
+          };
+        });
+      },
+      injectDefaultImport(url, hint = url) {
+        return cache.store(programPath, url, "default", (isScript, source) => {
+          const id = programPath.scope.generateUidIdentifier(hint);
+          return {
+            node: isScript
+              ? hoist(template.statement.ast`var ${id} = require(${source})`)
+              : t.importDeclaration([t.importDefaultSpecifier(id)], source),
+            name: id.name,
+          };
+        });
+      },
+    };
+  };
 }
