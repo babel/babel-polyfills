@@ -33,8 +33,6 @@ export type Targets = {
 export type ProviderApi = {|
   method: MethodString,
   targets: Targets,
-  include: Set<string>,
-  exclude: Set<string>,
   getUtils(path: NodePath): Utils,
   shouldInjectPolyfill(name: string): boolean,
   debug(name: string | null): void,
