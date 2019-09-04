@@ -22,6 +22,7 @@ import {
   stringifyTargetsMultiline,
   presetEnvSilentDebugHeader,
 } from "./debug-utils";
+import { validateIncludeExclude } from "./normalize-options";
 
 import type {
   ProviderApi,
@@ -34,32 +35,6 @@ import type {
 export { resolveProvider } from "./config";
 export { default as createMetaResolver } from "./meta-resolver";
 export type { PolyfillProvider, MetaDescriptor };
-
-function validateIncludeExclude(provider, names, include, exclude) {
-  for (const name of exclude) {
-    if (!names.has(name)) {
-      throw new Error(
-        `The "${provider}" provider doesn't ` +
-          `support the "${name}" polyfill (used in "exclude").`,
-      );
-    }
-  }
-
-  for (const name of include) {
-    if (!names.has(name)) {
-      throw new Error(
-        `The "${provider}" provider doesn't ` +
-          `support the "${name}" polyfill (used in "include").`,
-      );
-    }
-    if (exclude.has(name)) {
-      throw new Error(
-        `The "${name}" polyfill is both included and excluded ` +
-          `(in the "${provider}" provider)`,
-      );
-    }
-  }
-}
 
 export default declare((api, options: Options, dirname: string) => {
   api.assertVersion(7);
@@ -102,8 +77,8 @@ export default declare((api, options: Options, dirname: string) => {
 
   const resolvedProviders = providersDescriptors.map(
     ({ value, options = {}, alias }) => {
-      const include = new Set(options.include || []);
-      const exclude = new Set(options.exclude || []);
+      // eslint-disable-next-line prefer-const
+      let include, exclude;
       let polyfillsSupport;
       let polyfillsNames;
       let filterPolyfills;
@@ -112,8 +87,6 @@ export default declare((api, options: Options, dirname: string) => {
         getUtils,
         method,
         targets,
-        include,
-        exclude,
         shouldInjectPolyfill(name) {
           if (polyfillsNames === undefined) {
             throw new Error(
@@ -170,12 +143,12 @@ export default declare((api, options: Options, dirname: string) => {
         polyfillsNames = new Set();
       }
 
-      validateIncludeExclude(
+      ({ include, exclude } = validateIncludeExclude(
         provider.name || alias,
         polyfillsNames,
-        include,
-        exclude,
-      );
+        options.include || [],
+        options.exclude || [],
+      ));
 
       return provider;
     },

@@ -12,7 +12,7 @@
   },
   "main": "lib/index.js",
   "browser": {
-    "./lib/load-provider.js": "./lib/load-provider-browser.js"
+    "./lib/config/loader.js": "./lib/config/loader-browser.js"
   },
   "dependencies": {
     "@babel/helper-plugin-utils": "^7.0.0",

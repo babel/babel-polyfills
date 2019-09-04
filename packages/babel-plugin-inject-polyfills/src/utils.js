@@ -5,6 +5,12 @@ import type NodePath from "@babel/traverse";
 import type { Utils } from "./types";
 import type ImportsCache from "./imports-cache";
 
+export function intersection<T>(a: Set<T>, b: Set<T>): Set<T> {
+  const result = new Set();
+  a.forEach(v => b.has(v) && result.add(v));
+  return result;
+}
+
 export function has(object: Object, key: string) {
   return Object.prototype.hasOwnProperty.call(object, key);
 }
