@@ -123,7 +123,7 @@ export default declare((api, options: Options, dirname: string) => {
         },
       };
 
-      const provider = value(api, options);
+      const provider = value(api, options, dirname);
 
       if (typeof provider[methodName] !== "function") {
         throw new Error(
