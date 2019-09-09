@@ -1,0 +1,27 @@
+{
+  "global": {
+    "globalThis": {
+      "name": "globalThis",
+      "global": "globalThis/auto",
+      "pure": "globalThis/implementation",
+      "meta": { "version": "1.0.0", "package": "globalThis" }
+    }
+  },
+  "static": {
+    "Number": {
+      "isNaN": {
+        "name": "Number.isNaN",
+        "global": "is-nan/auto",
+        "pure": "is-nan/implementation",
+        "meta": { "version": "1.2.1", "package": "is-nan" }
+      }
+    }
+  },
+  "instance": {
+    "finally": {
+      "name": "Promise.prototype.finally",
+      "global": "promise.prototype.finally/auto",
+      "meta": { "version": "1.2.1", "package": "promise.prototype.finally" }
+    }
+  }
+}
