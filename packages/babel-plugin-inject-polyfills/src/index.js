@@ -32,8 +32,9 @@ import type {
   PolyfillProvider,
 } from "./types";
 
+import createMetaResolver from "./meta-resolver";
+
 export { resolveProvider } from "./config";
-export { default as createMetaResolver } from "./meta-resolver";
 export type { PolyfillProvider, MetaDescriptor };
 
 export default declare((api, options: Options, dirname: string) => {
@@ -87,6 +88,7 @@ export default declare((api, options: Options, dirname: string) => {
         getUtils,
         method,
         targets,
+        createMetaResolver,
         shouldInjectPolyfill(name) {
           if (polyfillsNames === undefined) {
             throw new Error(

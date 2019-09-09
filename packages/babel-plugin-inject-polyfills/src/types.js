@@ -2,6 +2,7 @@
 
 import type { NodePath } from "@babel/traverse";
 import { types as t } from "@babel/core";
+import createMetaResolver from "./meta-resolver";
 
 type ObjectMap<T> = { [k: string]: T };
 
@@ -22,6 +23,7 @@ export type ProviderOptions = {
 export type PolyfillProvider<Opts: ProviderOptions = ProviderOptions> = (
   api: ProviderApi,
   options: Opts,
+  dirname: string,
 ) => ProviderResult;
 
 export type MethodString = "entry-global" | "usage-global" | "usage-pure";
@@ -33,6 +35,7 @@ export type Targets = {
 export type ProviderApi = {|
   method: MethodString,
   targets: Targets,
+  createMetaResolver: typeof createMetaResolver,
   getUtils(path: NodePath): Utils,
   shouldInjectPolyfill(name: string): boolean,
   debug(name: string | null): void,

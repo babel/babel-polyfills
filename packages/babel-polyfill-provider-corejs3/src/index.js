@@ -16,10 +16,7 @@ import {
 import { types as t } from "@babel/core";
 import { callMethod, coreJSModule, isCoreJSSource } from "./utils";
 
-import {
-  createMetaResolver,
-  type PolyfillProvider,
-} from "@babel/plugin-inject-polyfills";
+import { type PolyfillProvider } from "@babel/plugin-inject-polyfills";
 
 type Options = {
   version?: number | string,
@@ -29,16 +26,16 @@ type Options = {
   exclude?: string[],
 };
 
-const resolve = createMetaResolver({
-  global: BuiltIns,
-  static: StaticProperties,
-  instance: InstanceProperties,
-});
-
 export default ((
-  { getUtils, method, shouldInjectPolyfill, debug },
+  { getUtils, method, shouldInjectPolyfill, createMetaResolver, debug },
   { version = 3, proposals, shippedProposals },
 ) => {
+  const resolve = createMetaResolver({
+    global: BuiltIns,
+    static: StaticProperties,
+    instance: InstanceProperties,
+  });
+
   const available = new Set(getModulesListForTargetVersion(version));
   const coreJSBase = proposals
     ? "@babel/runtime-corejs3/core-js"

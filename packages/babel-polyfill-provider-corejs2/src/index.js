@@ -9,17 +9,8 @@ import {
 import addPlatformSpecificPolyfills from "./add-platform-specific-polyfills";
 import { hasMinVersion } from "./helpers";
 
-import {
-  createMetaResolver,
-  type PolyfillProvider,
-} from "@babel/plugin-inject-polyfills";
+import { type PolyfillProvider } from "@babel/plugin-inject-polyfills";
 import { types as t } from "@babel/core";
-
-const resolve = createMetaResolver({
-  global: BuiltIns,
-  static: StaticProperties,
-  instance: InstanceProperties,
-});
 
 const presetEnvCompat: "#__secret_key__@babel/preset-env__compatibility" =
   "#__secret_key__@babel/preset-env__compatibility";
@@ -34,17 +25,25 @@ type Options = {|
 |};
 
 export default ((
-  { getUtils, method, targets, shouldInjectPolyfill, debug },
+  api,
   {
     version: runtimeVersion = "7.0.0-beta.0",
     [presetEnvCompat]: { entryInjectRegenerator } = {},
   },
 ) => {
+  const resolve = api.createMetaResolver({
+    global: BuiltIns,
+    static: StaticProperties,
+    instance: InstanceProperties,
+  });
+
   const polyfills = addPlatformSpecificPolyfills(
-    targets,
-    method,
+    api.targets,
+    api.method,
     corejs2Polyfills,
   );
+
+  const { debug, shouldInjectPolyfill } = api;
 
   function inject(name, utils) {
     if (typeof name === "string") {
@@ -162,11 +161,11 @@ export default ((
       if (id) path.replaceWith(id);
     },
 
-    visitor: method === "usage-global" && {
+    visitor: api.method === "usage-global" && {
       // yield*
       YieldExpression(path) {
         if (path.node.delegate) {
-          inject("web.dom.iterable", getUtils(path));
+          inject("web.dom.iterable", api.getUtils(path));
         }
       },
     },
