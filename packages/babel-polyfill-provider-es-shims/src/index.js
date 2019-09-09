@@ -15,7 +15,7 @@ export default ((
 
   function mark(desc) {
     debug(desc.name);
-    if (!hasDependency(dirname, desc.name)) missingDeps.add(desc.meta);
+    if (!hasDependency(dirname, desc.name)) missingDeps.add(desc);
   }
 
   return {
