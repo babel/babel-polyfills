@@ -1,15 +1,16 @@
-import {
-  createMetaResolver,
-  type PolyfillProvider,
-} from "@babel/plugin-inject-polyfills";
+import { type PolyfillProvider } from "@babel/plugin-inject-polyfills";
 import resolve from "resolve";
 
 import polyfills from "../data/polyfills.json";
 import mappings from "../data/mappings.json";
 
-const resolvePolyfill = createMetaResolver(mappings);
+export default ((
+  { shouldInjectPolyfill, createMetaResolver, debug },
+  options,
+  dirname,
+) => {
+  const resolvePolyfill = createMetaResolver(mappings);
 
-export default (({ shouldInjectPolyfill, debug }, options, dirname) => {
   const missingDeps = new Set();
 
   function mark(desc) {

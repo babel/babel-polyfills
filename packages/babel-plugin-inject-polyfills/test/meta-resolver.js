@@ -1,4 +1,4 @@
-import { createMetaResolver } from "..";
+import createMetaResolver from "../src/meta-resolver";
 
 describe("createMetaResolver", () => {
   const resolver = createMetaResolver({
