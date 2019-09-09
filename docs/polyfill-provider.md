@@ -7,11 +7,11 @@ A _"polyfill provider"_ is a normal JavaScript function, similarly to how Babel 
 function polyfillProvider(api: ProviderApi, options: Options): Provider;
 ```
 
-### The `Provider` result object.
+## The `Provider` result object.
 
 The provider object exposes different properties and methods:
 
-#### `provider.name: string`
+### `provider.name: string`
 
 It's the name of the polyfill providers, similarly Babel plugins' `name` property. It's mostly used when the `debug` option is enabled, and in error messages.
 
@@ -24,7 +24,7 @@ function myProvider(api) {
 }
 ```
 
-#### `provider.polyfills: string[] | { [name: string]: Support }`
+### `provider.polyfills: string[] | { [name: string]: Support }`
 
 Is the list of polyfills supported by the polyfill provider. The names don't have a predefined format, but it's important that you are consistent. For example, `core-js` always uses `es.OBJECT.METHOD`, like in `es.array.includes`.
 These names will be used for two main purpuses to automatically validate and apply the `include` and `exclude` options specified by the user.
@@ -42,7 +42,7 @@ function myProvider(api) {
 }
 ```
 
-#### `provider.filterPolyfills: (name: string) => boolean`
+### `provider.filterPolyfills: (name: string) => boolean`
 
 Sometimes you might want to conditionally include a polyfill based on some additional options that your provider takes.
 For example, you might want to only inlcude some non compliant shams if the `sham: true` option is enabled.
@@ -62,7 +62,11 @@ function myProvider(api, options) {
 }
 ```
 
-#### `provider.entryGlobal`, `provider.usageGlobal` and `provider.usagePure`
+### `provider.visitor`
+
+If a provider needs to handle special cases which aren't supported by `@babel/plugin-inject-polyfills`, it can provide a normal `visitor` like any Babel plugin.
+
+### `provider.entryGlobal`, `provider.usageGlobal` and `provider.usagePure`
 
 These three functions are the core of any polyfill provider.
 They correspond, respectively, to the `entry-global`, `usage-global` and `usage-pure` values of the `method` option of `@babel/plugin-inject-polyfills`.
@@ -74,14 +78,7 @@ They take three parameters, and return nothing:
 function entryGlobal(meta, utils, path): void;
 ```
 
-The first parameter represents the metadata of the function or property `@babel/plugin-inject-polyfills` is asking a polyfill for.
-...
-
-#### `provider.visitor`
-
-If a provider needs to handle special cases which aren't supported by `@babel/plugin-inject-polyfills`, it can provide a normal `visitor` like any Babel plugin.
-
-### meta
+#### `meta`
 
 A `meta` object describes the statement or expression which triggered the call to the polyfill provider. It always has a `kind` property which can be used to differentiate between the possible polyfill types.
 
@@ -195,8 +192,132 @@ A `meta` object describes the statement or expression which triggered the call t
 
   It follows the same rules as the `"property"` kind.
 
-### utils
+#### `utils`
 
-### api
+When calling a provider function (e.g. `usageGlobal`), `@babel/plugin-inject-polyfills` will provide it a few utilities to easily inject the necessary `import` statements or `require` calls, depending on the source type. Polyfill providers shouldn't worry about which AST represents an import, or about the source type of the file being transpiled.
 
-### createMetaResolver
+- `utils.injectGlobalImport(url: string)` can be used to inject side-effectful global imports. It is usually called when injecting global polyfills.
+  For example, `utils.injectGlobalImport("my-polyfill")` would generate this code:
+
+  ```js
+  import "my-polyfill";
+  ```
+
+- `utils.injectNamedImport(url: string, name: string, hint?: string)` and `utils.injectDefaultImport(url: string, hint?: string)` are used to inject named or defaults import. They both return an identifier referencing the imported value.
+  The optional `hint` parameter can be used to generate a nice-looking alias for the import.
+  For example, `utils.injectNamedImport("array-polyfills", "from, "Array.from")` would generate this code:
+
+  ```js
+  import { from as _ArrayFrom } from "array-polyfills";
+  ```
+
+  and return this AST node:
+
+  ```json
+  {
+    "type": "Identifier",
+    "name": "_ArrayFrom"
+  }
+  ```
+
+## The `ProviderApi` parameter
+
+While some utilities are provided in the `utils` object, some of them are provided in the `api` object. The main different is that `utils` methods act on a specific input source file, while `api` methods provide info about how the plugin was configured and are not directly related to the transformed source code.
+
+### `api.method`
+
+It represents the `method` option passed to `@babel/plugin-inject-polyfills`, and it can be one of `"entry-global"`, `"usage-global"`, or `"usage-pure"`.
+
+### `api.targets`
+
+It represents the resolved engines which the user is targeting. Regardless of how they were specified (i.e. via browserslist), they are always normalized to an object mapping from engine names to versions.
+
+Example:
+
+```json
+{
+  "chrome": "74.0.0",
+  "firefox": "67.0.0",
+  "ios": "12.2.0"
+}
+```
+
+### `api.shouldInjectPolyfill(name: string): boolean`
+
+This methods returns wether or not a polyfill is needed, using data from the `targets`, `include` and `exclude` options, and from the engines support specified in the `provider.polyfills` property returned by the polyfill provider.
+
+### `api.debug(name: string | null)`
+
+This method is used to log information about the injected polyfills, which will then be reported to the user if the `debug` option is enabled.
+
+It should be called passing the polyfill name as a string whenever a polyfill is injected. When, in `"entry-global"` mode, the polyfill entry point has been found but removed becase no polyfill was needed, this method should be called passing `null` as a parameter to indicate that nothing has been injected.
+
+### `api.getUtils(path: NodePath): Utils`
+
+Sometimes you might need to inject an import outside of the `entryGlobal`/`usageGlobal`/`usagePure` methods. You could manually create the AST representing it, after checking which source type the current file is using (if `script` or `module`), but it is way more complex than the out-of-the-box support provided by the `utils` object.
+
+You can use this method to create a new `utils` object with all its utilities, attached to the file the current `NodePath` belongs to.
+
+```js
+export default function({ getUtils }) {
+  return {
+    // ...
+    visitor: {
+      YieldExpression(path) {
+        if (!path.node.star) return;
+        getUtils(path).injectGlobalImport("iterators-polyfill");
+      },
+    },
+  };
+}
+```
+
+### `api.createMetaResolver`
+
+```js
+function createMetaResolver<T>(definitions: Definitions<T>): (meta: Meta) => T;
+```
+
+From a syntactic point of view, `window.Promise` is a static property access: we are accessing the `"Promise"` property of the `window` object. For this reason, when polyfilling the ES2015 `Promise` constructor, we need to check both for static properties and for global variables.
+Following the same pattern, `theFoo.includes` has the same problem: it could be a static property access on the `theFoo` global object, or `theFoo` could be a global instance of an array and `includes` would then be a prototype property.
+
+To avoid having to manually check for all these cases, the `createMetaResolver` factory creates a function which does it for you.
+
+The `definitions` parameter is an object containing mappings of global values, and of static and instance properties. It has the following shape:
+
+```js
+type Definitions<T> = {
+  global: {
+    [variableName: string]: T,
+  },
+  instance: {
+    [propertyName: string]: T,
+  },
+  static: {
+    [objectName: string]: {
+      [propertyName: string]: T,
+    },
+  },
+};
+```
+
+Instance properties aren't categorized by their object, because often it's not possible to statically determine it.
+For this reason, it is highly recommended that pure polyfills for instance properties, if supported, check their argument type at runtime.
+For example, a `*.includes` polyfill might look like this:
+
+```js
+import * as array from "array-methods";
+import * as string from "string-methods";
+
+export default includes(thisValue, value) {
+  if (typeof thisValue === "string") {
+    return string.includes(thisValue, value);
+  }
+  if (Array.isArray(thisValue)) {
+    return array.includes(thisValue, value);
+  }
+
+  // This is not an array or a string, so we call the original method
+  return arr.includes(value);
+}
+```
