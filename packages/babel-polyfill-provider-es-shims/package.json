@@ -1,0 +1,26 @@
+{
+  "name": "babel-polyfill-provider-es-shims",
+  "version": "0.1.0",
+  "description": "TODO",
+  "repository": "https://github.com/babel/TODO",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "keywords": [
+    "babel-plugin"
+  ],
+  "dependencies": {
+    "resolve": "^1.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/helper-plugin-test-runner": "^7.1.0",
+    "@babel/plugin-inject-polyfills": "^0.1.0"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-inject-polyfills": "^0.1.0"
+  }
+}

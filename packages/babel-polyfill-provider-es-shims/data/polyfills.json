@@ -1,0 +1,33 @@
+{
+  "Number.isNaN": {
+    "edge": "12",
+    "chrome": "19",
+    "android": "4.1",
+    "firefox": "15",
+    "safari": "9.0",
+    "opera": "15",
+    "node": "0.12",
+    "samsung": "2.1",
+    "electron": "0.20",
+    "ios": "9.0"
+  },
+  "Promise.prototype.finally": {
+    "chrome": "63",
+    "edge": "18",
+    "firefox": "58",
+    "safari": "11.1",
+    "node": "10",
+    "ios": "11.3",
+    "samsung": "8.2",
+    "opera": "50",
+    "electron": "3.1"
+  },
+  "globalThis": {
+    "chrome": "71",
+    "firefox": "65",
+    "safari": "12.1",
+    "opera": "58",
+    "node": "12.0",
+    "electron": "5.0"
+  }
+}

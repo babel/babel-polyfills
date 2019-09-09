@@ -1,0 +1,14 @@
+{
+  "validateLogs": true,
+  "plugins": [
+    [
+      "@babel/plugin-inject-polyfills",
+      {
+        "method": "usage-pure",
+        "providers": [
+          "@@/es-shims"
+        ]
+      }
+    ]
+  ]
+}
