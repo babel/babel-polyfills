@@ -163,6 +163,21 @@ describe("usage-global", () => {
     );
   });
 
+  it("ignores namespaces", () => {
+    const usageGlobal = jest.fn();
+
+    const source = `
+      import * as bar from "bar";
+      bar.map();`;
+
+    transform(source, {
+      method: "usage-global",
+      providers: [provider({ usageGlobal })],
+    });
+
+    expect(usageGlobal).not.toHaveBeenCalled();
+  });
+
   it("destructuring", () => {
     const usageGlobal = jest.fn();
 
@@ -267,6 +282,21 @@ describe("usage-pure", () => {
       expect.anything(), // utils
       expect.anything(), // path
     );
+  });
+
+  it("ignores namespaces", () => {
+    const usagePure = jest.fn();
+
+    const source = `
+      import * as bar from "bar";
+      bar.map();`;
+
+    transform(source, {
+      method: "usage-pure",
+      providers: [provider({ usagePure })],
+    });
+
+    expect(usagePure).not.toHaveBeenCalled();
   });
 
   it("destructuring", () => {
