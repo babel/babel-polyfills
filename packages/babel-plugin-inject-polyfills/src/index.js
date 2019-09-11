@@ -201,7 +201,11 @@ export default declare((api, options: Options, dirname: string) => {
       const key = resolveKey(path.get("property"), path.node.computed);
       if (!key || key === "prototype") return;
 
-      const source = resolveSource(path.get("object"));
+      const object = path.get("object");
+      const binding = object.scope.getBinding(object.node.name);
+      if (binding && binding.path.isImportNamespaceSpecifier()) return;
+
+      const source = resolveSource(object);
       return property(source.id, key, source.placement, path);
     },
 
