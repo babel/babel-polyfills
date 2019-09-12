@@ -6,23 +6,26 @@ import createMetaResolver from "./meta-resolver";
 
 type ObjectMap<T> = { [k: string]: T };
 
+export type Pattern = string | RegExp;
+
+export type ProviderOptions<Opts = {||}> = {|
+  ...Opts,
+  include?: Pattern[],
+  exclude?: Pattern[],
+|};
+
 export type Options = {
   method: MethodString,
-  providers: Array<string | [string] | [string, ProviderOptions]>,
+  providers: Array<string | [string] | [string, ProviderOptions<>]>,
   targets?: { browsers: string | string[], [target: string]: string | number },
   ignoreBrowserslistConfig?: boolean,
   configPath?: string,
   debug?: boolean,
 };
 
-export type ProviderOptions = {
-  include?: string[],
-  exclude?: string[],
-};
-
-export type PolyfillProvider<Opts: ProviderOptions = ProviderOptions> = (
+export type PolyfillProvider<Opts = {||}> = (
   api: ProviderApi,
-  options: Opts,
+  options: ProviderOptions<Opts>,
   dirname: string,
 ) => ProviderResult;
 

@@ -18,13 +18,11 @@ import { callMethod, coreJSModule, isCoreJSSource } from "./utils";
 
 import { type PolyfillProvider } from "@babel/plugin-inject-polyfills";
 
-type Options = {
+type Options = {|
   version?: number | string,
   proposals?: boolean,
   shippedProposals?: boolean,
-  include?: string[],
-  exclude?: string[],
-};
+|};
 
 export default ((
   { getUtils, method, shouldInjectPolyfill, createMetaResolver, debug },

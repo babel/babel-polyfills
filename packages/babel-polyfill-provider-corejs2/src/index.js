@@ -20,8 +20,6 @@ type Options = {|
   [typeof presetEnvCompat]: void | {
     entryInjectRegenerator: boolean,
   },
-  include?: string[],
-  exclude?: string[],
 |};
 
 export default ((
