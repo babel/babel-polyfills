@@ -11,7 +11,7 @@ import type { ProviderOptions, PolyfillProvider } from "../types";
 export type UnloadedDescriptor = {
   name: string | void,
   value: PolyfillProvider<*>,
-  options: ProviderOptions | void,
+  options: ProviderOptions<*> | void,
   alias: string,
   file?: {
     request: string,

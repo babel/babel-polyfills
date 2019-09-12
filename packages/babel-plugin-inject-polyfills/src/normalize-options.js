@@ -1,8 +1,7 @@
 // @flow
 
 import { intersection } from "./utils";
-
-type Pattern = string | RegExp;
+import type { Pattern } from "./types";
 
 function patternToRegExp(pattern: Pattern): ?RegExp {
   if (pattern instanceof RegExp) return pattern;
