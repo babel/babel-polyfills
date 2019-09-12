@@ -1,19 +1,15 @@
-# @babel/polyfill-provider-regenerator
-
-> Load `regenerator` polyfills
-
-See our website [@babel/polyfill-provider-regenerator](https://babeljs.io/docs/en/next/babel-polyfill-provider-regenerator.html) for more information.
+# babel-polyfill-provider-corejs2
 
 ## Install
 
 Using npm:
 
 ```sh
-npm install --save-dev @babel/polyfill-provider-regenerator
+npm install --save-dev babel-polyfill-provider-corejs2
 ```
 
 or using yarn:
 
 ```sh
-yarn add @babel/polyfill-provider-regenerator --dev
+yarn add babel-polyfill-provider-corejs2 --dev
 ```
