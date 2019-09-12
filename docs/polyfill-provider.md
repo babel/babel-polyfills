@@ -1,6 +1,8 @@
 _"Polyfill providers"_ are the packages which `@babel/plugin-inject-polyfills` delegates to.
 Their job is to provide the correct import paths for every functionality that their underling polyfill can handle.
 
+> You can find some examples in the [`packages`](https://github.com/nicolo-ribaudo/babel-polyfills/tree/master/packages) folder of this repository
+
 A _"polyfill provider"_ is a normal JavaScript function, similarly to how Babel plugins are defined. It takes two parameters (`api` and `options`) and returns an object with the provider implementation.
 
 ```ts
@@ -321,3 +323,11 @@ export default includes(thisValue, value) {
   return arr.includes(value);
 }
 ```
+
+## Naming convention
+
+Polyfill providers follow a naming convention similar to Babel plugins and presets:
+
+- `babel-polyfill-provider-POLYFILL-NAME`
+- `@ORG/babel-polyfill-provider-POLYFILL-NAME`
+- `@ORG/babel-polyfill-provider`
