@@ -1,0 +1,11 @@
+language: node_js
+node_js: node
+
+jobs:
+  include:
+    - name: "Test"
+      before_script: yarn build
+    - name: "Lint"
+      script:
+        - yarn lint
+        - yarn flow
