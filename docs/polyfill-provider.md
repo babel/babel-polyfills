@@ -47,7 +47,7 @@ function myProvider(api) {
 ### `provider.filterPolyfills: (name: string) => boolean`
 
 Sometimes you might want to conditionally include a polyfill based on some additional options that your provider takes.
-For example, you might want to only inlcude some non compliant shams if the `sham: true` option is enabled.
+For example, you might want to only include some non compliant shams if the `sham: true` option is enabled.
 
 This is similar to directly filtering the `polyfills` option, but it is applied _after_ validating the `include` and `exclude` options. Since only polyfills defined with `polyfills` can be used in those option, `filterPolyfills` prevents errors in case someone is excluding a polyfill which would be excluded by this method anyway.
 
