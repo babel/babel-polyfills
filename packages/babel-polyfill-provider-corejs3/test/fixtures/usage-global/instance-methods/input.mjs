@@ -10,6 +10,7 @@ e.padStart.apply(); // .apply
 f.padEnd.call(); // .call
 String.prototype.startsWith.call; // prototype.call
 var { codePointAt, endsWith } = k; // destructuring
+g.reverse();
 
 var asdf = "copyWithin";
 var asdf2 = "split";
