@@ -1,7 +1,6 @@
 // @flow
 
 import { declare } from "@babel/helper-plugin-utils";
-import * as traverse from "@babel/traverse";
 import type { NodePath } from "@babel/traverse";
 
 import getTargets from "@babel/preset-env/lib/targets-parser";
@@ -39,6 +38,7 @@ export type { PolyfillProvider, MetaDescriptor };
 
 export default declare((api, options: Options, dirname: string) => {
   api.assertVersion(7);
+  const { traverse } = api;
 
   const {
     method,
