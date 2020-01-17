@@ -1,6 +1,6 @@
 // @flow
 
-import corejs2Polyfills from "../data/corejs2-built-ins.json";
+import corejs2Polyfills from "@babel/compat-data/corejs2-built-ins";
 import {
   BuiltIns,
   StaticProperties,
@@ -9,7 +9,7 @@ import {
 import addPlatformSpecificPolyfills from "./add-platform-specific-polyfills";
 import { hasMinVersion } from "./helpers";
 
-import { type PolyfillProvider } from "@babel/plugin-inject-polyfills";
+import type { PolyfillProvider } from "@babel/plugin-inject-polyfills";
 import { types as t } from "@babel/core";
 
 const presetEnvCompat: "#__secret_key__@babel/preset-env__compatibility" =

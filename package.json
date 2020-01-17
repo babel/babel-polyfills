@@ -4,7 +4,6 @@
   "license": "MIT",
   "scripts": {
     "build": "gulp build",
-    "build-data": "node packages/babel-polyfill-provider-corejs2/scripts/build-data",
     "clean": "rimraf packages/*/lib",
     "clean-all": "rimraf packages/*/lib packages/*/node_modules node_modules",
     "flow": "flow check --strip-root",
@@ -45,7 +44,7 @@
     "through2": "^2.0.0"
   },
   "engines": {
-    "node": ">= 6.9.0 < 13.0.0",
+    "node": ">= 6.9.0",
     "yarn": ">=1.0.0"
   },
   "lint-staged": {
