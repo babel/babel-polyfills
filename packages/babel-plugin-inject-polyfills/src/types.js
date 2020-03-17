@@ -58,6 +58,8 @@ export type ProviderResult = {|
   usageGlobal?: (meta: MetaDescriptor, utils: Utils, path: NodePath) => void,
   usagePure?: (meta: MetaDescriptor, utils: Utils, path: NodePath) => void,
   visitor?: Object,
+  pre?: Function,
+  post?: Function,
 |};
 
 export type MetaDescriptor =

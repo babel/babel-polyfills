@@ -281,8 +281,16 @@ export default declare((api, options: Options, dirname: string) => {
         ),
         providers: new Set(),
       };
+
+      for (const provider of resolvedProviders) {
+        provider.pre?.apply(this, arguments);
+      }
     },
     post() {
+      for (const provider of resolvedProviders) {
+        provider.post?.post.apply(this, arguments);
+      }
+
       if (!debug) return;
 
       if (this.filename) console.log(`\n[${this.filename}]`);
