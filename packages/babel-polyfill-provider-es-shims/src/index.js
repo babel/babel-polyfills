@@ -1,5 +1,6 @@
 import { type PolyfillProvider } from "@babel/plugin-inject-polyfills";
 import resolve from "resolve";
+import fs from "fs";
 
 import polyfills from "../data/polyfills.json";
 import mappings from "../data/mappings.json";
@@ -45,22 +46,34 @@ export default ((
       path.replaceWith(id);
     },
 
-    visitor: {
-      Program: {
-        exit() {
-          let deps = "";
-          for (const { package: pkg, version } of missingDeps) {
-            deps += ` ${pkg}@^${version}`;
-          }
+    post() {
+      if (options.missingPolyfills?.cacheFile) {
+        const missingPolyfills = fs
+          .readFileSync(options.missingPolyfills.cacheFile, "utf8")
+          .split(/\s+/g);
 
-          console.warn(
-            "\nSome polyfills have been added put are not present in your dependencies.\n" +
-              "Please run one of the following commands:\n" +
-              `\tnpm install --save${deps}\n` +
-              `\tyarn add${deps}\n`,
-          );
-        },
-      },
+        for (const { package: pkg, version } of missingDeps) {
+          missingPolyfills.push(`${pkg}@^${version}`);
+        }
+        missingPolyfills.sort();
+
+        fs.writeFileSync(
+          options.missingPolyfills.cacheFile,
+          missingPolyfills.join(" "),
+        );
+      } else {
+        let deps = "";
+        for (const { package: pkg, version } of missingDeps) {
+          deps += ` ${pkg}@^${version}`;
+        }
+
+        console.warn(
+          "\nSome polyfills have been added put are not present in your dependencies.\n" +
+            "Please run one of the following commands:\n" +
+            `\tnpm install --save${deps}\n` +
+            `\tyarn add${deps}\n`,
+        );
+      }
     },
   };
 }: PolyfillProvider<*>);
