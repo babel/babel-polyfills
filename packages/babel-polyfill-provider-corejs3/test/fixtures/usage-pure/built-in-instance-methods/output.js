@@ -1,76 +1,76 @@
-var _bindInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/bind");
+var _bindInstanceProperty = require("core-js-pure/stable/instance/bind");
 
-var _codePointAtInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/code-point-at");
+var _codePointAtInstanceProperty = require("core-js-pure/stable/instance/code-point-at");
 
-var _concatInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/concat");
+var _concatInstanceProperty = require("core-js-pure/stable/instance/concat");
 
-var _copyWithinInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/copy-within");
+var _copyWithinInstanceProperty = require("core-js-pure/stable/instance/copy-within");
 
-var _endsWithInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/ends-with");
+var _endsWithInstanceProperty = require("core-js-pure/stable/instance/ends-with");
 
-var _entriesInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/entries");
+var _entriesInstanceProperty = require("core-js-pure/stable/instance/entries");
 
-var _everyInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/every");
+var _everyInstanceProperty = require("core-js-pure/stable/instance/every");
 
-var _fillInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/fill");
+var _fillInstanceProperty = require("core-js-pure/stable/instance/fill");
 
-var _filterInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/filter");
+var _filterInstanceProperty = require("core-js-pure/stable/instance/filter");
 
-var _findInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/find");
+var _findInstanceProperty = require("core-js-pure/stable/instance/find");
 
-var _findIndexInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/find-index");
+var _findIndexInstanceProperty = require("core-js-pure/stable/instance/find-index");
 
-var _flagsInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/flags");
+var _flagsInstanceProperty = require("core-js-pure/stable/instance/flags");
 
-var _flatMapInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/flat-map");
+var _flatMapInstanceProperty = require("core-js-pure/stable/instance/flat-map");
 
-var _flatInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/flat");
+var _flatInstanceProperty = require("core-js-pure/stable/instance/flat");
 
-var _forEachInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/for-each");
+var _forEachInstanceProperty = require("core-js-pure/stable/instance/for-each");
 
-var _includesInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/includes");
+var _includesInstanceProperty = require("core-js-pure/stable/instance/includes");
 
-var _indexOfInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/index-of");
+var _indexOfInstanceProperty = require("core-js-pure/stable/instance/index-of");
 
-var _keysInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/keys");
+var _keysInstanceProperty = require("core-js-pure/stable/instance/keys");
 
-var _lastIndexOfInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/last-index-of");
+var _lastIndexOfInstanceProperty = require("core-js-pure/stable/instance/last-index-of");
 
-var _mapInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/map");
+var _mapInstanceProperty = require("core-js-pure/stable/instance/map");
 
-var _padEndInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/pad-end");
+var _padEndInstanceProperty = require("core-js-pure/stable/instance/pad-end");
 
-var _padStartInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/pad-start");
+var _padStartInstanceProperty = require("core-js-pure/stable/instance/pad-start");
 
-var _reduceInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/reduce");
+var _reduceInstanceProperty = require("core-js-pure/stable/instance/reduce");
 
-var _reduceRightInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/reduce-right");
+var _reduceRightInstanceProperty = require("core-js-pure/stable/instance/reduce-right");
 
-var _repeatInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/repeat");
+var _repeatInstanceProperty = require("core-js-pure/stable/instance/repeat");
 
-var _reverseInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/reverse");
+var _reverseInstanceProperty = require("core-js-pure/stable/instance/reverse");
 
-var _sliceInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/slice");
+var _sliceInstanceProperty = require("core-js-pure/stable/instance/slice");
 
-var _someInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/some");
+var _someInstanceProperty = require("core-js-pure/stable/instance/some");
 
-var _sortInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/sort");
+var _sortInstanceProperty = require("core-js-pure/stable/instance/sort");
 
-var _spliceInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/splice");
+var _spliceInstanceProperty = require("core-js-pure/stable/instance/splice");
 
-var _startsWithInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/starts-with");
+var _startsWithInstanceProperty = require("core-js-pure/stable/instance/starts-with");
 
-var _trimInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/trim");
+var _trimInstanceProperty = require("core-js-pure/stable/instance/trim");
 
-var _trimEndInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/trim-end");
+var _trimEndInstanceProperty = require("core-js-pure/stable/instance/trim-end");
 
-var _trimLeftInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/trim-left");
+var _trimLeftInstanceProperty = require("core-js-pure/stable/instance/trim-left");
 
-var _trimRightInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/trim-right");
+var _trimRightInstanceProperty = require("core-js-pure/stable/instance/trim-right");
 
-var _trimStartInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/trim-start");
+var _trimStartInstanceProperty = require("core-js-pure/stable/instance/trim-start");
 
-var _valuesInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/values");
+var _valuesInstanceProperty = require("core-js-pure/stable/instance/values");
 
 object.at;
 

@@ -1,3 +1,3 @@
-import _Array$from from "@babel/runtime-corejs2/core-js/array/from";
+import _Array$from from "core-js/library/fn/array/from";
 
 _Array$from(foo);

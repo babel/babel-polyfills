@@ -1,3 +1,3 @@
-var _getIteratorMethod = require("@babel/runtime-corejs3/core-js/get-iterator-method");
+var _getIteratorMethod = require("core-js-pure/stable/get-iterator-method");
 
 const method = _getIteratorMethod(array);

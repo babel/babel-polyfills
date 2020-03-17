@@ -1,128 +1,128 @@
-var _Array$from = require("@babel/runtime-corejs2/core-js/array/from");
+var _Array$from = require("core-js/library/fn/array/from");
 
-var _Array$isArray = require("@babel/runtime-corejs2/core-js/array/is-array");
+var _Array$isArray = require("core-js/library/fn/array/is-array");
 
-var _Array$of = require("@babel/runtime-corejs2/core-js/array/of");
+var _Array$of = require("core-js/library/fn/array/of");
 
-var _Date$now = require("@babel/runtime-corejs2/core-js/date/now");
+var _Date$now = require("core-js/library/fn/date/now");
 
-var _JSON$stringify = require("@babel/runtime-corejs2/core-js/json/stringify");
+var _JSON$stringify = require("core-js/library/fn/json/stringify");
 
-var _Number$EPSILON = require("@babel/runtime-corejs2/core-js/number/epsilon");
+var _Number$EPSILON = require("core-js/library/fn/number/epsilon");
 
-var _Number$MAX_SAFE_INTEGER = require("@babel/runtime-corejs2/core-js/number/max-safe-integer");
+var _Number$MAX_SAFE_INTEGER = require("core-js/library/fn/number/max-safe-integer");
 
-var _Number$MIN_SAFE_INTEGER = require("@babel/runtime-corejs2/core-js/number/min-safe-integer");
+var _Number$MIN_SAFE_INTEGER = require("core-js/library/fn/number/min-safe-integer");
 
-var _Number$isFinite = require("@babel/runtime-corejs2/core-js/number/is-finite");
+var _Number$isFinite = require("core-js/library/fn/number/is-finite");
 
-var _Number$isInteger = require("@babel/runtime-corejs2/core-js/number/is-integer");
+var _Number$isInteger = require("core-js/library/fn/number/is-integer");
 
-var _Number$isNaN = require("@babel/runtime-corejs2/core-js/number/is-nan");
+var _Number$isNaN = require("core-js/library/fn/number/is-nan");
 
-var _Number$isSafeInteger = require("@babel/runtime-corejs2/core-js/number/is-safe-integer");
+var _Number$isSafeInteger = require("core-js/library/fn/number/is-safe-integer");
 
-var _Number$parseFloat = require("@babel/runtime-corejs2/core-js/number/parse-float");
+var _Number$parseFloat = require("core-js/library/fn/number/parse-float");
 
-var _Number$parseInt = require("@babel/runtime-corejs2/core-js/number/parse-int");
+var _Number$parseInt = require("core-js/library/fn/number/parse-int");
 
-var _Object$assign = require("@babel/runtime-corejs2/core-js/object/assign");
+var _Object$assign = require("core-js/library/fn/object/assign");
 
-var _Object$create = require("@babel/runtime-corejs2/core-js/object/create");
+var _Object$create = require("core-js/library/fn/object/create");
 
-var _Object$defineProperties = require("@babel/runtime-corejs2/core-js/object/define-properties");
+var _Object$defineProperties = require("core-js/library/fn/object/define-properties");
 
-var _Object$defineProperty = require("@babel/runtime-corejs2/core-js/object/define-property");
+var _Object$defineProperty = require("core-js/library/fn/object/define-property");
 
-var _Object$entries = require("@babel/runtime-corejs2/core-js/object/entries");
+var _Object$entries = require("core-js/library/fn/object/entries");
 
-var _Object$freeze = require("@babel/runtime-corejs2/core-js/object/freeze");
+var _Object$freeze = require("core-js/library/fn/object/freeze");
 
-var _Object$getOwnPropertyDescriptor = require("@babel/runtime-corejs2/core-js/object/get-own-property-descriptor");
+var _Object$getOwnPropertyDescriptor = require("core-js/library/fn/object/get-own-property-descriptor");
 
-var _Object$getOwnPropertyDescriptors = require("@babel/runtime-corejs2/core-js/object/get-own-property-descriptors");
+var _Object$getOwnPropertyDescriptors = require("core-js/library/fn/object/get-own-property-descriptors");
 
-var _Object$getOwnPropertyNames = require("@babel/runtime-corejs2/core-js/object/get-own-property-names");
+var _Object$getOwnPropertyNames = require("core-js/library/fn/object/get-own-property-names");
 
-var _Object$getOwnPropertySymbols = require("@babel/runtime-corejs2/core-js/object/get-own-property-symbols");
+var _Object$getOwnPropertySymbols = require("core-js/library/fn/object/get-own-property-symbols");
 
-var _Object$getPrototypeOf = require("@babel/runtime-corejs2/core-js/object/get-prototype-of");
+var _Object$getPrototypeOf = require("core-js/library/fn/object/get-prototype-of");
 
-var _Object$isExtensible = require("@babel/runtime-corejs2/core-js/object/is-extensible");
+var _Object$isExtensible = require("core-js/library/fn/object/is-extensible");
 
-var _Object$isFrozen = require("@babel/runtime-corejs2/core-js/object/is-frozen");
+var _Object$isFrozen = require("core-js/library/fn/object/is-frozen");
 
-var _Object$isSealed = require("@babel/runtime-corejs2/core-js/object/is-sealed");
+var _Object$isSealed = require("core-js/library/fn/object/is-sealed");
 
-var _Object$is = require("@babel/runtime-corejs2/core-js/object/is");
+var _Object$is = require("core-js/library/fn/object/is");
 
-var _Object$keys = require("@babel/runtime-corejs2/core-js/object/keys");
+var _Object$keys = require("core-js/library/fn/object/keys");
 
-var _Object$preventExtensions = require("@babel/runtime-corejs2/core-js/object/prevent-extensions");
+var _Object$preventExtensions = require("core-js/library/fn/object/prevent-extensions");
 
-var _Object$seal = require("@babel/runtime-corejs2/core-js/object/seal");
+var _Object$seal = require("core-js/library/fn/object/seal");
 
-var _Object$setPrototypeOf = require("@babel/runtime-corejs2/core-js/object/set-prototype-of");
+var _Object$setPrototypeOf = require("core-js/library/fn/object/set-prototype-of");
 
-var _Object$values = require("@babel/runtime-corejs2/core-js/object/values");
+var _Object$values = require("core-js/library/fn/object/values");
 
-var _Reflect$apply = require("@babel/runtime-corejs2/core-js/reflect/apply");
+var _Reflect$apply = require("core-js/library/fn/reflect/apply");
 
-var _Reflect$construct = require("@babel/runtime-corejs2/core-js/reflect/construct");
+var _Reflect$construct = require("core-js/library/fn/reflect/construct");
 
-var _Reflect$defineProperty = require("@babel/runtime-corejs2/core-js/reflect/define-property");
+var _Reflect$defineProperty = require("core-js/library/fn/reflect/define-property");
 
-var _Reflect$deleteProperty = require("@babel/runtime-corejs2/core-js/reflect/delete-property");
+var _Reflect$deleteProperty = require("core-js/library/fn/reflect/delete-property");
 
-var _Reflect$getOwnPropertyDescriptor = require("@babel/runtime-corejs2/core-js/reflect/get-own-property-descriptor");
+var _Reflect$getOwnPropertyDescriptor = require("core-js/library/fn/reflect/get-own-property-descriptor");
 
-var _Reflect$getPrototypeOf = require("@babel/runtime-corejs2/core-js/reflect/get-prototype-of");
+var _Reflect$getPrototypeOf = require("core-js/library/fn/reflect/get-prototype-of");
 
-var _Reflect$get = require("@babel/runtime-corejs2/core-js/reflect/get");
+var _Reflect$get = require("core-js/library/fn/reflect/get");
 
-var _Reflect$has = require("@babel/runtime-corejs2/core-js/reflect/has");
+var _Reflect$has = require("core-js/library/fn/reflect/has");
 
-var _Reflect$isExtensible = require("@babel/runtime-corejs2/core-js/reflect/is-extensible");
+var _Reflect$isExtensible = require("core-js/library/fn/reflect/is-extensible");
 
-var _Reflect$ownKeys = require("@babel/runtime-corejs2/core-js/reflect/own-keys");
+var _Reflect$ownKeys = require("core-js/library/fn/reflect/own-keys");
 
-var _Reflect$preventExtensions = require("@babel/runtime-corejs2/core-js/reflect/prevent-extensions");
+var _Reflect$preventExtensions = require("core-js/library/fn/reflect/prevent-extensions");
 
-var _Reflect$set = require("@babel/runtime-corejs2/core-js/reflect/set");
+var _Reflect$set = require("core-js/library/fn/reflect/set");
 
-var _Reflect$setPrototypeOf = require("@babel/runtime-corejs2/core-js/reflect/set-prototype-of");
+var _Reflect$setPrototypeOf = require("core-js/library/fn/reflect/set-prototype-of");
 
-var _String$fromCodePoint = require("@babel/runtime-corejs2/core-js/string/from-code-point");
+var _String$fromCodePoint = require("core-js/library/fn/string/from-code-point");
 
-var _String$raw = require("@babel/runtime-corejs2/core-js/string/raw");
+var _String$raw = require("core-js/library/fn/string/raw");
 
-var _Symbol = require("@babel/runtime-corejs2/core-js/symbol");
+var _Symbol = require("core-js/library/fn/symbol");
 
-var _Symbol$for = require("@babel/runtime-corejs2/core-js/symbol/for");
+var _Symbol$for = require("core-js/library/fn/symbol/for");
 
-var _Symbol$hasInstance = require("@babel/runtime-corejs2/core-js/symbol/has-instance");
+var _Symbol$hasInstance = require("core-js/library/fn/symbol/has-instance");
 
-var _Symbol$isConcatSpreadable = require("@babel/runtime-corejs2/core-js/symbol/is-concat-spreadable");
+var _Symbol$isConcatSpreadable = require("core-js/library/fn/symbol/is-concat-spreadable");
 
-var _Symbol$iterator = require("@babel/runtime-corejs2/core-js/symbol/iterator");
+var _Symbol$iterator = require("core-js/library/fn/symbol/iterator");
 
-var _Symbol$keyFor = require("@babel/runtime-corejs2/core-js/symbol/key-for");
+var _Symbol$keyFor = require("core-js/library/fn/symbol/key-for");
 
-var _Symbol$match = require("@babel/runtime-corejs2/core-js/symbol/match");
+var _Symbol$match = require("core-js/library/fn/symbol/match");
 
-var _Symbol$replace = require("@babel/runtime-corejs2/core-js/symbol/replace");
+var _Symbol$replace = require("core-js/library/fn/symbol/replace");
 
-var _Symbol$search = require("@babel/runtime-corejs2/core-js/symbol/search");
+var _Symbol$search = require("core-js/library/fn/symbol/search");
 
-var _Symbol$species = require("@babel/runtime-corejs2/core-js/symbol/species");
+var _Symbol$species = require("core-js/library/fn/symbol/species");
 
-var _Symbol$split = require("@babel/runtime-corejs2/core-js/symbol/split");
+var _Symbol$split = require("core-js/library/fn/symbol/split");
 
-var _Symbol$toPrimitive = require("@babel/runtime-corejs2/core-js/symbol/to-primitive");
+var _Symbol$toPrimitive = require("core-js/library/fn/symbol/to-primitive");
 
-var _Symbol$toStringTag = require("@babel/runtime-corejs2/core-js/symbol/to-string-tag");
+var _Symbol$toStringTag = require("core-js/library/fn/symbol/to-string-tag");
 
-var _Symbol$unscopables = require("@babel/runtime-corejs2/core-js/symbol/unscopables");
+var _Symbol$unscopables = require("core-js/library/fn/symbol/unscopables");
 
 _Array$from;
 _Array$isArray;

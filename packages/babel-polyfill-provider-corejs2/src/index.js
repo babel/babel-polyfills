@@ -35,19 +35,22 @@ export default ((
     instance: InstanceProperties,
   });
 
+  const { debug, shouldInjectPolyfill, method } = api;
+
   const polyfills = addPlatformSpecificPolyfills(
     api.targets,
-    api.method,
+    method,
     corejs2Polyfills,
   );
 
-  const { debug, shouldInjectPolyfill } = api;
+  const coreJSBase =
+    method === "usage-pure" ? "core-js/library/fn" : "core-js/modules";
 
   function inject(name, utils) {
     if (typeof name === "string") {
       if (shouldInjectPolyfill(name)) {
         debug(name);
-        utils.injectGlobalImport(`core-js/modules/${name}`);
+        utils.injectGlobalImport(`${coreJSBase}/${name}`);
       }
       return;
     }
@@ -66,10 +69,7 @@ export default ((
       return;
     }
 
-    return utils.injectDefaultImport(
-      `@babel/runtime-corejs2/core-js/${pure}`,
-      hint,
-    );
+    return utils.injectDefaultImport(`${coreJSBase}/${pure}`, hint);
   }
 
   return {
@@ -115,7 +115,7 @@ export default ((
           path.replaceWith(
             t.callExpression(
               utils.injectDefaultImport(
-                `@babel/runtime-corejs2/core-js/is-iterable`,
+                `${coreJSBase}/is-iterable`,
                 "isIterable",
               ),
               [path.node.right],
@@ -140,7 +140,7 @@ export default ((
           path.parentPath.replaceWith(
             t.callExpression(
               utils.injectDefaultImport(
-                `@babel/runtime-corejs2/core-js/get-iterator`,
+                `${coreJSBase}/get-iterator`,
                 "getIterator",
               ),
               [path.node.object],

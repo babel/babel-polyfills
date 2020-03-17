@@ -1,3 +1,3 @@
-var _Symbol$iterator = require("@babel/runtime-corejs2/core-js/symbol/iterator");
+var _Symbol$iterator = require("core-js/library/fn/symbol/iterator");
 
 _Symbol$iterator;

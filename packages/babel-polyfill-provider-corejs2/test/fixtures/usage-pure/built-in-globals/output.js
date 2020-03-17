@@ -1,22 +1,22 @@
-var _Map = require("@babel/runtime-corejs2/core-js/map");
+var _Map = require("core-js/library/fn/map");
 
-var _Promise = require("@babel/runtime-corejs2/core-js/promise");
+var _Promise = require("core-js/library/fn/promise");
 
-var _Set = require("@babel/runtime-corejs2/core-js/set");
+var _Set = require("core-js/library/fn/set");
 
-var _Symbol = require("@babel/runtime-corejs2/core-js/symbol");
+var _Symbol = require("core-js/library/fn/symbol");
 
-var _WeakMap = require("@babel/runtime-corejs2/core-js/weak-map");
+var _WeakMap = require("core-js/library/fn/weak-map");
 
-var _WeakSet = require("@babel/runtime-corejs2/core-js/weak-set");
+var _WeakSet = require("core-js/library/fn/weak-set");
 
-var _clearImmediate = require("@babel/runtime-corejs2/core-js/clear-immediate");
+var _clearImmediate = require("core-js/library/fn/clear-immediate");
 
-var _parseFloat = require("@babel/runtime-corejs2/core-js/parse-float");
+var _parseFloat = require("core-js/library/fn/parse-float");
 
-var _parseInt = require("@babel/runtime-corejs2/core-js/parse-int");
+var _parseInt = require("core-js/library/fn/parse-int");
 
-var _setImmediate = require("@babel/runtime-corejs2/core-js/set-immediate");
+var _setImmediate = require("core-js/library/fn/set-immediate");
 
 AggregateError;
 _Map;

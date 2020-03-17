@@ -1,3 +1,3 @@
-var _getIterator = require("@babel/runtime-corejs3/core-js/get-iterator");
+var _getIterator = require("core-js-pure/stable/get-iterator");
 
 const iterator = _getIterator(array);

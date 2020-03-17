@@ -2,11 +2,11 @@
 
 var _context;
 
-var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+var _Object$defineProperty = require("core-js-pure/stable/object/define-property");
 
-var _forEachInstanceProperty = require("@babel/runtime-corejs3/core-js-stable/instance/for-each");
+var _forEachInstanceProperty = require("core-js-pure/stable/instance/for-each");
 
-var _Object$keys = require("@babel/runtime-corejs3/core-js-stable/object/keys");
+var _Object$keys = require("core-js-pure/stable/object/keys");
 
 _Object$defineProperty(exports, "__esModule", {
   value: true
@@ -17,7 +17,7 @@ var _exportNames = {
 };
 exports.exp = void 0;
 
-var _includes = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/includes"));
+var _includes = _interopRequireDefault(require("core-js-pure/stable/instance/includes"));
 
 var _bar = _interopRequireDefault(require("bar"));
 

@@ -35,9 +35,12 @@ export default ((
   });
 
   const available = new Set(getModulesListForTargetVersion(version));
-  const coreJSBase = proposals
-    ? "@babel/runtime-corejs3/core-js"
-    : "@babel/runtime-corejs3/core-js-stable";
+  const coreJSBase =
+    method === "usage-pure"
+      ? proposals
+        ? "core-js-pure/features"
+        : "core-js-pure/stable"
+      : "core-js";
 
   function maybeInjectGlobal(names: string[], utils) {
     for (const name of names) {
@@ -124,7 +127,7 @@ export default ((
           path.replaceWith(
             t.callExpression(
               utils.injectDefaultImport(
-                `@babel/runtime-corejs3/core-js/is-iterable`,
+                `${coreJSBase}/is-iterable`,
                 "isIterable",
               ),
               [path.node.right],
@@ -151,7 +154,7 @@ export default ((
               path.parentPath.replaceWith(
                 t.callExpression(
                   utils.injectDefaultImport(
-                    `@babel/runtime-corejs3/core-js/get-iterator`,
+                    `${coreJSBase}/get-iterator`,
                     "getIterator",
                   ),
                   [path.node.object],
@@ -162,7 +165,7 @@ export default ((
               callMethod(
                 path,
                 utils.injectDefaultImport(
-                  `@babel/runtime-corejs3/core-js/get-iterator-method`,
+                  `${coreJSBase}/get-iterator-method`,
                   "getIteratorMethod",
                 ),
               );
@@ -171,7 +174,7 @@ export default ((
             path.replaceWith(
               t.callExpression(
                 utils.injectDefaultImport(
-                  `@babel/runtime-corejs3/core-js/get-iterator-method`,
+                  `${coreJSBase}/get-iterator-method`,
                   "getIteratorMethod",
                 ),
                 [path.node.object],
