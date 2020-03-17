@@ -11,13 +11,10 @@
   "keywords": [
     "babel-plugin"
   ],
-  "dependencies": {
-    "@babel/helper-plugin-utils": "^7.8.3"
-  },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
-    "@babel/plugin-inject-polyfills": "^0.1.0",
-    "@babel/helper-plugin-test-runner": "^7.1.0"
+    "@babel/helper-plugin-test-runner": "^7.1.0",
+    "@babel/plugin-inject-polyfills": "^0.1.0"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0-0",

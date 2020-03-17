@@ -3,8 +3,10 @@
 import { declare } from "@babel/helper-plugin-utils";
 import type { NodePath } from "@babel/traverse";
 
-import getTargets from "@babel/preset-env/lib/targets-parser";
-import { isPluginRequired } from "@babel/preset-env/lib/filter-items";
+import getTargets, {
+  isRequired,
+  getInclusionReasons,
+} from "@babel/helper-compilation-targets";
 
 import {
   getImportSource,
@@ -16,8 +18,6 @@ import {
 import { createProviderDescriptors } from "./config";
 import ImportsCache from "./imports-cache";
 import {
-  filterTargets,
-  stringifyTargets,
   stringifyTargetsMultiline,
   presetEnvSilentDebugHeader,
 } from "./debug-utils";
@@ -104,11 +104,12 @@ export default declare((api, options: Options, dirname: string) => {
           }
 
           if (filterPolyfills && !filterPolyfills(name)) return false;
-          if (include.has(name)) return true;
-          if (exclude.has(name)) return false;
-          if (!polyfillsSupport) return true;
 
-          return isPluginRequired(targets, polyfillsSupport[name]);
+          return isRequired(name, targets, {
+            compatData: polyfillsSupport,
+            includes: include,
+            excludes: exclude,
+          });
         },
         debug(name) {
           debugLog.providers.add(provider.name);
@@ -288,7 +289,7 @@ export default declare((api, options: Options, dirname: string) => {
     },
     post() {
       for (const provider of resolvedProviders) {
-        provider.post?.post.apply(this, arguments);
+        provider.post?.apply(this, arguments);
       }
 
       if (!debug) return;
@@ -320,8 +321,12 @@ export default declare((api, options: Options, dirname: string) => {
 
         for (const [name, support] of polyfills) {
           if (support) {
-            const filteredTargets = filterTargets(targets, support);
-            const formattedTargets = stringifyTargets(filteredTargets);
+            const filteredTargets = getInclusionReasons(name, targets, support);
+
+            const formattedTargets = JSON.stringify(filteredTargets)
+              .replace(/,/g, ", ")
+              .replace(/^\{"/, '{ "')
+              .replace(/"\}$/, '" }');
 
             console.log(`  ${name} ${formattedTargets}`);
           } else {
