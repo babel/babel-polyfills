@@ -1,5 +1,7 @@
-var a = new globalThis.Promise(resolve => {
-  resolve(Number.isNaN(2));
-}).finally(x => {
-  console.log(x);
-});
+globalThis;
+
+globalThis.AggregateError;
+
+foo.includes(2);
+
+Object.getOwnPropertyDescriptors(foo);

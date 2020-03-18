@@ -33,10 +33,13 @@ export default ((
     const dep = `${desc.package}@^${desc.version}`;
     if (installedDeps.has(dep) || missingDeps.has(dep)) return;
 
-    if (hasDependency(dirname, desc.package)) {
-      installedDeps.add(dep);
-    } else {
+    if (
+      options.missingDependencies?.all ||
+      !hasDependency(dirname, desc.package)
+    ) {
       missingDeps.add(dep);
+    } else {
+      installedDeps.add(dep);
     }
   }
 

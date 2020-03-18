@@ -1,8 +1,8 @@
-import "promise.prototype.finally/auto";
 import "globalThis/auto";
-import "is-nan/auto";
-var a = new globalThis.Promise(resolve => {
-  resolve(Number.isNaN(2));
-}).finally(x => {
-  console.log(x);
-});
+import "es-aggregate-error/auto";
+import "array-includes/auto";
+import "object.getownpropertydescriptors/auto";
+globalThis;
+globalThis.AggregateError;
+foo.includes(2);
+Object.getOwnPropertyDescriptors(foo);

@@ -7,7 +7,7 @@
         "method": "usage-pure",
         "providers": [
           ["@@/es-shims", {
-            "missingDependencies": { "log": "per-file" }
+            "missingDependencies": { "log": "per-file", "all": true }
           }]
         ]
       }
