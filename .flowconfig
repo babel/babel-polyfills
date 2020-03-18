@@ -9,4 +9,5 @@ packages/*/src
 include_warnings=true
 suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
 suppress_type=$FlowIgnore
+esproposal.optional_chaining=enable
 module.name_mapper='^@babel\/plugin-inject-polyfills$' -> '<PROJECT_ROOT>/packages/babel-plugin-inject-polyfills/src/index'

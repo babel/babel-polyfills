@@ -16,11 +16,11 @@ describe("missingDependencies", () => {
       "out",
     ]);
 
-    expect(stdout?.toString()).toMatchInlineSnapshot(`
+    expect(stdout.toString()).toMatchInlineSnapshot(`
       "Successfully compiled 2 files with Babel.
       "
     `);
-    expect(stderr?.toString()).toMatchInlineSnapshot(`
+    expect(stderr.toString()).toMatchInlineSnapshot(`
       "
       Some polyfills have been added but are not present in your dependencies.
       Please run one of the following commands:

@@ -285,11 +285,13 @@ export default declare((api, options: Options, dirname: string) => {
       };
 
       for (const provider of resolvedProviders) {
+        // $FlowIgnore - Flow doesn't support optional calls
         provider.pre?.apply(this, arguments);
       }
     },
     post() {
       for (const provider of resolvedProviders) {
+        // $FlowIgnore - Flow doesn't support optional calls
         provider.post?.apply(this, arguments);
       }
 
