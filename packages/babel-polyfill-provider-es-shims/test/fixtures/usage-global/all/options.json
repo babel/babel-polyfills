@@ -6,7 +6,9 @@
       {
         "method": "usage-global",
         "providers": [
-          "@@/es-shims"
+          ["@@/es-shims", {
+            "missingDependencies": { "log": "per-file" }
+          }]
         ]
       }
     ]

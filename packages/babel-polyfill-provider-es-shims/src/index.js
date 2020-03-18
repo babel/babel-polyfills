@@ -1,6 +1,6 @@
 import { type PolyfillProvider } from "@babel/plugin-inject-polyfills";
 import resolve from "resolve";
-import fs from "fs";
+import debounce from "lodash.debounce";
 
 import polyfills from "../data/polyfills.json";
 import mappings from "../data/mappings.json";
@@ -12,11 +12,20 @@ export default ((
 ) => {
   const resolvePolyfill = createMetaResolver(mappings);
 
+  const installedDeps = new Set();
   const missingDeps = new Set();
 
   function mark(desc) {
     debug(desc.name);
-    if (!hasDependency(dirname, desc.name)) missingDeps.add(desc);
+
+    const dep = `${desc.package}@^${desc.version}`;
+    if (installedDeps.has(dep) || missingDeps.has(dep)) return;
+
+    if (hasDependency(dirname, desc.package)) {
+      installedDeps.add(dep);
+    } else {
+      missingDeps.add(dep);
+    }
   }
 
   return {
@@ -47,32 +56,10 @@ export default ((
     },
 
     post() {
-      if (options.missingPolyfills?.cacheFile) {
-        const missingPolyfills = fs
-          .readFileSync(options.missingPolyfills.cacheFile, "utf8")
-          .split(/\s+/g);
-
-        for (const { package: pkg, version } of missingDeps) {
-          missingPolyfills.push(`${pkg}@^${version}`);
-        }
-        missingPolyfills.sort();
-
-        fs.writeFileSync(
-          options.missingPolyfills.cacheFile,
-          missingPolyfills.join(" "),
-        );
+      if (options.missingDependencies?.log === "per-file") {
+        logMissingDependencies(missingDeps);
       } else {
-        let deps = "";
-        for (const { package: pkg, version } of missingDeps) {
-          deps += ` ${pkg}@^${version}`;
-        }
-
-        console.warn(
-          "\nSome polyfills have been added put are not present in your dependencies.\n" +
-            "Please run one of the following commands:\n" +
-            `\tnpm install --save${deps}\n` +
-            `\tyarn add${deps}\n`,
-        );
+        laterLogMissingDependencies(missingDeps);
       }
     },
   };
@@ -86,3 +73,30 @@ function hasDependency(basedir, name) {
     return false;
   }
 }
+
+function logMissingDependencies(missingDeps) {
+  const deps = Array.from(missingDeps)
+    .sort()
+    .join(" ");
+
+  console.warn(
+    "\nSome polyfills have been added put are not present in your dependencies.\n" +
+      "Please run one of the following commands:\n" +
+      `\tnpm install --save ${deps}\n` +
+      `\tyarn add ${deps}\n`,
+  );
+}
+
+const laterLogMissingDependencies = (() => {
+  let allMissingDeps = new Set();
+
+  const laterLogMissingDependencies = debounce(() => {
+    logMissingDependencies(allMissingDeps);
+    allMissingDeps = new Set();
+  }, 1000);
+
+  return missingDeps => {
+    missingDeps.forEach(name => allMissingDeps.add(name));
+    laterLogMissingDependencies();
+  };
+})();

@@ -54,6 +54,7 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/test/fixtures/",
+      "/test/spawn-fixtures/",
       "/test/helpers/"
     ],
     "testEnvironment": "node",

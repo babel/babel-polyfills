@@ -1,0 +1,2 @@
+Number.isNaN;
+globalThis;

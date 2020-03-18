@@ -4,7 +4,7 @@
 __metadata:
   version: 4
 
-"@babel/cli@npm:^7.4.4":
+"@babel/cli@npm:7.8.4, @babel/cli@npm:^7.4.4":
   version: 7.8.4
   resolution: "@babel/cli@npm:7.8.4"
   dependencies:
@@ -3186,9 +3186,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "babel-polyfill-provider-es-shims@workspace:packages/babel-polyfill-provider-es-shims"
   dependencies:
+    "@babel/cli": 7.8.4
     "@babel/core": ^7.0.0-0
     "@babel/helper-plugin-test-runner": ^7.1.0
     "@babel/plugin-inject-polyfills": ^0.1.0
+    lodash.debounce: ^4.0.8
     resolve: ^1.14.2
   peerDependencies:
     "@babel/core": ^7.0.0-0
@@ -7777,6 +7779,13 @@ fsevents@^1.2.7:
   version: 4.5.0
   resolution: "lodash.clonedeep@npm:4.5.0"
   checksum: 2/41e2fe4c57c56a66a4775a6ddeebe9272f0ce4d257d97b3cb8724a9b01eeec9b09ce7e8603d6926baf5f48c287d988f0de4bf5aa244ea86b1f22c1e6f203cc27
+  languageName: node
+  linkType: hard
+
+"lodash.debounce@npm:^4.0.8":
+  version: 4.0.8
+  resolution: "lodash.debounce@npm:4.0.8"
+  checksum: 2/b6042bd8c09ff1961c9127d32266316bc21f946ece5e3464a663ec61fadb98e7d56ec0ef7e23b47d393695310c19cf24e651c1756be6da91ac02c72be7f79465
   languageName: node
   linkType: hard
 
