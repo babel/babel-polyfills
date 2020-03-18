@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    [
+      "@babel/plugin-inject-polyfills",
+      {
+        "method": "usage-pure",
+        "providers": ["@@/corejs3"]
+      }
+    ]
+  ]
+}
