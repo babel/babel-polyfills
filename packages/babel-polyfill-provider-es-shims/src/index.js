@@ -1,16 +1,28 @@
+// @flow
+
 import { type PolyfillProvider } from "@babel/plugin-inject-polyfills";
 import resolve from "resolve";
 import debounce from "lodash.debounce";
 
 import polyfills from "../data/polyfills.json";
-import mappings from "../data/mappings.json";
+
+import {
+  type Descriptor,
+  Globals,
+  StaticProperties,
+  InstanceProperties,
+} from "./mappings";
 
 export default ((
   { shouldInjectPolyfill, createMetaResolver, debug },
   options,
   dirname,
 ) => {
-  const resolvePolyfill = createMetaResolver(mappings);
+  const resolvePolyfill = createMetaResolver<Descriptor[]>({
+    global: Globals,
+    static: StaticProperties,
+    instance: InstanceProperties,
+  });
 
   const installedDeps = new Set();
   const missingDeps = new Set();
@@ -28,32 +40,42 @@ export default ((
     }
   }
 
+  function createDescIterator(cb) {
+    return (meta, utils, path) => {
+      const resolved = resolvePolyfill(meta);
+      if (!resolved) return;
+
+      for (const desc of resolved.desc) {
+        if (desc.global !== false && shouldInjectPolyfill(desc.name)) {
+          cb(desc, utils, path);
+        }
+      }
+    };
+  }
+
   return {
     name: "es-shims",
     polyfills,
 
-    usageGlobal(meta, utils) {
-      const resolved = resolvePolyfill(meta);
-      if (!resolved || resolved.desc.global === false) return;
-      if (!shouldInjectPolyfill(resolved.desc.name)) return;
+    usageGlobal: createDescIterator((desc, utils) => {
+      if (desc.global === false) return;
 
-      utils.injectGlobalImport(`${resolved.desc.package}/auto`);
-      mark(resolved.desc);
-    },
+      utils.injectGlobalImport(`${desc.package}/auto`);
 
-    usagePure(meta, utils, path) {
-      const resolved = resolvePolyfill(meta);
-      if (!resolved || resolved.desc.pure === false) return;
-      if (!shouldInjectPolyfill(resolved.desc.name)) return;
+      mark(desc);
+    }),
+
+    usagePure: createDescIterator((desc, utils, path) => {
+      if (desc.pure === false) return;
 
       const id = utils.injectDefaultImport(
-        `${resolved.desc.package}/implementation`,
-        resolved.desc.name,
+        `${desc.package}/implementation`,
+        desc.name,
       );
-      mark(resolved.desc);
-
       path.replaceWith(id);
-    },
+
+      mark(desc);
+    }),
 
     post() {
       if (options.missingDependencies?.log === "per-file") {
