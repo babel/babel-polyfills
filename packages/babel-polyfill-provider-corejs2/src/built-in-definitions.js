@@ -39,7 +39,7 @@ const ArrayNatureIterators = [
   "web.dom.iterable",
 ];
 
-const CommonIterators = ["es6.string.iterator", ...ArrayNatureIterators];
+export const CommonIterators = ["es6.string.iterator", ...ArrayNatureIterators];
 
 const PromiseDependencies = ["es6.object.to-string", "es6.promise"];
 

@@ -1,3 +1,4 @@
+import "core-js/modules/es6.object.to-string";
 import "core-js/modules/es7.string.pad-start";
 import "core-js/modules/es7.string.pad-end";
 

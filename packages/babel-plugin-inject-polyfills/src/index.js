@@ -97,6 +97,7 @@ export default declare((api, options: Options, dirname: string) => {
             );
           }
           if (!polyfillsNames.has(name)) {
+            console.log(name, polyfillsNames);
             throw new Error(
               `Internal error in the ${provider.name} provider: ` +
                 `unknown polyfill "${name}".`,

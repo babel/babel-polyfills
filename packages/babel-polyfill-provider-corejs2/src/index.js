@@ -5,6 +5,7 @@ import {
   BuiltIns,
   StaticProperties,
   InstanceProperties,
+  CommonIterators,
 } from "./built-in-definitions";
 import addPlatformSpecificPolyfills from "./add-platform-specific-polyfills";
 import { hasMinVersion } from "./helpers";
@@ -14,6 +15,8 @@ import { types as t } from "@babel/core";
 
 const presetEnvCompat: "#__secret_key__@babel/preset-env__compatibility" =
   "#__secret_key__@babel/preset-env__compatibility";
+
+const has = Function.call.bind(Object.hasOwnProperty);
 
 type Options = {|
   version?: number | string,
@@ -56,6 +59,12 @@ export default ((
     }
 
     name.forEach(name => inject(name, utils));
+  }
+
+  function injectIfAvailable(name, utils) {
+    // Some polyfills aren't always available, for example
+    // web.dom.iterable when targeting node
+    if (has(polyfills, name)) inject(name, utils);
   }
 
   function maybeInjectPure(desc, hint, utils) {
@@ -159,12 +168,19 @@ export default ((
       if (id) path.replaceWith(id);
     },
 
-    visitor: api.method === "usage-global" && {
+    visitor: method === "usage-global" && {
       // yield*
       YieldExpression(path) {
         if (path.node.delegate) {
-          inject("web.dom.iterable", api.getUtils(path));
+          injectIfAvailable("web.dom.iterable", api.getUtils(path));
         }
+      },
+
+      // for-of, [a, b] = c
+      "ForOfStatement|ArrayPattern"(path) {
+        CommonIterators.forEach(name =>
+          injectIfAvailable(name, api.getUtils(path)),
+        );
       },
     },
   };

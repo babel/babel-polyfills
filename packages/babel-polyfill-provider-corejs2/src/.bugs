@@ -1,2 +1,1 @@
 usage/all Symbol.asyncIterator polyfill is unnecessary
-usage/destructuring-for-x should add iterators
