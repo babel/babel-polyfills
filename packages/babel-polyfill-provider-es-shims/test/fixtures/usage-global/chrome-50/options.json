@@ -1,0 +1,17 @@
+{
+  "validateLogs": true,
+  "plugins": [
+    [
+      "@babel/plugin-inject-polyfills",
+      {
+        "method": "usage-global",
+        "targets": { "chrome": 50 },
+        "providers": [
+          ["@@/es-shims", {
+            "missingDependencies": { "log": "per-file", "all": true }
+          }]
+        ]
+      }
+    ]
+  ]
+}
