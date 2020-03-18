@@ -6,4 +6,5 @@ lerna.json
 packages/*/node_modules
 packages/*/lib
 packages/*/test/fixtures
+packages/*/test/spawn-fixtures
 packages/babel-polyfill-provider-corejs2/data/*
