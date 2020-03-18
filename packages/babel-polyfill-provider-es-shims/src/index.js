@@ -1,6 +1,6 @@
 // @flow
 
-import { type PolyfillProvider } from "@babel/plugin-inject-polyfills";
+import type { PolyfillProvider, Utils } from "@babel/plugin-inject-polyfills";
 import resolve from "resolve";
 import debounce from "lodash.debounce";
 
@@ -43,7 +43,7 @@ export default ((
     }
   }
 
-  function createDescIterator(cb) {
+  function createDescIterator(cb: (Descriptor, Utils, Object) => void) {
     return (meta, utils, path) => {
       const resolved = resolvePolyfill(meta);
       if (!resolved) return;

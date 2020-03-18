@@ -1,5 +1,8 @@
 // @flow
 
+// $FlowIgnore
+const has = Function.call.bind(Object.hasOwnProperty);
+
 export type Descriptor = {
   name: string,
   version: string,
@@ -8,9 +11,9 @@ export type Descriptor = {
   global?: false,
 };
 
-export const Globals = Object.create(null);
-export const StaticProperties = Object.create(null);
-export const InstanceProperties = Object.create(null);
+export const Globals = {};
+export const StaticProperties = {};
+export const InstanceProperties = {};
 
 defineGlobal("globalThis", "1.0.0", "globalThis");
 
@@ -58,7 +61,7 @@ function defineGlobal(name, version, pkg) {
 }
 
 function defineStatic(object, property, version, pkg) {
-  if (!StaticProperties[object]) StaticProperties[object] = Object.create(null);
+  if (!has(StaticProperties, object)) StaticProperties[object] = {};
 
   StaticProperties[object][property] = [
     createDescriptor(`${object}.${property}`, version, pkg),
@@ -66,7 +69,7 @@ function defineStatic(object, property, version, pkg) {
 }
 
 function defineInstance(object, property, version, pkg) {
-  if (!InstanceProperties[property]) InstanceProperties[property] = [];
+  if (!has(InstanceProperties, property)) InstanceProperties[property] = [];
 
   InstanceProperties[property].push({
     ...createDescriptor(`${object}.prototype.${property}`, version, pkg),

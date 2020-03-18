@@ -29,12 +29,13 @@ import type {
   Targets,
   MetaDescriptor,
   PolyfillProvider,
+  Utils,
 } from "./types";
 
 import createMetaResolver from "./meta-resolver";
 
 export { resolveProvider } from "./config";
-export type { PolyfillProvider, MetaDescriptor };
+export type { PolyfillProvider, MetaDescriptor, Utils };
 
 export default declare((api, options: Options, dirname: string) => {
   api.assertVersion(7);
