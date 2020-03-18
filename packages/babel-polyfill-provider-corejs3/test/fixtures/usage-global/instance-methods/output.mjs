@@ -14,6 +14,7 @@ import "core-js/modules/es.string.pad-end";
 import "core-js/modules/es.string.starts-with";
 import "core-js/modules/es.string.code-point-at";
 import "core-js/modules/es.string.ends-with";
+import "core-js/modules/es.array.reverse";
 import "core-js/modules/es.array.copy-within";
 import "core-js/modules/es.string.search";
 import "core-js/modules/es.regexp.exec";
@@ -43,6 +44,7 @@ var {
   endsWith
 } = k; // destructuring
 
+g.reverse();
 var asdf = "copyWithin";
 var asdf2 = "split";
 var asdf3 = "re" + "place";
