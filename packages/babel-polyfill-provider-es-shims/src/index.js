@@ -80,7 +80,7 @@ function logMissingDependencies(missingDeps) {
     .join(" ");
 
   console.warn(
-    "\nSome polyfills have been added put are not present in your dependencies.\n" +
+    "\nSome polyfills have been added but are not present in your dependencies.\n" +
       "Please run one of the following commands:\n" +
       `\tnpm install --save ${deps}\n` +
       `\tyarn add ${deps}\n`,
