@@ -2,8 +2,6 @@
   "global": {
     "globalThis": {
       "name": "globalThis",
-      "global": "globalThis/auto",
-      "pure": "globalThis/implementation",
       "version": "1.0.0",
       "package": "globalThis"
     }
@@ -12,8 +10,6 @@
     "Number": {
       "isNaN": {
         "name": "Number.isNaN",
-        "global": "is-nan/auto",
-        "pure": "is-nan/implementation",
         "version": "1.2.1",
         "package": "is-nan"
       }
@@ -21,22 +17,16 @@
     "Object": {
       "getOwnPropertyDescriptors": {
         "name": "Object.getOwnPropertyDescriptors",
-        "global": "object.getownpropertydescriptors/auto",
-        "pure": "object.getownpropertydescriptors/implementation",
         "version": "2.1.0",
         "package": "object.getownpropertydescriptors"
       },
       "entries": {
         "name": "Object.entries",
-        "global": "object.entries/auto",
-        "pure": "object.entries/implementation",
         "version": "1.1.1",
         "package": "object.entries"
       },
       "values": {
         "name": "Object.values",
-        "global": "object.values/auto",
-        "pure": "object.values/implementation",
         "version": "1.1.1",
         "package": "object.values"
       }
@@ -44,8 +34,6 @@
     "Promise": {
       "any": {
         "name": "Promise.any",
-        "global": "promise.any/auto",
-        "pure": "promise.any/implementation",
         "version": "2.0.1",
         "package": "promise.any"
       }
@@ -54,21 +42,21 @@
   "instance": {
     "finally": {
       "name": "Promise.prototype.finally",
-      "global": "promise.prototype.finally/auto",
       "version": "1.2.1",
-      "package": "promise.prototype.finally"
+      "package": "promise.prototype.finally",
+      "pure": false
     },
     "name": {
       "name": "Function.prototype.name",
-      "global": "function.prototype.name/auto",
       "version": "1.1.2",
-      "package": "function.prototype.name"
+      "package": "function.prototype.name",
+      "pure": false
     },
     "trimLeft": {
       "name": "String.prototype.trimLeft",
-      "global": "string.prototype.trimleft/auto",
       "version": "2.1.1",
-      "package": "string.prototype.trimleft"
+      "package": "string.prototype.trimleft",
+      "pure": false
     }
   }
 }

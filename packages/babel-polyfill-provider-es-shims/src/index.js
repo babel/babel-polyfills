@@ -34,20 +34,20 @@ export default ((
 
     usageGlobal(meta, utils) {
       const resolved = resolvePolyfill(meta);
-      if (!resolved || !resolved.desc.global) return;
+      if (!resolved || resolved.desc.global === false) return;
       if (!shouldInjectPolyfill(resolved.desc.name)) return;
 
-      utils.injectGlobalImport(resolved.desc.global);
+      utils.injectGlobalImport(`${resolved.desc.package}/auto`);
       mark(resolved.desc);
     },
 
     usagePure(meta, utils, path) {
       const resolved = resolvePolyfill(meta);
-      if (!resolved || !resolved.desc.pure) return;
+      if (!resolved || resolved.desc.pure === false) return;
       if (!shouldInjectPolyfill(resolved.desc.name)) return;
 
       const id = utils.injectDefaultImport(
-        resolved.desc.pure,
+        `${resolved.desc.package}/implementation`,
         resolved.desc.name,
       );
       mark(resolved.desc);
