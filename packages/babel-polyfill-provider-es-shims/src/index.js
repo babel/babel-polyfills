@@ -46,9 +46,7 @@ export default ((
       if (!resolved) return;
 
       for (const desc of resolved.desc) {
-        if (desc.global !== false && shouldInjectPolyfill(desc.name)) {
-          cb(desc, utils, path);
-        }
+        if (shouldInjectPolyfill(desc.name)) cb(desc, utils, path);
       }
     };
   }
