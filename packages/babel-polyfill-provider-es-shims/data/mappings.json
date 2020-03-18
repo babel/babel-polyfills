@@ -17,6 +17,38 @@
         "version": "1.2.1",
         "package": "is-nan"
       }
+    },
+    "Object": {
+      "getOwnPropertyDescriptors": {
+        "name": "Object.getOwnPropertyDescriptors",
+        "global": "object.getownpropertydescriptors/auto",
+        "pure": "object.getownpropertydescriptors/implementation",
+        "version": "2.1.0",
+        "package": "object.getownpropertydescriptors"
+      },
+      "entries": {
+        "name": "Object.entries",
+        "global": "object.entries/auto",
+        "pure": "object.entries/implementation",
+        "version": "1.1.1",
+        "package": "object.entries"
+      },
+      "values": {
+        "name": "Object.values",
+        "global": "object.values/auto",
+        "pure": "object.values/implementation",
+        "version": "1.1.1",
+        "package": "object.values"
+      }
+    },
+    "Promise": {
+      "any": {
+        "name": "Promise.any",
+        "global": "promise.any/auto",
+        "pure": "promise.any/implementation",
+        "version": "2.0.1",
+        "package": "promise.any"
+      }
     }
   },
   "instance": {
@@ -25,6 +57,18 @@
       "global": "promise.prototype.finally/auto",
       "version": "1.2.1",
       "package": "promise.prototype.finally"
+    },
+    "name": {
+      "name": "Function.prototype.name",
+      "global": "function.prototype.name/auto",
+      "version": "1.1.2",
+      "package": "function.prototype.name"
+    },
+    "trimLeft": {
+      "name": "String.prototype.trimLeft",
+      "global": "string.prototype.trimleft/auto",
+      "version": "2.1.1",
+      "package": "string.prototype.trimleft"
     }
   }
 }
