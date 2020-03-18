@@ -55,7 +55,7 @@ export const BuiltIns: ObjectMap<PolyfillDescriptor<CoreJS2Meta>> = {
   Promise: pureAndGlobal("promise", PromiseDependencies),
   RegExp: globalOnly(["es6.regexp.constructor"]),
   Set: pureAndGlobal("set", ["es6.set", ...CommonIterators]),
-  Symbol: pureAndGlobal("symbol", ["es6.symbol", "es7.symbol.async-iterator"]),
+  Symbol: pureAndGlobal("symbol", ["es6.symbol"]),
   Uint8Array: globalOnly(["es6.typed.uint8-array"]),
   Uint8ClampedArray: globalOnly(["es6.typed.uint8-clamped-array"]),
   Uint16Array: globalOnly(["es6.typed.uint16-array"]),
@@ -287,7 +287,7 @@ export const StaticProperties: ObjectMap<
 
   Symbol: {
     // FIXME: Pure disabled to work around zloirock/core-js#262.
-    asyncIterator: globalOnly(["es7.symbol.async-iterator"]),
+    asyncIterator: globalOnly(["es6.symbol", "es7.symbol.async-iterator"]),
     for: pureOnly("symbol/for", "es6.symbol"),
     hasInstance: pureOnly("symbol/has-instance", "es6.symbol"),
     isConcatSpreadable: pureOnly("symbol/is-concat-spreadable", "es6.symbol"),
