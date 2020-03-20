@@ -16,7 +16,7 @@ import {
 import { types as t } from "@babel/core";
 import { callMethod, coreJSModule, isCoreJSSource } from "./utils";
 
-import { type PolyfillProvider } from "@babel/plugin-inject-polyfills";
+import { defineProvider } from "@babel/plugin-inject-polyfills";
 
 type Options = {|
   version?: number | string,
@@ -24,10 +24,10 @@ type Options = {|
   shippedProposals?: boolean,
 |};
 
-export default ((
+export default defineProvider<Options>(function(
   { getUtils, method, shouldInjectPolyfill, createMetaResolver, debug },
   { version = 3, proposals, shippedProposals },
-) => {
+) {
   const resolve = createMetaResolver({
     global: BuiltIns,
     static: StaticProperties,
@@ -254,4 +254,4 @@ export default ((
       },
     },
   };
-}: PolyfillProvider<Options>);
+});

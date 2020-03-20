@@ -1,3 +1,7 @@
+// @flow
+
+import type { Targets } from "@babel/plugin-inject-polyfills";
+
 const webPolyfills = {
   "web.timers": {},
   "web.immediate": {},
@@ -10,7 +14,7 @@ const purePolyfills = {
   "es7.string.at": {},
 };
 
-export default function(targets, method, polyfills) {
+export default function(targets: Targets, method: string, polyfills: Object) {
   const targetNames = Object.keys(targets);
   const isAnyTarget = !targetNames.length;
   const isWebTarget = targetNames.some(name => name !== "node");

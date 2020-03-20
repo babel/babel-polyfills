@@ -10,7 +10,7 @@ import {
 import addPlatformSpecificPolyfills from "./add-platform-specific-polyfills";
 import { hasMinVersion } from "./helpers";
 
-import type { PolyfillProvider } from "@babel/plugin-inject-polyfills";
+import { defineProvider } from "@babel/plugin-inject-polyfills";
 import { types as t } from "@babel/core";
 
 const presetEnvCompat: "#__secret_key__@babel/preset-env__compatibility" =
@@ -26,13 +26,13 @@ type Options = {|
   },
 |};
 
-export default ((
+export default defineProvider<Options>(function(
   api,
   {
     version: runtimeVersion = "7.0.0-beta.0",
     [presetEnvCompat]: { entryInjectRegenerator } = {},
   },
-) => {
+) {
   const resolve = api.createMetaResolver({
     global: BuiltIns,
     static: StaticProperties,
@@ -50,7 +50,7 @@ export default ((
   const coreJSBase =
     method === "usage-pure" ? "core-js/library/fn" : "core-js/modules";
 
-  function inject(name, utils) {
+  function inject(name: string | string[], utils) {
     if (typeof name === "string") {
       if (shouldInjectPolyfill(name)) {
         debug(name);
@@ -185,4 +185,4 @@ export default ((
       },
     },
   };
-}: PolyfillProvider<Options>);
+});

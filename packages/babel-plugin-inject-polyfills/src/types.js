@@ -29,6 +29,8 @@ export type PolyfillProvider<Opts = {||}> = (
   dirname: string,
 ) => ProviderResult;
 
+export opaque type PolyfillProviderInternal<Opts> = PolyfillProvider<Opts>;
+
 export type MethodString = "entry-global" | "usage-global" | "usage-pure";
 
 export type Targets = {

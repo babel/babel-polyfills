@@ -23,19 +23,13 @@ import {
 } from "./debug-utils";
 import { validateIncludeExclude } from "./normalize-options";
 
-import type {
-  ProviderApi,
-  Options,
-  Targets,
-  MetaDescriptor,
-  PolyfillProvider,
-  Utils,
-} from "./types";
+import type { ProviderApi, Options, Targets, MetaDescriptor } from "./types";
 
 import createMetaResolver from "./meta-resolver";
 
+export { defineProvider } from "./define-provider";
 export { resolveProvider } from "./config";
-export type { PolyfillProvider, MetaDescriptor, Utils };
+export type { PolyfillProvider, MetaDescriptor, Utils, Targets } from "./types";
 
 export default declare((api, options: Options, dirname: string) => {
   api.assertVersion(7);

@@ -1,6 +1,7 @@
 // @flow
 
-import type { PolyfillProvider, Utils } from "@babel/plugin-inject-polyfills";
+import { defineProvider, type Utils } from "@babel/plugin-inject-polyfills";
+
 import resolve from "resolve";
 import debounce from "lodash.debounce";
 
@@ -13,11 +14,19 @@ import {
   InstanceProperties,
 } from "./mappings";
 
-export default ((
+type Options = {|
+  missingDependencies?: {
+    log?: "per-file" | "deferred",
+    // When true, log all the polyfills without checking if they are installed
+    all?: boolean,
+  },
+|};
+
+export default defineProvider<Options>(function(
   { shouldInjectPolyfill, createMetaResolver, debug },
   options,
   dirname,
-) => {
+) {
   const resolvePolyfill = createMetaResolver<Descriptor[]>({
     global: Globals,
     static: StaticProperties,
@@ -86,7 +95,7 @@ export default ((
       }
     },
   };
-}: PolyfillProvider<*>);
+});
 
 function hasDependency(basedir, name) {
   try {
