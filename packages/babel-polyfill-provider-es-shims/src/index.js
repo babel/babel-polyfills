@@ -70,7 +70,7 @@ export default defineProvider<Options>(function(
     usageGlobal: createDescIterator((desc, utils) => {
       if (desc.global === false) return;
 
-      utils.injectGlobalImport(`${desc.package}/auto`);
+      utils.injectGlobalImport(`${desc.package}/auto.js`);
 
       mark(desc);
     }),
@@ -79,7 +79,7 @@ export default defineProvider<Options>(function(
       if (desc.pure === false) return;
 
       const id = utils.injectDefaultImport(
-        `${desc.package}/implementation`,
+        `${desc.package}/implementation.js`,
         desc.name,
       );
       path.replaceWith(id);

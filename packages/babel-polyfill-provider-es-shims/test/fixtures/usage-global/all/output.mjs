@@ -1,7 +1,7 @@
-import "globalThis/auto";
-import "es-aggregate-error/auto";
-import "array-includes/auto";
-import "object.getownpropertydescriptors/auto";
+import "globalThis/auto.js";
+import "es-aggregate-error/auto.js";
+import "array-includes/auto.js";
+import "object.getownpropertydescriptors/auto.js";
 globalThis;
 globalThis.AggregateError;
 foo.includes(2);

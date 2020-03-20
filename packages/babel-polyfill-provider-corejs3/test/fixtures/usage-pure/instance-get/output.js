@@ -1,4 +1,4 @@
-var _includesInstanceProperty = require("core-js-pure/stable/instance/includes");
+var _includesInstanceProperty = require("core-js-pure/stable/instance/includes.js");
 
 _includesInstanceProperty(foo);
 

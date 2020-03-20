@@ -1,4 +1,4 @@
-var _getIterator = require("core-js-pure/stable/get-iterator");
+var _getIterator = require("core-js-pure/stable/get-iterator.js");
 
 var _iteratorNormalCompletion = true;
 var _didIteratorError = false;

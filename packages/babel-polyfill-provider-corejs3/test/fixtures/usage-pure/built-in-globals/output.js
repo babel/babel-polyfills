@@ -1,32 +1,32 @@
-var _Map = require("core-js-pure/stable/map");
+var _Map = require("core-js-pure/stable/map.js");
 
-var _Promise = require("core-js-pure/stable/promise");
+var _Promise = require("core-js-pure/stable/promise.js");
 
-var _Set = require("core-js-pure/stable/set");
+var _Set = require("core-js-pure/stable/set.js");
 
-var _Symbol = require("core-js-pure/stable/symbol");
+var _Symbol = require("core-js-pure/stable/symbol.js");
 
-var _URL = require("core-js-pure/stable/url");
+var _URL = require("core-js-pure/stable/url.js");
 
-var _URLSearchParams = require("core-js-pure/stable/url-search-params");
+var _URLSearchParams = require("core-js-pure/stable/url-search-params.js");
 
-var _WeakMap = require("core-js-pure/stable/weak-map");
+var _WeakMap = require("core-js-pure/stable/weak-map.js");
 
-var _WeakSet = require("core-js-pure/stable/weak-set");
+var _WeakSet = require("core-js-pure/stable/weak-set.js");
 
-var _clearImmediate = require("core-js-pure/stable/clear-immediate");
+var _clearImmediate = require("core-js-pure/stable/clear-immediate.js");
 
-var _parseFloat = require("core-js-pure/stable/parse-float");
+var _parseFloat = require("core-js-pure/stable/parse-float.js");
 
-var _parseInt = require("core-js-pure/stable/parse-int");
+var _parseInt = require("core-js-pure/stable/parse-int.js");
 
-var _queueMicrotask = require("core-js-pure/stable/queue-microtask");
+var _queueMicrotask = require("core-js-pure/stable/queue-microtask.js");
 
-var _setImmediate = require("core-js-pure/stable/set-immediate");
+var _setImmediate = require("core-js-pure/stable/set-immediate.js");
 
-var _setInterval = require("core-js-pure/stable/set-interval");
+var _setInterval = require("core-js-pure/stable/set-interval.js");
 
-var _setTimeout = require("core-js-pure/stable/set-timeout");
+var _setTimeout = require("core-js-pure/stable/set-timeout.js");
 
 AggregateError;
 _Map;

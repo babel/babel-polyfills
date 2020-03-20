@@ -1,4 +1,4 @@
-import "is-nan/auto";
-import "globalThis/auto";
+import "is-nan/auto.js";
+import "globalThis/auto.js";
 Number.isNaN;
 globalThis;

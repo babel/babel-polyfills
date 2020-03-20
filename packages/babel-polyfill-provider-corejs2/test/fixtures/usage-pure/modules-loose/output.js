@@ -1,6 +1,6 @@
 "use strict";
 
-var _Object$keys = require("core-js/library/fn/object/keys");
+var _Object$keys = require("core-js/library/fn/object/keys.js");
 
 exports.__esModule = true;
 var _exportNames = {
@@ -8,7 +8,7 @@ var _exportNames = {
 };
 exports.exp = void 0;
 
-var _from = _interopRequireDefault(require("core-js/library/fn/array/from"));
+var _from = _interopRequireDefault(require("core-js/library/fn/array/from.js"));
 
 var _bar = _interopRequireDefault(require("bar"));
 

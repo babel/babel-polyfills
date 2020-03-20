@@ -2,9 +2,9 @@
 
 var _context;
 
-var _forEachInstanceProperty = require("core-js-pure/stable/instance/for-each");
+var _forEachInstanceProperty = require("core-js-pure/stable/instance/for-each.js");
 
-var _Object$keys = require("core-js-pure/stable/object/keys");
+var _Object$keys = require("core-js-pure/stable/object/keys.js");
 
 exports.__esModule = true;
 var _exportNames = {
@@ -12,7 +12,7 @@ var _exportNames = {
 };
 exports.exp = void 0;
 
-var _includes = _interopRequireDefault(require("core-js-pure/stable/instance/includes"));
+var _includes = _interopRequireDefault(require("core-js-pure/stable/instance/includes.js"));
 
 var _bar = _interopRequireDefault(require("bar"));
 

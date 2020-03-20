@@ -1,76 +1,76 @@
-var _bindInstanceProperty = require("core-js-pure/stable/instance/bind");
+var _bindInstanceProperty = require("core-js-pure/stable/instance/bind.js");
 
-var _codePointAtInstanceProperty = require("core-js-pure/stable/instance/code-point-at");
+var _codePointAtInstanceProperty = require("core-js-pure/stable/instance/code-point-at.js");
 
-var _concatInstanceProperty = require("core-js-pure/stable/instance/concat");
+var _concatInstanceProperty = require("core-js-pure/stable/instance/concat.js");
 
-var _copyWithinInstanceProperty = require("core-js-pure/stable/instance/copy-within");
+var _copyWithinInstanceProperty = require("core-js-pure/stable/instance/copy-within.js");
 
-var _endsWithInstanceProperty = require("core-js-pure/stable/instance/ends-with");
+var _endsWithInstanceProperty = require("core-js-pure/stable/instance/ends-with.js");
 
-var _entriesInstanceProperty = require("core-js-pure/stable/instance/entries");
+var _entriesInstanceProperty = require("core-js-pure/stable/instance/entries.js");
 
-var _everyInstanceProperty = require("core-js-pure/stable/instance/every");
+var _everyInstanceProperty = require("core-js-pure/stable/instance/every.js");
 
-var _fillInstanceProperty = require("core-js-pure/stable/instance/fill");
+var _fillInstanceProperty = require("core-js-pure/stable/instance/fill.js");
 
-var _filterInstanceProperty = require("core-js-pure/stable/instance/filter");
+var _filterInstanceProperty = require("core-js-pure/stable/instance/filter.js");
 
-var _findInstanceProperty = require("core-js-pure/stable/instance/find");
+var _findInstanceProperty = require("core-js-pure/stable/instance/find.js");
 
-var _findIndexInstanceProperty = require("core-js-pure/stable/instance/find-index");
+var _findIndexInstanceProperty = require("core-js-pure/stable/instance/find-index.js");
 
-var _flagsInstanceProperty = require("core-js-pure/stable/instance/flags");
+var _flagsInstanceProperty = require("core-js-pure/stable/instance/flags.js");
 
-var _flatMapInstanceProperty = require("core-js-pure/stable/instance/flat-map");
+var _flatMapInstanceProperty = require("core-js-pure/stable/instance/flat-map.js");
 
-var _flatInstanceProperty = require("core-js-pure/stable/instance/flat");
+var _flatInstanceProperty = require("core-js-pure/stable/instance/flat.js");
 
-var _forEachInstanceProperty = require("core-js-pure/stable/instance/for-each");
+var _forEachInstanceProperty = require("core-js-pure/stable/instance/for-each.js");
 
-var _includesInstanceProperty = require("core-js-pure/stable/instance/includes");
+var _includesInstanceProperty = require("core-js-pure/stable/instance/includes.js");
 
-var _indexOfInstanceProperty = require("core-js-pure/stable/instance/index-of");
+var _indexOfInstanceProperty = require("core-js-pure/stable/instance/index-of.js");
 
-var _keysInstanceProperty = require("core-js-pure/stable/instance/keys");
+var _keysInstanceProperty = require("core-js-pure/stable/instance/keys.js");
 
-var _lastIndexOfInstanceProperty = require("core-js-pure/stable/instance/last-index-of");
+var _lastIndexOfInstanceProperty = require("core-js-pure/stable/instance/last-index-of.js");
 
-var _mapInstanceProperty = require("core-js-pure/stable/instance/map");
+var _mapInstanceProperty = require("core-js-pure/stable/instance/map.js");
 
-var _padEndInstanceProperty = require("core-js-pure/stable/instance/pad-end");
+var _padEndInstanceProperty = require("core-js-pure/stable/instance/pad-end.js");
 
-var _padStartInstanceProperty = require("core-js-pure/stable/instance/pad-start");
+var _padStartInstanceProperty = require("core-js-pure/stable/instance/pad-start.js");
 
-var _reduceInstanceProperty = require("core-js-pure/stable/instance/reduce");
+var _reduceInstanceProperty = require("core-js-pure/stable/instance/reduce.js");
 
-var _reduceRightInstanceProperty = require("core-js-pure/stable/instance/reduce-right");
+var _reduceRightInstanceProperty = require("core-js-pure/stable/instance/reduce-right.js");
 
-var _repeatInstanceProperty = require("core-js-pure/stable/instance/repeat");
+var _repeatInstanceProperty = require("core-js-pure/stable/instance/repeat.js");
 
-var _reverseInstanceProperty = require("core-js-pure/stable/instance/reverse");
+var _reverseInstanceProperty = require("core-js-pure/stable/instance/reverse.js");
 
-var _sliceInstanceProperty = require("core-js-pure/stable/instance/slice");
+var _sliceInstanceProperty = require("core-js-pure/stable/instance/slice.js");
 
-var _someInstanceProperty = require("core-js-pure/stable/instance/some");
+var _someInstanceProperty = require("core-js-pure/stable/instance/some.js");
 
-var _sortInstanceProperty = require("core-js-pure/stable/instance/sort");
+var _sortInstanceProperty = require("core-js-pure/stable/instance/sort.js");
 
-var _spliceInstanceProperty = require("core-js-pure/stable/instance/splice");
+var _spliceInstanceProperty = require("core-js-pure/stable/instance/splice.js");
 
-var _startsWithInstanceProperty = require("core-js-pure/stable/instance/starts-with");
+var _startsWithInstanceProperty = require("core-js-pure/stable/instance/starts-with.js");
 
-var _trimInstanceProperty = require("core-js-pure/stable/instance/trim");
+var _trimInstanceProperty = require("core-js-pure/stable/instance/trim.js");
 
-var _trimEndInstanceProperty = require("core-js-pure/stable/instance/trim-end");
+var _trimEndInstanceProperty = require("core-js-pure/stable/instance/trim-end.js");
 
-var _trimLeftInstanceProperty = require("core-js-pure/stable/instance/trim-left");
+var _trimLeftInstanceProperty = require("core-js-pure/stable/instance/trim-left.js");
 
-var _trimRightInstanceProperty = require("core-js-pure/stable/instance/trim-right");
+var _trimRightInstanceProperty = require("core-js-pure/stable/instance/trim-right.js");
 
-var _trimStartInstanceProperty = require("core-js-pure/stable/instance/trim-start");
+var _trimStartInstanceProperty = require("core-js-pure/stable/instance/trim-start.js");
 
-var _valuesInstanceProperty = require("core-js-pure/stable/instance/values");
+var _valuesInstanceProperty = require("core-js-pure/stable/instance/values.js");
 
 object.at;
 

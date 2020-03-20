@@ -1,3 +1,3 @@
-import "object.values/auto";
+import "object.values/auto.js";
 Object.values;
 Object.getOwnPropertyDescriptors;

@@ -54,7 +54,7 @@ export default defineProvider<Options>(function(
     if (typeof name === "string") {
       if (shouldInjectPolyfill(name)) {
         debug(name);
-        utils.injectGlobalImport(`${coreJSBase}/${name}`);
+        utils.injectGlobalImport(`${coreJSBase}/${name}.js`);
       }
       return;
     }
@@ -79,7 +79,7 @@ export default defineProvider<Options>(function(
       return;
     }
 
-    return utils.injectDefaultImport(`${coreJSBase}/${pure}`, hint);
+    return utils.injectDefaultImport(`${coreJSBase}/${pure}.js`, hint);
   }
 
   return {
@@ -94,7 +94,7 @@ export default defineProvider<Options>(function(
         inject(Object.keys(polyfills), utils);
 
         if (entryInjectRegenerator) {
-          utils.injectGlobalImport("regenerator-runtime/runtime");
+          utils.injectGlobalImport("regenerator-runtime/runtime.js");
         }
 
         path.remove();
@@ -125,7 +125,7 @@ export default defineProvider<Options>(function(
           path.replaceWith(
             t.callExpression(
               utils.injectDefaultImport(
-                `${coreJSBase}/is-iterable`,
+                `${coreJSBase}/is-iterable.js`,
                 "isIterable",
               ),
               [path.node.right],
@@ -150,7 +150,7 @@ export default defineProvider<Options>(function(
           path.parentPath.replaceWith(
             t.callExpression(
               utils.injectDefaultImport(
-                `${coreJSBase}/get-iterator`,
+                `${coreJSBase}/get-iterator.js`,
                 "getIterator",
               ),
               [path.node.object],

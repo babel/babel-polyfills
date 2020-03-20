@@ -1,8 +1,8 @@
 "use strict";
 
-var _Object$defineProperty = require("core-js/library/fn/object/define-property");
+var _Object$defineProperty = require("core-js/library/fn/object/define-property.js");
 
-var _Object$keys = require("core-js/library/fn/object/keys");
+var _Object$keys = require("core-js/library/fn/object/keys.js");
 
 _Object$defineProperty(exports, "__esModule", {
   value: true

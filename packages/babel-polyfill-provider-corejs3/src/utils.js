@@ -34,5 +34,5 @@ export function isCoreJSSource(source: string) {
 }
 
 export function coreJSModule(name: string) {
-  return `core-js/modules/${name}`;
+  return `core-js/modules/${name}.js`;
 }

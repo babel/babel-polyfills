@@ -62,7 +62,7 @@ export default defineProvider<Options>(function(
       !(object && desc.exclude && desc.exclude.includes(object)) &&
       shouldInjectPolyfill(desc.name)
     ) {
-      return utils.injectDefaultImport(`${coreJSBase}/${desc.pure}`, hint);
+      return utils.injectDefaultImport(`${coreJSBase}/${desc.pure}.js`, hint);
     }
   }
 
@@ -127,7 +127,7 @@ export default defineProvider<Options>(function(
           path.replaceWith(
             t.callExpression(
               utils.injectDefaultImport(
-                `${coreJSBase}/is-iterable`,
+                `${coreJSBase}/is-iterable.js`,
                 "isIterable",
               ),
               [path.node.right],
@@ -154,7 +154,7 @@ export default defineProvider<Options>(function(
               path.parentPath.replaceWith(
                 t.callExpression(
                   utils.injectDefaultImport(
-                    `${coreJSBase}/get-iterator`,
+                    `${coreJSBase}/get-iterator.js`,
                     "getIterator",
                   ),
                   [path.node.object],
@@ -165,7 +165,7 @@ export default defineProvider<Options>(function(
               callMethod(
                 path,
                 utils.injectDefaultImport(
-                  `${coreJSBase}/get-iterator-method`,
+                  `${coreJSBase}/get-iterator-method.js`,
                   "getIteratorMethod",
                 ),
               );
@@ -174,7 +174,7 @@ export default defineProvider<Options>(function(
             path.replaceWith(
               t.callExpression(
                 utils.injectDefaultImport(
-                  `${coreJSBase}/get-iterator-method`,
+                  `${coreJSBase}/get-iterator-method.js`,
                   "getIteratorMethod",
                 ),
                 [path.node.object],
