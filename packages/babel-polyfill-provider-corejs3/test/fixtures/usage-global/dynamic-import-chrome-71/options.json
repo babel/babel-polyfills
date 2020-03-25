@@ -1,11 +1,12 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs3",
       {
         "method": "usage-global",
-        "targets": { "chrome": 71 },
-        "providers": ["@@/corejs3"]
+        "targets": {
+          "chrome": 71
+        }
       }
     ],
     "@babel/plugin-syntax-dynamic-import"

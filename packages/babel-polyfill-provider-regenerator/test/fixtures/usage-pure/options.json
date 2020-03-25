@@ -1,10 +1,9 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-regenerator",
       {
-        "method": "usage-pure",
-        "providers": ["@@/regenerator"]
+        "method": "usage-pure"
       }
     ]
   ]

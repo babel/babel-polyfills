@@ -2,10 +2,9 @@
   "plugins": [
     "@babel/plugin-transform-for-of",
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs2",
       {
-        "method": "usage-pure",
-        "providers": ["@@/corejs2"]
+        "method": "usage-pure"
       }
     ]
   ]

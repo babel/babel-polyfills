@@ -2,14 +2,13 @@
   "validateLogs": true,
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-es-shims",
       {
         "method": "usage-global",
-        "providers": [
-          ["@@/es-shims", {
-            "missingDependencies": { "log": "per-file", "all": true }
-          }]
-        ]
+        "missingDependencies": {
+          "log": "per-file",
+          "all": true
+        }
       }
     ]
   ]

@@ -1,12 +1,16 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs3",
       {
-        "method": "usage-pure",
-        "providers": ["@@/corejs3"]
+        "method": "usage-pure"
       }
     ],
-    ["@babel/plugin-transform-modules-commonjs", { "loose": true }]
+    [
+      "@babel/plugin-transform-modules-commonjs",
+      {
+        "loose": true
+      }
+    ]
   ]
 }

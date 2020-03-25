@@ -1,10 +1,9 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs2",
       {
-        "method": "entry-global",
-        "providers": ["@@/corejs2"]
+        "method": "entry-global"
       }
     ]
   ]

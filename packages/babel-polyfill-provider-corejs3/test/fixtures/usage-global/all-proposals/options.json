@@ -1,15 +1,10 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs3",
       {
         "method": "usage-global",
-        "providers": [
-          [
-            "@@/corejs3",
-            { "proposals": true }
-          ]
-        ]
+        "proposals": true
       }
     ]
   ]

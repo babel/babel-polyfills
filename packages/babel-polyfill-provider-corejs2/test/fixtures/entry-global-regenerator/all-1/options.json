@@ -1,19 +1,12 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs2",
       {
         "method": "entry-global",
-        "providers": [
-          [
-            "@@/corejs2",
-            {
-              "#__secret_key__@babel/preset-env__compatibility": {
-                "entryInjectRegenerator": true
-              }
-            }
-          ]
-        ]
+        "#__secret_key__@babel/preset-env__compatibility": {
+          "entryInjectRegenerator": true
+        }
       }
     ]
   ]

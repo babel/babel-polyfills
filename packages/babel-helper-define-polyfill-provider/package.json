@@ -1,0 +1,33 @@
+{
+  "name": "@babel/helper-define-polyfill-provider",
+  "version": "0.1.0",
+  "description": "TODO",
+  "repository": "https://github.com/babel/TODO",
+  "keywords": [
+    "babel-plugin"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "browser": {
+    "./lib/config/loader.js": "./lib/config/loader-browser.js"
+  },
+  "dependencies": {
+    "@babel/helper-compilation-targets": "^7.8.7",
+    "@babel/helper-module-imports": "^7.8.3",
+    "@babel/helper-plugin-utils": "^7.8.3",
+    "@babel/traverse": "^7.0.0",
+    "debug": "^4.1.1",
+    "resolve": "^1.14.2",
+    "semver": "^6.1.2"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.4.0-0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/generator": "^7.4.4"
+  }
+}

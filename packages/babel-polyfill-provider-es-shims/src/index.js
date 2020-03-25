@@ -1,6 +1,8 @@
 // @flow
 
-import { defineProvider, type Utils } from "@babel/plugin-inject-polyfills";
+import defineProvider, {
+  type Utils,
+} from "@babel/helper-define-polyfill-provider";
 
 import resolve from "resolve";
 import debounce from "lodash.debounce";

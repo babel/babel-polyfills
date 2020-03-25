@@ -1,12 +1,18 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-regenerator",
       {
-        "method": "usage-global",
-        "providers": ["@@/regenerator"]
+        "method": "usage-global"
       }
     ]
   ],
-  "presets": [["@babel/preset-env", { "modules": false }]]
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false
+      }
+    ]
+  ]
 }

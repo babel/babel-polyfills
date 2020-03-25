@@ -1,23 +1,18 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs3",
       {
         "method": "entry-global",
-        "targets": { "chrome": 63 },
-        "providers": [
-          [
-            "@@/corejs3",
-            {
-              "exclude": [
-                "es.string.pad-start",
-                "es.string.pad-end",
-                "web.timers",
-                "web.immediate",
-                "web.dom-collections.iterator"
-              ]
-            }
-          ]
+        "targets": {
+          "chrome": 63
+        },
+        "exclude": [
+          "es.string.pad-start",
+          "es.string.pad-end",
+          "web.timers",
+          "web.immediate",
+          "web.dom-collections.iterator"
         ]
       }
     ]

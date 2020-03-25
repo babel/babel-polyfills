@@ -1,15 +1,24 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-regenerator",
       {
         "method": "usage-pure",
-        "targets": { "chrome": 40 },
-        "providers": ["@@/regenerator"]
+        "targets": {
+          "chrome": 40
+        }
       }
     ]
   ],
   "presets": [
-    ["@babel/preset-env", { "modules": false, "targets": { "chrome": 40 } }]
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "chrome": 40
+        }
+      }
+    ]
   ]
 }

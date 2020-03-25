@@ -16,7 +16,7 @@ import {
 import { types as t } from "@babel/core";
 import { callMethod, coreJSModule, isCoreJSSource } from "./utils";
 
-import { defineProvider } from "@babel/plugin-inject-polyfills";
+import defineProvider from "@babel/helper-define-polyfill-provider";
 
 type Options = {|
   version?: number | string,

@@ -1,12 +1,13 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs3",
       {
         "method": "usage-global",
-        "targets": { "esmodules": true },
-        "configPath": "../fixtures/preset-options-add-used-built-ins/browserslist-config-ignore",
-        "providers": ["@@/corejs3"]
+        "targets": {
+          "esmodules": true
+        },
+        "configPath": "../fixtures/preset-options-add-used-built-ins/browserslist-config-ignore"
       }
     ]
   ]

@@ -10,7 +10,7 @@ import {
 import addPlatformSpecificPolyfills from "./add-platform-specific-polyfills";
 import { hasMinVersion } from "./helpers";
 
-import { defineProvider } from "@babel/plugin-inject-polyfills";
+import defineProvider from "@babel/helper-define-polyfill-provider";
 import { types as t } from "@babel/core";
 
 const presetEnvCompat: "#__secret_key__@babel/preset-env__compatibility" =

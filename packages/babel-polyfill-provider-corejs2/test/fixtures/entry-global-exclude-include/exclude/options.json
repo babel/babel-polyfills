@@ -1,22 +1,17 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs2",
       {
         "method": "entry-global",
-        "targets": { "chrome": 63 },
-        "providers": [
-          [
-            "@@/corejs2",
-            {
-              "exclude": [
-                "es7.array.flat-map",
-                "web.timers",
-                "web.immediate",
-                "web.dom.iterable"
-              ]
-            }
-          ]
+        "targets": {
+          "chrome": 63
+        },
+        "exclude": [
+          "es7.array.flat-map",
+          "web.timers",
+          "web.immediate",
+          "web.dom.iterable"
         ]
       }
     ]

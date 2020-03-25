@@ -1,18 +1,30 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-regenerator",
+      {
+        "method": "usage-global"
+      }
+    ],
+    [
+      "@@/polyfill-corejs2",
       {
         "method": "usage-global",
-        "targets": { "chrome": 70 },
-        "providers": [
-          "@@/regenerator",
-          "@@/corejs2"
-        ]
+        "targets": {
+          "chrome": 70
+        }
       }
     ]
   ],
   "presets": [
-    ["@babel/preset-env", { "modules": false, "targets": { "chrome": 70 } }]
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "chrome": 70
+        }
+      }
+    ]
   ]
 }

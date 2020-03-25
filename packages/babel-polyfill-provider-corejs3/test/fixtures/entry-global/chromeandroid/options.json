@@ -1,11 +1,12 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs3",
       {
         "method": "entry-global",
-        "targets": { "browsers": "chromeandroid 59" },
-        "providers": ["@@/corejs3"]
+        "targets": {
+          "browsers": "chromeandroid 59"
+        }
       }
     ]
   ]

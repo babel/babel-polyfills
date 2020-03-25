@@ -1,11 +1,14 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs2",
       {
         "method": "usage-global",
-        "targets": { "browsers": ["ie > 10"] },
-        "providers": ["@@/corejs2"]
+        "targets": {
+          "browsers": [
+            "ie > 10"
+          ]
+        }
       }
     ]
   ]

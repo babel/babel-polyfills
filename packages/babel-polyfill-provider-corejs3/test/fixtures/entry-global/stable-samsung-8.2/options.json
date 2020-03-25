@@ -1,11 +1,12 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs3",
       {
         "method": "entry-global",
-        "targets": { "samsung": "8.2" },
-        "providers": ["@@/corejs3"]
+        "targets": {
+          "samsung": "8.2"
+        }
       }
     ]
   ]

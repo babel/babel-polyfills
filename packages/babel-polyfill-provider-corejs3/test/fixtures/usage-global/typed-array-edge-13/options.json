@@ -1,11 +1,12 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs3",
       {
         "method": "usage-global",
-        "targets": { "edge": 13 },
-        "providers": ["@@/corejs3"]
+        "targets": {
+          "edge": 13
+        }
       }
     ]
   ]

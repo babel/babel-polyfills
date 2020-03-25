@@ -1,6 +1,6 @@
 // @flow
 
-import type { Targets } from "@babel/plugin-inject-polyfills";
+import type { Targets } from "@babel/helper-define-polyfill-provider";
 
 const webPolyfills = {
   "web.timers": {},

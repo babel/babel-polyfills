@@ -1,11 +1,13 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs2",
       {
         "method": "entry-global",
-        "targets": { "chrome": "55", "node": "7.6" },
-        "providers": ["@@/corejs2"]
+        "targets": {
+          "chrome": "55",
+          "node": "7.6"
+        }
       }
     ]
   ]

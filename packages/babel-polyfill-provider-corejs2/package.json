@@ -17,13 +17,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
+    "@babel/helper-define-polyfill-provider": "^0.1.0",
     "@babel/helper-plugin-test-runner": "^7.1.0",
-    "@babel/plugin-inject-polyfills": "^0.1.0",
     "@babel/plugin-transform-for-of": "^7.4.4",
     "@babel/plugin-transform-modules-commonjs": "^7.4.4"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0-0",
-    "@babel/plugin-inject-polyfills": "^0.1.0"
+    "@babel/helper-define-polyfill-provider": "^0.1.0"
   }
 }

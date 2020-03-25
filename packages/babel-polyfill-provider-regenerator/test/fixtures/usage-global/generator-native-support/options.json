@@ -1,15 +1,24 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-regenerator",
       {
         "method": "usage-global",
-        "targets": { "node": 6 },
-        "providers": ["@@/regenerator"]
+        "targets": {
+          "node": 6
+        }
       }
     ]
   ],
   "presets": [
-    ["@babel/preset-env", { "modules": false, "targets": { "node": 6 } }]
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "node": 6
+        }
+      }
+    ]
   ]
 }

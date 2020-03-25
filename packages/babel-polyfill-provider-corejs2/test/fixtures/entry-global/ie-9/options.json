@@ -1,11 +1,12 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs2",
       {
         "method": "entry-global",
-        "targets": { "ie": 9 },
-        "providers": ["@@/corejs2"]
+        "targets": {
+          "ie": 9
+        }
       }
     ]
   ]

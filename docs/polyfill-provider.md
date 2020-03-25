@@ -1,9 +1,9 @@
-_"Polyfill providers"_ are the packages which `@babel/plugin-inject-polyfills` delegates to.
+_"Polyfill providers"_ are the packages which contain the actual polyfills data.
 Their job is to provide the correct import paths for every functionality that their underling polyfill can handle.
 
 > You can find some examples in the [`packages`](https://github.com/nicolo-ribaudo/babel-polyfills/tree/master/packages) folder of this repository
 
-A _"polyfill provider"_ is a normal JavaScript function, similarly to how Babel plugins are defined. It takes two parameters (`api` and `options`) and returns an object with the provider implementation.
+A _"polyfill provider"_ is defined passing a factory function to `@babel/helper-define-polyfill-provider`. The factory functiontakes two parameters (`api` and `options`) and returns an object with the provider implementation.
 
 ```ts
 function polyfillProvider(api: ProviderApi, options: Options): Provider;
@@ -30,7 +30,7 @@ function myProvider(api) {
 
 Is the list of polyfills supported by the polyfill provider. The names don't have a predefined format, but it's important that you are consistent. For example, `core-js` always uses `es.OBJECT.METHOD`, like in `es.array.includes`.
 These names will be used for two main purpuses to automatically validate and apply the `include` and `exclude` options specified by the user.
-If you use the recommended object version of this option, you can specify which browsers natively support the feature provided by the polyfill: this will make your provider support the `target` option of `@babel/plugin-inject-polyfills`.
+If you use the recommended object version of this option, you can specify which browsers natively support the feature provided by the polyfill: this will make your provider support the `target` option of `@babel/helper-define-polyfill-provider`.
 
 ```js
 function myProvider(api) {
@@ -66,12 +66,12 @@ function myProvider(api, options) {
 
 ### `provider.visitor`
 
-If a provider needs to handle special cases which aren't supported by `@babel/plugin-inject-polyfills`, it can provide a normal `visitor` like any Babel plugin.
+If a provider needs to handle special cases which aren't supported by `@babel/helper-define-polyfill-provider`, it can provide a normal `visitor` like any Babel plugin.
 
 ### `provider.entryGlobal`, `provider.usageGlobal` and `provider.usagePure`
 
 These three functions are the core of any polyfill provider.
-They correspond, respectively, to the `entry-global`, `usage-global` and `usage-pure` values of the `method` option of `@babel/plugin-inject-polyfills`.
+They correspond, respectively, to the `entry-global`, `usage-global` and `usage-pure` values of the `method` option of `@babel/helper-define-polyfill-provider`.
 They are all optional, but you must specify at least one of them.
 
 They take three parameters, and return nothing:
@@ -134,7 +134,7 @@ A `meta` object describes the statement or expression which triggered the call t
     };
     ```
 
-    Note that `@babel/plugin-inject-polyfills` will also track assignments as much as possible. For example, this code is represented by the same `Meta`:
+    Note that `@babel/helper-define-polyfill-provider` will also track assignments as much as possible. For example, this code is represented by the same `Meta`:
 
     ```js
     var MyArray = Array;
@@ -196,7 +196,7 @@ A `meta` object describes the statement or expression which triggered the call t
 
 #### `utils`
 
-When calling a provider function (e.g. `usageGlobal`), `@babel/plugin-inject-polyfills` will provide it a few utilities to easily inject the necessary `import` statements or `require` calls, depending on the source type. Polyfill providers shouldn't worry about which AST represents an import, or about the source type of the file being transpiled.
+When calling a provider function (e.g. `usageGlobal`), `@babel/helper-define-polyfill-provider` will provide it a few utilities to easily inject the necessary `import` statements or `require` calls, depending on the source type. Polyfill providers shouldn't worry about which AST represents an import, or about the source type of the file being transpiled.
 
 - `utils.injectGlobalImport(url: string)` can be used to inject side-effectful global imports. It is usually called when injecting global polyfills.
   For example, `utils.injectGlobalImport("my-polyfill")` would generate this code:
@@ -228,7 +228,7 @@ While some utilities are provided in the `utils` object, some of them are provid
 
 ### `api.method`
 
-It represents the `method` option passed to `@babel/plugin-inject-polyfills`, and it can be one of `"entry-global"`, `"usage-global"`, or `"usage-pure"`.
+It represents the `method` option passed to `@babel/helper-define-polyfill-provider`, and it can be one of `"entry-global"`, `"usage-global"`, or `"usage-pure"`.
 
 ### `api.targets`
 
@@ -328,6 +328,6 @@ export default includes(thisValue, value) {
 
 Polyfill providers follow a naming convention similar to Babel plugins and presets:
 
-- `babel-polyfill-provider-POLYFILL-NAME`
-- `@ORG/babel-polyfill-provider-POLYFILL-NAME`
-- `@ORG/babel-polyfill-provider`
+- `@babel/plugin-polyfill-POLYFILL-NAME`
+- `@ORG/babel-plugin-polyfill-POLYFILL-NAME`
+- `@ORG/babel-plugin-polyfill`

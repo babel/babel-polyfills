@@ -1,8 +1,8 @@
 // @flow
 
-import type { PolyfillProvider } from "@babel/plugin-inject-polyfills";
+import defineProvider from "@babel/helper-define-polyfill-provider";
 
-export default (({ debug }) => {
+export default defineProvider(({ debug }) => {
   return {
     name: "regenerator",
 
@@ -20,7 +20,7 @@ export default (({ debug }) => {
       }
     },
   };
-}: PolyfillProvider<>);
+});
 
 const isRegenerator = meta =>
   meta.kind === "global" && meta.name === "regeneratorRuntime";

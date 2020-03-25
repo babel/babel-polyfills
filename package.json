@@ -67,7 +67,7 @@
       "/test/fixtures/"
     ],
     "moduleNameMapper": {
-      "^@babel/plugin-inject-polyfills$": "<rootDir>/packages/babel-plugin-inject-polyfills/"
+      "^@babel/helper-define-polyfill-provider$": "<rootDir>/packages/babel-helper-define-polyfill-provider/"
     }
   },
   "version": "0.0.0"

@@ -1,12 +1,10 @@
 {
   "plugins": [
     [
-      "@babel/plugin-inject-polyfills",
+      "@@/polyfill-corejs2",
       {
         "method": "usage-pure",
-        "providers": [
-          ["@@/corejs2", { "version": "^7.0.2" }]
-        ]
+        "version": "^7.0.2"
       }
     ]
   ]

@@ -1,8 +1,10 @@
 ## Options
 
-### `targets`, `ignoreBrowserslistConfig`, `configPath`, `debug`
+Every polyfill provider accepts the following options.
+Note that they might not support filtering the polyfills based on the target
+engines, but if they do they will follow this interface.
 
-See the same options at https://babeljs.io/docs/en/babel-preset-env
+Additionally, polyfill providers can define any custom option.
 
 ### `method`
 
@@ -48,34 +50,12 @@ It can be one of `usage-pure`, `usage-global`, or `entry-global`.
   import "promise-global-polyfills/all-settled";
   ```
 
-### `providers`
+### `targets`, `ignoreBrowserslistConfig`, `configPath`, `debug`
 
-Is an array of polyfill providers, which you must install separately.
+See the same options at https://babeljs.io/docs/en/babel-preset-env
 
-Polyfill providers names can be shortened similar to plugin and preset names:
-
-| **Name**                  | **Imported package**                       |
-| ------------------------- | ------------------------------------------ |
-| `my-polyfill`             | `babel-polyfill-provider-my-polyfill`      |
-| `@org/my-polyfill`        | `@org/babel-polyfill-provider-by-polyfill` |
-| `@org`                    | `@org/babel-polyfill-provider`             |
-| `module:any-package-name` | `any-package-name`                         |
-
-You can also specifying options for a provider, similarly to how plugin and preset options work:
-
-<!-- prettier-ignore -->
-```json
-["@babel/inject-polyfills", {
-  "method": "usage-global",
-  "providers": [
-    ["my-polyfill", {
-      // Options
-      "unstableFeatures": true
-    }]
-  ]
-}]
-```
-
-<!-- prettier-ignore-end -->
+### `include`, `exclude`
 
 All polyfill providers accept two options: `include` and `exclude`. They are an array of strings to polyfills to be considered as not supported by the targets (`include`) or to be considered as supported (`exclude`).
+
+See the same options at https://babeljs.io/docs/en/babel-preset-env
