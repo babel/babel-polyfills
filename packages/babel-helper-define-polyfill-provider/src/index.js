@@ -82,6 +82,7 @@ function instantiateProvider<Options>(
   options: PluginOptions,
   dirname,
   debugLog,
+  babelApi,
 ) {
   const {
     method,
@@ -100,6 +101,7 @@ function instantiateProvider<Options>(
   let filterPolyfills;
 
   const api: ProviderApi = {
+    babel: babelApi,
     getUtils,
     method: options.method,
     targets,
@@ -197,7 +199,13 @@ export default function definePolyfillProvider<Options>(
       targets,
       provider,
       callProvider,
-    } = instantiateProvider<Options>(factory, options, dirname, () => debugLog);
+    } = instantiateProvider<Options>(
+      factory,
+      options,
+      dirname,
+      () => debugLog,
+      babelApi,
+    );
 
     const createVisitor = method === "entry-global" ? v.entry : v.usage;
 

@@ -8,6 +8,7 @@ import {
   CommonIterators,
   CommonInstanceDependencies,
   PromiseDependencies,
+  PromiseDependenciesWithIterators,
   StaticProperties,
   InstanceProperties,
   type CoreJSPolyfillDescriptor,
@@ -25,9 +26,11 @@ type Options = {|
 |};
 
 export default defineProvider<Options>(function(
-  { getUtils, method, shouldInjectPolyfill, createMetaResolver, debug },
+  { getUtils, method, shouldInjectPolyfill, createMetaResolver, debug, babel },
   { version = 3, proposals, shippedProposals },
 ) {
+  const isWebpack = babel.caller(caller => caller?.name === "babel-loader");
+
   const resolve = createMetaResolver({
     global: BuiltIns,
     static: StaticProperties,
@@ -223,7 +226,14 @@ export default defineProvider<Options>(function(
       // import("foo")
       CallExpression(path) {
         if (path.get("callee").isImport()) {
-          maybeInjectGlobal(PromiseDependencies, getUtils(path));
+          const utils = getUtils(path);
+
+          if (isWebpack) {
+            // Webpack uses Promise.all to handle dynamic import.
+            maybeInjectGlobal(PromiseDependenciesWithIterators, utils);
+          } else {
+            maybeInjectGlobal(PromiseDependencies, utils);
+          }
         }
       },
 

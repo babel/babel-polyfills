@@ -70,7 +70,7 @@ const TypedArrayStaticMethods = {
 
 export const PromiseDependencies = ["es.promise", "es.object.to-string"];
 
-const PromiseDependenciesWithIterators = [
+export const PromiseDependenciesWithIterators = [
   ...PromiseDependencies,
   ...CommonIterators,
 ];

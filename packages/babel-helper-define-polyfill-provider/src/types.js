@@ -48,6 +48,7 @@ export type Targets = {
 };
 
 export type ProviderApi = {|
+  babel: Object,
   method: MethodString,
   targets: Targets,
   createMetaResolver: typeof createMetaResolver,
