@@ -159,6 +159,7 @@
     "safari": "10.1",
     "samsung": "6.0"
   },
+  "Promise.allSettled": {},
   "Promise.any": {},
   "Promise.try": {},
   "Promise.prototype.finally": {

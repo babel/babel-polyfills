@@ -35,6 +35,7 @@ defineStatic("Object", "fromEntries", "2.0.2");
 defineStatic("Object", "getOwnPropertyDescriptors", "2.1.0");
 defineStatic("Object", "values", "1.1.1");
 
+defineStatic("Promise", "allSettled", "1.0.2");
 defineStatic("Promise", "any", "2.0.1");
 defineStatic("Promise", "try", "1.0.0");
 defineInstance("Promise", "finally", "1.2.1");
