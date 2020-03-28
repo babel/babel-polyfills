@@ -198,6 +198,7 @@
     "safari": "9.0",
     "samsung": "5.0"
   },
+  "String.prototype.matchAll": {},
   "String.prototype.padEnd": {
     "chrome": "57",
     "edge": "15",

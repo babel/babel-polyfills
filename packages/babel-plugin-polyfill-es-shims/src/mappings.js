@@ -44,6 +44,7 @@ defineStatic("Reflect", "ownKeys", "1.0.1");
 
 defineInstance("RegExp", "flags", "1.3.0");
 
+defineInstance("String", "matchAll", "4.0.2");
 defineInstance("String", "padEnd", "1.1.1");
 defineInstance("String", "padStart", "3.1.0");
 defineInstance("String", "replaceAll", "1.0.3");
