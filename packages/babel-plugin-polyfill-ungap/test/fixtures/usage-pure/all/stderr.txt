@@ -1,0 +1,4 @@
+Some polyfills have been added but are not present in your dependencies.
+Please run one of the following commands:
+	npm install --save @ungap/get-own-property-descriptors@^* @ungap/global-this@^* @ungap/map@^0.1.4
+	yarn add @ungap/get-own-property-descriptors@^* @ungap/global-this@^* @ungap/map@^0.1.4

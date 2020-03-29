@@ -7,16 +7,20 @@ import defineProvider, {
 import resolve from "resolve";
 import debounce from "lodash.debounce";
 
-import polyfills from "../data/polyfills.json";
+import polyfills from "../data/compat.json";
 
 import {
   type Descriptor,
+  type Package,
   Globals,
   StaticProperties,
   InstanceProperties,
+  DOMIterable,
 } from "./mappings";
 
 type Options = {|
+  essential?: boolean,
+  mode?: "cjs" | "esm",
   missingDependencies?: {
     log?: "per-file" | "deferred",
     // When true, log all the polyfills without checking if they are installed
@@ -25,11 +29,18 @@ type Options = {|
 |};
 
 export default defineProvider<Options>(function(
-  { shouldInjectPolyfill, createMetaResolver, debug },
+  { method, getUtils, shouldInjectPolyfill, createMetaResolver, debug, babel },
   options,
   dirname,
 ) {
-  const resolvePolyfill = createMetaResolver<Descriptor[]>({
+  const opts = {
+    mode:
+      options.mode ??
+      babel.caller(caller => (caller?.supportsStaticESM ? "esm" : "cjs")),
+    essential: options.essential ?? false,
+  };
+
+  const resolvePolyfill = createMetaResolver<Descriptor>({
     global: Globals,
     static: StaticProperties,
     instance: InstanceProperties,
@@ -38,29 +49,35 @@ export default defineProvider<Options>(function(
   const installedDeps = new Set();
   const missingDeps = new Set();
 
-  function mark(desc) {
-    debug(desc.name);
+  function mark(name, pkg) {
+    debug(name);
 
-    const dep = `${desc.package}@^${desc.version}`;
+    const pkgName = `@ungap/${pkg.package}`;
+
+    const dep = `${pkgName}@^${pkg.version}`;
     if (installedDeps.has(dep) || missingDeps.has(dep)) return;
 
-    if (
-      options.missingDependencies?.all ||
-      !hasDependency(dirname, desc.package)
-    ) {
+    if (options.missingDependencies?.all || !hasDependency(dirname, pkgName)) {
       missingDeps.add(dep);
     } else {
       installedDeps.add(dep);
     }
   }
 
-  function createDescIterator(cb: (Descriptor, Utils, Object) => void) {
+  function getImport(pkg) {
+    return `@ungap/${pkg.package}/${opts.mode}/index.js`;
+  }
+
+  function createDescIterator(cb: (string, Package, Utils, Object) => void) {
     return (meta, utils, path) => {
       const resolved = resolvePolyfill(meta);
       if (!resolved) return;
 
-      for (const desc of resolved.desc) {
-        if (shouldInjectPolyfill(desc.name)) cb(desc, utils, path);
+      const { name, regular, essential } = resolved.desc;
+      const pkg = (opts.essential && essential) || regular;
+
+      if (pkg && shouldInjectPolyfill(name)) {
+        cb(name, pkg, utils, path);
       }
     };
   }
@@ -69,24 +86,17 @@ export default defineProvider<Options>(function(
     name: "es-shims",
     polyfills,
 
-    usageGlobal: createDescIterator((desc, utils) => {
-      if (desc.global === false) return;
+    usageGlobal: createDescIterator((name, pkg, utils) => {
+      utils.injectGlobalImport(getImport(pkg));
 
-      utils.injectGlobalImport(`${desc.package}/auto.js`);
-
-      mark(desc);
+      mark(name, pkg);
     }),
 
-    usagePure: createDescIterator((desc, utils, path) => {
-      if (desc.pure === false) return;
-
-      const id = utils.injectDefaultImport(
-        `${desc.package}/implementation.js`,
-        desc.name,
-      );
+    usagePure: createDescIterator((name, pkg, utils, path) => {
+      const id = utils.injectDefaultImport(getImport(pkg), name);
       path.replaceWith(id);
 
-      mark(desc);
+      mark(name, pkg);
     }),
 
     post() {
@@ -95,6 +105,16 @@ export default defineProvider<Options>(function(
       } else {
         laterLogMissingDependencies(missingDeps);
       }
+    },
+
+    visitor: method === "usage-global" && {
+      "ForOfStatement|SpreadElement|ArrayPattern"(path) {
+        const { name, regular } = DOMIterable;
+
+        if (shouldInjectPolyfill(name) && regular) {
+          getUtils(path).injectGlobalImport(getImport(regular));
+        }
+      },
     },
   };
 });

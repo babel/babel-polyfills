@@ -1,0 +1,16 @@
+{
+  "validateLogs": true,
+  "plugins": [
+    [
+      "@@/polyfill-ungap",
+      {
+        "method": "usage-pure",
+        "mode": "esm",
+        "missingDependencies": {
+          "log": "per-file",
+          "all": true
+        }
+      }
+    ]
+  ]
+}

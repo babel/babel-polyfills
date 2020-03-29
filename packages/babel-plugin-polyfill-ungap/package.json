@@ -1,0 +1,27 @@
+{
+  "name": "babel-plugin-polyfill-ungap",
+  "version": "0.1.0",
+  "description": "TODO",
+  "repository": "https://github.com/babel/TODO",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "keywords": [
+    "babel-plugin"
+  ],
+  "dependencies": {
+    "lodash.debounce": "^4.0.8",
+    "resolve": "^1.14.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/helper-define-polyfill-provider": "^0.1.0",
+    "@babel/helper-plugin-test-runner": "^7.1.0"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/helper-define-polyfill-provider": "^0.1.0"
+  }
+}

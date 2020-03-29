@@ -1,0 +1,15 @@
+{
+  "validateLogs": true,
+  "plugins": [
+    [
+      "@@/polyfill-ungap",
+      {
+        "method": "usage-global",
+        "missingDependencies": {
+          "log": "per-file",
+          "all": true
+        }
+      }
+    ]
+  ]
+}
