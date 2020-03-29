@@ -78,6 +78,7 @@ export default defineProvider<Options>(function(
 
       if (pkg && shouldInjectPolyfill(name)) {
         cb(name, pkg, utils, path);
+        mark(name, pkg);
       }
     };
   }
@@ -88,15 +89,11 @@ export default defineProvider<Options>(function(
 
     usageGlobal: createDescIterator((name, pkg, utils) => {
       utils.injectGlobalImport(getImport(pkg));
-
-      mark(name, pkg);
     }),
 
     usagePure: createDescIterator((name, pkg, utils, path) => {
       const id = utils.injectDefaultImport(getImport(pkg), name);
       path.replaceWith(id);
-
-      mark(name, pkg);
     }),
 
     post() {
@@ -113,6 +110,7 @@ export default defineProvider<Options>(function(
 
         if (shouldInjectPolyfill(name) && regular) {
           getUtils(path).injectGlobalImport(getImport(regular));
+          mark(name, regular);
         }
       },
     },
