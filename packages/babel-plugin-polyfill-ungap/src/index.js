@@ -4,9 +4,6 @@ import defineProvider, {
   type Utils,
 } from "@babel/helper-define-polyfill-provider";
 
-import resolve from "resolve";
-import debounce from "lodash.debounce";
-
 import polyfills from "../data/compat.json";
 
 import {
@@ -21,17 +18,19 @@ import {
 type Options = {|
   essential?: boolean,
   mode?: "cjs" | "esm",
-  missingDependencies?: {
-    log?: "per-file" | "deferred",
-    // When true, log all the polyfills without checking if they are installed
-    all?: boolean,
-  },
 |};
 
 export default defineProvider<Options>(function(
-  { method, getUtils, shouldInjectPolyfill, createMetaResolver, debug, babel },
+  {
+    method,
+    getUtils,
+    shouldInjectPolyfill,
+    createMetaResolver,
+    assertDependency,
+    debug,
+    babel,
+  },
   options,
-  dirname,
 ) {
   const opts = {
     mode:
@@ -46,24 +45,6 @@ export default defineProvider<Options>(function(
     instance: InstanceProperties,
   });
 
-  const installedDeps = new Set();
-  const missingDeps = new Set();
-
-  function mark(name, pkg) {
-    debug(name);
-
-    const pkgName = `@ungap/${pkg.package}`;
-
-    const dep = `${pkgName}@^${pkg.version}`;
-    if (installedDeps.has(dep) || missingDeps.has(dep)) return;
-
-    if (options.missingDependencies?.all || !hasDependency(dirname, pkgName)) {
-      missingDeps.add(dep);
-    } else {
-      installedDeps.add(dep);
-    }
-  }
-
   function getImport(pkg) {
     return `@ungap/${pkg.package}/${opts.mode}/index.js`;
   }
@@ -77,8 +58,9 @@ export default defineProvider<Options>(function(
       const pkg = (opts.essential && essential) || regular;
 
       if (pkg && shouldInjectPolyfill(name)) {
+        assertDependency(path, `@ungap/${pkg.package}`, pkg.version);
         cb(name, pkg, utils, path);
-        mark(name, pkg);
+        debug(name);
       }
     };
   }
@@ -96,61 +78,16 @@ export default defineProvider<Options>(function(
       path.replaceWith(id);
     }),
 
-    post() {
-      if (options.missingDependencies?.log === "per-file") {
-        logMissingDependencies(missingDeps);
-      } else {
-        laterLogMissingDependencies(missingDeps);
-      }
-    },
-
     visitor: method === "usage-global" && {
       "ForOfStatement|SpreadElement|ArrayPattern"(path) {
         const { name, regular } = DOMIterable;
 
         if (shouldInjectPolyfill(name) && regular) {
+          assertDependency(path, `@ungap/${regular.package}`, regular.version);
           getUtils(path).injectGlobalImport(getImport(regular));
-          mark(name, regular);
+          debug(name);
         }
       },
     },
   };
 });
-
-function hasDependency(basedir, name) {
-  try {
-    resolve.sync(name, { basedir });
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function logMissingDependencies(missingDeps) {
-  if (missingDeps.size === 0) return;
-
-  const deps = Array.from(missingDeps)
-    .sort()
-    .join(" ");
-
-  console.warn(
-    "\nSome polyfills have been added but are not present in your dependencies.\n" +
-      "Please run one of the following commands:\n" +
-      `\tnpm install --save ${deps}\n` +
-      `\tyarn add ${deps}\n`,
-  );
-}
-
-const laterLogMissingDependencies = (() => {
-  let allMissingDeps = new Set();
-
-  const laterLogMissingDependencies = debounce(() => {
-    logMissingDependencies(allMissingDeps);
-    allMissingDeps = new Set();
-  }, 1000);
-
-  return missingDeps => {
-    missingDeps.forEach(name => allMissingDeps.add(name));
-    laterLogMissingDependencies();
-  };
-})();

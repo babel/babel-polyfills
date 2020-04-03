@@ -11,10 +11,6 @@
   "keywords": [
     "babel-plugin"
   ],
-  "dependencies": {
-    "lodash.debounce": "^4.0.8",
-    "resolve": "^1.14.2"
-  },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
     "@babel/helper-define-polyfill-provider": "^0.1.0",

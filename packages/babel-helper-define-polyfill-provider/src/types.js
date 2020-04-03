@@ -8,20 +8,20 @@ type ObjectMap<T> = { [k: string]: T };
 
 export type Pattern = string | RegExp;
 
+export type MissingDependenciesOption =
+  | false
+  | {
+      log?: "per-file" | "deferred",
+      inject?: "import" | "throw",
+      // When true, log all the polyfills without checking if they are installed
+      all?: boolean,
+    };
+
 export type ProviderOptions<Opts = {||}> = {|
   ...Opts,
   include?: Pattern[],
   exclude?: Pattern[],
 |};
-
-export type Options = {
-  method: MethodString,
-  providers: Array<string | [string] | [string, ProviderOptions<>]>,
-  targets?: { browsers: string | string[], [target: string]: string | number },
-  ignoreBrowserslistConfig?: boolean,
-  configPath?: string,
-  debug?: boolean,
-};
 
 export type PluginOptions = {|
   method: MethodString,
@@ -31,6 +31,7 @@ export type PluginOptions = {|
   debug?: boolean,
   include?: Pattern[],
   exclude?: Pattern[],
+  missingDependencies?: MissingDependenciesOption,
 |};
 
 export type PolyfillProvider<Opts = {||}> = (
@@ -55,6 +56,7 @@ export type ProviderApi = {|
   getUtils(path: NodePath): Utils,
   shouldInjectPolyfill(name: string): boolean,
   debug(name: string | null): void,
+  assertDependency(path: Object, name: string, version?: string): void,
 |};
 
 export type Utils = {|

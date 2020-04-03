@@ -14,7 +14,10 @@ import {
   stringifyTargetsMultiline,
   presetEnvSilentDebugHeader,
 } from "./debug-utils";
-import { validateIncludeExclude } from "./normalize-options";
+import {
+  validateIncludeExclude,
+  applyMissingDependenciesDefaults,
+} from "./normalize-options";
 
 import type {
   ProviderApi,
@@ -27,6 +30,7 @@ import type {
 } from "./types";
 
 import * as v from "./visitors";
+import * as deps from "./dependencies";
 
 import createMetaResolver from "./meta-resolver";
 
@@ -80,6 +84,7 @@ function resolveOptions<Options>(
 function instantiateProvider<Options>(
   factory: PolyfillProvider<Options>,
   options: PluginOptions,
+  missingDependencies,
   dirname,
   debugLog,
   babelApi,
@@ -99,6 +104,8 @@ function instantiateProvider<Options>(
   let polyfillsSupport;
   let polyfillsNames;
   let filterPolyfills;
+
+  const depsCache = new Map();
 
   const api: ProviderApi = {
     babel: babelApi,
@@ -139,6 +146,19 @@ function instantiateProvider<Options>(
         name,
         polyfillsSupport && name && polyfillsSupport[name],
       );
+    },
+    assertDependency(path, name, version = "*") {
+      if (missingDependencies === false) return;
+
+      const dep = version === "*" ? name : `${name}@^${version}`;
+
+      const found = missingDependencies.all
+        ? false
+        : mapGetOr(depsCache, name, () => deps.has(dirname, name));
+
+      if (!found) {
+        debugLog().missingDeps.add(dep);
+      }
     },
   };
 
@@ -193,6 +213,11 @@ export default function definePolyfillProvider<Options>(
 
     let debugLog;
 
+    const missingDependencies = applyMissingDependenciesDefaults(
+      options,
+      babelApi,
+    );
+
     const {
       debug,
       method,
@@ -202,6 +227,7 @@ export default function definePolyfillProvider<Options>(
     } = instantiateProvider<Options>(
       factory,
       options,
+      missingDependencies,
       dirname,
       () => debugLog,
       babelApi,
@@ -228,6 +254,7 @@ export default function definePolyfillProvider<Options>(
           polyfills: new Map(),
           found: false,
           providers: new Set(),
+          missingDeps: new Set(),
         };
 
         // $FlowIgnore - Flow doesn't support optional calls
@@ -236,6 +263,14 @@ export default function definePolyfillProvider<Options>(
       post() {
         // $FlowIgnore - Flow doesn't support optional calls
         provider.post?.apply(this, arguments);
+
+        if (missingDependencies !== false) {
+          if (missingDependencies.log === "per-file") {
+            deps.logMissing(debugLog.missingDeps);
+          } else {
+            deps.laterLogMissing(debugLog.missingDeps);
+          }
+        }
 
         if (!debug) return;
 
@@ -281,4 +316,13 @@ export default function definePolyfillProvider<Options>(
       },
     };
   });
+}
+
+function mapGetOr(map, key, getDefault) {
+  let val = map.get(key);
+  if (val === undefined) {
+    val = getDefault();
+    map.set(key, val);
+  }
+  return val;
 }

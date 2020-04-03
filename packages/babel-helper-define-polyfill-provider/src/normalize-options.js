@@ -1,7 +1,11 @@
 // @flow
 
 import { intersection } from "./utils";
-import type { Pattern } from "./types";
+import type {
+  Pattern,
+  PluginOptions,
+  MissingDependenciesOption,
+} from "./types";
 
 function patternToRegExp(pattern: Pattern): ?RegExp {
   if (pattern instanceof RegExp) return pattern;
@@ -74,4 +78,22 @@ export function validateIncludeExclude(
   }
 
   return { include, exclude };
+}
+
+export function applyMissingDependenciesDefaults(
+  options: PluginOptions,
+  babelApi: Object,
+): MissingDependenciesOption {
+  const { missingDependencies = {} } = options;
+  if (missingDependencies === false) return false;
+
+  const caller = babelApi.caller(caller => caller?.name);
+
+  const {
+    log = "deferred",
+    inject = caller === "rollup-plugin-babel" ? "throw" : "import",
+    all = false,
+  } = missingDependencies;
+
+  return { log, inject, all };
 }
