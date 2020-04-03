@@ -17,8 +17,16 @@ module.exports = {
         options: {
           plugins: [
             [
-              "@@/polyfill-es-shims",
-              { method: "usage-global", missingDependencies: { all: true } },
+              require("../../helpers/generic-provider.js"),
+              {
+                method: "usage-global",
+                globals: {
+                  a: "___a___not_a_real_pkg___",
+                  b: "___b___not_a_real_pkg___",
+                  c: "___c___not_a_real_pkg___",
+                },
+                missingDependencies: { all: true },
+              },
             ],
           ],
         },

@@ -4,7 +4,7 @@
 __metadata:
   version: 4
 
-"@babel/cli@npm:7.8.4, @babel/cli@npm:^7.4.4":
+"@babel/cli@npm:^7.4.4, @babel/cli@npm:^7.8.4":
   version: 7.8.4
   resolution: "@babel/cli@npm:7.8.4"
   dependencies:
@@ -49,7 +49,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.0.0-0, @babel/core@npm:^7.1.0, @babel/core@npm:^7.4.0, @babel/core@npm:^7.4.5, @babel/core@npm:^7.8.3":
+"@babel/core@npm:^7.0.0-0, @babel/core@npm:^7.1.0, @babel/core@npm:^7.4.5, @babel/core@npm:^7.8.3":
   version: 7.8.7
   resolution: "@babel/core@npm:7.8.7"
   dependencies:
@@ -79,7 +79,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/generator@npm:^7.4.0, @babel/generator@npm:^7.4.4, @babel/generator@npm:^7.8.6, @babel/generator@npm:^7.8.7":
+"@babel/generator@npm:^7.4.0, @babel/generator@npm:^7.8.6, @babel/generator@npm:^7.8.7":
   version: 7.8.8
   resolution: "@babel/generator@npm:7.8.8"
   dependencies:
@@ -88,6 +88,18 @@ __metadata:
     lodash: ^4.17.13
     source-map: ^0.5.0
   checksum: 2/56547d738618919a3ff604da7c02f9d1237d040c0eb94b1051f1a5d9725a30ed12bcc6387f84560b0eb2fde4769567c3fb21470086f4b441215de08171ee6244
+  languageName: node
+  linkType: hard
+
+"@babel/generator@npm:^7.8.3":
+  version: 7.9.4
+  resolution: "@babel/generator@npm:7.9.4"
+  dependencies:
+    "@babel/types": ^7.9.0
+    jsesc: ^2.5.1
+    lodash: ^4.17.13
+    source-map: ^0.5.0
+  checksum: 2/8815b1617fabe6a7b15add0b3567103832a50f3b742572953379e0f7e6050a25d620c8291b3b535082c8b803650712d853b59d42311229466cd6f0e4bfe148d7
   languageName: node
   linkType: hard
 
@@ -164,16 +176,22 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider"
   dependencies:
-    "@babel/core": ^7.4.0
-    "@babel/generator": ^7.4.4
+    "@babel/cli": ^7.8.4
+    "@babel/core": ^7.8.3
+    "@babel/generator": ^7.8.3
     "@babel/helper-compilation-targets": ^7.8.7
     "@babel/helper-module-imports": ^7.8.3
     "@babel/helper-plugin-utils": ^7.8.3
     "@babel/traverse": ^7.0.0
+    babel-loader: ^8.1.0
     debug: ^4.1.1
     lodash.debounce: ^4.0.8
     resolve: ^1.14.2
+    rollup: ^2.3.2
+    rollup-plugin-babel: ^4.4.0
     semver: ^6.1.2
+    webpack: ^4.42.1
+    webpack-cli: ^3.3.11
   peerDependencies:
     "@babel/core": ^7.4.0-0
   languageName: unknown
@@ -354,6 +372,13 @@ __metadata:
     resolve: ^1.3.2
     source-map: ^0.5.0
   checksum: 2/d622e3746ef7f4799bef98779240ebfdde6e9ced38a91bed6b1633c450140e55f99b76b9229bc1c00f5c8d7bf3017805c000620ba9896fdbb170a1cc6c352f74
+  languageName: node
+  linkType: hard
+
+"@babel/helper-validator-identifier@npm:^7.9.0":
+  version: 7.9.0
+  resolution: "@babel/helper-validator-identifier@npm:7.9.0"
+  checksum: 2/c8b67b61fe59ba40d28729bda49579b89022b3ac8ab2eb135fa0a41b2dec600e11240bb4b71a95195217404d02ea89d25a0f1dac01a93f37c50658cbf8b95115
   languageName: node
   linkType: hard
 
@@ -1125,6 +1150,17 @@ __metadata:
     lodash: ^4.17.13
     to-fast-properties: ^2.0.0
   checksum: 2/b6401126e3b3ea6c98a4225547a52ccade5747237cd9d62f86b1b9b76598ab0957e698bae46a6159cc5dfa0045fe71d367788ebd325c4a94383574a44781589b
+  languageName: node
+  linkType: hard
+
+"@babel/types@npm:^7.9.0":
+  version: 7.9.0
+  resolution: "@babel/types@npm:7.9.0"
+  dependencies:
+    "@babel/helper-validator-identifier": ^7.9.0
+    lodash: ^4.17.13
+    to-fast-properties: ^2.0.0
+  checksum: 2/5fcd95a5187f0083796f0966988bfc3d909764693245ac279296d5d25fff9bc07c1b5e9314c2cec9fe741ed09848d3d44289a37c0fb332593744e1c8b697cdf1
   languageName: node
   linkType: hard
 
@@ -3437,17 +3473,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "babel-plugin-polyfill-es-shims@workspace:packages/babel-plugin-polyfill-es-shims"
   dependencies:
-    "@babel/cli": 7.8.4
     "@babel/core": ^7.0.0-0
     "@babel/helper-define-polyfill-provider": ^0.1.0
     "@babel/helper-plugin-test-runner": ^7.1.0
-    babel-loader: ^8.1.0
-    lodash.debounce: ^4.0.8
-    resolve: ^1.14.2
-    rollup: ^2.3.2
-    rollup-plugin-babel: ^4.4.0
-    webpack: ^4.42.1
-    webpack-cli: ^3.3.11
   peerDependencies:
     "@babel/core": ^7.0.0-0
     "@babel/helper-define-polyfill-provider": ^0.1.0
@@ -3474,8 +3502,6 @@ __metadata:
     "@babel/core": ^7.0.0-0
     "@babel/helper-define-polyfill-provider": ^0.1.0
     "@babel/helper-plugin-test-runner": ^7.1.0
-    lodash.debounce: ^4.0.8
-    resolve: ^1.14.2
   peerDependencies:
     "@babel/core": ^7.0.0-0
     "@babel/helper-define-polyfill-provider": ^0.1.0

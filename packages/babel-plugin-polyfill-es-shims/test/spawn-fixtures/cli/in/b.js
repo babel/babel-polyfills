@@ -1,2 +1,0 @@
-globalThis;
-Promise.finally(() => {});

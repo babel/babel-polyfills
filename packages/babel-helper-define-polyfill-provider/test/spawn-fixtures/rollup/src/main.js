@@ -1,0 +1,3 @@
+import "./dep";
+
+b;

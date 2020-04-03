@@ -12,15 +12,9 @@
     "babel-plugin"
   ],
   "devDependencies": {
-    "@babel/cli": "7.8.4",
     "@babel/core": "^7.0.0-0",
     "@babel/helper-define-polyfill-provider": "^0.1.0",
-    "@babel/helper-plugin-test-runner": "^7.1.0",
-    "babel-loader": "^8.1.0",
-    "rollup": "^2.3.2",
-    "rollup-plugin-babel": "^4.4.0",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "@babel/helper-plugin-test-runner": "^7.1.0"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0-0",
