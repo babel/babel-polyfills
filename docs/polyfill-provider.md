@@ -254,6 +254,10 @@ This method is used to log information about the injected polyfills, which will 
 
 It should be called passing the polyfill name as a string whenever a polyfill is injected. When, in `"entry-global"` mode, the polyfill entry point has been found but removed becase no polyfill was needed, this method should be called passing `null` as a parameter to indicate that nothing has been injected.
 
+### `api.assertDependency(name: string, version?: string)`
+
+This method is used to verify that a polyfill package that is going to be used is installed. If it's not installed, it will log a message asking the user to install it.
+
 ### `api.getUtils(path: NodePath): Utils`
 
 Sometimes you might need to inject an import outside of the `entryGlobal`/`usageGlobal`/`usagePure` methods. You could manually create the AST representing it, after checking which source type the current file is using (if `script` or `module`), but it is way more complex than the out-of-the-box support provided by the `utils` object.

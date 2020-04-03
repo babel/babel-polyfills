@@ -59,3 +59,24 @@ See the same options at https://babeljs.io/docs/en/babel-preset-env
 All polyfill providers accept two options: `include` and `exclude`. They are an array of strings to polyfills to be considered as not supported by the targets (`include`) or to be considered as supported (`exclude`).
 
 See the same options at https://babeljs.io/docs/en/babel-preset-env
+
+### `missingDependencies`
+
+This option modifies the dependencies detection logging. If set to `false`, dependencies
+aren't checked at all (this can be useful, for example, when running in a browser).
+
+Other than `false`, it can be an object with the following type:
+
+```js
+type MissingDependencies = {
+  log?: "per-file" | "deferred",
+  // When true, log all the polyfills without checking if they are installed
+  all?: boolean,
+};
+```
+
+- If `log` is set to `"deferred"`, all the missing polyfills are logged together. Usually it happens at the end of the whole build process, but it's not guaranteed.
+- If `log` is set to `"per-file"`, the missing polyfills are logged after compiling each file.
+- If `all` is set to `true`, all polyfills are logged without checking if they are installed.
+
+The default value is `{ log: "deferred", all: false }`.
