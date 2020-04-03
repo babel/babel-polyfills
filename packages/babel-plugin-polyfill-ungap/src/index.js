@@ -58,7 +58,7 @@ export default defineProvider<Options>(function(
       const pkg = (opts.essential && essential) || regular;
 
       if (pkg && shouldInjectPolyfill(name)) {
-        assertDependency(path, `@ungap/${pkg.package}`, pkg.version);
+        assertDependency(`@ungap/${pkg.package}`, pkg.version);
         cb(name, pkg, utils, path);
         debug(name);
       }
@@ -83,7 +83,7 @@ export default defineProvider<Options>(function(
         const { name, regular } = DOMIterable;
 
         if (shouldInjectPolyfill(name) && regular) {
-          assertDependency(path, `@ungap/${regular.package}`, regular.version);
+          assertDependency(`@ungap/${regular.package}`, regular.version);
           getUtils(path).injectGlobalImport(getImport(regular));
           debug(name);
         }

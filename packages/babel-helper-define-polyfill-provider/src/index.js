@@ -147,7 +147,7 @@ function instantiateProvider<Options>(
         polyfillsSupport && name && polyfillsSupport[name],
       );
     },
-    assertDependency(path, name, version = "*") {
+    assertDependency(name, version = "*") {
       if (missingDependencies === false) return;
 
       const dep = version === "*" ? name : `${name}@^${version}`;

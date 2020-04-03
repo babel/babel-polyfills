@@ -5,9 +5,9 @@ module.exports = defineProvider(function({ assertDependency }, options) {
     name: "es-shims",
     polyfills: Object.keys(options.globals),
 
-    usageGlobal(meta, utils, path) {
+    usageGlobal(meta, utils) {
       if (meta.kind === "global" && meta.name in options.globals) {
-        assertDependency(path, options.globals[meta.name]);
+        assertDependency(options.globals[meta.name]);
         utils.injectGlobalImport(options.globals[meta.name]);
       }
     },

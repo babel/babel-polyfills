@@ -56,7 +56,7 @@ export type ProviderApi = {|
   getUtils(path: NodePath): Utils,
   shouldInjectPolyfill(name: string): boolean,
   debug(name: string | null): void,
-  assertDependency(path: Object, name: string, version?: string): void,
+  assertDependency(name: string, version?: string): void,
 |};
 
 export type Utils = {|

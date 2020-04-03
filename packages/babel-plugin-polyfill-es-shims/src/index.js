@@ -40,10 +40,10 @@ export default defineProvider<{||}>(function({
     name: "es-shims",
     polyfills,
 
-    usageGlobal: createDescIterator((desc, utils, path) => {
+    usageGlobal: createDescIterator((desc, utils) => {
       if (desc.global === false) return;
 
-      assertDependency(path, desc.package, desc.version);
+      assertDependency(desc.package, desc.version);
 
       utils.injectGlobalImport(`${desc.package}/auto.js`);
 
@@ -53,7 +53,7 @@ export default defineProvider<{||}>(function({
     usagePure: createDescIterator((desc, utils, path) => {
       if (desc.pure === false) return;
 
-      assertDependency(path, desc.package, desc.version);
+      assertDependency(desc.package, desc.version);
 
       const id = utils.injectDefaultImport(
         `${desc.package}/implementation.js`,
