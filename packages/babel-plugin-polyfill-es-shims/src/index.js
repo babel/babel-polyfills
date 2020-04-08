@@ -55,10 +55,7 @@ export default defineProvider<{||}>(function({
 
       assertDependency(desc.package, desc.version);
 
-      const id = utils.injectDefaultImport(
-        `${desc.package}/implementation.js`,
-        desc.name,
-      );
+      const id = utils.injectDefaultImport(desc.package, desc.name);
       path.replaceWith(id);
 
       debug(desc.name);
