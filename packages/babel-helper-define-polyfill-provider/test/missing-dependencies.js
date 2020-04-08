@@ -7,6 +7,7 @@ function execP(cmd, opts) {
       resolve({
         stdout: String(stdout).trim(),
         stderr: String(stderr || error).trim(),
+        exitCode: error ? error.code : 0,
       });
     });
   });
@@ -14,9 +15,11 @@ function execP(cmd, opts) {
 
 describe("missingDependencies", () => {
   it("logs with @babel/cli", async () => {
-    const { stdout, stderr } = await execP("yarn babel in -d out", {
+    const { stdout, stderr, exitCode } = await execP("yarn babel in -d out", {
       cwd: __dirname + "/spawn-fixtures/cli",
     });
+
+    expect(exitCode).not.toBe(0);
 
     expect(stdout).toMatchInlineSnapshot(
       `"Successfully compiled 2 files with Babel."`,
@@ -31,7 +34,9 @@ describe("missingDependencies", () => {
 
   it("logs with webpack", async () => {
     const cwd = __dirname + "/spawn-fixtures/webpack";
-    const { stdout, stderr } = await execP("yarn webpack", { cwd });
+    const { stdout, stderr, exitCode } = await execP("yarn webpack", { cwd });
+
+    expect(exitCode).not.toBe(0);
 
     const out = stdout
       // Remove ANSI codes
@@ -68,9 +73,11 @@ describe("missingDependencies", () => {
   });
 
   it("logs with rollup", async () => {
-    const { stdout, stderr } = await execP("yarn rollup -c", {
+    const { stdout, stderr, exitCode } = await execP("yarn rollup -c", {
       cwd: __dirname + "/spawn-fixtures/rollup",
     });
+
+    expect(exitCode).not.toBe(0);
 
     expect(stdout).toBe("");
 
