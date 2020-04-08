@@ -1,24 +1,30 @@
+var _sliceInstanceProperty = require("core-js-pure/stable/instance/slice.js");
+
+var _Array$from = require("core-js-pure/stable/array/from.js");
+
+var _Symbol = require("core-js-pure/stable/symbol.js");
+
+var _getIteratorMethod = require("core-js-pure/stable/get-iterator-method.js");
+
+var _Array$isArray = require("core-js-pure/stable/array/is-array.js");
+
 var _getIterator = require("core-js-pure/stable/get-iterator.js");
 
-var _iteratorNormalCompletion = true;
-var _didIteratorError = false;
-var _iteratorError = undefined;
+function _createForOfIteratorHelper(o) { if (typeof _Symbol === "undefined" || _getIteratorMethod(o) == null) { if (_Array$isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function () {}; return { s: F, n: function () { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function (e) { throw e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function () { it = _getIterator(o); }, n: function () { var step = it.next(); normalCompletion = step.done; return step; }, e: function (e) { didErr = true; err = e; }, f: function () { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { var _context; if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = _sliceInstanceProperty(_context = Object.prototype.toString.call(o)).call(_context, 8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return _Array$from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+
+var _iterator = _createForOfIteratorHelper(arr),
+    _step;
 
 try {
-  for (var _iterator = _getIterator(arr), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+  for (_iterator.s(); !(_step = _iterator.n()).done;) {
     var i = _step.value;
   }
 } catch (err) {
-  _didIteratorError = true;
-  _iteratorError = err;
+  _iterator.e(err);
 } finally {
-  try {
-    if (!_iteratorNormalCompletion && _iterator.return != null) {
-      _iterator.return();
-    }
-  } finally {
-    if (_didIteratorError) {
-      throw _iteratorError;
-    }
-  }
+  _iterator.f();
 }
