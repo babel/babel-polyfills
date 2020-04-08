@@ -49,8 +49,10 @@ defineInstance("String", "padEnd", "1.1.1");
 defineInstance("String", "padStart", "3.1.0");
 defineInstance("String", "replaceAll", "1.0.3");
 defineInstance("String", "trim", "1.2.1");
+defineInstance("String", "trimEnd", "1.0.0");
 defineInstance("String", "trimLeft", "2.1.1");
 defineInstance("String", "trimRight", "2.1.1");
+defineInstance("String", "trimStart", "1.0.0");
 
 defineInstance("Symbol", "description", "1.0.2");
 

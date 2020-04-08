@@ -236,6 +236,18 @@
     "safari": "12.1",
     "samsung": "7.0"
   },
+  "String.prototype.trimEnd": {
+    "chrome": "66",
+    "edge": "74",
+    "electron": "3.0",
+    "firefox": "61",
+    "ios": "12.2",
+    "node": "10.0",
+    "opera": "53",
+    "opera_mobile": "47",
+    "safari": "12.1",
+    "samsung": "9.0"
+  },
   "String.prototype.trimLeft": {
     "chrome": "66",
     "edge": "74",
@@ -249,6 +261,18 @@
     "samsung": "9.0"
   },
   "String.prototype.trimRight": {
+    "chrome": "66",
+    "edge": "74",
+    "electron": "3.0",
+    "firefox": "61",
+    "ios": "12.0",
+    "node": "10.0",
+    "opera": "53",
+    "opera_mobile": "47",
+    "safari": "12.0",
+    "samsung": "9.0"
+  },
+  "String.prototype.trimStart": {
     "chrome": "66",
     "edge": "74",
     "electron": "3.0",
