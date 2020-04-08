@@ -1,5 +1,7 @@
 # babel-plugin-polyfill-es-shims
 
+> :warning: **This package hasn't been published yet.**
+
 ## Install
 
 Using npm:
@@ -13,6 +15,18 @@ or using yarn:
 ```sh
 yarn add babel-plugin-polyfill-es-shims --dev
 ```
+
+## Usage
+
+Add this plugin to your Babel configuration:
+
+```json
+{
+  "plugins": [["polyfill-es-shims", { "method": "usage-pure" }]]
+}
+```
+
+This package supports the `usage-pure` and `usage-global` methods.
 
 ## Supported polyfills
 
