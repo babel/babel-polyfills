@@ -1,5 +1,5 @@
 import _AggregateError from "es-aggregate-error";
-import _globalThis from "globalThis";
+import _globalThis from "globalthis";
 _AggregateError;
 _globalThis;
 _AggregateError;

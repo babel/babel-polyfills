@@ -1,5 +1,5 @@
 import "array.from/auto.js";
-import "globalThis/auto.js";
+import "globalthis/auto.js";
 import "es-aggregate-error/auto.js";
 Array.from; // static method
 

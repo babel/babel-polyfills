@@ -1,5 +1,5 @@
 "use strict";
 
-require("globalThis/auto.js");
+require("globalthis/auto.js");
 
 globalThis;

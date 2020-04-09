@@ -24,7 +24,7 @@ export const Globals = {};
 export const StaticProperties = {};
 export const InstanceProperties = {};
 
-defineGlobal("globalThis", "1.0.0", "globalThis");
+defineGlobal("globalThis", "1.0.0");
 
 defineGlobal("AggregateError", "1.0.2", "es-aggregate-error");
 
