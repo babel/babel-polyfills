@@ -1,5 +1,3 @@
-var _Object;
-
 import _ArrayFrom from "array.from";
 import _ArrayOf from "array.of";
 import _NumberIsNaN from "is-nan";
@@ -7,7 +5,6 @@ import _ObjectAssign from "object.assign";
 import _ObjectEntries from "object.entries";
 import _ObjectFromEntries from "object.fromentries";
 import _ObjectGetOwnPropertyDescriptors from "object.getownpropertydescriptors";
-import _ArrayPrototypeKeys from "array.prototype.keys";
 import _ObjectValues from "object.values";
 import _ReflectOwnKeys from "reflect.ownkeys";
 _ArrayFrom;
@@ -71,7 +68,7 @@ Object.isExtensible;
 Object.isFrozen;
 Object.isSealed;
 Object.is;
-_Object = Object, Array.isArray(_Object) ? _ArrayPrototypeKeys.getPolyfill() : _Object.keys;
+Object.keys;
 Object.preventExtensions;
 Object.seal;
 Object.setPrototypeOf;

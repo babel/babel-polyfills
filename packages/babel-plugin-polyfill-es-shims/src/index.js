@@ -43,7 +43,10 @@ export default defineProvider<{||}>(function({
       }
 
       for (const desc of resolved.desc) {
-        if (shouldInjectPolyfill(desc.name)) cb(desc, utils, path);
+        // $FlowIgnore
+        if (!desc.exclude?.(meta) && shouldInjectPolyfill(desc.name)) {
+          cb(desc, utils, path);
+        }
       }
     };
   }
@@ -121,7 +124,14 @@ export default defineProvider<{||}>(function({
 
           for (const desc of resolved.desc) {
             const { thisCheck } = desc;
-            if (!thisCheck || !shouldInjectPolyfill(desc.name)) continue;
+            if (
+              !thisCheck ||
+              // $FlowIgnore
+              desc.exclude?.(meta) ||
+              !shouldInjectPolyfill(desc.name)
+            ) {
+              continue;
+            }
 
             if (!tmp) {
               tmp = path.scope.generateUidIdentifierBasedOnNode(object);

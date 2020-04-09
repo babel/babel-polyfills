@@ -1,4 +1,4 @@
 Some polyfills have been added but are not present in your dependencies.
 Please run one of the following commands:
-	npm install --save array.prototype.keys@^1.0.0 object.assign@^4.1.0
-	yarn add array.prototype.keys@^1.0.0 object.assign@^4.1.0
+	npm install --save object.assign@^4.1.0
+	yarn add object.assign@^4.1.0

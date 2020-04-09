@@ -1,7 +1,5 @@
 "use strict";
 
-var _ArrayPrototypeKeys = require("array.prototype.keys");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -18,7 +16,7 @@ var _fuz = require("fuz");
 
 var _mod = require("mod");
 
-(_Object = Object, Array.isArray(_Object) ? _ArrayPrototypeKeys : Function.call.bind(_Object.keys))(_Object, _mod).forEach(function (key) {
+Object.keys(_mod).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
   Object.defineProperty(exports, key, {
@@ -29,7 +27,7 @@ var _mod = require("mod");
   });
 });
 
-var _foo, _Object;
+var _foo;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
