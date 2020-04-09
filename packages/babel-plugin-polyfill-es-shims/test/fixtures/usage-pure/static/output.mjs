@@ -4,7 +4,6 @@ import _ObjectGetOwnPropertyDescriptors from "object.getownpropertydescriptors";
 import _PromiseAllSettled from "promise.allsettled";
 _globalThis;
 _AggregateError;
-foo.includes(2); // Not supported yet
 
 _ObjectGetOwnPropertyDescriptors(foo);
 

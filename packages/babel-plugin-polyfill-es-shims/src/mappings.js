@@ -1,5 +1,9 @@
 // @flow
 
+import { template } from "@babel/core";
+
+const expr = template.expression.ast;
+
 // $FlowIgnore
 const has = Function.call.bind(Object.hasOwnProperty);
 
@@ -9,6 +13,7 @@ export type Descriptor = {
   package: string,
   pure?: false,
   global?: false,
+  thisCheck?: (thisObj: Object) => Object,
 };
 
 export const Globals = {};
@@ -19,23 +24,25 @@ defineGlobal("globalThis", "1.0.0", "globalThis");
 
 defineGlobal("AggregateError", "1.0.2", "es-aggregate-error");
 
+const arrayCheck = thisObj => expr`Array.isArray(${thisObj})`;
+
 defineStatic("Array", "from", "1.1.0");
 defineStatic("Array", "of", "1.0.0");
-defineInstance("Array", "entries", "1.0.0");
-defineInstance("Array", "every", "1.1.0");
-defineInstance("Array", "find", "2.1.1");
-defineInstance("Array", "findIndex", "2.1.0");
-defineInstance("Array", "flat", "1.2.3");
-defineInstance("Array", "flatMap", "1.2.3");
-defineInstance("Array", "includes", "3.1.1", "array-includes");
-defineInstance("Array", "indexOf", "1.0.0");
-defineInstance("Array", "keys", "1.0.0");
-defineInstance("Array", "lastIndexOf", "1.0.0");
-defineInstance("Array", "map", "1.0.2");
-defineInstance("Array", "reduce", "1.0.1");
-defineInstance("Array", "reduceRight", "1.0.1");
-defineInstance("Array", "some", "1.1.1");
-defineInstance("Array", "values", "1.0.0");
+defineInstance("Array", "entries", "1.0.0", arrayCheck);
+defineInstance("Array", "every", "1.1.0", arrayCheck);
+defineInstance("Array", "find", "2.1.1", arrayCheck);
+defineInstance("Array", "findIndex", "2.1.0", arrayCheck);
+defineInstance("Array", "flat", "1.2.3", arrayCheck);
+defineInstance("Array", "flatMap", "1.2.3", arrayCheck);
+defineInstance("Array", "includes", "3.1.1", arrayCheck, "array-includes");
+defineInstance("Array", "indexOf", "1.0.0", arrayCheck);
+defineInstance("Array", "keys", "1.0.0", arrayCheck);
+defineInstance("Array", "lastIndexOf", "1.0.0", arrayCheck);
+defineInstance("Array", "map", "1.0.2", arrayCheck);
+defineInstance("Array", "reduce", "1.0.1", arrayCheck);
+defineInstance("Array", "reduceRight", "1.0.1", arrayCheck);
+defineInstance("Array", "some", "1.1.1", arrayCheck);
+defineInstance("Array", "values", "1.0.0", arrayCheck);
 
 defineInstance("Function", "name", "1.1.2");
 
@@ -84,11 +91,12 @@ function defineStatic(object, property, version, pkg) {
   ];
 }
 
-function defineInstance(object, property, version, pkg) {
+function defineInstance(object, property, version, thisCheck, pkg) {
   if (!has(InstanceProperties, property)) InstanceProperties[property] = [];
 
   InstanceProperties[property].push({
     ...createDescriptor(`${object}.prototype.${property}`, version, pkg),
-    pure: false,
+    thisCheck,
+    pure: true,
   });
 }
