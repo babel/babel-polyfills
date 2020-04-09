@@ -50,6 +50,7 @@ This plugin supports the following `es-shims` polyfills.
 | :-------------------------- | :------------------------------------------------------------------------------------ |
 | `Array.from`                | [`array.from`](https://github.com/mathiasbynens/Array.from)                           |
 | `Array.of`                  | [`array.of`](https://github.com/mathiasbynens/Array.of)                               |
+| `Array.prototype.entries`   | [`array.prototype.entries`](https://github.com/es-shims/Array.prototype.entries)      |
 | `Array.prototype.find`      | [`array.prototype.find`](https://github.com/paulmillr/Array.prototype.find)           |
 | `Array.prototype.findIndex` | [`array.prototype.findindex`](https://github.com/paulmillr/Array.prototype.findIndex) |
 | `Array.prototype.keys`      | [`array.prototype.keys`](https://github.com/es-shims/Array.prototype.keys)            |
