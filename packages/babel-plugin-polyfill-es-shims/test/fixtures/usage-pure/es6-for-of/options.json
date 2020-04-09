@@ -1,0 +1,16 @@
+{
+  "validateLogs": true,
+  "plugins": [
+    [
+      "@@/polyfill-es-shims",
+      {
+        "method": "usage-pure",
+        "missingDependencies": {
+          "log": "per-file",
+          "all": true
+        }
+      }
+    ],
+    "@babel/plugin-transform-for-of"
+  ]
+}

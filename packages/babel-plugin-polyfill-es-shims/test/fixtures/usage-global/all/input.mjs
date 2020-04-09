@@ -1,9 +1,10 @@
-globalThis;
+Array.from; // static method
+globalThis; // built-in
+new AggregateError(); // new builtin
+_arr[Symbol.iterator](); // Symbol.iterator
 
-globalThis.AggregateError;
-
-foo.includes(2);
-
-Object.getOwnPropertyDescriptors(foo);
-
-/foo/g.flags;
+// no import
+Array.asdf;
+Array2.from;
+globalThis2;
+new AggregateError2();

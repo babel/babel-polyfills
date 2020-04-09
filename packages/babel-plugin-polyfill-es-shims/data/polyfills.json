@@ -34,6 +34,17 @@
     "opera": "32",
     "electron": "0.35"
   },
+  "Array.prototype.entries": {
+    "chrome": "40",
+    "edge": "12",
+    "firefox": "35",
+    "safari": "9",
+    "node": "4",
+    "ios": "9",
+    "samsung": "3.4",
+    "opera": "27",
+    "electron": "0.21"
+  },
   "Array.prototype.every": {
     "chrome": "48",
     "edge": "15",

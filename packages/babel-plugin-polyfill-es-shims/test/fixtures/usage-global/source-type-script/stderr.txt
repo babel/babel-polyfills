@@ -1,0 +1,4 @@
+Some polyfills have been added but are not present in your dependencies.
+Please run one of the following commands:
+	npm install --save array-includes@^3.1.1 es-aggregate-error@^1.0.2
+	yarn add array-includes@^3.1.1 es-aggregate-error@^1.0.2

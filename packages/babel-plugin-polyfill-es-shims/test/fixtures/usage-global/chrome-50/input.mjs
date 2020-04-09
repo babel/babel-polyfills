@@ -1,2 +1,0 @@
-Object.values;
-Object.getOwnPropertyDescriptors;

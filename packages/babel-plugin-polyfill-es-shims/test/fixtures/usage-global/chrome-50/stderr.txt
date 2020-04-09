@@ -1,4 +1,0 @@
-Some polyfills have been added but are not present in your dependencies.
-Please run one of the following commands:
-	npm install --save object.values@^1.1.1
-	yarn add object.values@^1.1.1

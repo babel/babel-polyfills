@@ -76,6 +76,9 @@ export default defineProvider<{||}>(function({
         path.replaceWith(injectDefault(desc, utils));
       },
       (meta, resolved, utils, path) => {
+        if (meta.kind !== "property") return;
+        if (path.parentPath.isAssignmentExpression({ left: path.node })) return;
+
         if (seen.has(path.node)) return;
         seen.add(path.node);
 
@@ -149,20 +152,6 @@ export default defineProvider<{||}>(function({
             parent.alternate = expr`Function.call.bind(${parent.alternate})`;
             path.parentPath.unshiftContainer("arguments", tmp);
           }
-
-          console.log(
-            JSON.stringify(
-              {
-                meta,
-                resolved,
-                parent: !!parent,
-                path: path.toString(),
-                replacement: path.toString.call({ node: replacement }),
-              },
-              null,
-              2,
-            ),
-          );
 
           path.replaceWith(replacement);
         }

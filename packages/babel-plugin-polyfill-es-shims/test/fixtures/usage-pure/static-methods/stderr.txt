@@ -1,0 +1,4 @@
+Some polyfills have been added but are not present in your dependencies.
+Please run one of the following commands:
+	npm install --save array.from@^1.1.0 array.of@^1.0.0 array.prototype.keys@^1.0.0 is-nan@^1.2.1 object.assign@^4.1.0 object.entries@^1.1.1 object.fromentries@^2.0.2 object.getownpropertydescriptors@^2.1.0 object.values@^1.1.1 reflect.ownkeys@^1.0.1
+	yarn add array.from@^1.1.0 array.of@^1.0.0 array.prototype.keys@^1.0.0 is-nan@^1.2.1 object.assign@^4.1.0 object.entries@^1.1.1 object.fromentries@^2.0.2 object.getownpropertydescriptors@^2.1.0 object.values@^1.1.1 reflect.ownkeys@^1.0.1

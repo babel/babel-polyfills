@@ -1,0 +1,4 @@
+Some polyfills have been added but are not present in your dependencies.
+Please run one of the following commands:
+	npm install --save array.from@^1.1.0 function.prototype.name@^1.1.2
+	yarn add array.from@^1.1.0 function.prototype.name@^1.1.2

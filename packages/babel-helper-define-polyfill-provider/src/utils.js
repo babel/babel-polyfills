@@ -79,6 +79,8 @@ export function resolveSource(obj: NodePath) {
     return { id: getType(value), placement: "prototype" };
   } else if (obj.isRegExpLiteral()) {
     return { id: "RegExp", placement: "prototype" };
+  } else if (obj.isFunction()) {
+    return { id: "Function", placement: "prototype" };
   }
 
   return { id: null, placement: null };

@@ -1,0 +1,12 @@
+import "array.prototype.values/auto.js";
+import "array-includes/auto.js";
+import "regexp.prototype.flags/auto.js";
+import "array.prototype.indexof/auto.js";
+import "string.prototype.trim/auto.js";
+var a = [];
+a.values();
+''.replace();
+''.includes();
+/./gi.flags;
+''.indexOf();
+a.trim;
