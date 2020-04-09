@@ -56,7 +56,7 @@ This plugin supports the following `es-shims` polyfills.
 | `Array.prototype.values`    | [`array.prototype.values`](https://github.com/es-shims/Array.prototype.values)        |
 | `Function.prototype.name`   | [`function.prototype.name`](https://github.com/es-shims/Function.prototype.name)      |
 | `Number.isNaN`              | [`is-nan`](https://github.com/es-shims/is-nan)                                        |
-| `Object.asskgin`            | [`object.assign`](https://github.com/ljharb/object.assign)                            |
+| `Object.assign`             | [`object.assign`](https://github.com/ljharb/object.assign)                            |
 | `Reflect.ownKeys`           | [`reflect.ownkeys`](https://github.com/es-shims/Reflect.ownKeys)                      |
 | `RegExp.prototype.flags`    | [`regexp.prototype.flags`](https://github.com/es-shims/RegExp.prototype.flags)        |
 
