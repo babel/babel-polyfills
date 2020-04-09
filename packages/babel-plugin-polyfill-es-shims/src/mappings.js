@@ -1,6 +1,6 @@
 // @flow
 
-import { template } from "@babel/core";
+import { template, types as t } from "@babel/core";
 
 const expr = template.expression.ast;
 
@@ -14,6 +14,7 @@ export type Descriptor = {
   pure?: false,
   global?: false,
   thisCheck?: (thisObj: Object) => Object,
+  getter?: true,
 };
 
 export const Globals = {};
@@ -25,6 +26,12 @@ defineGlobal("globalThis", "1.0.0", "globalThis");
 defineGlobal("AggregateError", "1.0.2", "es-aggregate-error");
 
 const arrayCheck = thisObj => expr`Array.isArray(${thisObj})`;
+const typeofCheck = type => thisObj => expr`typeof ${thisObj} === "${type}"`;
+const instanceofCheck = Class => thisObj =>
+  expr`${thisObj} instanceof ${t.identifier(Class)}`;
+const stringCheck = typeofCheck("string");
+
+const getter = { getter: true };
 
 defineStatic("Array", "from", "1.1.0");
 defineStatic("Array", "of", "1.0.0");
@@ -34,7 +41,9 @@ defineInstance("Array", "find", "2.1.1", arrayCheck);
 defineInstance("Array", "findIndex", "2.1.0", arrayCheck);
 defineInstance("Array", "flat", "1.2.3", arrayCheck);
 defineInstance("Array", "flatMap", "1.2.3", arrayCheck);
-defineInstance("Array", "includes", "3.1.1", arrayCheck, "array-includes");
+defineInstance("Array", "includes", "3.1.1", arrayCheck, {
+  pkg: "array-includes",
+});
 defineInstance("Array", "indexOf", "1.0.0", arrayCheck);
 defineInstance("Array", "keys", "1.0.0", arrayCheck);
 defineInstance("Array", "lastIndexOf", "1.0.0", arrayCheck);
@@ -44,7 +53,7 @@ defineInstance("Array", "reduceRight", "1.0.1", arrayCheck);
 defineInstance("Array", "some", "1.1.1", arrayCheck);
 defineInstance("Array", "values", "1.0.0", arrayCheck);
 
-defineInstance("Function", "name", "1.1.2");
+defineInstance("Function", "name", "1.1.2", typeofCheck("function"), getter);
 
 defineStatic("Number", "isNaN", "1.2.1", "is-nan");
 
@@ -57,23 +66,29 @@ defineStatic("Object", "values", "1.1.1");
 defineStatic("Promise", "allSettled", "1.0.2");
 defineStatic("Promise", "any", "2.0.1");
 defineStatic("Promise", "try", "1.0.0");
-defineInstance("Promise", "finally", "1.2.1");
+defineInstance("Promise", "finally", "1.2.1", instanceofCheck("Promise"));
 
 defineStatic("Reflect", "ownKeys", "1.0.1");
 
-defineInstance("RegExp", "flags", "1.3.0");
+defineInstance("RegExp", "flags", "1.3.0", instanceofCheck("RegExp"), getter);
 
-defineInstance("String", "matchAll", "4.0.2");
-defineInstance("String", "padEnd", "1.1.1");
-defineInstance("String", "padStart", "3.1.0");
-defineInstance("String", "replaceAll", "1.0.3");
-defineInstance("String", "trim", "1.2.1");
-defineInstance("String", "trimEnd", "1.0.0");
-defineInstance("String", "trimLeft", "2.1.1");
-defineInstance("String", "trimRight", "2.1.1");
-defineInstance("String", "trimStart", "1.0.0");
+defineInstance("String", "matchAll", "4.0.2", stringCheck);
+defineInstance("String", "padEnd", "1.1.1", stringCheck);
+defineInstance("String", "padStart", "3.1.0", stringCheck);
+defineInstance("String", "replaceAll", "1.0.3", stringCheck);
+defineInstance("String", "trim", "1.2.1", stringCheck);
+defineInstance("String", "trimEnd", "1.0.0", stringCheck);
+defineInstance("String", "trimLeft", "2.1.1", stringCheck);
+defineInstance("String", "trimRight", "2.1.1", stringCheck);
+defineInstance("String", "trimStart", "1.0.0", stringCheck);
 
-defineInstance("Symbol", "description", "1.0.2");
+defineInstance(
+  "Symbol",
+  "description",
+  "1.0.2",
+  instanceofCheck("Symbol"),
+  getter,
+);
 
 function createDescriptor(name, version, pkg = name.toLowerCase()) {
   return { name, version, package: pkg };
@@ -91,12 +106,18 @@ function defineStatic(object, property, version, pkg) {
   ];
 }
 
-function defineInstance(object, property, version, thisCheck, pkg) {
+function defineInstance(
+  object,
+  property,
+  version,
+  thisCheck,
+  { getter = false, pkg }: { getter?: boolean, pkg?: string } = {},
+) {
   if (!has(InstanceProperties, property)) InstanceProperties[property] = [];
 
   InstanceProperties[property].push({
     ...createDescriptor(`${object}.prototype.${property}`, version, pkg),
     thisCheck,
-    pure: true,
+    getter,
   });
 }

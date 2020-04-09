@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "kind": "property",
+    "object": "foo",
+    "key": "some",
+    "placement": "static"
+  },
+  "resolved": {
+    "kind": "instance",
+    "desc": [
+      {
+        "name": "Array.prototype.some",
+        "version": "1.1.1",
+        "package": "array.prototype.some",
+        "getter": false
+      }
+    ],
+    "name": "some"
+  },
+  "parent": true,
+  "path": "_foo.some",
+  "replacement": "_foo = foo, Array.isArray(_foo) ? _ArrayPrototypeSome : Function.call.bind(_foo.some)"
+}
+{
+  "meta": {
+    "kind": "property",
+    "object": "foo",
+    "key": "some",
+    "placement": "static"
+  },
+  "resolved": {
+    "kind": "instance",
+    "desc": [
+      {
+        "name": "Array.prototype.some",
+        "version": "1.1.1",
+        "package": "array.prototype.some",
+        "getter": false
+      }
+    ],
+    "name": "some"
+  },
+  "parent": true,
+  "path": "_foo2.some",
+  "replacement": "_foo2 = foo, Array.isArray(_foo2) ? _ArrayPrototypeSome.getPolyfill() : _foo2.some"
+}
+{
+  "meta": {
+    "kind": "property",
+    "object": "foo",
+    "key": "some",
+    "placement": "static"
+  },
+  "resolved": {
+    "kind": "instance",
+    "desc": [
+      {
+        "name": "Array.prototype.some",
+        "version": "1.1.1",
+        "package": "array.prototype.some",
+        "getter": false
+      }
+    ],
+    "name": "some"
+  },
+  "parent": true,
+  "path": "_foo3.some",
+  "replacement": "_foo3 = foo, Array.isArray(_foo3) ? _ArrayPrototypeSome.getPolyfill() : _foo3.some"
+}

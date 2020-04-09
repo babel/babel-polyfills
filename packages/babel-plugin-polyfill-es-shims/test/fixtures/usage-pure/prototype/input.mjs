@@ -8,6 +8,10 @@ Array.prototype.some.call(arguments, () => true);
 
 Array.prototype.some.bind(arguments);
 
+[].some;
+
 foo.some(2);
 
 foo.some.call(bar, () => false);
+
+foo.some;

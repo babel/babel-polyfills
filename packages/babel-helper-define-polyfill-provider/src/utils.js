@@ -77,6 +77,8 @@ export function resolveSource(obj: NodePath) {
   const { value } = obj.evaluate();
   if (value !== undefined) {
     return { id: getType(value), placement: "prototype" };
+  } else if (obj.isRegExpLiteral()) {
+    return { id: "RegExp", placement: "prototype" };
   }
 
   return { id: null, placement: null };

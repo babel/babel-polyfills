@@ -80,6 +80,7 @@ export default defineProvider<{||}>(function({
         seen.add(path.node);
 
         const isCall = path.parentPath.isCallExpression({ callee: path.node });
+        const isGetter = resolved.desc[0].getter;
 
         if (
           // This is the actual method for sure.
@@ -92,7 +93,9 @@ export default defineProvider<{||}>(function({
 
           const id = injectDefault(desc, utils);
 
-          if (isCall) {
+          if (isGetter) {
+            path.replaceWith(expr`${id}(${path.node.object})`);
+          } else if (isCall) {
             path.parentPath.unshiftContainer("arguments", path.node.object);
             path.replaceWith(id);
           } else if (
@@ -127,7 +130,11 @@ export default defineProvider<{||}>(function({
 
             replacement = t.conditionalExpression(
               thisCheck(tmp),
-              isCall ? id : expr`${id}.getPolyfill()`,
+              isGetter
+                ? expr`${id}(${tmp})`
+                : isCall
+                ? id
+                : expr`${id}.getPolyfill()`,
               replacement,
             );
 
@@ -138,10 +145,24 @@ export default defineProvider<{||}>(function({
 
           replacement = expr`(${tmp} = ${object}, ${replacement})`;
 
-          if (isCall) {
+          if (!isGetter && isCall) {
             parent.alternate = expr`Function.call.bind(${parent.alternate})`;
             path.parentPath.unshiftContainer("arguments", tmp);
           }
+
+          console.log(
+            JSON.stringify(
+              {
+                meta,
+                resolved,
+                parent: !!parent,
+                path: path.toString(),
+                replacement: path.toString.call({ node: replacement }),
+              },
+              null,
+              2,
+            ),
+          );
 
           path.replaceWith(replacement);
         }
