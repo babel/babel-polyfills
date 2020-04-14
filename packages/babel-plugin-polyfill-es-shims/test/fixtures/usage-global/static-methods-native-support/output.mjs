@@ -1,4 +1,3 @@
-import "object.assign/auto.js";
 Object.values(foo);
 const {
   assign

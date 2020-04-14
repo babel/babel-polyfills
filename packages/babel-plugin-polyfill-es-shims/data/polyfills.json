@@ -245,7 +245,29 @@
     "safari": "9.0",
     "samsung": "1.5"
   },
-  "Object.assign": {},
+  "Object.assign": {
+    "chrome": "49",
+    "edge": "13",
+    "firefox": "36",
+    "safari": "10",
+    "node": "6",
+    "ios": "10",
+    "samsung": "5",
+    "opera": "36",
+    "electron": "1"
+  },
+  "Object.is": {
+    "chrome": "19",
+    "edge": "12",
+    "firefox": "22",
+    "safari": "9",
+    "node": "0.12",
+    "android": "4.1",
+    "ios": "9",
+    "samsung": "1.5",
+    "opera": "15",
+    "electron": "0.2"
+  },
   "Object.entries": {
     "chrome": "54",
     "edge": "14",
