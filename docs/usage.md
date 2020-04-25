@@ -60,6 +60,8 @@ All polyfill providers accept two options: `include` and `exclude`. They are an 
 
 See the same options at https://babeljs.io/docs/en/babel-preset-env
 
+## Advanced options
+
 ### `missingDependencies`
 
 This option modifies the dependencies detection logging. If set to `false`, dependencies

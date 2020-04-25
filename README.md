@@ -3,7 +3,9 @@
 A set of Babel plugins that enable injecting different polyfills with different strategies in your compiled code.
 Additionally, this reporitory contains a package that helps creating providers for any other polyfill.
 
-> ⚠️ These packages are highly experimental and not published yet.
+> ⚠️ These packages are highly experimental and not published yet. You can use GitHub's "Watch for Releases only" feature to be notified when the first version is published.
+
+> ℹ️ This repository implements what was initially proposed at [babel/babel#10008](https://github.com/babel/babel/issues/10008).
 
 ## How does it work?
 
@@ -18,29 +20,112 @@ Note that polyfill plugins don't automatically add the necessary package(s) to y
   1. Babel's detection logic isn't smart enough to understand which functions you are using;
   1. you want to have a single bundled file containing all the polyfill, without needing to regenerate it when your code changes.
 
-  <!--prettier-ignore -->
-  | Input code | Output code |
-  | :--------: | :---------: |
-  | <pre lang="js">import "core-js";</pre> | <pre lang="js">import "core-js/modules/es7.array.flat-map.js";<br/>import "core-js/modules/es6.array.sort.js";<br/>import "core-js/modules/es7.promise.finally.js";<br/>import "core-js/modules/es7.symbol.async-iterator.js";<br/>import "core-js/modules/es7.string.trim-left.js";<br/>import "core-js/modules/es7.string.trim-right.js";<br/>import "core-js/modules/web.timers.js";<br/>import "core-js/modules/web.immediate.js";<br/>import "core-js/modules/web.dom.iterable.js";</pre> |
+    <!-- prettier-ignore-start -->
+    <table>
+    <thead><tr>
+    <th align="center">Input code</th>
+    <th align="center">Output code</th>
+    </tr></thead>
+    <tr>
+    <td>
+          
+    ```js
+    import "core-js";
+    ```
+    
+    </td>
+    <td>
+    
+    ```js
+    import "core-js/modules/es7.array.flat-map.js";
+    import "core-js/modules/es6.array.sort.js";
+    import "core-js/modules/es7.promise.finally.js";
+    import "core-js/modules/es7.symbol.async-iterator.js";
+    import "core-js/modules/es7.string.trim-left.js";
+    import "core-js/modules/es7.string.trim-right.js";
+    import "core-js/modules/web.timers.js";
+    import "core-js/modules/web.immediate.js";
+    import "core-js/modules/web.dom.iterable.js";
+    ```
+    
+    </td>
+    </tr>
+    </table>
+    <!-- prettier-ignore-end -->
 
 - The `usage-global` method injects imports to polyfills attatched to the global scope, but only for unsupported features which are used in your code. You might want to use this method if:
 
   1. you need to keep your code size as small as possible, and only including what is effectively used;
   1. your polyfill doesn't support a single entry point, but each of its features must be loaded separately.
 
-  <!--prettier-ignore -->
-  | Input code | Output code |
-  | :--------: | :---------: |
-  | <pre lang="js">foo.flatMap(x => [x, x+1]);<br/>bar.trimLeft();<bt/>arr.includes(2);</pre> | <pre lang="js">import "core-js/modules/es.array.flat-map.js";<br/>import "core-js/modules/es.array.unscopables.flat-map.js";<br/>import "core-js/modules/es.string.trim-start.js";<br/><br/>foo.flatMap(x => [x, x + 1]);<br/>bar.trimLeft();<br/>arr.includes(2);</pre> |
+    <!-- prettier-ignore-start -->
+    <table>
+    <thead><tr>
+    <th align="center">Input code</th>
+    <th align="center">Output code</th>
+    </tr></thead>
+    <tr>
+    <td>
+          
+    ```js
+    foo.flatMap(x => [x, x+1]);
+    bar.trimLeft();
+    arr.includes(2);
+    ```
+    
+    </td>
+    <td>
+    
+    ```js
+    import "core-js/modules/es.array.flat-map.js";
+    import "core-js/modules/es.array.unscopables.flat-map.js";
+    import "core-js/modules/es.string.trim-start.js";
+    
+    foo.flatMap(x => [x, x + 1]);
+    bar.trimLeft();
+    arr.includes(2);
+    ```
+    
+    </td>
+    </tr>
+    </table>
+    <!-- prettier-ignore-end -->
 
 - The `usage-pure` method injects imports to polyfills attatched ot the global scope, only for unsupported features which are used in your code, without attatching the polyfills to the global scope but importing them as normal functions. You might want to use this method if:
 
   1. you are a library author, and don't want to "pollute" the global scope with the polyfills you are loading.
 
-  <!--prettier-ignore -->
-  | Input code | Output code |
-  | :--------: | :---------: |
-  | <pre lang="js">foo.flatMap(x => [x, x+1]);<br/>bar.trimLeft();<bt/>arr.includes(2);</pre> | <pre lang="js">import _flatMapInstanceProperty from "core-js-pure/stable/instance/flat-map.js";<br/>import _trimLeftInstanceProperty from "core-js-pure/stable/instance/trim-left.js";<br/><br/>_flatMapInstanceProperty(foo).call(foo, x => [x, x + 1]);<br/>_trimLeftInstanceProperty(bar).call(bar);<br/>arr.includes(2);</pre> |
+    <!-- prettier-ignore-start -->
+    <table>
+    <thead><tr>
+    <th align="center">Input code</th>
+    <th align="center">Output code</th>
+    </tr></thead>
+    <tr>
+    <td>
+          
+    ```js
+    foo.flatMap(x => [x, x+1]);
+    bar.trimLeft();
+    arr.includes(2);
+    ```
+    
+    </td>
+    <td>
+    
+    ```js
+    import _flatMapInstanceProperty from "core-js-pure/stable/instance/flat-map.js";
+    import _trimLeftInstanceProperty from "core-js-pure/stable/instance/trim-left.js";
+    
+    _flatMapInstanceProperty(foo).call(foo, x => [x, x + 1]);
+    _trimLeftInstanceProperty(bar).call(bar);
+    arr.includes(2);
+    ```
+    
+    </td>
+    </tr>
+    </table>
+    <!-- prettier-ignore-end -->
 
 If you want to read more about the different options and supported features, you can read the [usage docs](./docs/usage.md)!
 
