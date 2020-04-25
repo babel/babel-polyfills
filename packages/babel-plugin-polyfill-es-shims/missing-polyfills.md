@@ -1,0 +1,79 @@
+- `Map`
+- `Set`
+- `Promise`
+- `String.fromCodePoint`
+- `String.raw`
+- `String.prototype.codePointAt()`
+- `String.prototype.endsWith()`
+- `String.prototype.includes()`
+- `String.prototype.repeat()`
+- `String.prototype.startsWith()`
+- `RegExp` (`new RegExp`, when given a RegExp as the pattern, will no longer throw when given a "flags" string argument).
+- `RegExp.prototype[Symbol.match]`
+- `RegExp.prototype[Symbol.replace]`
+- `RegExp.prototype[Symbol.search]`
+- `RegExp.prototype[Symbol.split]`
+- `RegExp.prototype.toString`
+- `Number` (binary and octal literals: `Number('0b1')` and `Number('0o7')`)
+- `Number.EPSILON`
+- `Number.MAX_SAFE_INTEGER`
+- `Number.MIN_SAFE_INTEGER`
+- `Number.isInteger()`
+- `Number.isSafeInteger()`
+- `Number.isFinite()`
+- `Number.parseInt()`
+- `Number.parseFloat()`
+- `Array.prototype.copyWithin()`
+- `Array.prototype.fill()`
+- `Array.prototype.indexOf()`
+- `Object.keys()`
+- `Object.setPrototypeOf()`
+- `Math.acosh()`
+- `Math.asinh()`
+- `Math.atanh()`
+- `Math.cbrt()`
+- `Math.clz32()`
+- `Math.cosh()`
+- `Math.expm1()`
+- `Math.fround()`
+- `Math.hypot()`
+- `Math.imul()`
+- `Math.log10()`
+- `Math.log1p()`
+- `Math.log2()`
+- `Math.sign()`
+- `Math.sinh()`
+- `Math.tanh()`
+- `Math.trunc()`
+- `Reflect.apply()`
+- `Reflect.construct()`
+- `Reflect.defineProperty()`
+- `Reflect.deleteProperty()`
+- `Reflect.get()`
+- `Reflect.getOwnPropertyDescriptor()`
+- `Reflect.getPrototypeOf()`
+- `Reflect.has()`
+- `Reflect.isExtensible()`
+- `Reflect.preventExtensions()`
+- `Reflect.set()`
+- `Reflect.setPrototypeOf()`
+- `Symbol.match` (and corresponding `String#match`, `String#startsWith`, `String#endsWith`, `String#includes`, `RegExp` support)
+- `Symbol.replace` (and corresponding `String#replace` support)
+- `Symbol.search` (and corresponding `String#search` support)
+- `Symbol.split` (and corresponding `String#split` support)
+
+Annex B HTML methods:
+
+- `String.prototype.anchor()`
+- `String.prototype.big()`
+- `String.prototype.blink()`
+- `String.prototype.bold()`
+- `String.prototype.fixed()`
+- `String.prototype.fontcolor()`
+- `String.prototype.fontsize()`
+- `String.prototype.italics()`
+- `String.prototype.link()`
+- `String.prototype.small()`
+- `String.prototype.strike()`
+- `String.prototype.sub()`
+- `String.prototype.sup()`

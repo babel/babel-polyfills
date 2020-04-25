@@ -112,3 +112,9 @@ This plugin supports the following `es-shims` polyfills.
 | `AggregateError` (for `Promise.any`) | [`es-aggregate-error`](https://github.com/es-shims/AggregateError)                       |
 | `String.prototype.replaceAll`        | [`string.prototype.replaceall`](https://github.com/es-shims/String.prototype.replaceAll) |
 | `Promise.any`                        | [`promise.any`](https://github.com/es-shims/Promise.any)                                 |
+
+## Missing polyfills
+
+**NOTE**: This polyfill provider is only compatible with polyfills that follow the [`es-shims-api`](https://github.com/es-shims/es-shim-api) specification. Additionally, those polyfills must live under the [`@es-shims`](https://github.com/es-shims) organization.
+
+This porivder fully supports ES2016+, but we are still working on ES5 and ES6 support. You can find the list of missing polyfills at [`missing-polyfills.md`](./missing-polyfills.md).
