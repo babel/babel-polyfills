@@ -184,9 +184,7 @@ function instantiateProvider<Options>(
   ({ include, exclude } = validateIncludeExclude(
     provider.name || factory.name,
     polyfillsNames,
-    // $FlowIgnore
     providerOptions.include || [],
-    // $FlowIgnore
     providerOptions.exclude || [],
   ));
 
