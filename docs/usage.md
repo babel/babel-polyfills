@@ -62,6 +62,18 @@ See the same options at https://babeljs.io/docs/en/babel-preset-env
 
 ## Advanced options
 
+### `shouldInjectPolyfill`
+
+`include` and `exclude` are great ways to forcefully mark a given polyfill as supported or unsupported.
+
+However, sometimes you might need something mroe advanced or customized: for example, you could want to store somewhere a list of the injected polyfills, or to throw an error when a given polyfill would be included.
+
+The `shouldInjectPolyfill` function takes two parameters: the name of the polyfill and wether or not it should be injected based on your targets. It must return a boolean, indicating wether or not the polyfill should be injected.
+
+```js
+function shouldInjectPolyfill(name: string, defaultShouldInject: boolean): boolean;
+```
+
 ### `missingDependencies`
 
 This option modifies the dependencies detection logging. If set to `false`, dependencies
