@@ -82,10 +82,16 @@ defineStatic("Reflect", "ownKeys", "1.0.1");
 
 defineInstance("RegExp", "flags", "1.3.0", instanceofCheck("RegExp"), getter);
 
+defineStatic("String", "fromCodePoint", "1.0.0");
+defineInstance("String", "codePoitAt", "1.0.0", stringCheck);
+defineInstance("String", "endsWith", "1.0.0", stringCheck);
+defineInstance("String", "includes", "2.0.0", stringCheck);
 defineInstance("String", "matchAll", "4.0.2", stringCheck);
 defineInstance("String", "padEnd", "1.1.1", stringCheck);
 defineInstance("String", "padStart", "3.1.0", stringCheck);
+defineInstance("String", "repeat", "1.0.0", stringCheck);
 defineInstance("String", "replaceAll", "1.0.3", stringCheck);
+defineInstance("String", "startsWith", "1.0.0", stringCheck);
 defineInstance("String", "trim", "1.2.1", stringCheck);
 defineInstance("String", "trimEnd", "1.0.0", stringCheck);
 defineInstance("String", "trimLeft", "2.1.1", stringCheck);

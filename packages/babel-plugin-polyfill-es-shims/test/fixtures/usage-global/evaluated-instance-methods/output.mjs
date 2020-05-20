@@ -1,4 +1,5 @@
 import "array-includes/auto.js";
+import "string.prototype.includes/auto.js";
 import "array.prototype.find/auto.js";
 var arrayInstance = [];
 var inclidesStr = "includes";

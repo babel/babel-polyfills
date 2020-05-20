@@ -355,6 +355,50 @@
     "safari": "9.0",
     "samsung": "5.0"
   },
+  "String.fromCodePoint": {
+    "chrome": "41",
+    "opera": "28",
+    "edge": "12",
+    "firefox": "29",
+    "safari": "9",
+    "node": "4",
+    "ios": "9",
+    "samsung": "3.4",
+    "electron": "0.22"
+  },
+  "String.prototype.codePointAt": {
+    "chrome": "41",
+    "opera": "28",
+    "edge": "12",
+    "firefox": "29",
+    "safari": "9",
+    "node": "4",
+    "ios": "9",
+    "samsung": "3.4",
+    "electron": "0.22"
+  },
+  "String.prototype.endsWith": {
+    "chrome": "41",
+    "opera": "28",
+    "edge": "12",
+    "firefox": "29",
+    "safari": "9",
+    "node": "4",
+    "ios": "9",
+    "samsung": "3.4",
+    "electron": "0.22"
+  },
+  "String.prototype.includes": {
+    "chrome": "41",
+    "opera": "28",
+    "edge": "12",
+    "firefox": "40",
+    "safari": "9",
+    "node": "4",
+    "ios": "9",
+    "samsung": "3.4",
+    "electron": "0.22"
+  },
   "String.prototype.matchAll": {},
   "String.prototype.padEnd": {
     "chrome": "57",
@@ -380,7 +424,29 @@
     "safari": "11.0",
     "samsung": "7.0"
   },
+  "String.prototype.repeat": {
+    "chrome": "41",
+    "opera": "28",
+    "edge": "12",
+    "firefox": "24",
+    "safari": "9",
+    "node": "4",
+    "ios": "9",
+    "samsung": "3.4",
+    "electron": "0.22"
+  },
   "String.prototype.replaceAll": {},
+  "String.prototype.startsWith": {
+    "chrome": "41",
+    "opera": "28",
+    "edge": "12",
+    "firefox": "29",
+    "safari": "9",
+    "node": "4",
+    "ios": "9",
+    "samsung": "3.4",
+    "electron": "0.22"
+  },
   "String.prototype.trim": {
     "chrome": "59",
     "edge": "15",
