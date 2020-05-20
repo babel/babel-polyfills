@@ -1,5 +1,6 @@
 import "object.entries/auto.js";
 import "array-includes/auto.js";
+import "string.prototype.includes/auto.js";
 import "object.values/auto.js";
 import "object.fromentries/auto.js";
 'entries' in Object;

@@ -1,6 +1,7 @@
 import "object.entries/auto.js";
 import "string.prototype.trim/auto.js";
 import "array-includes/auto.js";
+import "string.prototype.includes/auto.js";
 import "array.from/auto.js";
 import "array.of/auto.js";
 var bind, toString;
