@@ -88,13 +88,18 @@ export default defineProvider<{||}>(function({
         const isCall = path.parentPath.isCallExpression({ callee: path.node });
         const isGetter = resolved.desc[0].getter;
 
+        const matchesPolyfill = ({ name }) =>
+          name.startsWith(((meta.object: any): string));
+
+        let index = -1;
         if (
           // This is the actual method for sure.
           meta.kind === "property" &&
           meta.placement === "prototype" &&
-          meta.object != null
+          meta.object != null &&
+          (index = resolved.desc.findIndex(matchesPolyfill)) !== -1
         ) {
-          const desc = resolved.desc[0];
+          const desc = resolved.desc[index];
           if (!shouldInjectPolyfill(desc.name)) return;
 
           const id = injectDefault(desc, utils);
