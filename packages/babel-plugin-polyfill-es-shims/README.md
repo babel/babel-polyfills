@@ -58,7 +58,7 @@ This plugin supports the following `es-shims` polyfills.
 | `Function.prototype.name`   | [`function.prototype.name`](https://github.com/es-shims/Function.prototype.name)      |
 | `Number.isNaN`              | [`is-nan`](https://github.com/es-shims/is-nan)                                        |
 | `Object.assign`             | [`object.assign`](https://github.com/ljharb/object.assign)                            |
-| `Object.is`                 | [`object-js`](https://github.com/es-shims/object-is)                                  |
+| `Object.is`                 | [`object-is`](https://github.com/es-shims/object-is)                                  |
 | `Reflect.ownKeys`           | [`reflect.ownkeys`](https://github.com/es-shims/Reflect.ownKeys)                      |
 | `RegExp.prototype.flags`    | [`regexp.prototype.flags`](https://github.com/es-shims/RegExp.prototype.flags)        |
 
@@ -117,4 +117,4 @@ This plugin supports the following `es-shims` polyfills.
 
 **NOTE**: This polyfill provider is only compatible with polyfills that follow the [`es-shims-api`](https://github.com/es-shims/es-shim-api) specification. Additionally, those polyfills must live under the [`@es-shims`](https://github.com/es-shims) organization.
 
-This porivder fully supports ES2016+, but we are still working on ES5 and ES6 support. You can find the list of missing polyfills at [`missing-polyfills.md`](./missing-polyfills.md).
+This provider fully supports ES2016+, but we are still working on ES5 and ES6 support. You can find the list of missing polyfills at [`missing-polyfills.md`](./missing-polyfills.md).
