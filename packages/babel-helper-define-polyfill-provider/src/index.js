@@ -43,6 +43,7 @@ function resolveOptions<Options>(
   methodName: "usageGlobal" | "entryGlobal" | "usagePure",
   targets: Targets,
   debug: boolean,
+  shouldInjectPolyfill: ?(name: string, shouldInject: boolean) => boolean,
   providerOptions: ProviderOptions<Options>,
 } {
   const {
@@ -51,6 +52,7 @@ function resolveOptions<Options>(
     ignoreBrowserslistConfig,
     configPath,
     debug,
+    shouldInjectPolyfill,
     ...providerOptions
   } = options;
 
@@ -63,7 +65,21 @@ function resolveOptions<Options>(
   } else {
     throw new Error(
       `.method must be one of "entry-global", "usage-global"` +
-        ` or "usage-pure" (received "${method}")`,
+        ` or "usage-pure" (received ${JSON.stringify(method)})`,
+    );
+  }
+
+  if (typeof shouldInjectPolyfill === "function") {
+    if (options.include || options.exclude) {
+      throw new Error(
+        `.include and .exclude are not supported when using the` +
+          ` .shouldInjectPolyfill function.`,
+      );
+    }
+  } else if (shouldInjectPolyfill != null) {
+    throw new Error(
+      `.shouldInjectPolyfill must be a function, or undefined` +
+        ` (received ${JSON.stringify(shouldInjectPolyfill)})`,
     );
   }
 
@@ -76,6 +92,7 @@ function resolveOptions<Options>(
     method,
     methodName,
     targets,
+    shouldInjectPolyfill,
     debug: !!debug,
     providerOptions: ((providerOptions: Object): ProviderOptions<Options>),
   };
@@ -94,6 +111,7 @@ function instantiateProvider<Options>(
     methodName,
     targets,
     debug,
+    shouldInjectPolyfill,
     providerOptions,
   } = resolveOptions<Options>(options);
 
@@ -129,11 +147,20 @@ function instantiateProvider<Options>(
 
       if (filterPolyfills && !filterPolyfills(name)) return false;
 
-      return isRequired(name, targets, {
+      let shouldInject = isRequired(name, targets, {
         compatData: polyfillsSupport,
         includes: include,
         excludes: exclude,
       });
+
+      if (shouldInjectPolyfill) {
+        shouldInject = shouldInjectPolyfill(name, shouldInject);
+        if (typeof shouldInject !== "boolean") {
+          throw new Error(`.shouldInjectPolyfill must return a boolean.`);
+        }
+      }
+
+      return shouldInject;
     },
     debug(name) {
       debugLog().found = true;

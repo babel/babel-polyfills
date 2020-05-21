@@ -31,6 +31,7 @@ export type PluginOptions = {|
   debug?: boolean,
   include?: Pattern[],
   exclude?: Pattern[],
+  shouldInjectPolyfill?: (name: string, shouldInject: boolean) => boolean,
   missingDependencies?: MissingDependenciesOption,
 |};
 
