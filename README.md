@@ -1,15 +1,96 @@
 # Babel Polyfills
 
-A set of Babel plugins that enable injecting different polyfills with different strategies in your compiled code.
-Additionally, this reporitory contains a package that helps creating providers for any other polyfill.
-
-> ⚠️ These packages are highly experimental and not published yet. You can use GitHub's "Watch for Releases only" feature to be notified when the first version is published.
+> ⚠️ These packages are **highly experimental** and they have not been tested in production applications yet. Also, we are still working ond wiring some missing polyfills.
 
 > ℹ️ This repository implements what was initially proposed at [babel/babel#10008](https://github.com/babel/babel/issues/10008).
 
 > 💡 If you are looking for some quick setup examples, or just want to see how to migrade your config, please check [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
 
-## How does it work?
+## Usage
+
+The main Babel packages only transform JavaScript _syntax_: you also need to load a polyfill, to make native _functions_ or _built-in objects_ work in older browsers. The Babel plugins implemented in this repository automatically inject the polyfills in your code, trying to only load what is really needed basd on your compilation targets and on what you are using in your code.
+
+These plugins (also called "polyfill providers") support different [injection methods](#injection-methods), to better fit your needs.
+
+For example, if you want to inject imports to `es-shims` polyfills adding the missing functions to the global objects, you could configure Babel as such:
+
+<!-- prettier-ignore-start -->
+<table>
+<thead><tr>
+<th align="center">Configuration</th>
+<th align="center">Input code</th>
+<th align="center">Output code</th>
+</tr></thead>
+<tr>
+<td>
+
+```json
+{
+  "plugins": [
+    ["polyfill-es-shims", {
+      "method": "usage-global",
+      "targets": {
+        "firefox": 65
+      }
+    }]
+  ]
+}
+```
+
+</td>
+<td>
+
+```js
+ 
+ 
+ 
+Promise.allSettled([
+  p1,
+  p2
+]).finally(() => {
+  console.log("Done!");
+});
+ 
+```
+
+</td>
+<td>
+
+```js
+import "promise.prototype.finally/auto.js";
+import "promise.allsettled/auto.js";
+
+Promise.allSettled([
+  p1,
+  p2
+]).finally(() => {
+  console.log("Done!");
+});
+ 
+```
+
+</td>
+</tr>
+</table>
+<!-- prettier-ignore-end -->
+
+If you want to see more configuration examples, you can chec the migration docs: [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
+
+If you are interested in reading about all the options supported by these plugins, you can check the usage docs: [`docs/usage.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
+
+## Supported polyfills
+
+<!--prettier-ignore -->
+| Polyfill | Plugin | Methods |
+| :------: | :----: | :-----: |
+| `core-js@2` | [`babel-plugin-polyfill-corejs2`](./packages/babel-plugin-polyfill-corejs2) | `entry-global`, `usage-global` and `usage-pure` |
+| `core-js@3` | [`babel-plugin-polyfill-corejs3`](./packages/babel-plugin-polyfill-corejs3) | `entry-global`, `usage-global` and `usage-pure` |
+| `es-shims` | [`babel-plugin-polyfill-es-shims`](./packages/babel-plugin-polyfill-es-shims) | `usage-global` and `usage-pure` |
+| `regenerator-runtime` | [`babel-plugin-polyfill-regenerator`](./packages/babel-plugin-polyfill-regenerator) | `entry-global`, `usage-global` and `usage-pure` |
+
+> 💡 If you want to implement support for a custom polyfill, you can use `@babel/helper-define-polyfill-provider`. ([`docs/polyfill-provider.md`](https://github.com/babel/babel-polyfills/blob/master/docs/polyfill-provider.md).)
+
+## Injection methods
 
 Polyfill plugins can expose three different injection methods: `entry-global`, `usage-global` and `usage-pure`.
 Note that polyfill plugins don't automatically add the necessary package(s) to your dependencies, so you must explicitly list them in your `package.json`.
@@ -128,20 +209,6 @@ Note that polyfill plugins don't automatically add the necessary package(s) to y
     </tr>
     </table>
     <!-- prettier-ignore-end -->
-
-If you want to read more about the different options and supported features, you can read the [usage docs](./docs/usage.md)!
-
-## What polyfills are supported?
-
-<!--prettier-ignore -->
-| Polyfill | Plugin | Methods |
-| :------: | :----: | :-----: |
-| `core-js@2` | [`babel-plugin-polyfill-corejs2`](./packages/babel-plugin-polyfill-corejs2) | `entry-global`, `usage-global` and `usage-pure` |
-| `core-js@3` | [`babel-plugin-polyfill-corejs3`](./packages/babel-plugin-polyfill-corejs3) | `entry-global`, `usage-global` and `usage-pure` |
-| `es-shims` | [`babel-plugin-polyfill-es-shims`](./packages/babel-plugin-polyfill-es-shims) | `usage-global` and `usage-pure` |
-| `regenerator-runtime` | [`babel-plugin-polyfill-regenerator`](./packages/babel-plugin-polyfill-regenerator) | `entry-global`, `usage-global` and `usage-pure` |
-
-If you want to implement support for a custom polyfill, you can use `@babel/helper-define-polyfill-provider`. ([docs](./docs/polyfill-provider.md))
 
 ## History and Motivation
 
