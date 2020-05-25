@@ -11,7 +11,7 @@ Additionally, this reporitory contains a package that helps creating providers f
 
 ## Usage
 
-The main Babel packages only transform JavaScript _syntax_: you also need to load a polyfill, to make native _functions_ (`Array.prototype.flat`) or _built-in objects_ (`Promise`) work in older browsers.
+The main Babel packages only transform JavaScript _syntax_: you also need to load a polyfill, to make native _functions_ (`Array.prototype.flat`) or _built-in objects_ (`Reflect`) work in older browsers.
 
 The easiest way to do so is to directly load the polyfill using a `<script ...>` tag:
 ```html
