@@ -98,7 +98,9 @@ If you are interested in reading about all the options supported by these plugin
 | `es-shims` | [`babel-plugin-polyfill-es-shims`](./packages/babel-plugin-polyfill-es-shims) | `usage-global` and `usage-pure` |
 | `regenerator-runtime` | [`babel-plugin-polyfill-regenerator`](./packages/babel-plugin-polyfill-regenerator) | `entry-global`, `usage-global` and `usage-pure` |
 
-> 💡 If you want to implement support for a custom polyfill, you can use `@babel/helper-define-polyfill-provider`. ([`docs/polyfill-provider.md`](https://github.com/babel/babel-polyfills/blob/master/docs/polyfill-provider.md).)
+> 💡 We are maintaining support for `core-js` and `es-shims`, but we encourage you to implement a provider for your own polyfill, or for your favorite one! One of our goals is to encourage competition between different polyfills, to better balance the different trade offs like spec compliancy and code size.
+>
+> If you want to implement support for a custom polyfill, you can use `@babel/helper-define-polyfill-provider`. ([`docs/polyfill-provider.md`](https://github.com/babel/babel-polyfills/blob/master/docs/polyfill-provider.md).)
 
 ## Injection methods
 
