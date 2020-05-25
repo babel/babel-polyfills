@@ -11,7 +11,14 @@ Additionally, this reporitory contains a package that helps creating providers f
 
 ## Usage
 
-The main Babel packages only transform JavaScript _syntax_: you also need to load a polyfill, to make native _functions_ (`Array.prototype.flat`) or _built-in objects_ (`Promise`) work in older browsers. The Babel plugins implemented in this repository automatically inject these polyfills in your code, while trying to only load what is really needed. It does this based on your compilation targets and on what you are using in your code.
+The main Babel packages only transform JavaScript _syntax_: you also need to load a polyfill, to make native _functions_ (`Array.prototype.flat`) or _built-in objects_ (`Promise`) work in older browsers.
+
+The easiest way to do so is to directly load the polyfill using a `<script ...>` tag:
+```html
+<script src="https://unpkg.com/core-js-bundle@3.6.5/minified.js"></script>
+```
+
+However, this simple approach can potentially include a lot of unnecessary code. The Babel plugins implemented in this repository automatically inject the polyfills in your code, while trying to only load what is really needed. It does this based on your compilation targets and on what you are using in your code.
 
 These plugins (we are calling them "polyfill providers") support different [injection *methods*](#injection-methods), to better fit your needs.
 
