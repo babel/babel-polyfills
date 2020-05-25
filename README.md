@@ -1,5 +1,8 @@
 # Babel Polyfills
 
+A set of Babel plugins that enable injecting different polyfills with different strategies in your compiled code.
+Additionally, this reporitory contains a package that helps creating providers for any other polyfill.
+
 > ⚠️ These packages are **highly experimental** and they have not been tested in production applications yet. Also, we are still working ond wiring some missing polyfills.
 
 > ℹ️ This repository implements what was initially proposed at [babel/babel#10008](https://github.com/babel/babel/issues/10008).
@@ -74,7 +77,7 @@ Promise.allSettled([
 </table>
 <!-- prettier-ignore-end -->
 
-If you want to see more configuration examples, you can chec the migration docs: [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
+If you want to see more configuration examples, you can check the migration docs: [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
 
 If you are interested in reading about all the options supported by these plugins, you can check the usage docs: [`docs/usage.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
 
