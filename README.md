@@ -7,6 +7,8 @@ Additionally, this reporitory contains a package that helps creating providers f
 
 > ℹ️ This repository implements what was initially proposed at [babel/babel#10008](https://github.com/babel/babel/issues/10008).
 
+> 💡 If you are looking for some quick setup examples, or just want to see how to migrade your config, please check [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
+
 ## How does it work?
 
 Polyfill plugins can expose three different injection methods: `entry-global`, `usage-global` and `usage-pure`.
