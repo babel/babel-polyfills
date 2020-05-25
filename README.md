@@ -13,9 +13,9 @@ Additionally, this reporitory contains a package that helps creating providers f
 
 The main Babel packages only transform JavaScript _syntax_: you also need to load a polyfill, to make native _functions_ (`Array.prototype.flat`) or _built-in objects_ (`Promise`) work in older browsers. The Babel plugins implemented in this repository automatically inject these polyfills in your code, while trying to only load what is really needed. It does this based on your compilation targets and on what you are using in your code.
 
-These plugins (also called "polyfill providers") support different [injection methods](#injection-methods), to better fit your needs.
+These plugins (we are calling them "polyfill providers") support different [injection *methods*](#injection-methods), to better fit your needs.
 
-For example, if you want to inject imports to `es-shims` polyfills adding the missing functions to the global objects, you could configure Babel as such:
+For example, if you want to inject imports to [`es-shims`](https://github.com/es-shims) polyfills by adding the missing functions to the global objects, you could configure Babel as such:
 
 <!-- prettier-ignore-start -->
 <table>
