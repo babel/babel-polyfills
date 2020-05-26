@@ -69,7 +69,7 @@ export default defineProvider<{||}>(function({
 
       assertDependency(desc.package, desc.version);
 
-      utils.injectGlobalImport(`${desc.package}/auto.js`);
+      utils.injectGlobalImport(`${desc.package}/auto`);
 
       debug(desc.name);
     }),

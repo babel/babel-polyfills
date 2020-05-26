@@ -1,3 +1,3 @@
-import "es-aggregate-error/auto.js";
+import "es-aggregate-error/auto";
 const AggregateError = window.AggregateError;
 const glob = something.globalThis;

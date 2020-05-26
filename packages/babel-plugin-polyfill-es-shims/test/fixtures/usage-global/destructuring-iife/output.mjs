@@ -1,7 +1,7 @@
-import "object.entries/auto.js";
-import "array.from/auto.js";
-import "array-includes/auto.js";
-import "string.prototype.includes/auto.js";
+import "object.entries/auto";
+import "array.from/auto";
+import "array-includes/auto";
+import "string.prototype.includes/auto";
 !function (foo, {
   entries
 }) {}({}, Object);

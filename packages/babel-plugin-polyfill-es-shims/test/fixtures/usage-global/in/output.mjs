@@ -1,8 +1,8 @@
-import "object.entries/auto.js";
-import "array-includes/auto.js";
-import "string.prototype.includes/auto.js";
-import "object.values/auto.js";
-import "object.fromentries/auto.js";
+import "object.entries/auto";
+import "array-includes/auto";
+import "string.prototype.includes/auto";
+import "object.values/auto";
+import "object.fromentries/auto";
 'entries' in Object;
 'includes' in [1, 2, 3];
 'va' + 'lues' in Object;

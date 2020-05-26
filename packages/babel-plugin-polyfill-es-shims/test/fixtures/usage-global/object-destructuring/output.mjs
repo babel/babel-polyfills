@@ -1,9 +1,9 @@
-import "object.entries/auto.js";
-import "string.prototype.trim/auto.js";
-import "array-includes/auto.js";
-import "string.prototype.includes/auto.js";
-import "array.from/auto.js";
-import "array.of/auto.js";
+import "object.entries/auto";
+import "string.prototype.trim/auto";
+import "array-includes/auto";
+import "string.prototype.includes/auto";
+import "array.from/auto";
+import "array.of/auto";
 var bind, toString;
 var {
   bind

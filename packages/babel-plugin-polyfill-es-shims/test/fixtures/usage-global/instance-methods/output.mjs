@@ -1,12 +1,12 @@
-import "array.from/auto.js";
-import "array-includes/auto.js";
-import "string.prototype.includes/auto.js";
-import "array.prototype.find/auto.js";
-import "array.prototype.findindex/auto.js";
-import "string.prototype.padstart/auto.js";
-import "string.prototype.padend/auto.js";
-import "string.prototype.startswith/auto.js";
-import "string.prototype.endswith/auto.js";
+import "array.from/auto";
+import "array-includes/auto";
+import "string.prototype.includes/auto";
+import "array.prototype.find/auto";
+import "array.prototype.findindex/auto";
+import "string.prototype.padstart/auto";
+import "string.prototype.padend/auto";
+import "string.prototype.startswith/auto";
+import "string.prototype.endswith/auto";
 Array.from; // static function
 
 Map; // top level built-in

@@ -1,9 +1,9 @@
-import "array.prototype.values/auto.js";
-import "array-includes/auto.js";
-import "string.prototype.includes/auto.js";
-import "regexp.prototype.flags/auto.js";
-import "array.prototype.indexof/auto.js";
-import "string.prototype.trim/auto.js";
+import "array.prototype.values/auto";
+import "array-includes/auto";
+import "string.prototype.includes/auto";
+import "regexp.prototype.flags/auto";
+import "array.prototype.indexof/auto";
+import "string.prototype.trim/auto";
 var a = [];
 a.values();
 ''.replace();

@@ -1,6 +1,6 @@
-import "array.prototype.values/auto.js";
-import "object.assign/auto.js";
-import "array.prototype.entries/auto.js";
+import "array.prototype.values/auto";
+import "object.assign/auto";
+import "array.prototype.entries/auto";
 var objectClass = Object;
 var arrayInstance = [];
 var assignStr = "assign";

@@ -1,6 +1,6 @@
-require("es-aggregate-error/auto.js");
+require("es-aggregate-error/auto");
 
-require("array-includes/auto.js");
+require("array-includes/auto");
 
 require("foo");
 

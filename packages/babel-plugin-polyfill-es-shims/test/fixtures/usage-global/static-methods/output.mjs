@@ -1,4 +1,4 @@
-import "object.assign/auto.js";
+import "object.assign/auto";
 Object.keys(foo);
 const getOwnPropertySymbols = Object.getOwnPropertySymbols;
 const {

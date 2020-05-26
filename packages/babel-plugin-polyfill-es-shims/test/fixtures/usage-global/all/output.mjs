@@ -1,6 +1,6 @@
-import "array.from/auto.js";
-import "globalthis/auto.js";
-import "es-aggregate-error/auto.js";
+import "array.from/auto";
+import "globalthis/auto";
+import "es-aggregate-error/auto";
 Array.from; // static method
 
 globalThis; // built-in
