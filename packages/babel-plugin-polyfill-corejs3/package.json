@@ -1,10 +1,10 @@
 {
   "name": "babel-plugin-polyfill-corejs3",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A Babel plugin to inject imports to core-js@3 polyfills",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/babel/babel-polyfills.git",
+    "type": "git",
+    "url": "https://github.com/babel/babel-polyfills.git",
     "directory": "packages/babel-plugin-polyfill-corejs3"
   },
   "license": "MIT",
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
-    "@babel/helper-define-polyfill-provider": "^0.0.0",
+    "@babel/helper-define-polyfill-provider": "^0.0.1",
     "@babel/helper-plugin-test-runner": "^7.1.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-for-of": "^7.4.4",
