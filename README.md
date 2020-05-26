@@ -86,7 +86,7 @@ Promise.allSettled([
 
 If you want to see more configuration examples, you can check the migration docs: [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
 
-If you are interested in reading about all the options supported by these plugins, you can check the usage docs: [`docs/usage.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
+If you are interested in reading about all the options supported by these plugins, you can check the usage docs: [`docs/usage.md`](https://github.com/babel/babel-polyfills/blob/master/docs/usage.md).
 
 ## Supported polyfills
 
