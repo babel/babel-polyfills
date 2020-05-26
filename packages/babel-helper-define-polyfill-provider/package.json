@@ -1,8 +1,12 @@
 {
   "name": "@babel/helper-define-polyfill-provider",
   "version": "0.0.0",
-  "description": "TODO",
-  "repository": "https://github.com/babel/TODO",
+  "description": "Babel helper to create your own polyfill provider",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/babel/babel-polyfills.git",
+    "directory": "packages/babel-helper-define-polyfill-provider"
+  },
   "keywords": [
     "babel-plugin"
   ],

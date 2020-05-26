@@ -1,8 +1,12 @@
 {
   "name": "babel-plugin-polyfill-corejs3",
   "version": "0.0.0",
-  "description": "TODO",
-  "repository": "https://github.com/babel/TODO",
+  "description": "A Babel plugin to inject imports to core-js@3 polyfills",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/babel/babel-polyfills.git",
+    "directory": "packages/babel-plugin-polyfill-corejs3"
+  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"

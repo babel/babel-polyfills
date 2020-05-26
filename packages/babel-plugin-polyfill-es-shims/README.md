@@ -1,7 +1,5 @@
 # babel-plugin-polyfill-es-shims
 
-> :warning: **This package hasn't been published yet.**
-
 ## Install
 
 Using npm:

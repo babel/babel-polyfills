@@ -1,7 +1,5 @@
 # babel-plugin-polyfill-corejs3
 
-> :warning: **This package hasn't been published yet.**
-
 ## Install
 
 Using npm:
