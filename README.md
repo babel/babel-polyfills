@@ -67,8 +67,8 @@ Promise.allSettled([
 <td>
 
 ```js
-import "promise.prototype.finally/auto.js";
-import "promise.allsettled/auto.js";
+import "promise.prototype.finally/auto";
+import "promise.allsettled/auto";
 
 Promise.allSettled([
   p1,
