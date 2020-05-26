@@ -1,13 +1,13 @@
 # Babel Polyfills
 
 A set of Babel plugins that enable injecting different polyfills with different strategies in your compiled code.
-Additionally, this reporitory contains a package that helps creating providers for any other polyfill.
+Additionally, this repository contains a package that helps with creating providers for other polyfills.
 
 > ⚠️ These packages are highly experimental and not published yet. You can use GitHub's "Watch for Releases only" feature to be notified when the first version is published.
 
 > ℹ️ This repository implements what was initially proposed at [babel/babel#10008](https://github.com/babel/babel/issues/10008).
 
-> 💡 If you are looking for some quick setup examples, or just want to see how to migrade your config, please check [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
+> 💡 If you are looking for some quick setup examples, or just want to see how to migrate your config, please check [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
 
 ## How does it work?
 
@@ -20,7 +20,7 @@ Note that polyfill plugins don't automatically add the necessary package(s) to y
 
   1. you are not compiling your dependencies, but you want to be sure that they have all the necessary polyfills;
   1. Babel's detection logic isn't smart enough to understand which functions you are using;
-  1. you want to have a single bundled file containing all the polyfill, without needing to regenerate it when your code changes.
+  1. you want to have a single bundled file containing all the polyfills, without needing to regenerate it when your code changes.
 
     <!-- prettier-ignore-start -->
     <table>
@@ -55,9 +55,9 @@ Note that polyfill plugins don't automatically add the necessary package(s) to y
     </table>
     <!-- prettier-ignore-end -->
 
-- The `usage-global` method injects imports to polyfills attatched to the global scope, but only for unsupported features which are used in your code. You might want to use this method if:
+- The `usage-global` method injects imports to polyfills attached to the global scope, but only for unsupported features which are used in your code. You might want to use this method if:
 
-  1. you need to keep your code size as small as possible, and only including what is effectively used;
+  1. you need to keep your code size as small as possible, and only include what is used;
   1. your polyfill doesn't support a single entry point, but each of its features must be loaded separately.
 
     <!-- prettier-ignore-start -->
@@ -93,7 +93,7 @@ Note that polyfill plugins don't automatically add the necessary package(s) to y
     </table>
     <!-- prettier-ignore-end -->
 
-- The `usage-pure` method injects imports to polyfills attatched ot the global scope, only for unsupported features which are used in your code, without attatching the polyfills to the global scope but importing them as normal functions. You might want to use this method if:
+- The `usage-pure` method injects imports to polyfills for unsupported features which are used in your code, without attaching the polyfills to the global scope but importing them as normal functions. You might want to use this method if:
 
   1. you are a library author, and don't want to "pollute" the global scope with the polyfills you are loading.
 
@@ -155,7 +155,7 @@ So far Babel provided three different ways to inject `core-js` polyfills in the 
 
 Our old approach has two main problems:
 
-- It wasn't possible to use `@babel/preset-env`'s `targets` option with "pure" po<i>n</i>fylls, because `@babel/plugin-transform-runtime` is a completely separated package.
+- It wasn't possible to use `@babel/preset-env`'s `targets` option with "pure" po<i>n</i>fylls, because `@babel/plugin-transform-runtime` is a completely separate package.
 - We forced our users to use `core-js` if they wanted a Babel integration. `core-js` is a good and comprhensive polyfill, but it doesn't fit the needs of all of our users.
 
 With this new packages we are proposing a solution for both of these problem, while still maintaining full backward compatibility.
