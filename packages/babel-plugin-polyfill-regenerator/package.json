@@ -15,9 +15,11 @@
   "keywords": [
     "babel-plugin"
   ],
+  "dependencies": {
+    "@babel/helper-define-polyfill-provider": "^0.0.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
-    "@babel/helper-define-polyfill-provider": "^0.0.1",
     "@babel/helper-plugin-test-runner": "^7.1.0"
   },
   "peerDependencies": {
