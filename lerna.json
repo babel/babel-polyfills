@@ -5,9 +5,7 @@
       "ignoreChanges": [
         "*.md",
         "*.txt",
-        "test/**",
-        "# We ignore every JSON file, except for built-in-modules and built-ins defined in babel-preset-env/data.",
-        "@(!(built-in-modules|built-ins)).json"
+        "test/**"
       ]
     }
   },
