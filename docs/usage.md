@@ -36,7 +36,7 @@ It can be one of `usage-pure`, `usage-global`, or `entry-global`.
   let obj = Object.fromEntries(entries);
   ```
 
-- `usage-entry` injects polyfills for every feature not supported by your target browsers and attaches them to the global scope, providing a native-like environment. It is similar to the legacy `useBuiltIns: "entry"` option of `@babel/preset-env`.
+- `entry-global` injects polyfills for every feature not supported by your target browsers and attaches them to the global scope, providing a native-like environment. It is similar to the legacy `useBuiltIns: "entry"` option of `@babel/preset-env`.
 
   **Example:**
 
