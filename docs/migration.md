@@ -85,7 +85,7 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
   ],
   "plugins": [
     ["polyfill-corejs3", {
-      "method": "usage-entry",
+      "method": "entry-global",
       "targets": { "firefox": 42 }
     }]
   ]
@@ -328,7 +328,7 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
   ],
   "plugins": [
     ["polyfill-corejs2", {
-      "method": "usage-entry",
+      "method": "entry-global",
       "targets": { "firefox": 42 }
     }]
   ]
