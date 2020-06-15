@@ -7,7 +7,7 @@ Additionally, this repository contains a package that helps with creating provid
 
 > ℹ️ This repository implements what was initially proposed at [babel/babel#10008](https://github.com/babel/babel/issues/10008).
 
-> 💡 If you are looking for some quick setup examples, or just want to see how to migrate your config, please check [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
+> 💡 If you are looking for some quick setup examples, or just want to see how to migrate your config, please check [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/main/docs/migration.md).
 
 ## Usage
 
@@ -84,9 +84,9 @@ Promise.allSettled([
 </table>
 <!-- prettier-ignore-end -->
 
-If you want to see more configuration examples, you can check the migration docs: [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/master/docs/migration.md).
+If you want to see more configuration examples, you can check the migration docs: [`docs/migration.md`](https://github.com/babel/babel-polyfills/blob/main/docs/migration.md).
 
-If you are interested in reading about all the options supported by these plugins, you can check the usage docs: [`docs/usage.md`](https://github.com/babel/babel-polyfills/blob/master/docs/usage.md).
+If you are interested in reading about all the options supported by these plugins, you can check the usage docs: [`docs/usage.md`](https://github.com/babel/babel-polyfills/blob/main/docs/usage.md).
 
 ## Supported polyfills
 
@@ -100,7 +100,7 @@ If you are interested in reading about all the options supported by these plugin
 
 > 💡 We are maintaining support for `core-js` and `es-shims`, but we encourage you to implement a provider for your own polyfill, or for your favorite one! One of our goals is to encourage competition between different polyfills, to better balance the different trade offs like spec compliancy and code size.
 >
-> If you want to implement support for a custom polyfill, you can use `@babel/helper-define-polyfill-provider`. ([`docs/polyfill-provider.md`](https://github.com/babel/babel-polyfills/blob/master/docs/polyfill-provider.md).)
+> If you want to implement support for a custom polyfill, you can use `@babel/helper-define-polyfill-provider`. ([`docs/polyfill-provider.md`](https://github.com/babel/babel-polyfills/blob/main/docs/polyfill-provider.md).)
 
 ## Injection methods
 

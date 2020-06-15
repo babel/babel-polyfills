@@ -1,7 +1,7 @@
 _"Polyfill providers"_ are the packages which contain the actual polyfills data.
 Their job is to provide the correct import paths for every functionality that their underling polyfill can handle.
 
-> You can find some examples in the [`packages`](https://github.com/nicolo-ribaudo/babel-polyfills/tree/master/packages) folder of this repository
+> You can find some examples in the [`packages`](https://github.com/nicolo-ribaudo/babel-polyfills/tree/main/packages) folder of this repository
 
 A _"polyfill provider"_ is defined passing a factory function to `@babel/helper-define-polyfill-provider`. The factory functiontakes two parameters (`api` and `options`) and returns an object with the provider implementation.
 
