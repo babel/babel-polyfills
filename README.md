@@ -3,7 +3,7 @@
 A set of Babel plugins that enable injecting different polyfills with different strategies in your compiled code.
 Additionally, this repository contains a package that helps with creating providers for other polyfills.
 
-> ⚠️ These packages are **highly experimental** and they have not been tested in production applications yet. Also, we are still working ond wiring some missing polyfills.
+> ⚠️ These packages are **highly experimental** and they have not been tested in production applications yet. Also, we are still working on wiring some missing polyfills.
 
 > ℹ️ This repository implements what was initially proposed at [babel/babel#10008](https://github.com/babel/babel/issues/10008).
 
@@ -234,7 +234,7 @@ So far Babel provided three different ways to inject `core-js` polyfills in the 
 
 Our old approach has two main problems:
 
-- It wasn't possible to use `@babel/preset-env`'s `targets` option with "pure" po<i>n</i>fylls, because `@babel/plugin-transform-runtime` is a completely separate package.
-- We forced our users to use `core-js` if they wanted a Babel integration. `core-js` is a good and comprhensive polyfill, but it doesn't fit the needs of all of our users.
+- It wasn't possible to use `@babel/preset-env`'s `targets` option with "pure" po<i>n</i>yfills, because `@babel/plugin-transform-runtime` is a completely separate package.
+- We forced our users to use `core-js` if they wanted a Babel integration. `core-js` is a good and comprehensive polyfill, but it doesn't fit the needs of all of our users.
 
 With this new packages we are proposing a solution for both of these problem, while still maintaining full backward compatibility.
