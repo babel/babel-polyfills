@@ -57,7 +57,7 @@ module.exports = {
   "String.prototype.padStart": "String padding / String.prototype.padStart",
   "String.prototype.repeat":
     "String.prototype methods / String.prototype.repeat",
-  "String.prototype.replaceAll": [],
+  "String.prototype.replaceAll": "String.prototype.replaceAll",
   "String.prototype.startsWith":
     "String.prototype methods / String.prototype.startsWith",
   "String.prototype.trim":
