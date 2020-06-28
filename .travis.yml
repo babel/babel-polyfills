@@ -16,3 +16,4 @@ jobs:
       script:
         - yarn lint
         - yarn flow
+        - CHECK_COMPAT_DATA=1 yarn build-es-shims-data
