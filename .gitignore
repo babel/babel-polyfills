@@ -18,3 +18,5 @@ package-lock.json
 
 /packages/*/lib
 /.changelog
+
+build/compat-table

@@ -10,7 +10,7 @@
           "all": true
         },
         "targets": {
-          "chrome": 50
+          "chrome": 45
         }
       }
     ]
