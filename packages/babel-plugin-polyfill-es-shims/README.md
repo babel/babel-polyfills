@@ -105,18 +105,18 @@ This plugin supports the following `es-shims` polyfills.
 
 ### ES2020
 
-| Builtin object or function  | Package name                                                                       | Owner |
-| :-------------------------- | :--------------------------------------------------------------------------------- | :---- |
-| `globalThis`                | [`globalthis`](https://github.com/es-shims/globalThis)                             |
-| `Promise.allSettled`        | [`promise.allsettled`](https://github.com/es-shims/Promise.allSettled)             |
-| `String.prototype.matchAll` | [`string.prototype.matchall`](https://github.com/ljharb/String.prototype.matchAll) |
+| Builtin object or function      | Package name                                                                             | Owner |
+| :------------------------------ | :--------------------------------------------------------------------------------------- | :---- |
+| `globalThis`                    | [`globalthis`](https://github.com/es-shims/globalThis)                                   |
+| `Promise.allSettled`            | [`promise.allsettled`](https://github.com/es-shims/Promise.allSettled)                   |
+| `String.prototype.matchAll`     | [`string.prototype.matchall`](https://github.com/ljharb/String.prototype.matchAll)       |
+| `String.prototype.replaceAll`   | [`string.prototype.replaceall`](https://github.com/es-shims/String.prototype.replaceAll) |
 
 ### Stage 3
 
 | Builtin object or function           | Package name                                                                             | Owner |
 | :----------------------------------- | :--------------------------------------------------------------------------------------- | :---- |
 | `AggregateError` (for `Promise.any`) | [`es-aggregate-error`](https://github.com/es-shims/AggregateError)                       |
-| `String.prototype.replaceAll`        | [`string.prototype.replaceall`](https://github.com/es-shims/String.prototype.replaceAll) |
 | `Promise.any`                        | [`promise.any`](https://github.com/es-shims/Promise.any)                                 |
 
 ## Missing polyfills

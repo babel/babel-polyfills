@@ -425,7 +425,12 @@
     "samsung": "3.4",
     "electron": "0.21"
   },
-  "String.prototype.replaceAll": {},
+  "String.prototype.replaceAll": {
+    "chrome": "85",
+    "firefox": "77",
+    "safari": "13.1",
+    "electron": "10"
+  },
   "String.prototype.startsWith": {
     "chrome": "41",
     "opera": "28",
