@@ -52,7 +52,7 @@ module.exports = {
     "String.prototype methods / String.prototype.endsWith",
   "String.prototype.includes":
     "String.prototype methods / String.prototype.includes",
-  "String.prototype.matchAll": [],
+  "String.prototype.matchAll": "String.prototype.matchAll",
   "String.prototype.padEnd": "String padding / String.prototype.padEnd",
   "String.prototype.padStart": "String padding / String.prototype.padStart",
   "String.prototype.repeat":

@@ -391,7 +391,15 @@
     "samsung": "3.4",
     "electron": "0.21"
   },
-  "String.prototype.matchAll": {},
+  "String.prototype.matchAll": {
+    "chrome": "80",
+    "opera": "67",
+    "edge": "80",
+    "firefox": "73",
+    "safari": "13.1",
+    "node": "14",
+    "electron": "8"
+  },
   "String.prototype.padEnd": {
     "chrome": "57",
     "opera": "44",
