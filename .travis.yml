@@ -12,6 +12,8 @@ jobs:
   include:
     - name: "Test"
       before_script: yarn build
+      env:
+        BABEL_TYPES_8_BREAKING: true
     - name: "Lint"
       script:
         - yarn lint

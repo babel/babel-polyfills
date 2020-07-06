@@ -109,20 +109,19 @@ function hoist(node: t.Node) {
 
 export function createUtilsGetter(cache: ImportsCache) {
   return (path: NodePath): Utils => {
-    const programPath = path.findParent(p => p.isProgram());
+    const prog = path.findParent(p => p.isProgram());
 
     return {
       injectGlobalImport(url) {
-        cache.store(programPath, url, "", (isScript, source) => ({
-          node: isScript
+        cache.storeAnonymous(prog, url, (isScript, source) => {
+          return isScript
             ? template.statement.ast`require(${source})`
-            : t.importDeclaration([], source),
-          name: "",
-        }));
+            : t.importDeclaration([], source);
+        });
       },
       injectNamedImport(url, name, hint = name) {
-        return cache.store(programPath, url, name, (isScript, source, name) => {
-          const id = programPath.scope.generateUidIdentifier(hint);
+        return cache.storeNamed(prog, url, name, (isScript, source, name) => {
+          const id = prog.scope.generateUidIdentifier(hint);
           return {
             node: isScript
               ? hoist(template.statement.ast`
@@ -134,8 +133,8 @@ export function createUtilsGetter(cache: ImportsCache) {
         });
       },
       injectDefaultImport(url, hint = url) {
-        return cache.store(programPath, url, "default", (isScript, source) => {
-          const id = programPath.scope.generateUidIdentifier(hint);
+        return cache.storeNamed(prog, url, "default", (isScript, source) => {
+          const id = prog.scope.generateUidIdentifier(hint);
           return {
             node: isScript
               ? hoist(template.statement.ast`var ${id} = require(${source})`)
