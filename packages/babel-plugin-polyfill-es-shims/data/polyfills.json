@@ -398,6 +398,7 @@
     "firefox": "73",
     "safari": "13.1",
     "node": "14",
+    "ios": "13.4",
     "electron": "8"
   },
   "String.prototype.padEnd": {
@@ -437,6 +438,7 @@
     "chrome": "85",
     "firefox": "77",
     "safari": "13.1",
+    "ios": "13.4",
     "electron": "10"
   },
   "String.prototype.startsWith": {
