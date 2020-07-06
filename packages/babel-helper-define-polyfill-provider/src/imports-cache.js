@@ -30,15 +30,7 @@ export default class ImportsCache {
       t.stringLiteral(url),
     );
     imports.add(key);
-
-    let lastImport = this._lastImports.get(programPath);
-    if (lastImport && lastImport.node) {
-      lastImport = lastImport.insertAfter(node);
-    } else {
-      lastImport = programPath.unshiftContainer("body", node);
-    }
-    lastImport = lastImport[lastImport.length - 1];
-    this._lastImports.set(programPath, lastImport);
+    this._injectImport(programPath, node);
   }
 
   storeNamed(
@@ -61,18 +53,21 @@ export default class ImportsCache {
         t.identifier(name),
       );
       imports.set(key, id);
-
-      let lastImport = this._lastImports.get(programPath);
-      if (lastImport && lastImport.node) {
-        lastImport = lastImport.insertAfter(node);
-      } else {
-        lastImport = programPath.unshiftContainer("body", node);
-      }
-      lastImport = lastImport[lastImport.length - 1];
-      this._lastImports.set(programPath, lastImport);
+      this._injectImport(programPath, node);
     }
 
     return t.identifier(imports.get(key));
+  }
+
+  _injectImport(programPath: NodePath, node: t.Node) {
+    let lastImport = this._lastImports.get(programPath);
+    if (lastImport && lastImport.node) {
+      lastImport = lastImport.insertAfter(node);
+    } else {
+      lastImport = programPath.unshiftContainer("body", node);
+    }
+    lastImport = lastImport[lastImport.length - 1];
+    this._lastImports.set(programPath, lastImport);
   }
 
   _ensure(
