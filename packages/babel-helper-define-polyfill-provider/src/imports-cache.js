@@ -7,6 +7,7 @@ type StrMap<K> = Map<string, K>;
 
 export default class ImportsCache {
   _imports: WeakMap<NodePath, StrMap<string>>;
+  _anonymousImports: WeakMap<NodePath, Set<string>>;
   _lastImports: WeakMap<NodePath, NodePath>;
 
   constructor() {
