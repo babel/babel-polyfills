@@ -22,7 +22,7 @@ export default class ImportsCache {
     getVal: (isScript: boolean, source: t.StringLiteral) => t.Node,
   ) {
     const key = this._normalizeKey(programPath, url, "");
-    const imports = this._ensure(this._anonymousImports, programPath, Set);
+    const imports = this._ensure<Set<*,*>>(this._anonymousImports, programPath, Set);
 
     if (imports.has(key)) return;
 
@@ -45,7 +45,7 @@ export default class ImportsCache {
     ) => { node: t.Node, name: string },
   ) {
     const key = this._normalizeKey(programPath, url, name);
-    const imports = this._ensure(this._imports, programPath, Map);
+    const imports = this._ensure<Map<*,*>>(this._imports, programPath, Map);
 
     if (!imports.has(key)) {
       const { node, name: id } = getVal(
@@ -71,10 +71,10 @@ export default class ImportsCache {
     this._lastImports.set(programPath, lastImport);
   }
 
-  _ensure(
-    map: Map<*, *> | WeakMap<*, *>,
+  _ensure<C>(
+    map: C,
     programPath: NodePath,
-    Collection: Class<Map> | Class<Set>,
+    Collection: Class<C>,
   ): * {
     if (!map.has(programPath)) map.set(programPath, new Collection());
     return map.get(programPath);
