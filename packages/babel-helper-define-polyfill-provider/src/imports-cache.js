@@ -7,14 +7,34 @@ type StrMap<K> = Map<string, K>;
 
 export default class ImportsCache {
   _imports: WeakMap<NodePath, StrMap<string>>;
+  _anonymousImports: WeakMap<NodePath, Set<string>>;
   _lastImports: WeakMap<NodePath, NodePath>;
 
   constructor() {
     this._imports = new WeakMap();
+    this._anonymousImports = new WeakMap();
     this._lastImports = new WeakMap();
   }
 
-  store(
+  storeAnonymous(
+    programPath: NodePath,
+    url: string,
+    getVal: (isScript: boolean, source: t.StringLiteral) => t.Node,
+  ) {
+    const key = this._normalizeKey(programPath, url, "");
+    const imports = this._ensure(this._anonymousImports, programPath, Set);
+
+    if (imports.has(key)) return;
+
+    const node = getVal(
+      programPath.node.sourceType === "script",
+      t.stringLiteral(url),
+    );
+    imports.add(key);
+    this._injectImport(programPath, node);
+  }
+
+  storeNamed(
     programPath: NodePath,
     url: string,
     name: string,
@@ -25,7 +45,7 @@ export default class ImportsCache {
     ) => { node: t.Node, name: string },
   ) {
     const key = this._normalizeKey(programPath, url, name);
-    const imports = this._ensure(this._imports, programPath);
+    const imports = this._ensure(this._imports, programPath, Map);
 
     if (!imports.has(key)) {
       const { node, name: id } = getVal(
@@ -34,23 +54,34 @@ export default class ImportsCache {
         t.identifier(name),
       );
       imports.set(key, id);
-
-      let lastImport = this._lastImports.get(programPath);
-      if (lastImport && lastImport.node) {
-        lastImport = lastImport.insertAfter(node);
-      } else {
-        lastImport = programPath.unshiftContainer("body", node);
-      }
-      lastImport = lastImport[lastImport.length - 1];
-      this._lastImports.set(programPath, lastImport);
+      this._injectImport(programPath, node);
     }
 
     return t.identifier(imports.get(key));
   }
 
-  _ensure(map: Map<*, *> | WeakMap<*, *>, programPath: NodePath): * {
-    if (!map.has(programPath)) map.set(programPath, new Map());
-    return map.get(programPath);
+  _injectImport(programPath: NodePath, node: t.Node) {
+    let lastImport = this._lastImports.get(programPath);
+    if (lastImport && lastImport.node) {
+      lastImport = lastImport.insertAfter(node);
+    } else {
+      lastImport = programPath.unshiftContainer("body", node);
+    }
+    lastImport = lastImport[lastImport.length - 1];
+    this._lastImports.set(programPath, lastImport);
+  }
+
+  _ensure<C: Map<*, *> | Set<*>>(
+    map: WeakMap<NodePath, C>,
+    programPath: NodePath,
+    Collection: Class<C>,
+  ): C {
+    let collection = map.get(programPath);
+    if (!collection) {
+      collection = new Collection();
+      map.set(programPath, collection);
+    }
+    return collection;
   }
 
   _normalizeKey(programPath: NodePath, url: string, name: string): string {
