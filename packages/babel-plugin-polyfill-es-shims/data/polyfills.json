@@ -127,6 +127,7 @@
     "samsung": "1",
     "electron": "0.20"
   },
+  "Array.prototype.item": {},
   "Array.prototype.keys": {
     "chrome": "38",
     "opera": "25",
@@ -391,6 +392,7 @@
     "samsung": "3.4",
     "electron": "0.21"
   },
+  "String.prototype.item": {},
   "String.prototype.matchAll": {
     "chrome": "80",
     "opera": "67",
@@ -441,6 +443,7 @@
     "ios": "13.4",
     "electron": "10"
   },
+  "String.prototype.split": {},
   "String.prototype.startsWith": {
     "chrome": "41",
     "opera": "28",

@@ -43,6 +43,7 @@ This plugin supports the following `es-shims` polyfills.
 | `Array.prototype.reduce`      | [`array.prototype.reduce`](https://github.com/es-shims/Array.prototype.reduce)           |
 | `Array.prototype.reduceRight` | [`array.prototype.reduceright`](https://github.com/es-shims/Array.prototype.reduceRight) |
 | `Array.prototype.some`        | [`array.prototype.some`](https://github.com/es-shims/Array.prototype.some)               |
+| `String.prototype.split`      | [`string.prototype.split`](https://github.com/es-shims/String.prototype.split)           |
 
 ### ES2015 (ES6)
 
@@ -105,19 +106,21 @@ This plugin supports the following `es-shims` polyfills.
 
 ### ES2020
 
-| Builtin object or function      | Package name                                                                             | Owner |
-| :------------------------------ | :--------------------------------------------------------------------------------------- | :---- |
-| `globalThis`                    | [`globalthis`](https://github.com/es-shims/globalThis)                                   |
-| `Promise.allSettled`            | [`promise.allsettled`](https://github.com/es-shims/Promise.allSettled)                   |
-| `String.prototype.matchAll`     | [`string.prototype.matchall`](https://github.com/ljharb/String.prototype.matchAll)       |
-| `String.prototype.replaceAll`   | [`string.prototype.replaceall`](https://github.com/es-shims/String.prototype.replaceAll) |
-
-### Stage 3
-
 | Builtin object or function           | Package name                                                                             | Owner |
 | :----------------------------------- | :--------------------------------------------------------------------------------------- | :---- |
 | `AggregateError` (for `Promise.any`) | [`es-aggregate-error`](https://github.com/es-shims/AggregateError)                       |
+| `globalThis`                         | [`globalthis`](https://github.com/es-shims/globalThis)                                   |
+| `Promise.allSettled`                 | [`promise.allsettled`](https://github.com/es-shims/Promise.allSettled)                   |
 | `Promise.any`                        | [`promise.any`](https://github.com/es-shims/Promise.any)                                 |
+| `String.prototype.matchAll`          | [`string.prototype.matchall`](https://github.com/ljharb/String.prototype.matchAll)       |
+| `String.prototype.replaceAll`        | [`string.prototype.replaceall`](https://github.com/es-shims/String.prototype.replaceAll) |
+
+### Proposals
+
+| Builtin object or function | Package name                                                                 | Owner |
+| :------------------------- | :--------------------------------------------------------------------------- | :---- |
+| `Array.prototype.item`     | [`Array.prototype.item`](https://github.com/es-shims/Array.prototype.item)   |
+| `String.prototype.item`    | [`String.prototype.item`](https://github.com/es-shims/String.prototype.item) |
 
 ## Missing polyfills
 

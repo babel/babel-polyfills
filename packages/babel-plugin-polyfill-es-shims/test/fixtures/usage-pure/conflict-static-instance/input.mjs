@@ -9,3 +9,7 @@ obj.keys();
 Object.values();
 obj.values();
 [].values();
+
+Symbol.split;
+"".split;
+str.split;

@@ -17,6 +17,7 @@ module.exports = {
     "Array.prototype.{flat, flatMap} / Array.prototype.flatMap",
   "Array.prototype.includes": "Array.prototype.includes",
   "Array.prototype.indexOf": "Array methods / Array.prototype.indexOf",
+  "Array.prototype.item": [],
   "Array.prototype.keys": "Array.prototype methods / Array.prototype.keys",
   "Array.prototype.lastIndexOf": "Array methods / Array.prototype.lastIndexOf",
   "Array.prototype.map": "Array methods / Array.prototype.map",
@@ -52,12 +53,14 @@ module.exports = {
     "String.prototype methods / String.prototype.endsWith",
   "String.prototype.includes":
     "String.prototype methods / String.prototype.includes",
+  "String.prototype.item": [],
   "String.prototype.matchAll": "String.prototype.matchAll",
   "String.prototype.padEnd": "String padding / String.prototype.padEnd",
   "String.prototype.padStart": "String padding / String.prototype.padStart",
   "String.prototype.repeat":
     "String.prototype methods / String.prototype.repeat",
   "String.prototype.replaceAll": "String.prototype.replaceAll",
+  "String.prototype.split": [],
   "String.prototype.startsWith":
     "String.prototype methods / String.prototype.startsWith",
   "String.prototype.trim":
