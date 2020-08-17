@@ -1,18 +1,18 @@
-var _Map = require("core-js-pure/stable/map.js");
+var _Map = require("core-js-pure/stable/map/index.js");
 
-var _Promise = require("core-js-pure/stable/promise.js");
+var _Promise = require("core-js-pure/stable/promise/index.js");
 
-var _Set = require("core-js-pure/stable/set.js");
+var _Set = require("core-js-pure/stable/set/index.js");
 
-var _Symbol = require("core-js-pure/stable/symbol.js");
+var _Symbol = require("core-js-pure/stable/symbol/index.js");
 
-var _URL = require("core-js-pure/stable/url.js");
+var _URL = require("core-js-pure/stable/url/index.js");
 
-var _URLSearchParams = require("core-js-pure/stable/url-search-params.js");
+var _URLSearchParams = require("core-js-pure/stable/url-search-params/index.js");
 
-var _WeakMap = require("core-js-pure/stable/weak-map.js");
+var _WeakMap = require("core-js-pure/stable/weak-map/index.js");
 
-var _WeakSet = require("core-js-pure/stable/weak-set.js");
+var _WeakSet = require("core-js-pure/stable/weak-set/index.js");
 
 var _clearImmediate = require("core-js-pure/stable/clear-immediate.js");
 

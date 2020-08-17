@@ -134,7 +134,7 @@ var _String$raw = require("core-js-pure/stable/string/raw.js");
 
 var _Symbol$asyncIterator = require("core-js-pure/stable/symbol/async-iterator.js");
 
-var _Symbol = require("core-js-pure/stable/symbol.js");
+var _Symbol = require("core-js-pure/stable/symbol/index.js");
 
 var _Symbol$for = require("core-js-pure/stable/symbol/for.js");
 

@@ -1,3 +1,3 @@
-var _Promise = require("core-js-pure/stable/promise.js");
+var _Promise = require("core-js-pure/stable/promise/index.js");
 
 _Promise.resolve;

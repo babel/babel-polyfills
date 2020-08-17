@@ -2,7 +2,7 @@ var _sliceInstanceProperty = require("core-js-pure/stable/instance/slice.js");
 
 var _Array$from = require("core-js-pure/stable/array/from.js");
 
-var _Symbol = require("core-js-pure/stable/symbol.js");
+var _Symbol = require("core-js-pure/stable/symbol/index.js");
 
 var _getIteratorMethod = require("core-js-pure/stable/get-iterator-method.js");
 

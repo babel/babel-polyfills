@@ -1,22 +1,22 @@
 var _AggregateError = require("core-js-pure/features/aggregate-error.js");
 
-var _Map = require("core-js-pure/features/map.js");
+var _Map = require("core-js-pure/features/map/index.js");
 
-var _Observable = require("core-js-pure/features/observable.js");
+var _Observable = require("core-js-pure/features/observable/index.js");
 
-var _Promise = require("core-js-pure/features/promise.js");
+var _Promise = require("core-js-pure/features/promise/index.js");
 
-var _Set = require("core-js-pure/features/set.js");
+var _Set = require("core-js-pure/features/set/index.js");
 
-var _Symbol = require("core-js-pure/features/symbol.js");
+var _Symbol = require("core-js-pure/features/symbol/index.js");
 
-var _URL = require("core-js-pure/features/url.js");
+var _URL = require("core-js-pure/features/url/index.js");
 
-var _URLSearchParams = require("core-js-pure/features/url-search-params.js");
+var _URLSearchParams = require("core-js-pure/features/url-search-params/index.js");
 
-var _WeakMap = require("core-js-pure/features/weak-map.js");
+var _WeakMap = require("core-js-pure/features/weak-map/index.js");
 
-var _WeakSet = require("core-js-pure/features/weak-set.js");
+var _WeakSet = require("core-js-pure/features/weak-set/index.js");
 
 var _clearImmediate = require("core-js-pure/features/clear-immediate.js");
 

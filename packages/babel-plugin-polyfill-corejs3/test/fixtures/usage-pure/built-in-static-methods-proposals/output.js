@@ -212,7 +212,7 @@ var _Symbol$toStringTag = require("core-js-pure/features/symbol/to-string-tag.js
 
 var _Symbol$unscopables = require("core-js-pure/features/symbol/unscopables.js");
 
-var _Symbol = require("core-js-pure/features/symbol.js");
+var _Symbol = require("core-js-pure/features/symbol/index.js");
 
 _Array$from;
 _Array$isArray;
