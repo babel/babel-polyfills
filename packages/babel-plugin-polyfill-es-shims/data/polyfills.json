@@ -443,7 +443,20 @@
     "ios": "13.4",
     "electron": "10"
   },
-  "String.prototype.split": {},
+  "String.prototype.split": {
+    "chrome": "15",
+    "opera": "11",
+    "edge": "12",
+    "firefox": "5",
+    "safari": "5.1",
+    "node": "0.12",
+    "ie": "9",
+    "android": "4.4",
+    "ios": "6",
+    "phantom": "2",
+    "samsung": "1",
+    "electron": "0.20"
+  },
   "String.prototype.startsWith": {
     "chrome": "41",
     "opera": "28",
