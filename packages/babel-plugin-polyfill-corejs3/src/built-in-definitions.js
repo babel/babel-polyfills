@@ -320,7 +320,7 @@ export const StaticProperties: ObjectMap<
   Promise: {
     all: define(null, PromiseDependenciesWithIterators),
     allSettled: define(null, [
-      "esnext.promise.all-settled",
+      "es.promise.all-settled",
       ...PromiseDependenciesWithIterators,
     ]),
     any: define(null, [
