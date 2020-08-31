@@ -140,16 +140,16 @@ export default defineProvider<{||}>(function({
 
             if (!tmp) {
               tmp = path.scope.generateUidIdentifierBasedOnNode(object);
-              path.scope.push({ id: tmp });
+              path.scope.push({ id: t.cloneNode(tmp) });
               path.get("object").replaceWith(tmp);
             }
 
             const id = injectDefault(desc, utils);
 
             replacement = t.conditionalExpression(
-              thisCheck(tmp),
+              thisCheck(t.cloneNode(tmp)),
               isGetter
-                ? expr`${id}(${tmp})`
+                ? expr`${id}(${t.cloneNode(tmp)})`
                 : isCall
                 ? id
                 : expr`${id}.getPolyfill()`,
@@ -161,11 +161,11 @@ export default defineProvider<{||}>(function({
 
           if (!parent) return;
 
-          replacement = expr`(${tmp} = ${object}, ${replacement})`;
+          replacement = expr`(${t.cloneNode(tmp)} = ${object}, ${replacement})`;
 
           if (!isGetter && isCall) {
             parent.alternate = expr`Function.call.bind(${parent.alternate})`;
-            path.parentPath.unshiftContainer("arguments", tmp);
+            path.parentPath.unshiftContainer("arguments", t.cloneNode(tmp));
           }
 
           path.replaceWith(replacement);

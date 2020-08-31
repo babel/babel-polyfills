@@ -12,7 +12,7 @@ export function callMethod(path: *, id: t.Identifier) {
     context2 = t.cloneNode(object);
   } else {
     context1 = path.scope.generateDeclaredUidIdentifier("context");
-    context2 = t.assignmentExpression("=", context1, object);
+    context2 = t.assignmentExpression("=", t.cloneNode(context1), object);
   }
 
   path.replaceWith(

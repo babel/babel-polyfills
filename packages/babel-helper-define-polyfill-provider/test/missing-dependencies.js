@@ -21,8 +21,8 @@ describe("missingDependencies", () => {
 
     expect(exitCode).not.toBe(0);
 
-    expect(stdout).toMatchInlineSnapshot(
-      `"Successfully compiled 2 files with Babel."`,
+    expect(stdout.replace(/\(\d+ms\)/, "XXXms")).toMatchInlineSnapshot(
+      `"Successfully compiled 2 files with Babel XXXms."`,
     );
     expect(stderr).toMatchInlineSnapshot(`
       "Some polyfills have been added but are not present in your dependencies.
