@@ -83,7 +83,12 @@ function resolveOptions<Options>(
     );
   }
 
-  const targets: Targets = getTargets(targetsOption, {
+  const targetsObj =
+    typeof targetsOption === "string" || Array.isArray(targetsOption)
+      ? { browsers: targetsOption }
+      : targetsOption;
+
+  const targets: Targets = getTargets(targetsObj, {
     ignoreBrowserslistConfig,
     configPath,
   });
