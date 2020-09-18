@@ -24,6 +24,37 @@ describe("method", () => {
   });
 });
 
+function extractTargets(targets) {
+  let resolved;
+  transform("code", { method: "usage-global", targets }, ({ targets }) => {
+    resolved = targets;
+    return {
+      usageGlobal() {},
+    };
+  });
+  return resolved;
+}
+
+describe("targets", () => {
+  it("accepts a string", () => {
+    const targets = extractTargets("firefox 67, ie 11");
+
+    expect(targets).toEqual({ firefox: "67.0.0", ie: "11.0.0" });
+  });
+
+  it("accepts an array", () => {
+    const targets = extractTargets(["firefox 67", "ie 11"]);
+
+    expect(targets).toEqual({ firefox: "67.0.0", ie: "11.0.0" });
+  });
+
+  it("accepts an object", () => {
+    const targets = extractTargets({ firefox: "67", ie: "11" });
+
+    expect(targets).toEqual({ firefox: "67.0.0", ie: "11.0.0" });
+  });
+});
+
 describe("shouldInjectPolyfill", () => {
   it("is not compatible with .include", () => {
     expect(() =>
