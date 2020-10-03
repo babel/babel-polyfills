@@ -19,6 +19,7 @@ export default class ImportsCache {
   storeAnonymous(
     programPath: NodePath,
     url: string,
+    // eslint-disable-next-line no-undef
     getVal: (isScript: boolean, source: t.StringLiteral) => t.Node,
   ) {
     const key = this._normalizeKey(programPath, url, "");
@@ -40,7 +41,9 @@ export default class ImportsCache {
     name: string,
     getVal: (
       isScript: boolean,
+      // eslint-disable-next-line no-undef
       source: t.StringLiteral,
+      // eslint-disable-next-line no-undef
       name: t.Identifier,
     ) => { node: t.Node, name: string },
   ) {
