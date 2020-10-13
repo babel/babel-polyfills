@@ -124,8 +124,8 @@ This plugin supports the following `es-shims` polyfills.
 
 | Builtin object or function | Package name                                                                 | Owner |
 | :------------------------- | :--------------------------------------------------------------------------- | :---- |
-| `Array.prototype.item`     | [`Array.prototype.item`](https://github.com/es-shims/Array.prototype.item)   |
-| `String.prototype.item`    | [`String.prototype.item`](https://github.com/es-shims/String.prototype.item) |
+| `Array.prototype.item`     | [`array.prototype.item`](https://github.com/es-shims/Array.prototype.item)   |
+| `String.prototype.item`    | [`string.prototype.item`](https://github.com/es-shims/String.prototype.item) |
 
 ## Missing polyfills
 
