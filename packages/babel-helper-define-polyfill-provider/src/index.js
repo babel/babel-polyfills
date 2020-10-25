@@ -53,6 +53,7 @@ function resolveOptions<Options>(
     configPath,
     debug,
     shouldInjectPolyfill,
+    absoluteImports,
     ...providerOptions
   } = options;
 
@@ -83,6 +84,17 @@ function resolveOptions<Options>(
     );
   }
 
+  if (
+    absoluteImports != null &&
+    typeof absoluteImports !== "boolean" &&
+    typeof absoluteImports !== "string"
+  ) {
+    throw new Error(
+      `.absoluteImports must be a boolean, a string, or undefined` +
+        ` (received ${JSON.stringify(absoluteImports)})`,
+    );
+  }
+
   const targetsObj =
     typeof targetsOption === "string" || Array.isArray(targetsOption)
       ? { browsers: targetsOption }
@@ -97,6 +109,7 @@ function resolveOptions<Options>(
     method,
     methodName,
     targets,
+    absoluteImports: absoluteImports || false,
     shouldInjectPolyfill,
     debug: !!debug,
     providerOptions: ((providerOptions: Object): ProviderOptions<Options>),
@@ -118,9 +131,14 @@ function instantiateProvider<Options>(
     debug,
     shouldInjectPolyfill,
     providerOptions,
+    absoluteImports,
   } = resolveOptions<Options>(options);
 
-  const getUtils = createUtilsGetter(new ImportsCache());
+  const getUtils = createUtilsGetter(
+    new ImportsCache(moduleName =>
+      deps.resolve(dirname, moduleName, absoluteImports),
+    ),
+  );
 
   // eslint-disable-next-line prefer-const
   let include, exclude;
@@ -180,12 +198,18 @@ function instantiateProvider<Options>(
     },
     assertDependency(name, version = "*") {
       if (missingDependencies === false) return;
+      if (absoluteImports) {
+        // If absoluteImports is not false, we will try resolving
+        // the dependency and throw if it's not possible. We can
+        // skip the check here.
+        return;
+      }
 
       const dep = version === "*" ? name : `${name}@^${version}`;
 
       const found = missingDependencies.all
         ? false
-        : mapGetOr(depsCache, name, () => deps.has(dirname, name));
+        : mapGetOr(depsCache, name, () => !deps.has(dirname, name));
 
       if (!found) {
         debugLog().missingDeps.add(dep);

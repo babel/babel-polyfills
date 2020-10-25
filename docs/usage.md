@@ -74,6 +74,16 @@ The `shouldInjectPolyfill` function takes two parameters: the name of the polyfi
 function shouldInjectPolyfill(name: string, defaultShouldInject: boolean): boolean;
 ```
 
+### `absoluteRuntime`
+
+`boolean` or `string`, defaults to `false`.
+
+This allows users to run polyfill providers broadly across a whole project. By default, polyfill providers inject a bare import to the polyfill package (for example, `core-js-pure/stable/array/from.js`), but that only works if the polyfill is in the `node_modules` of the file that is being compiled. This can be problematic for nested `node_modules`, npm-linked modules, or CLIs that reside outside the user's project, among other cases. To avoid worrying about how the runtime module's location is resolved, this allows users to resolve the runtime once up front, and then insert absolute paths to the runtime into the output code.
+
+Using absolute paths is not desirable if files are compiled for use at a later time, but in contexts where a file is compiled and then immediately consumed, they can be quite helpful.
+
+Reference: [babel/babel#8435](https://github.com/babel/babel/pull/8435)
+
 ### `missingDependencies`
 
 This option modifies the dependencies detection logging. If set to `false`, dependencies

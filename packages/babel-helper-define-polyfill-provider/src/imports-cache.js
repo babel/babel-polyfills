@@ -9,11 +9,13 @@ export default class ImportsCache {
   _imports: WeakMap<NodePath, StrMap<string>>;
   _anonymousImports: WeakMap<NodePath, Set<string>>;
   _lastImports: WeakMap<NodePath, NodePath>;
+  _resolver: (url: string) => string;
 
-  constructor() {
+  constructor(resolver: (url: string) => string) {
     this._imports = new WeakMap();
     this._anonymousImports = new WeakMap();
     this._lastImports = new WeakMap();
+    this._resolver = resolver;
   }
 
   storeAnonymous(
@@ -29,7 +31,7 @@ export default class ImportsCache {
 
     const node = getVal(
       programPath.node.sourceType === "script",
-      t.stringLiteral(url),
+      t.stringLiteral(this._resolver(url)),
     );
     imports.add(key);
     this._injectImport(programPath, node);
@@ -53,7 +55,7 @@ export default class ImportsCache {
     if (!imports.has(key)) {
       const { node, name: id } = getVal(
         programPath.node.sourceType === "script",
-        t.stringLiteral(url),
+        t.stringLiteral(this._resolver(url)),
         t.identifier(name),
       );
       imports.set(key, id);

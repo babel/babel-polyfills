@@ -186,3 +186,19 @@ describe("shouldInjectPolyfill", () => {
     expect(result).toBe(true);
   });
 });
+
+function withAbsoluteImports(absoluteImports) {
+  let resolved;
+  transform("code", { method: "usage-global", absoluteImports }, () => ({
+    usageGlobal() {},
+  }));
+  return resolved;
+}
+
+describe("absoluteImports", () => {
+  it("can be a boolean or a string", () => {
+    expect(() => withAbsoluteImports(false)).not.toThrow();
+    expect(() => withAbsoluteImports(true)).not.toThrow();
+    expect(() => withAbsoluteImports("./foo/bar")).not.toThrow();
+  });
+});

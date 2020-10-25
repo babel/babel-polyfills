@@ -1,0 +1,12 @@
+{
+  "babelrcRoots": ["./nested", "./nested-2"],
+  "plugins": [
+    ["../../../helpers/generic-provider.js", {
+      "method": "usage-global",
+      "globals": {
+        "a": "polyfill-a"
+      },
+      "absoluteImports": true
+    }, "polyfill-a"]
+  ]
+}
