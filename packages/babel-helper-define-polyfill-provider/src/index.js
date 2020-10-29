@@ -45,6 +45,7 @@ function resolveOptions<Options>(
   debug: boolean,
   shouldInjectPolyfill: ?(name: string, shouldInject: boolean) => boolean,
   providerOptions: ProviderOptions<Options>,
+  absoluteImports: string | boolean,
 } {
   const {
     method,

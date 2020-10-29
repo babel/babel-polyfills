@@ -39,6 +39,7 @@ export function resolve(
   } catch (err) {
     if (err.code !== "MODULE_NOT_FOUND") throw err;
 
+    // $FlowIgnore
     throw Object.assign(
       new Error(`Failed to resolve "${moduleName}" relative to "${dirname}"`),
       {
