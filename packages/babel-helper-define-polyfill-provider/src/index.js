@@ -110,7 +110,7 @@ function resolveOptions<Options>(
     method,
     methodName,
     targets,
-    absoluteImports: absoluteImports || false,
+    absoluteImports: absoluteImports ?? false,
     shouldInjectPolyfill,
     debug: !!debug,
     providerOptions: ((providerOptions: Object): ProviderOptions<Options>),
