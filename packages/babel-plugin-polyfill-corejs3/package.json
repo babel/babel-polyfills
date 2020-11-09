@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "@babel/helper-define-polyfill-provider": "^0.0.4",
-    "core-js-compat": "^3.6.4"
+    "core-js-compat": "^3.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.5",
