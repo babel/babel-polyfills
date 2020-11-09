@@ -401,6 +401,7 @@
     "safari": "13.1",
     "node": "14",
     "ios": "13.4",
+    "samsung": "13",
     "electron": "8"
   },
   "String.prototype.padEnd": {
@@ -440,6 +441,7 @@
     "chrome": "85",
     "firefox": "77",
     "safari": "13.1",
+    "node": "15",
     "ios": "13.4",
     "electron": "10"
   },
