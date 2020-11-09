@@ -20,7 +20,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.5",
-    "@babel/helper-plugin-test-runner": "^7.10.4"
+    "@babel/helper-plugin-test-runner": "^7.10.4",
+    "array.from": "^1.1.0"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0-0"

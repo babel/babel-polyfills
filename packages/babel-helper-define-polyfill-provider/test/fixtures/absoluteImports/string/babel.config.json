@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    ["../../../helpers/generic-provider.js", {
+      "method": "usage-global",
+      "globals": {
+        "a": "polyfill-a",
+        "b": "polyfill-b"
+      },
+      "absoluteImports": "./nested"
+    }, "polyfill-a"]
+  ]
+}

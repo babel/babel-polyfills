@@ -33,6 +33,7 @@ export type PluginOptions = {|
   exclude?: Pattern[],
   shouldInjectPolyfill?: (name: string, shouldInject: boolean) => boolean,
   missingDependencies?: MissingDependenciesOption,
+  absoluteImports?: boolean | string,
 |};
 
 export type PolyfillProvider<Opts = {||}> = (

@@ -233,7 +233,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-define-polyfill-provider@^0.0.3, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
+"@babel/helper-define-polyfill-provider@^0.0.4, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
   version: 0.0.0-use.local
   resolution: "@babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider"
   dependencies:
@@ -3634,6 +3634,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"array.from@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "array.from@npm:1.1.0"
+  dependencies:
+    define-properties: ^1.1.3
+    es-abstract: ^1.17.2
+    iterate-value: ^1.0.1
+  checksum: da072503db3a45ee76e779ad6c00325345cdef476d599799a468e453658b620b5d9b45f2a5b949ac7477887c6b7e5a737b457ae955aa6450e285678a56964ab4
+  languageName: node
+  linkType: hard
+
 "array.prototype.flat@npm:^1.2.1":
   version: 1.2.3
   resolution: "array.prototype.flat@npm:1.2.3"
@@ -3871,7 +3882,7 @@ __metadata:
   dependencies:
     "@babel/compat-data": ^7.11.0
     "@babel/core": ^7.11.5
-    "@babel/helper-define-polyfill-provider": ^0.0.3
+    "@babel/helper-define-polyfill-provider": ^0.0.4
     "@babel/helper-plugin-test-runner": ^7.10.4
     "@babel/plugin-transform-for-of": ^7.10.4
     "@babel/plugin-transform-modules-commonjs": ^7.10.4
@@ -3886,12 +3897,13 @@ __metadata:
   resolution: "babel-plugin-polyfill-corejs3@workspace:packages/babel-plugin-polyfill-corejs3"
   dependencies:
     "@babel/core": ^7.11.5
-    "@babel/helper-define-polyfill-provider": ^0.0.3
+    "@babel/helper-define-polyfill-provider": ^0.0.4
     "@babel/helper-plugin-test-runner": ^7.10.4
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/plugin-transform-for-of": ^7.10.4
     "@babel/plugin-transform-modules-commonjs": ^7.10.4
     core-js-compat: ^3.6.4
+    core-js-pure: ^3.6.5
   peerDependencies:
     "@babel/core": ^7.0.0-0
   languageName: unknown
@@ -3902,8 +3914,9 @@ __metadata:
   resolution: "babel-plugin-polyfill-es-shims@workspace:packages/babel-plugin-polyfill-es-shims"
   dependencies:
     "@babel/core": ^7.11.5
-    "@babel/helper-define-polyfill-provider": ^0.0.3
+    "@babel/helper-define-polyfill-provider": ^0.0.4
     "@babel/helper-plugin-test-runner": ^7.10.4
+    array.from: ^1.1.0
   peerDependencies:
     "@babel/core": ^7.0.0-0
   languageName: unknown
@@ -3914,7 +3927,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-regenerator@workspace:packages/babel-plugin-polyfill-regenerator"
   dependencies:
     "@babel/core": ^7.11.5
-    "@babel/helper-define-polyfill-provider": ^0.0.3
+    "@babel/helper-define-polyfill-provider": ^0.0.4
     "@babel/helper-plugin-test-runner": ^7.10.4
   peerDependencies:
     "@babel/core": ^7.0.0-0
@@ -5033,6 +5046,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"core-js-pure@npm:^3.6.5":
+  version: 3.6.5
+  resolution: "core-js-pure@npm:3.6.5"
+  checksum: 91fc8e0b699d5bcb11f265ad4544d08c98096b86ad6c9b4c00109616db0aa992ceb58ea82d0dbae2a16658a7aaf2922aa6f9fc1107dc3b0055270799d0414a3f
+  languageName: node
+  linkType: hard
+
 "core-js@npm:^2.6.5":
   version: 2.6.11
   resolution: "core-js@npm:2.6.11"
@@ -5693,7 +5713,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es-abstract@npm:^1.17.0, es-abstract@npm:^1.17.0-next.1, es-abstract@npm:^1.17.2, es-abstract@npm:^1.17.5":
+"es-abstract@npm:^1.17.0, es-abstract@npm:^1.17.0-next.1, es-abstract@npm:^1.17.2, es-abstract@npm:^1.17.4, es-abstract@npm:^1.17.5":
   version: 1.17.5
   resolution: "es-abstract@npm:1.17.5"
   dependencies:
@@ -5709,6 +5729,21 @@ __metadata:
     string.prototype.trimleft: ^2.1.1
     string.prototype.trimright: ^2.1.1
   checksum: 83b0ce528072f37174182548d73e18d1b02fa6bddf0d675e81de77b23f4c6f4908f4d1bd5835fcae9f5d91051533afafd841482dafa21b111eaf52160a08b837
+  languageName: node
+  linkType: hard
+
+"es-get-iterator@npm:^1.0.2":
+  version: 1.1.0
+  resolution: "es-get-iterator@npm:1.1.0"
+  dependencies:
+    es-abstract: ^1.17.4
+    has-symbols: ^1.0.1
+    is-arguments: ^1.0.4
+    is-map: ^2.0.1
+    is-set: ^2.0.1
+    is-string: ^1.0.5
+    isarray: ^2.0.5
+  checksum: 2facd9668d2297ae98f42384667a588abbbd5a12f8223086ff9bece004f927d88d817ece5109a45d439e9280152f36b5aac27ec1173695856519d5717a162b43
   languageName: node
   linkType: hard
 
@@ -7682,6 +7717,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"is-arguments@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "is-arguments@npm:1.0.4"
+  checksum: a04bc21254cfbb77c934ec51165ef7629c12cabd2a92c2c4333280b5117f138fcec6369dd2ab7d8fe24e3af7dbc2a4ce389c53ed0b55b0f8818788c3c09f4ad2
+  languageName: node
+  linkType: hard
+
 "is-arrayish@npm:^0.2.1":
   version: 0.2.1
   resolution: "is-arrayish@npm:0.2.1"
@@ -7887,6 +7929,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"is-map@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "is-map@npm:2.0.1"
+  checksum: 16524b5d2e0c5c8bc2674f99294205abbb63819de7919b232c3035436771d3df50b69a3af2b2ce110961b4eeaf50f9a172f6a5b690aa4be32be85f4e5b2d6f01
+  languageName: node
+  linkType: hard
+
 "is-negated-glob@npm:^1.0.0":
   version: 1.0.0
   resolution: "is-negated-glob@npm:1.0.0"
@@ -7990,6 +8039,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"is-set@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "is-set@npm:2.0.1"
+  checksum: 97a9f4dd73405d9edf5c18b0a5935961f34ae34c81220d3cd9621ad390114b7f881f3c12e4abe4effae066dccf447ae7109d8e29b67c0c0e5fae4333179bfda7
+  languageName: node
+  linkType: hard
+
 "is-ssh@npm:^1.3.0":
   version: 1.3.1
   resolution: "is-ssh@npm:1.3.1"
@@ -8082,6 +8138,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"isarray@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "isarray@npm:2.0.5"
+  checksum: cfb3e907b3c7957fb18e479bbe9102df4e84c5386839b4a33076f38ee31a8934e77d43ff517967fd39192a7c06b894770454886a5ffc8a3ddc36f6b746d70726
+  languageName: node
+  linkType: hard
+
 "isexe@npm:^2.0.0":
   version: 2.0.0
   resolution: "isexe@npm:2.0.0"
@@ -8171,6 +8234,23 @@ fsevents@~2.1.2:
   dependencies:
     html-escaper: ^2.0.0
   checksum: 828f4afd30f1248aaf2ae65a606aa889611165de2c71eaa6a8953eeb4bdbf4b19072b5ec224d465a7511ed02a63a8fabf08c915ab08f7016310a512d4e14c2ac
+  languageName: node
+  linkType: hard
+
+"iterate-iterator@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "iterate-iterator@npm:1.0.1"
+  checksum: d2e6b0704bd4c194589059f6b5b1f7947a997af70a6cb54765f908ec6fe76f39a49d588aaaff9e725209c0dc8a700a883f2f265efb646bab2535c51975466bd3
+  languageName: node
+  linkType: hard
+
+"iterate-value@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "iterate-value@npm:1.0.2"
+  dependencies:
+    es-get-iterator: ^1.0.2
+    iterate-iterator: ^1.0.1
+  checksum: 7c0bef59ead553a2d1b7957954a514e180e3155765606c5e8cfb09518860c7b81aa0675c987352f506dd779b2366cd2b5e4cd249f7cf0a965b86c916e669608e
   languageName: node
   linkType: hard
 
