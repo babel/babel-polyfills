@@ -18,8 +18,6 @@ import "core-js/modules/es.array.index-of.js";
 import "core-js/modules/es.array.iterator.js";
 import "core-js/modules/es.array.last-index-of.js";
 import "core-js/modules/es.array.map.js";
-import "core-js/modules/es.array.reduce.js";
-import "core-js/modules/es.array.reduce-right.js";
 import "core-js/modules/es.array.slice.js";
 import "core-js/modules/es.array.sort.js";
 import "core-js/modules/es.array.species.js";
