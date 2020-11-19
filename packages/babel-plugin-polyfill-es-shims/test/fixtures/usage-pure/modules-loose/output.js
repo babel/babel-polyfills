@@ -1,5 +1,7 @@
 "use strict";
 
+var _ObjectKeys = require("object-keys");
+
 exports.__esModule = true;
 var _exportNames = {
   exp: true
@@ -16,7 +18,7 @@ var _fuz = require("fuz");
 
 var _mod = require("mod");
 
-Object.keys(_mod).forEach(function (key) {
+_ObjectKeys(_mod).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
   exports[key] = _mod[key];

@@ -2,6 +2,7 @@ var _obj, _obj2, _obj3, _str;
 
 import _ObjectEntries from "object.entries";
 import _ArrayPrototypeEntries from "array.prototype.entries";
+import _ObjectKeys from "object-keys";
 import _ArrayPrototypeKeys from "array.prototype.keys";
 import _ObjectValues from "object.values";
 import _ArrayPrototypeValues from "array.prototype.values";
@@ -13,7 +14,8 @@ _ObjectEntries();
 
 _ArrayPrototypeEntries([]);
 
-Object.keys();
+_ObjectKeys();
+
 (_obj2 = obj, Array.isArray(_obj2) ? _ArrayPrototypeKeys : Function.call.bind(_obj2.keys))(_obj2);
 
 _ArrayPrototypeKeys([]);

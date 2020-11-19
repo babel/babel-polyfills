@@ -43,6 +43,7 @@ This plugin supports the following `es-shims` polyfills.
 | `Array.prototype.reduce`      | [`array.prototype.reduce`](https://github.com/es-shims/Array.prototype.reduce)           |
 | `Array.prototype.reduceRight` | [`array.prototype.reduceright`](https://github.com/es-shims/Array.prototype.reduceRight) |
 | `Array.prototype.some`        | [`array.prototype.some`](https://github.com/es-shims/Array.prototype.some)               |
+| `Object.keys`                 | [`object.keys`](https://github.com/ljharb/object-keys) | [@ljharb](https://github.com/ljharb) 
 | `String.prototype.split`      | [`string.prototype.split`](https://github.com/es-shims/String.prototype.split)           |
 
 ### ES2015 (ES6)

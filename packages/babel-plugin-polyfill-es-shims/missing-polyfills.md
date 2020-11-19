@@ -20,7 +20,6 @@
 - `Array.prototype.copyWithin()`
 - `Array.prototype.fill()`
 - `Array.prototype.indexOf()`
-- `Object.keys()`
 - `Object.setPrototypeOf()`
 - `Math.acosh()`
 - `Math.asinh()`
