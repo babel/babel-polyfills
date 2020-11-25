@@ -15,7 +15,12 @@ import {
 } from "./built-in-definitions";
 
 import { types as t } from "@babel/core";
-import { callMethod, coreJSModule, isCoreJSSource } from "./utils";
+import {
+  callMethod,
+  coreJSModule,
+  isCoreJSSource,
+  coreJSPureHelper,
+} from "./utils";
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
 
@@ -130,7 +135,7 @@ export default defineProvider<Options>(function(
           path.replaceWith(
             t.callExpression(
               utils.injectDefaultImport(
-                `${coreJSBase}/is-iterable.js`,
+                coreJSPureHelper("is-iterable"),
                 "isIterable",
               ),
               [path.node.right],
@@ -157,7 +162,7 @@ export default defineProvider<Options>(function(
               path.parentPath.replaceWith(
                 t.callExpression(
                   utils.injectDefaultImport(
-                    `${coreJSBase}/get-iterator.js`,
+                    coreJSPureHelper("get-iterator"),
                     "getIterator",
                   ),
                   [path.node.object],
@@ -168,7 +173,7 @@ export default defineProvider<Options>(function(
               callMethod(
                 path,
                 utils.injectDefaultImport(
-                  `${coreJSBase}/get-iterator-method.js`,
+                  coreJSPureHelper("get-iterator-method"),
                   "getIteratorMethod",
                 ),
               );
@@ -177,7 +182,7 @@ export default defineProvider<Options>(function(
             path.replaceWith(
               t.callExpression(
                 utils.injectDefaultImport(
-                  `${coreJSBase}/get-iterator-method.js`,
+                  coreJSPureHelper("get-iterator-method"),
                   "getIteratorMethod",
                 ),
                 [path.node.object],

@@ -1,3 +1,3 @@
-var _isIterable = require("core-js-pure/stable/is-iterable.js");
+var _isIterable = require("core-js-pure/features/is-iterable.js");
 
 _isIterable(Object(arr));
