@@ -43,12 +43,9 @@ export default defineProvider<Options>(function(
   });
 
   const available = new Set(getModulesListForTargetVersion(version));
-  const coreJSBase =
-    method === "usage-pure"
-      ? proposals
-        ? "core-js-pure/features"
-        : "core-js-pure/stable"
-      : "core-js";
+  const coreJSPureBase = proposals
+    ? "core-js-pure/features"
+    : "core-js-pure/stable";
 
   function maybeInjectGlobal(names: string[], utils) {
     for (const name of names) {
@@ -70,7 +67,10 @@ export default defineProvider<Options>(function(
       !(object && desc.exclude && desc.exclude.includes(object)) &&
       shouldInjectPolyfill(desc.name)
     ) {
-      return utils.injectDefaultImport(`${coreJSBase}/${desc.pure}.js`, hint);
+      return utils.injectDefaultImport(
+        `${coreJSPureBase}/${desc.pure}.js`,
+        hint,
+      );
     }
   }
 
