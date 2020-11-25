@@ -166,7 +166,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-define-polyfill-provider@^0.0.4, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
+"@babel/helper-define-polyfill-provider@^0.0.5, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
   version: 0.0.0-use.local
   resolution: "@babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider"
   dependencies:
@@ -616,6 +616,17 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 134a6f37feac0e6d55f8188232e11798ccf699b02d50a4daf9c040f52a22ee32923a6a979443ecc865f4014937ffe67ac11b81aa5668b6792238c647314f41c9
+  languageName: node
+  linkType: hard
+
+"@babel/plugin-syntax-export-default-from@npm:^7.12.1":
+  version: 7.12.1
+  resolution: "@babel/plugin-syntax-export-default-from@npm:7.12.1"
+  dependencies:
+    "@babel/helper-plugin-utils": ^7.10.4
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 2fb7cd269beb9bb662e68358fa250fdfc110664c03dd47e6b5d884d56f2d2227510b86ff16d0ff0fefb901b5050dfb60501f4314710fe1702f29ca1e87e2eee6
   languageName: node
   linkType: hard
 
@@ -3596,7 +3607,7 @@ __metadata:
   dependencies:
     "@babel/compat-data": ^7.11.0
     "@babel/core": ^7.11.5
-    "@babel/helper-define-polyfill-provider": ^0.0.4
+    "@babel/helper-define-polyfill-provider": ^0.0.5
     "@babel/helper-plugin-test-runner": ^7.10.4
     "@babel/plugin-transform-for-of": ^7.10.4
     "@babel/plugin-transform-modules-commonjs": ^7.10.4
@@ -3611,9 +3622,10 @@ __metadata:
   resolution: "babel-plugin-polyfill-corejs3@workspace:packages/babel-plugin-polyfill-corejs3"
   dependencies:
     "@babel/core": ^7.11.5
-    "@babel/helper-define-polyfill-provider": ^0.0.4
+    "@babel/helper-define-polyfill-provider": ^0.0.5
     "@babel/helper-plugin-test-runner": ^7.10.4
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
+    "@babel/plugin-syntax-export-default-from": ^7.12.1
     "@babel/plugin-transform-for-of": ^7.10.4
     "@babel/plugin-transform-modules-commonjs": ^7.10.4
     core-js-compat: ^3.7.0
@@ -3628,7 +3640,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-es-shims@workspace:packages/babel-plugin-polyfill-es-shims"
   dependencies:
     "@babel/core": ^7.11.5
-    "@babel/helper-define-polyfill-provider": ^0.0.4
+    "@babel/helper-define-polyfill-provider": ^0.0.5
     "@babel/helper-plugin-test-runner": ^7.10.4
     array.from: ^1.1.0
   peerDependencies:
@@ -3641,7 +3653,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-regenerator@workspace:packages/babel-plugin-polyfill-regenerator"
   dependencies:
     "@babel/core": ^7.11.5
-    "@babel/helper-define-polyfill-provider": ^0.0.4
+    "@babel/helper-define-polyfill-provider": ^0.0.5
     "@babel/helper-plugin-test-runner": ^7.10.4
   peerDependencies:
     "@babel/core": ^7.0.0-0

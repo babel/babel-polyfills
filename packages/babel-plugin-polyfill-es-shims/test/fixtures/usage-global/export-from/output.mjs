@@ -1,0 +1,1 @@
+export { AggregateError } from "foo";

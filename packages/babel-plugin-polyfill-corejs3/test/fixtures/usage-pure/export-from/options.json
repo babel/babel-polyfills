@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    "@babel/plugin-syntax-export-default-from",
+    [
+      "@@/polyfill-corejs3",
+      {
+        "method": "usage-pure"
+      }
+    ]
+  ]
+}

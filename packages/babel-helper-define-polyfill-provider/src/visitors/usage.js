@@ -15,6 +15,14 @@ export default (
   return {
     // Symbol(), new Promise
     ReferencedIdentifier(path: NodePath) {
+      if (
+        path.parentPath.isExportSpecifier() &&
+        path.parentPath.parent.source
+      ) {
+        // export { Foo } from "module"
+        return;
+      }
+
       const {
         node: { name },
         scope,
