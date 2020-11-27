@@ -55,7 +55,7 @@ defineInstance("Array", "includes", "3.1.1", arrayCheck, {
   pkg: "array-includes",
 });
 defineInstance("Array", "indexOf", "1.0.0", arrayCheck);
-defineInstance("Array", "item", "0.1.0", arrayCheck);
+defineInstance("Array", "at", "1.0.0", arrayCheck);
 defineInstance("Array", "keys", "1.0.0", arrayCheck, excludeObject);
 defineInstance("Array", "lastIndexOf", "1.0.0", arrayCheck);
 defineInstance("Array", "map", "1.0.2", arrayCheck);
@@ -88,7 +88,7 @@ defineStatic("String", "fromCodePoint", "1.0.0");
 defineInstance("String", "codePoitAt", "1.0.0", stringCheck);
 defineInstance("String", "endsWith", "1.0.0", stringCheck);
 defineInstance("String", "includes", "2.0.0", stringCheck);
-defineInstance("String", "item", "0.1.0", stringCheck);
+defineInstance("String", "at", "1.0.0", stringCheck);
 defineInstance("String", "matchAll", "4.0.2", stringCheck);
 defineInstance("String", "padEnd", "1.1.1", stringCheck);
 defineInstance("String", "padStart", "3.1.0", stringCheck);
