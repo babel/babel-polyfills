@@ -1,10 +1,10 @@
 var _foo;
 
-import _StringPrototypeItem from "string.prototype.item";
-import _ArrayPrototypeItem from "array.prototype.item";
+import _StringPrototypeAt from "string.prototype.at";
+import _ArrayPrototypeAt from "array.prototype.at";
 
-_StringPrototypeItem("abc", -1);
+_StringPrototypeAt("abc", -1);
 
-_ArrayPrototypeItem([1, 2, 3], -1);
+_ArrayPrototypeAt([1, 2, 3], -1);
 
-(_foo = foo, typeof _foo === "string" ? _StringPrototypeItem : Array.isArray(_foo) ? _ArrayPrototypeItem : Function.call.bind(_foo.item))(_foo, -1);
+(_foo = foo, typeof _foo === "string" ? _StringPrototypeAt : Array.isArray(_foo) ? _ArrayPrototypeAt : Function.call.bind(_foo.at))(_foo, -1);
