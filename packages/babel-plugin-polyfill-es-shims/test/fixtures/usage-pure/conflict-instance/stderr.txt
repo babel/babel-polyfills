@@ -1,4 +1,4 @@
 Some polyfills have been added but are not present in your dependencies.
 Please run one of the following commands:
-	npm install --save array.prototype.item@^0.1.0 string.prototype.item@^0.1.0
-	yarn add array.prototype.item@^0.1.0 string.prototype.item@^0.1.0
+	npm install --save array.prototype.at@^1.0.0 string.prototype.at@^1.0.0
+	yarn add array.prototype.at@^1.0.0 string.prototype.at@^1.0.0
