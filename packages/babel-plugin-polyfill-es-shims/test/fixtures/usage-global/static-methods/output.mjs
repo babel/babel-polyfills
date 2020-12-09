@@ -1,3 +1,4 @@
+import "object-keys/auto";
 import "object.assign/auto";
 Object.keys(foo);
 const getOwnPropertySymbols = Object.getOwnPropertySymbols;

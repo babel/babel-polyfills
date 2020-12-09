@@ -36,6 +36,7 @@ module.exports = {
   "Object.is": "Object static methods / Object.is",
   "Object.entries": "Object static methods / Object.entries",
   "Object.fromEntries": "Object.fromEntries",
+  "Object.keys": "Object static methods / Object.keys",
   "Object.getOwnPropertyDescriptors":
     "Object static methods / Object.getOwnPropertyDescriptors",
   "Object.values": "Object static methods / Object.values",

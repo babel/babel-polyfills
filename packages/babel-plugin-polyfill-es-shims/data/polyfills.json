@@ -290,6 +290,20 @@
     "samsung": "11",
     "electron": "5"
   },
+  "Object.keys": {
+    "chrome": "5",
+    "opera": "12",
+    "edge": "12",
+    "firefox": "4",
+    "safari": "4",
+    "node": "0.10",
+    "ie": "9",
+    "android": "4",
+    "ios": "6",
+    "phantom": "2",
+    "samsung": "1",
+    "electron": "0.20"
+  },
   "Object.getOwnPropertyDescriptors": {
     "chrome": "54",
     "opera": "41",
