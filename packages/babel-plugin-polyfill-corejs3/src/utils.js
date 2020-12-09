@@ -36,3 +36,7 @@ export function isCoreJSSource(source: string) {
 export function coreJSModule(name: string) {
   return `core-js/modules/${name}.js`;
 }
+
+export function coreJSPureHelper(name: string) {
+  return `core-js-pure/features/${name}.js`;
+}
