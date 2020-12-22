@@ -1,7 +1,6 @@
 - `Map`
 - `Set`
 - `Promise`
-- `String.raw`
 - `RegExp` (`new RegExp`, when given a RegExp as the pattern, will no longer throw when given a "flags" string argument).
 - `RegExp.prototype[Symbol.match]`
 - `RegExp.prototype[Symbol.replace]`

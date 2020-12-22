@@ -63,6 +63,7 @@ This plugin supports the following `es-shims` polyfills.
 | `Reflect.ownKeys`              | [`reflect.ownkeys`](https://github.com/es-shims/Reflect.ownKeys)                                |
 | `RegExp.prototype.flags`       | [`regexp.prototype.flags`](https://github.com/es-shims/RegExp.prototype.flags)                  |
 | `String.fromCodePoint`         | [`string.fromcodepoint`](https://github.com/mathiasbynens/String.fromCodePoint)                 | [@mathiasbynens](https://github.com/mathiasbynens) |
+| `String.raw`                   | [`string.raw`](https://github.com/es-shims/String.raw)                                          |
 | `String.prototype.codePointAt` | [`string.prototype.codepointat`](https://github.com/mathiasbynens/String.prototype.codePointAt) | [@mathiasbynens](https://github.com/mathiasbynens) |
 | `String.prototype.endsWith`    | [`string.prototype.endswith`](https://github.com/mathiasbynens/String.prototype.endsWith)       | [@mathiasbynens](https://github.com/mathiasbynens) |
 | `String.prototype.includes`    | [`string.prototype.includes`](https://github.com/mathiasbynens/String.prototype.includes)       | [@mathiasbynens](https://github.com/mathiasbynens) |
