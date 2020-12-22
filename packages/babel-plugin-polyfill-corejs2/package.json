@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-polyfill-corejs2",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A Babel plugin to inject imports to core-js@2 polyfills",
   "repository": {
     "type": "git",
