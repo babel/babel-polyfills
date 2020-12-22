@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-polyfill-es-shims",
-  "version": "0.0.9-0",
+  "version": "0.0.9",
   "description": "A Babel plugin to inject imports to es-shims polyfills",
   "repository": {
     "type": "git",
