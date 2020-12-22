@@ -85,6 +85,7 @@ defineStatic("Reflect", "ownKeys", "1.0.1");
 defineInstance("RegExp", "flags", "1.3.0", instanceofCheck("RegExp"), getter);
 
 defineStatic("String", "fromCodePoint", "1.0.0");
+defineStatic("String", "raw", "1.0.1");
 defineInstance("String", "codePoitAt", "1.0.0", stringCheck);
 defineInstance("String", "endsWith", "1.0.0", stringCheck);
 defineInstance("String", "includes", "2.0.0", stringCheck);

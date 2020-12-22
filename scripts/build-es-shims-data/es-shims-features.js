@@ -47,6 +47,7 @@ module.exports = {
   "RegExp.prototype.flags":
     "RegExp.prototype properties / RegExp.prototype.flags",
   "String.fromCodePoint": "String static methods / String.fromCodePoint",
+  "String.raw": "String static methods / String.raw",
   "String.prototype.codePointAt":
     "String.prototype methods / String.prototype.codePointAt",
   "String.prototype.endsWith":
