@@ -9,7 +9,7 @@
     "clean-all": "rimraf packages/*/lib packages/*/node_modules node_modules",
     "flow": "flow check --strip-root",
     "lint": "eslint packages '*.js' --format=codeframe",
-    "publish": "yarn clean && NODE_ENV=production yarn build && yarn validate && lerna publish",
+    "publish": "yarn clean && NODE_ENV=production yarn build && yarn validate && lerna publish from-git",
     "test": "jest",
     "validate": "yarn lint && yarn flow && yarn test",
     "watch": "gulp watch"
