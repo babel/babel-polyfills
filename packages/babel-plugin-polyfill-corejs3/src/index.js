@@ -4,8 +4,6 @@ import corejs3Polyfills from "core-js-compat/data";
 import corejs3ShippedProposalsList from "./shipped-proposals";
 import getModulesListForTargetVersion from "core-js-compat/get-modules-list-for-target-version";
 import {
-  main,
-  fallbacks,
   BuiltIns,
   CommonIterators,
   CommonInstanceDependencies,
@@ -14,7 +12,6 @@ import {
   StaticProperties,
   InstanceProperties,
   type CoreJSPolyfillDescriptor,
-  type WithFallback,
 } from "./built-in-definitions";
 
 import { types as t } from "@babel/core";
@@ -33,6 +30,17 @@ type Options = {|
   shippedProposals?: boolean,
 |};
 
+const esnextFallback = (
+  name: string,
+  cb: (name: string) => boolean,
+): boolean => {
+  if (cb(name)) return true;
+  if (!name.startsWith("es.")) return false;
+  const fallback = `esnext.${name.slice(3)}`;
+  if (!corejs3Polyfills[fallback]) return false;
+  return cb(fallback);
+};
+
 export default defineProvider<Options>(function(
   { getUtils, method, shouldInjectPolyfill, createMetaResolver, debug, babel },
   { version = 3, proposals, shippedProposals },
@@ -50,16 +58,21 @@ export default defineProvider<Options>(function(
     ? "core-js-pure/features"
     : "core-js-pure/stable";
 
-  function maybeInjectGlobal(names: WithFallback[], utils) {
-    for (const nameWithFallbacks of names) {
-      for (const name of fallbacks(nameWithFallbacks)) {
-        if (shouldInjectPolyfill(name)) {
-          debug(name);
-          utils.injectGlobalImport(coreJSModule(name));
+  function maybeInjectGlobalImpl(name: string, utils) {
+    if (shouldInjectPolyfill(name)) {
+      debug(name);
+      utils.injectGlobalImport(coreJSModule(name));
+      return true;
+    }
+    return false;
+  }
 
-          // We only inject the first alternative
-          break;
-        }
+  function maybeInjectGlobal(names: string[], utils, fallback = true) {
+    for (const name of names) {
+      if (fallback) {
+        esnextFallback(name, name => maybeInjectGlobalImpl(name, utils));
+      } else {
+        maybeInjectGlobalImpl(name, utils);
       }
     }
   }
@@ -73,7 +86,7 @@ export default defineProvider<Options>(function(
     if (
       desc.pure &&
       !(object && desc.exclude && desc.exclude.includes(object)) &&
-      fallbacks(desc.name).some(fb => shouldInjectPolyfill(fb))
+      esnextFallback(desc.name, shouldInjectPolyfill)
     ) {
       return utils.injectDefaultImport(
         `${coreJSPureBase}/${desc.pure}.js`,
@@ -113,7 +126,7 @@ export default defineProvider<Options>(function(
         return;
       }
 
-      maybeInjectGlobal(modules, utils);
+      maybeInjectGlobal(modules, utils, false);
       path.remove();
     },
 
@@ -130,7 +143,7 @@ export default defineProvider<Options>(function(
       ) {
         const low = meta.object.toLowerCase();
         deps = deps.filter(
-          m => main(m).includes(low) || CommonInstanceDependencies.has(main(m)),
+          m => m.includes(low) || CommonInstanceDependencies.has(m),
         );
       }
 

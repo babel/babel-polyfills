@@ -2,19 +2,10 @@
 
 type ObjectMap<V> = { [name: string]: V };
 
-export type WithFallback = string | { main: string, fallbacks: string[] };
-
-export const main = (obj: WithFallback) => {
-  return typeof obj === "string" ? obj : obj.main;
-};
-export const fallbacks = (obj: WithFallback) => {
-  return typeof obj === "string" ? [obj] : [obj.main, ...obj.fallbacks];
-};
-
 export type CoreJSPolyfillDescriptor = {
-  name: WithFallback,
+  name: string,
   pure: ?string,
-  global: WithFallback[],
+  global: string[],
   exclude: ?(string[]),
 };
 
@@ -23,9 +14,8 @@ const define = (
   global,
   name = global[0],
   exclude,
-  fallbacks = [],
 ): CoreJSPolyfillDescriptor => {
-  return { name, pure, global, exclude, fallbacks };
+  return { name, pure, global, exclude };
 };
 
 const typed = (name: string) => define(null, [name, ...TypedArrayDependencies]);
@@ -195,9 +185,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   compositeKey: define("composite-key", ["esnext.composite-key"]),
   compositeSymbol: define("composite-symbol", ["esnext.composite-symbol"]),
   fetch: define(null, PromiseDependencies),
-  globalThis: define("global-this", [
-    { main: "es.global-this", fallbacks: ["esnext.global-this"] },
-  ]),
+  globalThis: define("global-this", ["es.global-this"]),
   parseFloat: define("parse-float", ["es.parse-float"]),
   parseInt: define("parse-int", ["es.parse-int"]),
   queueMicrotask: define("queue-microtask", ["web.queue-microtask"]),
@@ -527,9 +515,7 @@ export const InstanceProperties = {
   link: define(null, ["es.string.link"]),
   map: define("instance/map", ["es.array.map"]),
   match: define(null, ["es.string.match", "es.regexp.exec"]),
-  matchAll: define("instance/match-all", [
-    { main: "es.string.match-all", fallbacks: ["esnext.string.match-all"] },
-  ]),
+  matchAll: define("instance/match-all", ["es.string.match-all"]),
   name: define(null, ["es.function.name"]),
   padEnd: define("instance/pad-end", ["es.string.pad-end"]),
   padStart: define("instance/pad-start", ["es.string.pad-start"]),
