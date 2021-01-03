@@ -1,8 +1,10 @@
 // @flow
 
-import requireResolve from "resolve";
 import path from "path";
 import debounce from "lodash.debounce";
+import requireResolve from "resolve";
+
+const nativeRequireResolve = parseFloat(process.versions.node) >= 8.9;
 
 export function resolve(
   dirname: string,
@@ -32,9 +34,15 @@ export function resolve(
   }
 
   try {
-    const pkg = requireResolve.sync(`${modulePackage}/package.json`, {
-      basedir,
-    });
+    let pkg;
+    if (nativeRequireResolve) {
+      // $FlowIgnore
+      pkg = require.resolve(`${modulePackage}/package.json`, {
+        paths: [basedir],
+      });
+    } else {
+      pkg = requireResolve.sync(`${modulePackage}/package.json`, { basedir });
+    }
     return path.dirname(pkg) + moduleNestedPath;
   } catch (err) {
     if (err.code !== "MODULE_NOT_FOUND") throw err;
@@ -53,7 +61,12 @@ export function resolve(
 
 export function has(basedir: string, name: string) {
   try {
-    requireResolve.sync(name, { basedir });
+    if (nativeRequireResolve) {
+      // $FlowIgnore
+      require.resolve(name, { paths: [basedir] });
+    } else {
+      requireResolve.sync(name, { basedir });
+    }
     return true;
   } catch {
     return false;
