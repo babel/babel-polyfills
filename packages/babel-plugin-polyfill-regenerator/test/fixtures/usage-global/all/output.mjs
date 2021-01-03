@@ -1,2 +1,2 @@
-import "regenerator-runtime/runtime";
+import "regenerator-runtime/runtime.js";
 regeneratorRuntime.wrap(function () {});
