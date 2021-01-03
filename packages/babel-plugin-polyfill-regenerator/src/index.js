@@ -11,7 +11,7 @@ export default defineProvider(({ debug }) => {
     usageGlobal(meta, utils) {
       if (isRegenerator(meta)) {
         debug("regenerator-runtime");
-        utils.injectGlobalImport("regenerator-runtime/runtime");
+        utils.injectGlobalImport("regenerator-runtime/runtime.js");
       }
     },
     usagePure(meta, utils, path) {

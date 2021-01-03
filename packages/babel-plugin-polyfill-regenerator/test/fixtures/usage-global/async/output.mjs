@@ -1,4 +1,4 @@
-import "regenerator-runtime/runtime";
+import "regenerator-runtime/runtime.js";
 import "core-js/modules/es6.object.to-string.js";
 import "core-js/modules/es6.promise.js";
 
