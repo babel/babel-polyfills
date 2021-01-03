@@ -4,6 +4,8 @@ import corejs3Polyfills from "core-js-compat/data";
 import corejs3ShippedProposalsList from "./shipped-proposals";
 import getModulesListForTargetVersion from "core-js-compat/get-modules-list-for-target-version";
 import {
+  main,
+  fallbacks,
   BuiltIns,
   CommonIterators,
   CommonInstanceDependencies,
@@ -12,6 +14,7 @@ import {
   StaticProperties,
   InstanceProperties,
   type CoreJSPolyfillDescriptor,
+  type WithFallback,
 } from "./built-in-definitions";
 
 import { types as t } from "@babel/core";
@@ -47,11 +50,16 @@ export default defineProvider<Options>(function(
     ? "core-js-pure/features"
     : "core-js-pure/stable";
 
-  function maybeInjectGlobal(names: string[], utils) {
-    for (const name of names) {
-      if (shouldInjectPolyfill(name)) {
-        debug(name);
-        utils.injectGlobalImport(coreJSModule(name));
+  function maybeInjectGlobal(names: WithFallback[], utils) {
+    for (const nameWithFallbacks of names) {
+      for (const name of fallbacks(nameWithFallbacks)) {
+        if (shouldInjectPolyfill(name)) {
+          debug(name);
+          utils.injectGlobalImport(coreJSModule(name));
+
+          // We only inject the first alternative
+          break;
+        }
       }
     }
   }
@@ -65,7 +73,7 @@ export default defineProvider<Options>(function(
     if (
       desc.pure &&
       !(object && desc.exclude && desc.exclude.includes(object)) &&
-      shouldInjectPolyfill(desc.name)
+      fallbacks(desc.name).some(fb => shouldInjectPolyfill(fb))
     ) {
       return utils.injectDefaultImport(
         `${coreJSPureBase}/${desc.pure}.js`,
@@ -122,7 +130,7 @@ export default defineProvider<Options>(function(
       ) {
         const low = meta.object.toLowerCase();
         deps = deps.filter(
-          m => m.includes(low) || CommonInstanceDependencies.has(m),
+          m => main(m).includes(low) || CommonInstanceDependencies.has(main(m)),
         );
       }
 
