@@ -233,6 +233,61 @@
     "samsung": "1",
     "electron": "0.20"
   },
+  "Math.acosh": {
+    "chrome": "38",
+    "opera": "25",
+    "edge": "12",
+    "firefox": "25",
+    "safari": "7.1",
+    "node": "0.12",
+    "ios": "8",
+    "samsung": "3",
+    "electron": "0.20"
+  },
+  "Math.atanh": {
+    "chrome": "38",
+    "opera": "25",
+    "edge": "12",
+    "firefox": "25",
+    "safari": "7.1",
+    "node": "0.12",
+    "ios": "8",
+    "samsung": "3",
+    "electron": "0.20"
+  },
+  "Math.clz32": {
+    "chrome": "38",
+    "opera": "25",
+    "edge": "12",
+    "firefox": "31",
+    "safari": "9",
+    "node": "0.12",
+    "ios": "9",
+    "samsung": "3",
+    "electron": "0.20"
+  },
+  "Math.cbrt": {
+    "chrome": "38",
+    "opera": "25",
+    "edge": "12",
+    "firefox": "25",
+    "safari": "7.1",
+    "node": "0.12",
+    "ios": "8",
+    "samsung": "3",
+    "electron": "0.20"
+  },
+  "Math.fround": {
+    "chrome": "38",
+    "opera": "25",
+    "edge": "12",
+    "firefox": "26",
+    "safari": "7.1",
+    "node": "0.12",
+    "ios": "8",
+    "samsung": "3",
+    "electron": "0.20"
+  },
   "Number.isNaN": {
     "chrome": "19",
     "opera": "15",
