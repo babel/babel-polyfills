@@ -66,6 +66,12 @@ defineInstance("Array", "values", "1.0.0", arrayCheck, excludeObject);
 
 defineInstance("Function", "name", "1.1.2", typeofCheck("function"), getter);
 
+defineStatic("Math", "acosh", "1.0.0");
+defineStatic("Math", "atanh", "1.0.0");
+defineStatic("Math", "clz32", "1.0.0");
+defineStatic("Math", "cbrt", "1.0.0");
+defineStatic("Math", "fround", "1.0.0");
+
 defineStatic("Number", "isNaN", "1.2.1", "is-nan");
 
 defineStatic("Object", "assign", "4.1.0");
