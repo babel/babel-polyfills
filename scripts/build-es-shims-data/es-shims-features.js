@@ -2,7 +2,7 @@
 
 module.exports = {
   globalThis: "globalThis",
-  AggregateError: [],
+  AggregateError: "Promise.any / AggregateError",
   "Array.from": "Array static methods / Array.from",
   "Array.of": "Array static methods / Array.of",
   "Array.prototype.entries":
@@ -39,8 +39,8 @@ module.exports = {
   "Object.getOwnPropertyDescriptors":
     "Object static methods / Object.getOwnPropertyDescriptors",
   "Object.values": "Object static methods / Object.values",
-  "Promise.allSettled": [],
-  "Promise.any": [],
+  "Promise.allSettled": "Promise.allSettled",
+  "Promise.any": "Promise.any",
   "Promise.try": [],
   "Promise.prototype.finally": "Promise.prototype.finally",
   "Reflect.ownKeys": "Reflect / Reflect.ownKeys",

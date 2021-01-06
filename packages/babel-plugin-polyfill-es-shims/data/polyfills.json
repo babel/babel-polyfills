@@ -10,7 +10,13 @@
     "samsung": "10",
     "electron": "5"
   },
-  "AggregateError": {},
+  "AggregateError": {
+    "chrome": "85",
+    "firefox": "79",
+    "safari": "14",
+    "node": "15",
+    "electron": "10"
+  },
   "Array.from": {
     "chrome": "51",
     "opera": "38",
@@ -312,8 +318,24 @@
     "samsung": "6",
     "electron": "1.5"
   },
-  "Promise.allSettled": {},
-  "Promise.any": {},
+  "Promise.allSettled": {
+    "chrome": "76",
+    "opera": "63",
+    "edge": "79",
+    "firefox": "71",
+    "safari": "13",
+    "node": "12.9",
+    "ios": "13",
+    "samsung": "12",
+    "electron": "6"
+  },
+  "Promise.any": {
+    "chrome": "85",
+    "firefox": "79",
+    "safari": "14",
+    "node": "15",
+    "electron": "10"
+  },
   "Promise.try": {},
   "Promise.prototype.finally": {
     "chrome": "63",
