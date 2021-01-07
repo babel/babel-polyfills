@@ -12,9 +12,11 @@
   },
   "AggregateError": {
     "chrome": "85",
+    "edge": "85",
     "firefox": "79",
     "safari": "14",
     "node": "15",
+    "ios": "14",
     "electron": "10"
   },
   "Array.from": {
@@ -386,9 +388,11 @@
   },
   "Promise.any": {
     "chrome": "85",
+    "edge": "85",
     "firefox": "79",
     "safari": "14",
     "node": "15",
+    "ios": "14",
     "electron": "10"
   },
   "Promise.try": {},
@@ -527,6 +531,7 @@
   },
   "String.prototype.replaceAll": {
     "chrome": "85",
+    "edge": "85",
     "firefox": "77",
     "safari": "13.1",
     "node": "15",

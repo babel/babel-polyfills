@@ -30,6 +30,17 @@ type Options = {|
   shippedProposals?: boolean,
 |};
 
+const esnextFallback = (
+  name: string,
+  cb: (name: string) => boolean,
+): boolean => {
+  if (cb(name)) return true;
+  if (!name.startsWith("es.")) return false;
+  const fallback = `esnext.${name.slice(3)}`;
+  if (!corejs3Polyfills[fallback]) return false;
+  return cb(fallback);
+};
+
 export default defineProvider<Options>(function(
   { getUtils, method, shouldInjectPolyfill, createMetaResolver, debug, babel },
   { version = 3, proposals, shippedProposals },
@@ -47,11 +58,21 @@ export default defineProvider<Options>(function(
     ? "core-js-pure/features"
     : "core-js-pure/stable";
 
-  function maybeInjectGlobal(names: string[], utils) {
+  function maybeInjectGlobalImpl(name: string, utils) {
+    if (shouldInjectPolyfill(name)) {
+      debug(name);
+      utils.injectGlobalImport(coreJSModule(name));
+      return true;
+    }
+    return false;
+  }
+
+  function maybeInjectGlobal(names: string[], utils, fallback = true) {
     for (const name of names) {
-      if (shouldInjectPolyfill(name)) {
-        debug(name);
-        utils.injectGlobalImport(coreJSModule(name));
+      if (fallback) {
+        esnextFallback(name, name => maybeInjectGlobalImpl(name, utils));
+      } else {
+        maybeInjectGlobalImpl(name, utils);
       }
     }
   }
@@ -65,7 +86,7 @@ export default defineProvider<Options>(function(
     if (
       desc.pure &&
       !(object && desc.exclude && desc.exclude.includes(object)) &&
-      shouldInjectPolyfill(desc.name)
+      esnextFallback(desc.name, shouldInjectPolyfill)
     ) {
       return utils.injectDefaultImport(
         `${coreJSPureBase}/${desc.pure}.js`,
@@ -105,7 +126,7 @@ export default defineProvider<Options>(function(
         return;
       }
 
-      maybeInjectGlobal(modules, utils);
+      maybeInjectGlobal(modules, utils, false);
       path.remove();
     },
 

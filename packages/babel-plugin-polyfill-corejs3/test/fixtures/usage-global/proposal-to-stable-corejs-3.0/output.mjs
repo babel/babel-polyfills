@@ -1,0 +1,2 @@
+globalThis;
+foo.matchAll(bar);
