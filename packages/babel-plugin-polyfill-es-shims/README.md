@@ -57,6 +57,11 @@ This plugin supports the following `es-shims` polyfills.
 | `Array.prototype.keys`         | [`array.prototype.keys`](https://github.com/es-shims/Array.prototype.keys)                      |
 | `Array.prototype.values`       | [`array.prototype.values`](https://github.com/es-shims/Array.prototype.values)                  |
 | `Function.prototype.name`      | [`function.prototype.name`](https://github.com/es-shims/Function.prototype.name)                |
+| `Math.acosh`                   | [`math.acosh`](https://github.com/es-shims/Math.acosh)                                          |
+| `Math.atanh`                   | [`math.atanh`](https://github.com/es-shims/Math.atanh)                                          |
+| `Math.clz32`                   | [`math.clz32`](https://github.com/es-shims/Math.clz32)                                          |
+| `Math.cbrt`                    | [`math.cbrt`](https://github.com/es-shims/Math.cbrt)                                            |
+| `Math.fround`                  | [`math.fround`](https://github.com/es-shims/Math.fround)                                        |
 | `Number.isNaN`                 | [`is-nan`](https://github.com/es-shims/is-nan)                                                  |
 | `Object.assign`                | [`object.assign`](https://github.com/ljharb/object.assign)                                      | [@ljharb](https://github.com/ljharb)               |
 | `Object.is`                    | [`object-is`](https://github.com/es-shims/object-is)                                            |
