@@ -24,7 +24,7 @@ export default class ImportsCache {
     // eslint-disable-next-line no-undef
     getVal: (isScript: boolean, source: t.StringLiteral) => t.Node,
   ) {
-    const key = this._normalizeKey(programPath, url, "");
+    const key = this._normalizeKey(programPath, url);
     const imports = this._ensure(this._anonymousImports, programPath, Set);
 
     if (imports.has(key)) return;
@@ -89,7 +89,12 @@ export default class ImportsCache {
     return collection;
   }
 
-  _normalizeKey(programPath: NodePath, url: string, name: string): string {
-    return `${programPath.node.sourceType}::${url}::${name}`;
+  _normalizeKey(programPath: NodePath, url: string, name: string = ""): string {
+    const { sourceType } = programPath.node;
+
+    // If we rely on the imported binding (the "name" parameter), we also need to cache
+    // based on the sourceType. This is because the module transforms change the names
+    // of the import variables.
+    return `${name && sourceType}::${url}::${name}`;
   }
 }
