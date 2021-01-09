@@ -1,6 +1,7 @@
 import * as babel from "@babel/core";
 import definePolyfillProvider from "../lib";
 import astToCode from "./helpers/ast-to-code-serializer.js";
+import pluginCJS from "@babel/plugin-transform-modules-commonjs";
 
 function withUtils(code, fn, opts) {
   let result;
@@ -310,6 +311,102 @@ describe("injectors", () => {
         import "./polyfill/cat";
         foo;
       `);
+    });
+
+    describe("with the commonjs transform", () => {
+      function testImportsCacheWithModulesTransform(method, provider) {
+        const source = "foo;";
+
+        return babel.transformSync(source, {
+          configFile: false,
+          plugins: [
+            [definePolyfillProvider(() => provider), { method }],
+            pluginCJS,
+
+            // After converting ESM to CJS, we inject a new
+            // reference that needs to be polyfilled.
+            ({ template }) => ({
+              visitor: {
+                Program: {
+                  exit(path) {
+                    path.pushContainer("body", template.ast(source));
+                  },
+                },
+              },
+            }),
+          ],
+          ast: true,
+          code: false,
+          sourceType: "module",
+        });
+      }
+
+      it("injectGlobalImport", () => {
+        const { ast } = testImportsCacheWithModulesTransform("usage-global", {
+          usageGlobal(meta, utils) {
+            if (meta.kind === "global" && meta.name === "foo") {
+              utils.injectGlobalImport("./polyfill/foo");
+            }
+          },
+        });
+
+        expect(ast).toMatchInlineSnapshot(`
+          "use strict";
+
+          require("./polyfill/foo");
+
+          foo;
+          foo;
+        `);
+      });
+
+      it("injectNamedImport", () => {
+        const { ast } = testImportsCacheWithModulesTransform("usage-global", {
+          usageGlobal(meta, utils, path) {
+            if (meta.kind === "global" && meta.name === "foo") {
+              path.replaceWith(
+                utils.injectNamedImport("./polyfill/foo", "foo"),
+              );
+            }
+          },
+        });
+
+        expect(ast).toMatchInlineSnapshot(`
+          "use strict";
+
+          var _foo3 = require("./polyfill/foo").foo;
+
+          var _foo2 = require("./polyfill/foo");
+
+          _foo2.foo;
+          _foo3;
+        `);
+      });
+
+      it("injectDefaultImport", () => {
+        const { ast } = testImportsCacheWithModulesTransform("usage-global", {
+          usageGlobal(meta, utils, path) {
+            if (meta.kind === "global" && meta.name === "foo") {
+              path.replaceWith(
+                utils.injectDefaultImport("./polyfill/foo", "foo"),
+              );
+            }
+          },
+        });
+
+        expect(ast).toMatchInlineSnapshot(`
+          "use strict";
+
+          var _foo3 = require("./polyfill/foo");
+
+          var _foo2 = _interopRequireDefault(require("./polyfill/foo"));
+
+          function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+          _foo2.default;
+          _foo3;
+        `);
+      });
     });
   });
 });
