@@ -20,6 +20,7 @@ import {
   coreJSModule,
   isCoreJSSource,
   coreJSPureHelper,
+  sameImportPath,
 } from "./utils";
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
@@ -132,7 +133,7 @@ export default defineProvider<Options>(function(
 
       if (
         modules.length === 1 &&
-        meta.source === coreJSModule(modules[0]) &&
+        sameImportPath(meta.source, coreJSModule(modules[0])) &&
         shouldInjectPolyfill(modules[0])
       ) {
         // Avoid infinite loop: do not replace imports with a new copy of

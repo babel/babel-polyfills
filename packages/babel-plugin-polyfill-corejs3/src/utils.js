@@ -46,3 +46,7 @@ export function coreJSPureHelper(
     ? `${useBabelRuntime}/core-js/${name}${ext}`
     : `core-js-pure/features/${name}.js`;
 }
+
+export function sameImportPath(left: string, right: string) {
+  return left === right || `${left}.js` === right;
+}

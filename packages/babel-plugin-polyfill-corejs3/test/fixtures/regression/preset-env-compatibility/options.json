@@ -1,0 +1,8 @@
+{
+  "plugins": [
+    ["@@/polyfill-corejs3", { "method": "entry-global" }]
+  ],
+  "presets": [
+      ["@babel/env-7.10.4", { "modules": false, "corejs": 3, "useBuiltIns": "entry" }]
+  ]
+}
