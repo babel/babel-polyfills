@@ -44,6 +44,7 @@ This plugin supports the following `es-shims` polyfills.
 | `Array.prototype.reduceRight` | [`array.prototype.reduceright`](https://github.com/es-shims/Array.prototype.reduceRight) |
 | `Array.prototype.some`        | [`array.prototype.some`](https://github.com/es-shims/Array.prototype.some)               |
 | `String.prototype.split`      | [`string.prototype.split`](https://github.com/es-shims/String.prototype.split)           |
+| `String.prototype.trim`       | [`string.prototype.trim`](https://github.com/es-shims/String.prototype.trim)             |
 
 ### ES2015 (ES6)
 
@@ -51,6 +52,7 @@ This plugin supports the following `es-shims` polyfills.
 | :----------------------------- | :---------------------------------------------------------------------------------------------- | :------------------------------------------------- |
 | `Array.from`                   | [`array.from`](https://github.com/mathiasbynens/Array.from)                                     | [@mathiasbynens](https://github.com/mathiasbynens) |
 | `Array.of`                     | [`array.of`](https://github.com/mathiasbynens/Array.of)                                         | [@mathiasbynens](https://github.com/mathiasbynens) |
+| `Array.prototype.copyWithin`   | [`array.prototype.copywithin`](https://github.com/es-shims/Array.prototype.copyWithin)          |
 | `Array.prototype.entries`      | [`array.prototype.entries`](https://github.com/es-shims/Array.prototype.entries)                |
 | `Array.prototype.find`         | [`array.prototype.find`](https://github.com/paulmillr/Array.prototype.find)                     | [@paulmillr](https://github.com/paulmillr)         |
 | `Array.prototype.findIndex`    | [`array.prototype.findindex`](https://github.com/paulmillr/Array.prototype.findIndex)           | [@paulmillr](https://github.com/paulmillr)         |
@@ -62,9 +64,13 @@ This plugin supports the following `es-shims` polyfills.
 | `Math.clz32`                   | [`math.clz32`](https://github.com/es-shims/Math.clz32)                                          |
 | `Math.cbrt`                    | [`math.cbrt`](https://github.com/es-shims/Math.cbrt)                                            |
 | `Math.fround`                  | [`math.fround`](https://github.com/es-shims/Math.fround)                                        |
+| `Math.fround`                  | [`math.log1p`](https://github.com/es-shims/Math.log1p)                                          |
+| `Math.sign`                    | [`math.sign`](https://github.com/es-shims/Math.sign)                                            |
 | `Number.isNaN`                 | [`is-nan`](https://github.com/es-shims/is-nan)                                                  |
 | `Object.assign`                | [`object.assign`](https://github.com/ljharb/object.assign)                                      | [@ljharb](https://github.com/ljharb)               |
+| `Object.getPrototypeOf`        | [`object.getprototypeof`](https://github.com/es-shims/Object.getPrototypeOf)                    |
 | `Object.is`                    | [`object-is`](https://github.com/es-shims/object-is)                                            |
+| `Reflect.getPrototypeOf`       | [`reflect.getprototypeof`](https://github.com/es-shims/Reflect.getPrototypeOf)                  |
 | `Reflect.ownKeys`              | [`reflect.ownkeys`](https://github.com/es-shims/Reflect.ownKeys)                                |
 | `RegExp.prototype.flags`       | [`regexp.prototype.flags`](https://github.com/es-shims/RegExp.prototype.flags)                  |
 | `String.fromCodePoint`         | [`string.fromcodepoint`](https://github.com/mathiasbynens/String.fromCodePoint)                 | [@mathiasbynens](https://github.com/mathiasbynens) |
