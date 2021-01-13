@@ -45,6 +45,7 @@ const excludeObject = excludeStatic("Object");
 
 defineStatic("Array", "from", "1.1.0");
 defineStatic("Array", "of", "1.0.0");
+defineInstance("Array", "copyWithin", "1.0.0", arrayCheck);
 defineInstance("Array", "entries", "1.0.0", arrayCheck, excludeObject);
 defineInstance("Array", "every", "1.1.0", arrayCheck);
 defineInstance("Array", "find", "2.1.1", arrayCheck);
@@ -54,7 +55,7 @@ defineInstance("Array", "flatMap", "1.2.3", arrayCheck);
 defineInstance("Array", "includes", "3.1.1", arrayCheck, {
   pkg: "array-includes",
 });
-defineInstance("Array", "indexOf", "1.0.0", arrayCheck);
+defineInstance("Array", "indexOf", "1.0.1", arrayCheck);
 defineInstance("Array", "at", "1.0.0", arrayCheck);
 defineInstance("Array", "keys", "1.0.0", arrayCheck, excludeObject);
 defineInstance("Array", "lastIndexOf", "1.0.0", arrayCheck);
@@ -71,6 +72,8 @@ defineStatic("Math", "atanh", "1.0.0");
 defineStatic("Math", "clz32", "1.0.0");
 defineStatic("Math", "cbrt", "1.0.0");
 defineStatic("Math", "fround", "1.0.0");
+defineStatic("Math", "log1p", "1.0.1");
+defineStatic("Math", "sign", "2.0.0");
 
 defineStatic("Number", "isNaN", "1.2.1", "is-nan");
 
@@ -79,6 +82,7 @@ defineStatic("Object", "entries", "1.1.1");
 defineStatic("Object", "fromEntries", "2.0.2");
 defineStatic("Object", "is", "1.1.2", "object-is");
 defineStatic("Object", "getOwnPropertyDescriptors", "2.1.0");
+defineStatic("Object", "getPrototypeOf", "1.0.0");
 defineStatic("Object", "values", "1.1.1");
 
 defineStatic("Promise", "allSettled", "1.0.2");
@@ -87,6 +91,7 @@ defineStatic("Promise", "try", "1.0.0");
 defineInstance("Promise", "finally", "1.2.1", instanceofCheck("Promise"));
 
 defineStatic("Reflect", "ownKeys", "1.0.1");
+defineStatic("Reflect", "getPrototypeOf", "1.0.0");
 
 defineInstance("RegExp", "flags", "1.3.0", instanceofCheck("RegExp"), getter);
 

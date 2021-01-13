@@ -16,9 +16,7 @@
 - `Number.isFinite()`
 - `Number.parseInt()`
 - `Number.parseFloat()`
-- `Array.prototype.copyWithin()`
 - `Array.prototype.fill()`
-- `Array.prototype.indexOf()`
 - `Object.keys()`
 - `Object.setPrototypeOf()`
 - `Math.asinh()`
@@ -27,9 +25,7 @@
 - `Math.hypot()`
 - `Math.imul()`
 - `Math.log10()`
-- `Math.log1p()`
 - `Math.log2()`
-- `Math.sign()`
 - `Math.sinh()`
 - `Math.tanh()`
 - `Math.trunc()`

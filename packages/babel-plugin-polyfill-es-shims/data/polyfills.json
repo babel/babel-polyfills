@@ -41,6 +41,18 @@
     "samsung": "5",
     "electron": "0.31"
   },
+  "Array.prototype.at": {},
+  "Array.prototype.copyWithin": {
+    "chrome": "45",
+    "opera": "32",
+    "edge": "12",
+    "firefox": "32",
+    "safari": "9",
+    "node": "4",
+    "ios": "9",
+    "samsung": "5",
+    "electron": "0.31"
+  },
   "Array.prototype.entries": {
     "chrome": "38",
     "opera": "25",
@@ -135,7 +147,6 @@
     "samsung": "1",
     "electron": "0.20"
   },
-  "Array.prototype.at": {},
   "Array.prototype.keys": {
     "chrome": "38",
     "opera": "25",
@@ -296,6 +307,28 @@
     "samsung": "3",
     "electron": "0.20"
   },
+  "Math.log1p": {
+    "chrome": "38",
+    "opera": "25",
+    "edge": "12",
+    "firefox": "25",
+    "safari": "7.1",
+    "node": "0.12",
+    "ios": "8",
+    "samsung": "3",
+    "electron": "0.20"
+  },
+  "Math.sign": {
+    "chrome": "38",
+    "opera": "25",
+    "edge": "12",
+    "firefox": "25",
+    "safari": "9",
+    "node": "0.12",
+    "ios": "9",
+    "samsung": "3",
+    "electron": "0.20"
+  },
   "Number.isNaN": {
     "chrome": "19",
     "opera": "15",
@@ -364,6 +397,20 @@
     "samsung": "6",
     "electron": "1.5"
   },
+  "Object.getPrototypeOf": {
+    "chrome": "5",
+    "opera": "12",
+    "edge": "12",
+    "firefox": "3.5",
+    "safari": "4",
+    "node": "0.10",
+    "ie": "9",
+    "android": "4",
+    "ios": "6",
+    "phantom": "2",
+    "samsung": "1",
+    "electron": "0.20"
+  },
   "Object.values": {
     "chrome": "54",
     "opera": "41",
@@ -406,6 +453,17 @@
     "ios": "11.3",
     "samsung": "8",
     "electron": "3"
+  },
+  "Reflect.getPrototypeOf": {
+    "chrome": "49",
+    "opera": "36",
+    "edge": "12",
+    "firefox": "42",
+    "safari": "10",
+    "node": "6",
+    "ios": "10",
+    "samsung": "5",
+    "electron": "0.37"
   },
   "Reflect.ownKeys": {
     "chrome": "49",
