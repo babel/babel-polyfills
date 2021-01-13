@@ -5,6 +5,9 @@ module.exports = {
   AggregateError: "Promise.any / AggregateError",
   "Array.from": "Array static methods / Array.from",
   "Array.of": "Array static methods / Array.of",
+  "Array.prototype.at": "`.item` method / Array.prototype.item",
+  "Array.prototype.copyWithin":
+    "Array.prototype methods / Array.prototype.copyWithin",
   "Array.prototype.entries":
     "Array.prototype methods / Array.prototype.entries",
   "Array.prototype.every": "Array methods / Array.prototype.every",
@@ -17,7 +20,6 @@ module.exports = {
     "Array.prototype.{flat, flatMap} / Array.prototype.flatMap",
   "Array.prototype.includes": "Array.prototype.includes",
   "Array.prototype.indexOf": "Array methods / Array.prototype.indexOf",
-  "Array.prototype.at": "`.item` method / Array.prototype.item",
   "Array.prototype.keys": "Array.prototype methods / Array.prototype.keys",
   "Array.prototype.lastIndexOf": "Array methods / Array.prototype.lastIndexOf",
   "Array.prototype.map": "Array methods / Array.prototype.map",
@@ -36,6 +38,8 @@ module.exports = {
   "Math.clz32": "Math methods / Math.clz32",
   "Math.cbrt": "Math methods / Math.cbrt",
   "Math.fround": "Math methods / Math.fround",
+  "Math.log1p": "Math methods / Math.log1p",
+  "Math.sign": "Math methods / Math.sign",
   "Number.isNaN": "Number properties / Number.isNaN",
   "Object.assign": "Object static methods / Object.assign",
   "Object.is": "Object static methods / Object.is",
@@ -43,11 +47,13 @@ module.exports = {
   "Object.fromEntries": "Object.fromEntries",
   "Object.getOwnPropertyDescriptors":
     "Object static methods / Object.getOwnPropertyDescriptors",
+  "Object.getPrototypeOf": "Object static methods / Object.getPrototypeOf",
   "Object.values": "Object static methods / Object.values",
   "Promise.allSettled": "Promise.allSettled",
   "Promise.any": "Promise.any",
   "Promise.try": [],
   "Promise.prototype.finally": "Promise.prototype.finally",
+  "Reflect.getPrototypeOf": "Reflect / Reflect.getPrototypeOf",
   "Reflect.ownKeys": "Reflect / Reflect.ownKeys",
   "RegExp.prototype.flags":
     "RegExp.prototype properties / RegExp.prototype.flags",

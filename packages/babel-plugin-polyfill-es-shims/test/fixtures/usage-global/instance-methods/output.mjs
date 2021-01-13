@@ -7,6 +7,7 @@ import "string.prototype.padstart/auto";
 import "string.prototype.padend/auto";
 import "string.prototype.startswith/auto";
 import "string.prototype.endswith/auto";
+import "array.prototype.copywithin/auto";
 import "string.prototype.split/auto";
 Array.from; // static function
 
