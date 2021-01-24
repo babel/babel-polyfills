@@ -13,6 +13,7 @@ import {
   InstanceProperties,
   type CoreJSPolyfillDescriptor,
 } from "./built-in-definitions";
+import canSkipPolyfill from "./usage-filters";
 
 import { types as t } from "@babel/core";
 import {
@@ -130,9 +131,11 @@ export default defineProvider<Options>(function(
       path.remove();
     },
 
-    usageGlobal(meta, utils) {
+    usageGlobal(meta, utils, path) {
       const resolved = resolve(meta);
       if (!resolved) return;
+
+      if (canSkipPolyfill(resolved.desc, path)) return;
 
       let deps = resolved.desc.global;
 
@@ -217,6 +220,8 @@ export default defineProvider<Options>(function(
 
       const resolved = resolve(meta);
       if (!resolved) return;
+
+      if (canSkipPolyfill(resolved.desc, path)) return;
 
       if (resolved.kind === "global") {
         const id = maybeInjectPure(resolved.desc, resolved.name, utils);
