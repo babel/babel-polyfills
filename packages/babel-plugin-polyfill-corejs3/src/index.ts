@@ -11,6 +11,7 @@ import {
   InstanceProperties,
   type CoreJSPolyfillDescriptor,
 } from "./built-in-definitions";
+import canSkipPolyfill from "./usage-filters";
 
 import type { NodePath } from "@babel/traverse";
 import { types as t } from "@babel/core";
@@ -175,9 +176,11 @@ export default defineProvider<Options>(function (
       path.remove();
     },
 
-    usageGlobal(meta, utils) {
+    usageGlobal(meta, utils, path) {
       const resolved = resolve(meta);
       if (!resolved) return;
+
+      if (canSkipPolyfill(resolved.desc, path)) return;
 
       let deps = resolved.desc.global;
 
@@ -266,6 +269,8 @@ export default defineProvider<Options>(function (
 
       let resolved = resolve(meta);
       if (!resolved) return;
+
+      if (canSkipPolyfill(resolved.desc, path)) return;
 
       if (
         useBabelRuntime &&
