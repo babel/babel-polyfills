@@ -24,10 +24,15 @@ import {
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
 
+const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
+
 type Options = {|
   version?: number | string,
   proposals?: boolean,
   shippedProposals?: boolean,
+  "#__secret_key__@babel/runtime__compatibility": void | {
+    useBabelRuntime: true,
+  },
 |};
 
 const esnextFallback = (
@@ -43,7 +48,12 @@ const esnextFallback = (
 
 export default defineProvider<Options>(function(
   { getUtils, method, shouldInjectPolyfill, createMetaResolver, debug, babel },
-  { version = 3, proposals, shippedProposals },
+  {
+    version = 3,
+    proposals,
+    shippedProposals,
+    [runtimeCompat]: { useBabelRuntime } = {},
+  },
 ) {
   const isWebpack = babel.caller(caller => caller?.name === "babel-loader");
 
@@ -54,7 +64,11 @@ export default defineProvider<Options>(function(
   });
 
   const available = new Set(getModulesListForTargetVersion(version));
-  const coreJSPureBase = proposals
+  const coreJSPureBase = useBabelRuntime
+    ? proposals
+      ? "@babel/runtime-corejs3/core-js"
+      : "@babel/runtime-corejs3/core-js-stable"
+    : proposals
     ? "core-js-pure/features"
     : "core-js-pure/stable";
 
@@ -156,7 +170,7 @@ export default defineProvider<Options>(function(
           path.replaceWith(
             t.callExpression(
               utils.injectDefaultImport(
-                coreJSPureHelper("is-iterable"),
+                coreJSPureHelper("is-iterable", useBabelRuntime),
                 "isIterable",
               ),
               [path.node.right],
@@ -185,7 +199,7 @@ export default defineProvider<Options>(function(
               path.parentPath.replaceWith(
                 t.callExpression(
                   utils.injectDefaultImport(
-                    coreJSPureHelper("get-iterator"),
+                    coreJSPureHelper("get-iterator", useBabelRuntime),
                     "getIterator",
                   ),
                   [path.node.object],
@@ -196,7 +210,7 @@ export default defineProvider<Options>(function(
               callMethod(
                 path,
                 utils.injectDefaultImport(
-                  coreJSPureHelper("get-iterator-method"),
+                  coreJSPureHelper("get-iterator-method", useBabelRuntime),
                   "getIteratorMethod",
                 ),
               );
@@ -205,7 +219,7 @@ export default defineProvider<Options>(function(
             path.replaceWith(
               t.callExpression(
                 utils.injectDefaultImport(
-                  coreJSPureHelper("get-iterator-method"),
+                  coreJSPureHelper("get-iterator-method", useBabelRuntime),
                   "getIteratorMethod",
                 ),
                 [path.node.object],
@@ -217,8 +231,23 @@ export default defineProvider<Options>(function(
         }
       }
 
-      const resolved = resolve(meta);
+      let resolved = resolve(meta);
       if (!resolved) return;
+
+      if (
+        useBabelRuntime &&
+        resolved.desc.pure &&
+        resolved.desc.pure.slice(-6) === "/index"
+      ) {
+        // Remove /index, since it doesn't exist in @babel/runtime-corejs3s
+        resolved = {
+          ...resolved,
+          desc: {
+            ...resolved.desc,
+            pure: resolved.desc.pure.slice(0, -6),
+          },
+        };
+      }
 
       if (resolved.kind === "global") {
         const id = maybeInjectPure(resolved.desc, resolved.name, utils);

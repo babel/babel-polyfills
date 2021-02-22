@@ -37,6 +37,8 @@ export function coreJSModule(name: string) {
   return `core-js/modules/${name}.js`;
 }
 
-export function coreJSPureHelper(name: string) {
-  return `core-js-pure/features/${name}.js`;
+export function coreJSPureHelper(name: string, useBabelRuntime: boolean) {
+  return useBabelRuntime
+    ? `@babel/runtime-corejs3/core-js/${name}.js`
+    : `core-js-pure/features/${name}.js`;
 }

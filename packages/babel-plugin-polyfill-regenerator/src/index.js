@@ -2,7 +2,15 @@
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
 
-export default defineProvider(({ debug }) => {
+const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
+
+export default defineProvider(({ debug }, options) => {
+  const { [runtimeCompat]: { useBabelRuntime } = {} } = options;
+
+  const pureName = useBabelRuntime
+    ? `${useBabelRuntime}/regenerator`
+    : "regenerator-runtime";
+
   return {
     name: "regenerator",
 
@@ -16,7 +24,9 @@ export default defineProvider(({ debug }) => {
     },
     usagePure(meta, utils, path) {
       if (isRegenerator(meta)) {
-        path.replaceWith(utils.injectDefaultImport("regenerator-runtime"));
+        path.replaceWith(
+          utils.injectDefaultImport(pureName, "regenerator-runtime"),
+        );
       }
     },
   };

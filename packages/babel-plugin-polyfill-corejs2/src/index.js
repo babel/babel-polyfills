@@ -13,24 +13,27 @@ import { hasMinVersion } from "./helpers";
 import defineProvider from "@babel/helper-define-polyfill-provider";
 import { types as t } from "@babel/core";
 
-const presetEnvCompat: "#__secret_key__@babel/preset-env__compatibility" =
-  "#__secret_key__@babel/preset-env__compatibility";
+const presetEnvCompat = "#__secret_key__@babel/preset-env__compatibility";
+const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 
 // $FlowIgnore
 const has = Function.call.bind(Object.hasOwnProperty);
 
 type Options = {|
-  version?: number | string,
-  [typeof presetEnvCompat]: void | {
+  "#__secret_key__@babel/preset-env__compatibility": void | {
     entryInjectRegenerator: boolean,
+  },
+  "#__secret_key__@babel/runtime__compatibility": void | {
+    useBabelRuntime: boolean,
+    runtimeVersion: string,
   },
 |};
 
 export default defineProvider<Options>(function(
   api,
   {
-    version: runtimeVersion = "7.0.0-beta.0",
     [presetEnvCompat]: { entryInjectRegenerator } = {},
+    [runtimeCompat]: { useBabelRuntime, runtimeVersion } = {},
   },
 ) {
   const resolve = api.createMetaResolver({
@@ -47,8 +50,11 @@ export default defineProvider<Options>(function(
     corejs2Polyfills,
   );
 
-  const coreJSBase =
-    method === "usage-pure" ? "core-js/library/fn" : "core-js/modules";
+  const coreJSBase = useBabelRuntime
+    ? "@babel/runtime-corejs2/core-js"
+    : method === "usage-pure"
+    ? "core-js/library/fn"
+    : "core-js/modules";
 
   function inject(name: string | string[], utils) {
     if (typeof name === "string") {
@@ -71,10 +77,13 @@ export default defineProvider<Options>(function(
   function maybeInjectPure(desc, hint, utils) {
     const { pure, meta, name } = desc;
 
+    if (!pure || !shouldInjectPolyfill(name)) return;
+
     if (
-      !pure ||
-      !hasMinVersion(meta && meta.minRuntimeVersion, runtimeVersion) ||
-      !shouldInjectPolyfill(name)
+      runtimeVersion &&
+      meta &&
+      meta.minRuntimeVersion &&
+      !hasMinVersion(meta && meta.minRuntimeVersion, runtimeVersion)
     ) {
       return;
     }
