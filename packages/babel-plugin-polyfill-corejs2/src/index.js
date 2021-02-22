@@ -136,6 +136,8 @@ export default defineProvider<Options>(function(
         return;
       }
 
+      if (path.parentPath.isUnaryExpression({ operator: "delete" })) return;
+
       if (meta.kind === "property") {
         // We can't compile destructuring.
         if (!path.isMemberExpression()) return;

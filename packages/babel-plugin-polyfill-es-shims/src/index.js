@@ -34,6 +34,8 @@ export default defineProvider<{||}>(function({
     instance?: (MetaDescriptor, *, Utils, Object) => void,
   ) {
     return (meta, utils, path) => {
+      if (path.parentPath.isUnaryExpression({ operator: "delete" })) return;
+
       const resolved = resolvePolyfill(meta);
       if (!resolved) return;
 

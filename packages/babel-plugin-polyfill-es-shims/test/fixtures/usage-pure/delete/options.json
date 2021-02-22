@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    [
+      "@@/polyfill-es-shims",
+      {
+        "method": "usage-pure"
+      }
+    ]
+  ]
+}

@@ -166,6 +166,8 @@ export default defineProvider<Options>(function(
         return;
       }
 
+      if (path.parentPath.isUnaryExpression({ operator: "delete" })) return;
+
       let isCall: ?boolean;
 
       if (meta.kind === "property") {
