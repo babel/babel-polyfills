@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.11.5",
-    "@babel/core": "^7.11.5",
+    "@babel/core": "^7.13.0",
     "@babel/generator": "^7.11.5",
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "babel-loader": "^8.1.0",

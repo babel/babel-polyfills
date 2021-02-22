@@ -1,13 +1,11 @@
 import "core-js/modules/es7.array.flat-map.js";
+import "core-js/modules/es6.array.iterator.js";
 import "core-js/modules/es6.array.sort.js";
 import "core-js/modules/es7.object.define-getter.js";
 import "core-js/modules/es7.object.define-setter.js";
-import "core-js/modules/es7.object.entries.js";
-import "core-js/modules/es7.object.get-own-property-descriptors.js";
 import "core-js/modules/es7.object.lookup-getter.js";
 import "core-js/modules/es7.object.lookup-setter.js";
 import "core-js/modules/es6.object.to-string.js";
-import "core-js/modules/es7.object.values.js";
 import "core-js/modules/es7.promise.finally.js";
 import "core-js/modules/es7.symbol.async-iterator.js";
 import "core-js/modules/es7.string.pad-start.js";

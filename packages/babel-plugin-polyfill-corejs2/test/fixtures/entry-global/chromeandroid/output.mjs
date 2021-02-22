@@ -1,4 +1,5 @@
 import "core-js/modules/es7.array.flat-map.js";
+import "core-js/modules/es6.array.iterator.js";
 import "core-js/modules/es6.array.sort.js";
 import "core-js/modules/es7.object.define-getter.js";
 import "core-js/modules/es7.object.define-setter.js";
