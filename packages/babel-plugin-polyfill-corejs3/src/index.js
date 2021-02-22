@@ -31,7 +31,8 @@ type Options = {|
   proposals?: boolean,
   shippedProposals?: boolean,
   "#__secret_key__@babel/runtime__compatibility": void | {
-    useBabelRuntime: true,
+    useBabelRuntime: string,
+    ext: string,
   },
 |};
 
@@ -52,7 +53,7 @@ export default defineProvider<Options>(function(
     version = 3,
     proposals,
     shippedProposals,
-    [runtimeCompat]: { useBabelRuntime } = {},
+    [runtimeCompat]: { useBabelRuntime, ext = ".js" } = {},
   },
 ) {
   const isWebpack = babel.caller(caller => caller?.name === "babel-loader");
@@ -66,8 +67,8 @@ export default defineProvider<Options>(function(
   const available = new Set(getModulesListForTargetVersion(version));
   const coreJSPureBase = useBabelRuntime
     ? proposals
-      ? "@babel/runtime-corejs3/core-js"
-      : "@babel/runtime-corejs3/core-js-stable"
+      ? `${useBabelRuntime}/core-js`
+      : `${useBabelRuntime}/core-js-stable`
     : proposals
     ? "core-js-pure/features"
     : "core-js-pure/stable";
@@ -103,7 +104,7 @@ export default defineProvider<Options>(function(
       esnextFallback(desc.name, shouldInjectPolyfill)
     ) {
       return utils.injectDefaultImport(
-        `${coreJSPureBase}/${desc.pure}.js`,
+        `${coreJSPureBase}/${desc.pure}${ext}`,
         hint,
       );
     }
@@ -170,7 +171,7 @@ export default defineProvider<Options>(function(
           path.replaceWith(
             t.callExpression(
               utils.injectDefaultImport(
-                coreJSPureHelper("is-iterable", useBabelRuntime),
+                coreJSPureHelper("is-iterable", useBabelRuntime, ext),
                 "isIterable",
               ),
               [path.node.right],
@@ -199,7 +200,7 @@ export default defineProvider<Options>(function(
               path.parentPath.replaceWith(
                 t.callExpression(
                   utils.injectDefaultImport(
-                    coreJSPureHelper("get-iterator", useBabelRuntime),
+                    coreJSPureHelper("get-iterator", useBabelRuntime, ext),
                     "getIterator",
                   ),
                   [path.node.object],
@@ -210,7 +211,7 @@ export default defineProvider<Options>(function(
               callMethod(
                 path,
                 utils.injectDefaultImport(
-                  coreJSPureHelper("get-iterator-method", useBabelRuntime),
+                  coreJSPureHelper("get-iterator-method", useBabelRuntime, ext),
                   "getIteratorMethod",
                 ),
               );
@@ -219,7 +220,7 @@ export default defineProvider<Options>(function(
             path.replaceWith(
               t.callExpression(
                 utils.injectDefaultImport(
-                  coreJSPureHelper("get-iterator-method", useBabelRuntime),
+                  coreJSPureHelper("get-iterator-method", useBabelRuntime, ext),
                   "getIteratorMethod",
                 ),
                 [path.node.object],

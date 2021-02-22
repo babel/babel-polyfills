@@ -24,8 +24,9 @@ type Options = {|
     entryInjectRegenerator: boolean,
   },
   "#__secret_key__@babel/runtime__compatibility": void | {
-    useBabelRuntime: boolean,
+    useBabelRuntime: string,
     runtimeVersion: string,
+    ext: string,
   },
 |};
 
@@ -33,7 +34,7 @@ export default defineProvider<Options>(function(
   api,
   {
     [presetEnvCompat]: { entryInjectRegenerator } = {},
-    [runtimeCompat]: { useBabelRuntime, runtimeVersion } = {},
+    [runtimeCompat]: { useBabelRuntime, runtimeVersion, ext = ".js" } = {},
   },
 ) {
   const resolve = api.createMetaResolver({
@@ -51,7 +52,7 @@ export default defineProvider<Options>(function(
   );
 
   const coreJSBase = useBabelRuntime
-    ? "@babel/runtime-corejs2/core-js"
+    ? `${useBabelRuntime}/core-js`
     : method === "usage-pure"
     ? "core-js/library/fn"
     : "core-js/modules";
@@ -88,7 +89,7 @@ export default defineProvider<Options>(function(
       return;
     }
 
-    return utils.injectDefaultImport(`${coreJSBase}/${pure}.js`, hint);
+    return utils.injectDefaultImport(`${coreJSBase}/${pure}${ext}`, hint);
   }
 
   return {
@@ -134,7 +135,7 @@ export default defineProvider<Options>(function(
           path.replaceWith(
             t.callExpression(
               utils.injectDefaultImport(
-                `${coreJSBase}/is-iterable.js`,
+                `${coreJSBase}/is-iterable${ext}`,
                 "isIterable",
               ),
               [path.node.right],
@@ -161,7 +162,7 @@ export default defineProvider<Options>(function(
           path.parentPath.replaceWith(
             t.callExpression(
               utils.injectDefaultImport(
-                `${coreJSBase}/get-iterator.js`,
+                `${coreJSBase}/get-iterator${ext}`,
                 "getIterator",
               ),
               [path.node.object],
