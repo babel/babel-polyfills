@@ -2,6 +2,7 @@
   "root": true,
   "plugins": ["prettier", "@babel/development", "import"],
   "extends": "babel",
+  "parser": "@babel/eslint-parser",
   "rules": {
     "prettier/prettier": "error"
   },
