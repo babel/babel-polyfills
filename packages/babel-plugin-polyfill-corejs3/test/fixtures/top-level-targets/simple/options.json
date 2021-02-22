@@ -1,0 +1,6 @@
+{
+	"targets": "chrome 60",
+	"plugins": [
+	  ["@@/polyfill-corejs3", { "method": "usage-global" }]
+	]
+  }

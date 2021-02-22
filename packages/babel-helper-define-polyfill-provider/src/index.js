@@ -38,6 +38,7 @@ export type { PolyfillProvider, MetaDescriptor, Utils, Targets } from "./types";
 
 function resolveOptions<Options>(
   options: PluginOptions,
+  babelApi,
 ): {
   method: MethodString,
   methodName: "usageGlobal" | "entryGlobal" | "usagePure",
@@ -96,15 +97,27 @@ function resolveOptions<Options>(
     );
   }
 
-  const targetsObj =
-    typeof targetsOption === "string" || Array.isArray(targetsOption)
-      ? { browsers: targetsOption }
-      : targetsOption;
+  let targets;
 
-  const targets: Targets = getTargets(targetsObj, {
-    ignoreBrowserslistConfig,
-    configPath,
-  });
+  if (
+    // If any browserslist-related option is specified, fallback to the old
+    // behavior of not using the targets specified in the top-level options.
+    targetsOption ||
+    configPath ||
+    ignoreBrowserslistConfig
+  ) {
+    const targetsObj =
+      typeof targetsOption === "string" || Array.isArray(targetsOption)
+        ? { browsers: targetsOption }
+        : targetsOption;
+
+    targets = getTargets(targetsObj, {
+      ignoreBrowserslistConfig,
+      configPath,
+    });
+  } else {
+    targets = babelApi.targets();
+  }
 
   return {
     method,
@@ -133,7 +146,7 @@ function instantiateProvider<Options>(
     shouldInjectPolyfill,
     providerOptions,
     absoluteImports,
-  } = resolveOptions<Options>(options);
+  } = resolveOptions<Options>(options, babelApi);
 
   const getUtils = createUtilsGetter(
     new ImportsCache(moduleName =>
