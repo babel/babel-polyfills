@@ -67,13 +67,42 @@ export default class ImportsCache {
 
   _injectImport(programPath: NodePath, node: t.Node) {
     let lastImport = this._lastImports.get(programPath);
-    if (lastImport && lastImport.node) {
+    if (
+      lastImport &&
+      lastImport.node &&
+      // Sometimes the AST is modified and the "last import"
+      // we have has been replaced
+      lastImport.parent === programPath.node &&
+      lastImport.container === programPath.node.body
+    ) {
       lastImport = lastImport.insertAfter(node);
     } else {
       lastImport = programPath.unshiftContainer("body", node);
     }
     lastImport = lastImport[lastImport.length - 1];
     this._lastImports.set(programPath, lastImport);
+
+    /*
+    let lastImport;
+
+    programPath.get("body").forEach(path => {
+      if (path.isImportDeclaration()) lastImport = path;
+      if (
+        path.isExpressionStatement() &&
+        isRequireCall(path.get("expression"))
+      ) {
+        lastImport = path;
+      }
+      if (
+        path.isVariableDeclaration() &&
+        path.get("declarations").length === 1 &&
+        (isRequireCall(path.get("declarations.0.init")) ||
+          (path.get("declarations.0.init").isMemberExpression() &&
+            isRequireCall(path.get("declarations.0.init.object"))))
+      ) {
+        lastImport = path;
+      }
+    });*/
   }
 
   _ensure<C: Map<*, *> | Set<*>>(
