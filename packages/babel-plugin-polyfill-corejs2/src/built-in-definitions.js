@@ -1,5 +1,7 @@
 // @flow
 
+import corejs2Polyfills from "@babel/compat-data/corejs2-built-ins";
+
 type ObjectMap<V> = { [name: string]: V };
 
 type PolyfillDescriptor<T> = {
@@ -111,7 +113,6 @@ export const InstanceProperties: ObjectMap<PolyfillDescriptor<CoreJS2Meta>> = {
   repeat: globalOnly(["es6.string.repeat"]),
   replace: globalOnly(["es6.regexp.replace"]),
   search: globalOnly(["es6.regexp.search"]),
-  slice: globalOnly(["es6.array.slice"]),
   small: globalOnly(["es6.string.small"]),
   some: globalOnly(["es6.array.some"]),
   sort: globalOnly(["es6.array.sort"]),
@@ -134,6 +135,11 @@ export const InstanceProperties: ObjectMap<PolyfillDescriptor<CoreJS2Meta>> = {
   trimStart: globalOnly(["es7.string.trim-left"]),
   values: globalOnly(ArrayNatureIterators),
 };
+
+// This isn't present in older @babel/compat-data versions
+if ("es6.array.slice" in corejs2Polyfills) {
+  InstanceProperties.slice = globalOnly(["es6.array.slice"]);
+}
 
 export const StaticProperties: ObjectMap<
   ObjectMap<PolyfillDescriptor<CoreJS2Meta>>,
