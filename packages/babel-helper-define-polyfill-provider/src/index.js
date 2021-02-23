@@ -176,7 +176,7 @@ function instantiateProvider<Options>(
         );
       }
       if (!polyfillsNames.has(name)) {
-        throw new Error(
+        console.warn(
           `Internal error in the ${provider.name} provider: ` +
             `unknown polyfill "${name}".`,
         );
