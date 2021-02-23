@@ -16,7 +16,7 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@babel/compat-data": "^7.11.0",
+    "@babel/compat-data": "^7.13.0",
     "@babel/helper-define-polyfill-provider": "^0.1.1",
     "semver": "^6.1.1"
   },
