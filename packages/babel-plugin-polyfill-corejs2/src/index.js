@@ -59,7 +59,9 @@ export default defineProvider<Options>(function(
 
   function inject(name: string | string[], utils) {
     if (typeof name === "string") {
-      if (shouldInjectPolyfill(name)) {
+      // Some polyfills aren't always available, for example
+      // web.dom.iterable when targeting node
+      if (has(polyfills, name) && shouldInjectPolyfill(name)) {
         debug(name);
         utils.injectGlobalImport(`${coreJSBase}/${name}.js`);
       }
@@ -67,12 +69,6 @@ export default defineProvider<Options>(function(
     }
 
     name.forEach(name => inject(name, utils));
-  }
-
-  function injectIfAvailable(name, utils) {
-    // Some polyfills aren't always available, for example
-    // web.dom.iterable when targeting node
-    if (has(polyfills, name)) inject(name, utils);
   }
 
   function maybeInjectPure(desc, hint, utils) {
@@ -185,15 +181,13 @@ export default defineProvider<Options>(function(
       // yield*
       YieldExpression(path) {
         if (path.node.delegate) {
-          injectIfAvailable("web.dom.iterable", api.getUtils(path));
+          inject("web.dom.iterable", api.getUtils(path));
         }
       },
 
       // for-of, [a, b] = c
       "ForOfStatement|ArrayPattern"(path) {
-        CommonIterators.forEach(name =>
-          injectIfAvailable(name, api.getUtils(path)),
-        );
+        CommonIterators.forEach(name => inject(name, api.getUtils(path)));
       },
     },
   };
