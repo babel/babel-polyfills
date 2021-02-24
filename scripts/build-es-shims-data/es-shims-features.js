@@ -53,6 +53,7 @@ module.exports = {
   "Promise.any": "Promise.any",
   "Promise.try": [],
   "Promise.prototype.finally": "Promise.prototype.finally",
+  "Reflect.apply": "Reflect / Reflect.apply",
   "Reflect.getPrototypeOf": "Reflect / Reflect.getPrototypeOf",
   "Reflect.ownKeys": "Reflect / Reflect.ownKeys",
   "RegExp.prototype.flags":

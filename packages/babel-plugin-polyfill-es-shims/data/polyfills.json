@@ -454,6 +454,17 @@
     "samsung": "8",
     "electron": "3"
   },
+  "Reflect.apply": {
+    "chrome": "49",
+    "opera": "36",
+    "edge": "12",
+    "firefox": "42",
+    "safari": "10",
+    "node": "6",
+    "ios": "10",
+    "samsung": "5",
+    "electron": "0.37"
+  },
   "Reflect.getPrototypeOf": {
     "chrome": "49",
     "opera": "36",

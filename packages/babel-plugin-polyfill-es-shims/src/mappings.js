@@ -90,6 +90,7 @@ defineStatic("Promise", "any", "2.0.1");
 defineStatic("Promise", "try", "1.0.0");
 defineInstance("Promise", "finally", "1.2.1", instanceofCheck("Promise"));
 
+defineStatic("Reflect", "apply", "1.0.0");
 defineStatic("Reflect", "ownKeys", "1.0.1");
 defineStatic("Reflect", "getPrototypeOf", "1.0.0");
 
