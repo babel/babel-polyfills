@@ -494,7 +494,7 @@ export const InstanceProperties = {
     "es.array.flat-map",
     "es.array.unscopables.flat-map",
   ]),
-  flat: define("instance/flat", [], "es.array.flat"),
+  flat: define("instance/flat", ["es.array.flat"]),
   fontcolor: define(null, ["es.string.fontcolor"]),
   fontsize: define(null, ["es.string.fontsize"]),
   forEach: define("instance/for-each", [
