@@ -29,7 +29,6 @@
 - `Math.sinh()`
 - `Math.tanh()`
 - `Math.trunc()`
-- `Reflect.apply()`
 - `Reflect.construct()`
 - `Reflect.defineProperty()`
 - `Reflect.deleteProperty()`

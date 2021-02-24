@@ -70,6 +70,7 @@ This plugin supports the following `es-shims` polyfills.
 | `Object.assign`                | [`object.assign`](https://github.com/ljharb/object.assign)                                      | [@ljharb](https://github.com/ljharb)               |
 | `Object.getPrototypeOf`        | [`object.getprototypeof`](https://github.com/es-shims/Object.getPrototypeOf)                    |
 | `Object.is`                    | [`object-is`](https://github.com/es-shims/object-is)                                            |
+| `Reflect.apply`                | [`reflect.apply`](https://github.com/es-shims/Reflect.apply)                                    |
 | `Reflect.getPrototypeOf`       | [`reflect.getprototypeof`](https://github.com/es-shims/Reflect.getPrototypeOf)                  |
 | `Reflect.ownKeys`              | [`reflect.ownkeys`](https://github.com/es-shims/Reflect.ownKeys)                                |
 | `RegExp.prototype.flags`       | [`regexp.prototype.flags`](https://github.com/es-shims/RegExp.prototype.flags)                  |
