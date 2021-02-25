@@ -16,7 +16,8 @@
   },
   "main": "lib/index.js",
   "browser": {
-    "./lib/config/loader.js": "./lib/config/loader-browser.js"
+    "./lib/node/dependencies.js": "./lib/browser/dependencies.js",
+    "./src/node/dependencies.js": "./src/browser/dependencies.js"
   },
   "dependencies": {
     "@babel/helper-compilation-targets": "^7.13.0",
