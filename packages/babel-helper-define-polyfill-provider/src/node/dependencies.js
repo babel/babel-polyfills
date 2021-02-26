@@ -95,9 +95,11 @@ let allMissingDeps = new Set();
 const laterLogMissingDependencies = debounce(() => {
   logMissing(allMissingDeps);
   allMissingDeps = new Set();
-}, 1000);
+}, 100);
 
 export function laterLogMissing(missingDeps: Set<string>) {
+  if (missingDeps.size === 0) return;
+
   missingDeps.forEach(name => allMissingDeps.add(name));
   laterLogMissingDependencies();
 }
