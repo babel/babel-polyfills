@@ -268,7 +268,7 @@ export const StaticProperties: ObjectMap<
     isInteger: define("number/is-integer", ["es.number.is-integer"]),
     isNaN: define("number/is-nan", ["es.number.is-nan"]),
     isSafeInteger: define("number/is-safe-integer", [
-      "es.number.is-safe-integer"
+      "es.number.is-safe-integer",
     ]),
     parseFloat: define("number/parse-float", ["es.number.parse-float"]),
     parseInt: define("number/parse-int", ["es.number.parse-int"]),
