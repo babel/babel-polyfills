@@ -3,7 +3,7 @@
 A set of Babel plugins that enable injecting different polyfills with different strategies in your compiled code.
 Additionally, this repository contains a package that helps with creating providers for other polyfills.
 
-> ⚠️ These packages are **highly experimental** and they have not been tested in production applications yet. Also, we are still working on wiring some missing polyfills.
+> ⚠️ These packages are **experimental**. The `core-js` and `regenerator` polyfill plugins are used internally by `@babel/preset-env`, but we are still working on completing the `es-shims` polyfill plugin.
 
 > ℹ️ This repository implements what was initially proposed at [babel/babel#10008](https://github.com/babel/babel/issues/10008).
 
