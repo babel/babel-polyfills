@@ -85,7 +85,7 @@ export const InstanceProperties: ObjectMap<PolyfillDescriptor<CoreJS2Meta>> = {
   copyWithin: globalOnly(["es6.array.copy-within"]),
   endsWith: globalOnly(["es6.string.ends-with"]),
   entries: globalOnly(ArrayNatureIterators),
-  every: globalOnly(["es6.array.is-array"]),
+  every: globalOnly(["es6.array.every"]),
   fill: globalOnly(["es6.array.fill"]),
   filter: globalOnly(["es6.array.filter"]),
   finally: globalOnly(["es7.promise.finally", ...PromiseDependencies]),
