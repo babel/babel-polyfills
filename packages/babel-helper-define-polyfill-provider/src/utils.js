@@ -1,6 +1,7 @@
 // @flow
 
-import { types as t, template } from "@babel/core";
+import * as babel from "@babel/core";
+const { types: t, template } = babel.default || babel;
 import type NodePath from "@babel/traverse";
 import type { Utils } from "./types";
 import type ImportsCache from "./imports-cache";

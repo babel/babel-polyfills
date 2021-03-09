@@ -17,6 +17,7 @@ package-lock.json
 *.cache
 
 /packages/*/lib
+/packages/*/esm
 /.changelog
 
 build/compat-table

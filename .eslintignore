@@ -5,6 +5,7 @@ package.json
 lerna.json
 packages/*/node_modules
 packages/*/lib
+packages/*/esm
 packages/*/test/fixtures
 packages/*/test/spawn-fixtures
 packages/babel-plugin-polyfill-corejs2/data/*

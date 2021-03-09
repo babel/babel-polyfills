@@ -1,7 +1,8 @@
 // @flow
 
 import type { NodePath } from "@babel/traverse";
-import { types as t } from "@babel/core";
+import * as babel from "@babel/core";
+const { types: t } = babel.default || babel;
 import createMetaResolver from "./meta-resolver";
 
 type ObjectMap<T> = { [k: string]: T };

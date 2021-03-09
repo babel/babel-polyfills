@@ -2,7 +2,7 @@
 
 import corejs3Polyfills from "core-js-compat/data";
 import corejs3ShippedProposalsList from "./shipped-proposals";
-import getModulesListForTargetVersion from "core-js-compat/get-modules-list-for-target-version";
+import getModulesListForTargetVersion from "core-js-compat/get-modules-list-for-target-version.js";
 import {
   BuiltIns,
   CommonIterators,
@@ -14,7 +14,8 @@ import {
   type CoreJSPolyfillDescriptor,
 } from "./built-in-definitions";
 
-import { types as t } from "@babel/core";
+import * as babel from "@babel/core";
+const { types: t } = babel.default || babel;
 import {
   callMethod,
   coreJSModule,
