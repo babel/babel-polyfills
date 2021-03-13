@@ -23,9 +23,10 @@ Object.keys(electronToChromiumVersions).forEach(electron => {
   // This is missing
   if (chromeId === "chrome82") chromeId = "chrome81";
   if (!envs[chromeId]) {
-    throw new Error(
+    console.error(
       `Electron ${electron} inherits from Chrome ${chrome}, which is not defined.`
     );
+    return;
   }
 
   envs[electronId] = { equals: chromeId };
