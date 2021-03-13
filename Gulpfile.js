@@ -74,11 +74,15 @@ async function buildRollup() {
     packages.map(async name => {
       const dir = `${base}/${name}`;
       const pkg = require(`${dir}/package.json`);
-      const external = [
-        ...Object.keys(pkg.dependencies || {}),
-        "@babel/core",
-        "core-js-compat/get-modules-list-for-target-version.js",
-      ];
+      const external = (specifier, x, skip) => {
+        if (!skip && !external(specifier, x, true)) console.log(specifier);
+        if (specifier.includes("/core-js-compat/")) return true;
+        if (specifier.includes("/data/polyfills")) return true;
+        if (specifier.startsWith("/")) return false;
+        const name = /^(?:@[^/]+\/[^/]+|[^/]+)/.exec(specifier)?.[0];
+        if (name === "@babel/core") return true;
+        return Object.hasOwnProperty.call(pkg.dependencies || {}, name);
+      };
 
       const bundle = await rollup({
         input: `${dir}/src/index.js`,

@@ -5,7 +5,7 @@ import defineProvider, {
   type MetaDescriptor,
 } from "@babel/helper-define-polyfill-provider";
 
-import polyfills from "../data/polyfills.json";
+import polyfills from "../data/polyfills.js";
 
 import {
   type Descriptor,

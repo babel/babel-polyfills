@@ -2,7 +2,7 @@
 
 import * as babel from "@babel/core";
 const { types: t } = babel.default || babel;
-import corejsEntries from "core-js-compat/entries";
+import corejsEntries from "../core-js-compat/entries.js";
 
 export function callMethod(path: *, id: t.Identifier) {
   const { object } = path.node;
