@@ -16,6 +16,7 @@ import "core-js/modules/es6.array.map.js";
 import "core-js/modules/es6.array.of.js";
 import "core-js/modules/es6.array.reduce.js";
 import "core-js/modules/es6.array.reduce-right.js";
+import "core-js/modules/es6.array.slice.js";
 import "core-js/modules/es6.array.some.js";
 import "core-js/modules/es6.array.sort.js";
 import "core-js/modules/es6.array.species.js";
