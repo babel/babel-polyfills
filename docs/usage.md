@@ -74,7 +74,7 @@ The `shouldInjectPolyfill` function takes two parameters: the name of the polyfi
 function shouldInjectPolyfill(name: string, defaultShouldInject: boolean): boolean;
 ```
 
-### `absoluteRuntime`
+### `absoluteImports`
 
 `boolean` or `string`, defaults to `false`.
 
