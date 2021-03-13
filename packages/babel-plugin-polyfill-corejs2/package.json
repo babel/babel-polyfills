@@ -12,13 +12,16 @@
     "access": "public"
   },
   "main": "lib/index.js",
-  "exports": [
-    {
-      "import": "./esm/index.mjs",
-      "default": "./lib/index.js"
-    },
-    "./lib/index.js"
-  ],
+  "exports": {
+    ".": [
+      {
+        "import": "./esm/index.mjs",
+        "default": "./lib/index.js"
+      },
+      "./lib/index.js"
+    ],
+    "./package.json": "./package.json"
+  },
   "keywords": [
     "babel-plugin"
   ],
