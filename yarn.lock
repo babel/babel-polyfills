@@ -5,6 +5,18 @@ __metadata:
   version: 4
   cacheKey: 7
 
+"@babel-internal/test-esm@workspace:test/esm":
+  version: 0.0.0-use.local
+  resolution: "@babel-internal/test-esm@workspace:test/esm"
+  dependencies:
+    "@babel/core": ^7.13.10
+    babel-plugin-polyfill-corejs2: "workspace:*"
+    babel-plugin-polyfill-corejs3: "workspace:*"
+    babel-plugin-polyfill-es-shims: "workspace:*"
+    babel-plugin-polyfill-regenerator: "workspace:*"
+  languageName: unknown
+  linkType: soft
+
 "@babel/cli@npm:^7.11.5, @babel/cli@npm:^7.13.10":
   version: 7.13.10
   resolution: "@babel/cli@npm:7.13.10"
@@ -3709,7 +3721,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-polyfill-corejs2@workspace:packages/babel-plugin-polyfill-corejs2":
+"babel-plugin-polyfill-corejs2@workspace:*, babel-plugin-polyfill-corejs2@workspace:packages/babel-plugin-polyfill-corejs2":
   version: 0.0.0-use.local
   resolution: "babel-plugin-polyfill-corejs2@workspace:packages/babel-plugin-polyfill-corejs2"
   dependencies:
@@ -3737,7 +3749,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-polyfill-corejs3@workspace:packages/babel-plugin-polyfill-corejs3":
+"babel-plugin-polyfill-corejs3@workspace:*, babel-plugin-polyfill-corejs3@workspace:packages/babel-plugin-polyfill-corejs3":
   version: 0.0.0-use.local
   resolution: "babel-plugin-polyfill-corejs3@workspace:packages/babel-plugin-polyfill-corejs3"
   dependencies:
@@ -3756,7 +3768,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"babel-plugin-polyfill-es-shims@workspace:packages/babel-plugin-polyfill-es-shims":
+"babel-plugin-polyfill-es-shims@workspace:*, babel-plugin-polyfill-es-shims@workspace:packages/babel-plugin-polyfill-es-shims":
   version: 0.0.0-use.local
   resolution: "babel-plugin-polyfill-es-shims@workspace:packages/babel-plugin-polyfill-es-shims"
   dependencies:
@@ -3780,7 +3792,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-polyfill-regenerator@workspace:packages/babel-plugin-polyfill-regenerator":
+"babel-plugin-polyfill-regenerator@workspace:*, babel-plugin-polyfill-regenerator@workspace:packages/babel-plugin-polyfill-regenerator":
   version: 0.0.0-use.local
   resolution: "babel-plugin-polyfill-regenerator@workspace:packages/babel-plugin-polyfill-regenerator"
   dependencies:
