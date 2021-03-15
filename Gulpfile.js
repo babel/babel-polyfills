@@ -74,8 +74,7 @@ async function buildRollup() {
     packages.map(async name => {
       const dir = `${base}/${name}`;
       const pkg = require(`${dir}/package.json`);
-      const external = (specifier, x, skip) => {
-        if (!skip && !external(specifier, x, true)) console.log(specifier);
+      const external = specifier => {
         if (specifier.includes("/core-js-compat/")) return true;
         if (specifier.includes("/data/polyfills")) return true;
         if (specifier.startsWith("/")) return false;
