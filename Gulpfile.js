@@ -14,12 +14,13 @@ const rollupBabel = require("@rollup/plugin-babel").babel;
 const rollupNodeResolve = require("@rollup/plugin-node-resolve").nodeResolve;
 const rollupJson = require("@rollup/plugin-json");
 
-const packages = [
-  "babel-helper-define-polyfill-provider",
-  "babel-plugin-polyfill-corejs2",
-  "babel-plugin-polyfill-corejs3",
-  "babel-plugin-polyfill-es-shims",
-  "babel-plugin-polyfill-regenerator",
+const esmBundles = [
+  { name: "babel-helper-define-polyfill-provider", target: "node" },
+  { name: "babel-helper-define-polyfill-provider", target: "browser" },
+  { name: "babel-plugin-polyfill-corejs2" },
+  { name: "babel-plugin-polyfill-corejs3" },
+  { name: "babel-plugin-polyfill-es-shims" },
+  { name: "babel-plugin-polyfill-regenerator" },
 ];
 
 function swapSrcWithLib(srcPath) {
@@ -71,7 +72,7 @@ async function buildRollup() {
   const base = path.join(__dirname, "packages");
 
   return Promise.all(
-    packages.map(async name => {
+    esmBundles.map(async ({ name, target }) => {
       const dir = `${base}/${name}`;
       const pkg = require(`${dir}/package.json`);
       const external = specifier => {
@@ -97,13 +98,15 @@ async function buildRollup() {
           }),
           rollupNodeResolve({
             extensions: [".ts", ".js", ".mjs", ".cjs", ".json"],
-            browser: true,
+            browser: target === "browser",
             preferBuiltins: true,
           }),
         ],
       });
 
-      const outputFile = `${dir}/esm/index.mjs`;
+      const outputFile = target
+        ? `${dir}/esm/index.${target}.mjs`
+        : `${dir}/esm/index.mjs`;
       await bundle.write({
         file: outputFile,
         format: "es",
