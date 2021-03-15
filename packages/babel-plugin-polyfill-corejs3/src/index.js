@@ -14,8 +14,6 @@ import {
   type CoreJSPolyfillDescriptor,
 } from "./built-in-definitions";
 
-import * as babel from "@babel/core";
-const { types: t } = babel.default || babel;
 import {
   callMethod,
   coreJSModule,
@@ -24,6 +22,11 @@ import {
 } from "./utils";
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
+
+import * as _babel from "@babel/core";
+let babel = _babel;
+if (babel.default) babel = babel.default;
+const { types: t } = babel;
 
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 

@@ -1,8 +1,11 @@
 // @flow
 
 import type { NodePath } from "@babel/traverse";
-import * as babel from "@babel/core";
-const { types: t } = babel.default || babel;
+
+import * as _babel from "@babel/core";
+let babel = _babel;
+if (babel.default) babel = babel.default;
+const { types: t } = babel;
 
 type StrMap<K> = Map<string, K>;
 

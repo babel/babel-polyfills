@@ -1,10 +1,13 @@
 // @flow
 
-import * as babel from "@babel/core";
-const { types: t, template } = babel.default || babel;
 import type NodePath from "@babel/traverse";
 import type { Utils } from "./types";
 import type ImportsCache from "./imports-cache";
+
+import * as _babel from "@babel/core";
+let babel = _babel;
+if (babel.default) babel = babel.default;
+const { types: t, template } = babel;
 
 export function intersection<T>(a: Set<T>, b: Set<T>): Set<T> {
   const result = new Set();
