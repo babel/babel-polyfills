@@ -3761,8 +3761,9 @@ __metadata:
     "@babel/plugin-transform-for-of": ^7.10.4
     "@babel/plugin-transform-modules-commonjs": ^7.10.4
     "@babel/plugin-transform-spread": ^7.13.0
+    core-js: ^3.9.1
     core-js-compat: ^3.9.1
-    core-js-pure: ^3.8.1
+    core-js-pure: ^3.9.1
   peerDependencies:
     "@babel/core": ^7.0.0-0
   languageName: unknown
@@ -4949,10 +4950,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-pure@npm:^3.8.1":
-  version: 3.8.1
-  resolution: "core-js-pure@npm:3.8.1"
-  checksum: 27dc872375d478d5758c54c7f4fab1c76feb5e0dce2648d29926488b6ca331bfefcb543674c14355be16812eec76d1ad6fc6c8c754eea9eecd8fb89b247ab73f
+"core-js-pure@npm:^3.9.1":
+  version: 3.9.1
+  resolution: "core-js-pure@npm:3.9.1"
+  checksum: 9cbb38523f6360c068991af52bb91a55cfdc3dd3cda0964b8e232caa795b95c08523d2fb1c80b76ffd2a8446e4822a6ba960f3bd762353ad0f8470f2fd3c652e
   languageName: node
   linkType: hard
 
@@ -4960,6 +4961,13 @@ __metadata:
   version: 2.6.11
   resolution: "core-js@npm:2.6.11"
   checksum: 39ad00b46deaecf344470ef940949b58c4b15e71608a98e8ac7429cd16e485b829f9720d44a44b5f4dee966ff04a18baf5283feb8aaba2cb59ce2c25fa72b88c
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.9.1":
+  version: 3.9.1
+  resolution: "core-js@npm:3.9.1"
+  checksum: 3f360466246e816ff745f349bf0ea0c54bc3a05203638d84c5f0eae3583f07e7d848d6aa9b69c30467efb418e526bae034a6da50bcfda8b2cd413e5144cd1444
   languageName: node
   linkType: hard
 

@@ -37,7 +37,8 @@
     "@babel/plugin-transform-for-of": "^7.10.4",
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "@babel/plugin-transform-spread": "^7.13.0",
-    "core-js-pure": "^3.8.1"
+    "core-js": "^3.9.1",
+    "core-js-pure": "^3.9.1"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0-0"
