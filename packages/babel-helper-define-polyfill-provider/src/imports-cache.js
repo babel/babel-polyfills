@@ -1,7 +1,8 @@
 // @flow
 
-import { types as t } from "@babel/core";
 import type { NodePath } from "@babel/traverse";
+import * as babel from "@babel/core";
+const { types: t } = babel.default || babel;
 
 type StrMap<K> = Map<string, K>;
 

@@ -16,8 +16,22 @@
   },
   "main": "lib/index.js",
   "browser": {
+    "./esm/node/dependencies.mjs": "./esm/node/dependencies.mjs",
     "./lib/node/dependencies.js": "./lib/browser/dependencies.js",
     "./src/node/dependencies.js": "./src/browser/dependencies.js"
+  },
+  "exports": {
+    ".": [
+      {
+        "import": {
+          "node": "./esm/index.node.mjs",
+          "browser": "./esm/index.browser.mjs"
+        },
+        "default": "./lib/index.js"
+      },
+      "./lib/index.js"
+    ],
+    "./package.json": "./package.json"
   },
   "dependencies": {
     "@babel/helper-compilation-targets": "^7.13.0",

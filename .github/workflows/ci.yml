@@ -86,3 +86,6 @@ jobs:
         run: yarn jest --ci --color
         env:
           BABEL_TYPES_8_BREAKING: true
+      - name: Test the esm build
+        run:
+          yarn test:esm

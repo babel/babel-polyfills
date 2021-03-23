@@ -1,6 +1,7 @@
 // @flow
 
-import { template, types as t } from "@babel/core";
+import * as babel from "@babel/core";
+const { types: t, template } = babel.default || babel;
 
 import type { MetaDescriptor } from "@babel/helper-define-polyfill-provider";
 

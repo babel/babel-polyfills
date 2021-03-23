@@ -5,16 +5,7 @@ module.exports = function(api) {
 
   return {
     sourceType: "unambiguous",
-    presets: [
-      [
-        "@babel/preset-env",
-        {
-          loose: true,
-          exclude: ["transform-typeof-symbol"],
-          targets: { node: env === "production" ? "6.9" : "current" },
-        },
-      ],
-      "@babel/preset-flow",
-    ],
+    targets: { node: env === "production" ? "6.9" : "current" },
+    presets: [["@babel/preset-env", { loose: true }], "@babel/preset-flow"],
   };
 };

@@ -2,11 +2,17 @@ import cp from "child_process";
 import fs from "fs";
 
 function execP(cmd, opts) {
+  const normalize = buff =>
+    String(buff)
+      // Remove ANSII escapes
+      .replace(/\u001b\[.*?m/g, "") // eslint-disable-line no-control-regex
+      .trim();
+
   return new Promise(resolve => {
     cp.exec(cmd, opts, (error, stdout, stderr) => {
       resolve({
-        stdout: String(stdout).trim(),
-        stderr: String(stderr || error).trim(),
+        stdout: normalize(stdout),
+        stderr: normalize(stderr || error),
         exitCode: error ? error.code : 0,
       });
     });
