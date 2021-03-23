@@ -10,7 +10,8 @@
     "flow": "flow check --strip-root",
     "lint": "eslint packages '*.js' --format=codeframe",
     "publish": "yarn clean && NODE_ENV=production yarn build && yarn validate && lerna publish from-git",
-    "test": "jest && node test/esm/index.mjs",
+    "test": "jest && yarn test:esm",
+    "test:esm": "node test/esm/index.mjs",
     "validate": "yarn lint && yarn flow && yarn test",
     "watch": "gulp watch"
   },
