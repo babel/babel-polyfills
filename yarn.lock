@@ -11739,21 +11739,7 @@ resolve@1.1.7:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.3.2":
-  version: 2.40.0
-  resolution: "rollup@npm:2.40.0"
-  dependencies:
-    fsevents: ~2.3.1
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  bin:
-    rollup: dist/bin/rollup
-  checksum: c512236087c32f661181d65489341a01fdd8a41ff3992479d049e999d9070387b20c8b37a5fbdda6af9507fce435e0b9dc510dbf058573575a157d3e61bd2bd4
-  languageName: node
-  linkType: hard
-
-"rollup@npm:^2.42.3":
+"rollup@npm:^2.3.2, rollup@npm:^2.42.3":
   version: 2.42.3
   resolution: "rollup@npm:2.42.3"
   dependencies:
