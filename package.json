@@ -48,7 +48,7 @@
     "lodash": "^4.17.15",
     "prettier": "^1.17.1",
     "rimraf": "^2.6.3",
-    "rollup": "^2.40.0",
+    "rollup": "^2.42.3",
     "through2": "^2.0.0"
   },
   "engines": {

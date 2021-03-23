@@ -3841,7 +3841,7 @@ __metadata:
     lodash: ^4.17.15
     prettier: ^1.17.1
     rimraf: ^2.6.3
-    rollup: ^2.40.0
+    rollup: ^2.42.3
     through2: ^2.0.0
   languageName: unknown
   linkType: soft
@@ -11739,7 +11739,7 @@ resolve@1.1.7:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.3.2, rollup@npm:^2.40.0":
+"rollup@npm:^2.3.2":
   version: 2.40.0
   resolution: "rollup@npm:2.40.0"
   dependencies:
@@ -11750,6 +11750,20 @@ resolve@1.1.7:
   bin:
     rollup: dist/bin/rollup
   checksum: c512236087c32f661181d65489341a01fdd8a41ff3992479d049e999d9070387b20c8b37a5fbdda6af9507fce435e0b9dc510dbf058573575a157d3e61bd2bd4
+  languageName: node
+  linkType: hard
+
+"rollup@npm:^2.42.3":
+  version: 2.42.3
+  resolution: "rollup@npm:2.42.3"
+  dependencies:
+    fsevents: ~2.3.1
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    rollup: dist/bin/rollup
+  checksum: eb5d3eda11a72ae50a62632f8f1177e6d99e2351c5da4241c7417bd8bdb6365065c7c8fa36ef6bc34df8e2d856451f830cec131b2af50c483932d28d0415cdb6
   languageName: node
   linkType: hard
 
