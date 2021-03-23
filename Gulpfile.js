@@ -79,7 +79,7 @@ async function buildRollup() {
         if (specifier.includes("/core-js-compat/")) return true;
         if (specifier.includes("/data/polyfills")) return true;
         if (specifier.startsWith("/")) return false;
-        const name = /^(?:@[^/]+\/[^/]+|[^/]+)/.exec(specifier)?.[0];
+        const [name] = /^(?:@[^/]+\/[^/]+|[^/]+)/.exec(specifier);
         if (name === "@babel/core") return true;
         return Object.hasOwnProperty.call(pkg.dependencies || {}, name);
       };
