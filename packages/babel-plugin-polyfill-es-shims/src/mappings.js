@@ -1,11 +1,9 @@
 // @flow
 
-import type { MetaDescriptor } from "@babel/helper-define-polyfill-provider";
+import * as babel from "@babel/core";
+const { types: t, template } = babel.default || babel;
 
-import * as _babel from "@babel/core";
-let babel = _babel;
-if (babel.default) babel = babel.default;
-const { types: t, template } = babel;
+import type { MetaDescriptor } from "@babel/helper-define-polyfill-provider";
 
 const expr = template.expression.ast;
 

@@ -11,11 +11,8 @@ import addPlatformSpecificPolyfills from "./add-platform-specific-polyfills";
 import { hasMinVersion } from "./helpers";
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
-
-import * as _babel from "@babel/core";
-let babel = _babel;
-if (babel.default) babel = babel.default;
-const { types: t } = babel;
+import * as babel from "@babel/core";
+const { types: t } = babel.default || babel;
 
 const presetEnvCompat = "#__secret_key__@babel/preset-env__compatibility";
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";

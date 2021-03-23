@@ -1,11 +1,8 @@
 // @flow
 
+import * as babel from "@babel/core";
+const { types: t } = babel.default || babel;
 import corejsEntries from "../core-js-compat/entries.js";
-
-import * as _babel from "@babel/core";
-let babel = _babel;
-if (babel.default) babel = babel.default;
-const { types: t } = babel;
 
 export function callMethod(path: *, id: t.Identifier) {
   const { object } = path.node;
