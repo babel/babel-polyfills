@@ -1,5 +1,7 @@
 // @flow
 
+import corejs3Polyfills from "../core-js-compat/data.js";
+
 type ObjectMap<V> = { [name: string]: V };
 
 export type CoreJSPolyfillDescriptor = {
@@ -9,13 +11,23 @@ export type CoreJSPolyfillDescriptor = {
   exclude: ?(string[]),
 };
 
+const polyfillsOrder = {};
+Object.keys(corejs3Polyfills).forEach((name, index) => {
+  polyfillsOrder[name] = index;
+});
+
 const define = (
   pure,
   global,
   name = global[0],
   exclude,
 ): CoreJSPolyfillDescriptor => {
-  return { name, pure, global, exclude };
+  return {
+    name,
+    pure,
+    global: global.sort((a, b) => polyfillsOrder[a] - polyfillsOrder[b]),
+    exclude,
+  };
 };
 
 const typed = (name: string) => define(null, [name, ...TypedArrayDependencies]);
