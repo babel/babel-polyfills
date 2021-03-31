@@ -1,11 +1,11 @@
 {
-	"private": true,
-	"name": "@babel-internal/test-esm",
-	"devDependencies": {
-		"@babel/core": "^7.13.10",
-		"babel-plugin-polyfill-corejs2": "workspace:*",
-		"babel-plugin-polyfill-corejs3": "workspace:*",
-		"babel-plugin-polyfill-es-shims": "workspace:*",
-		"babel-plugin-polyfill-regenerator": "workspace:*"
-	}
+  "private": true,
+  "name": "@babel-internal/test-esm",
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "babel-plugin-polyfill-corejs2": "workspace:*",
+    "babel-plugin-polyfill-corejs3": "workspace:*",
+    "babel-plugin-polyfill-es-shims": "workspace:*",
+    "babel-plugin-polyfill-regenerator": "workspace:*"
+  }
 }

@@ -2064,6 +2064,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lerna/npm-publish@patch:@lerna/npm-publish@npm:3.18.5#.yarn-patches/@lerna/npm-publish.patch::locator=babel-polyfills%40workspace%3A.":
+  version: 3.18.5
+  resolution: "@lerna/npm-publish@patch:@lerna/npm-publish@npm%3A3.18.5#.yarn-patches/@lerna/npm-publish.patch::version=3.18.5&hash=96a003&locator=babel-polyfills%40workspace%3A."
+  dependencies:
+    "@evocateur/libnpmpublish": ^1.2.2
+    "@lerna/otplease": 3.18.5
+    "@lerna/run-lifecycle": 3.16.2
+    figgy-pudding: ^3.5.1
+    fs-extra: ^8.1.0
+    npm-package-arg: ^6.1.0
+    npmlog: ^4.1.2
+    pify: ^4.0.1
+    read-package-json: ^2.0.13
+  checksum: c8d694d92274e99ce38ea3b3e9d1f310652fe1227a254d56d246e80ae409722e9bf08938e964cd6ff0a36487966bc49078e7b2ede256937fc2e97577980c7b94
+  languageName: node
+  linkType: hard
+
 "@lerna/npm-run-script@npm:3.16.5":
   version: 3.16.5
   resolution: "@lerna/npm-run-script@npm:3.16.5"
@@ -2110,6 +2127,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lerna/pack-directory@patch:@lerna/pack-directory@npm:3.16.4#.yarn-patches/@lerna/pack-directory.patch::locator=babel-polyfills%40workspace%3A.":
+  version: 3.16.4
+  resolution: "@lerna/pack-directory@patch:@lerna/pack-directory@npm%3A3.16.4#.yarn-patches/@lerna/pack-directory.patch::version=3.16.4&hash=3b33ba&locator=babel-polyfills%40workspace%3A."
+  dependencies:
+    "@lerna/get-packed": 3.16.0
+    "@lerna/package": 3.16.0
+    "@lerna/run-lifecycle": 3.16.2
+    figgy-pudding: ^3.5.1
+    npm-packlist: ^1.4.4
+    npmlog: ^4.1.2
+    tar: ^4.4.10
+    temp-write: ^3.4.0
+  checksum: 8c715c53331907e30ed7f7bb2eb203011d33659b1e9f005fbb51f881bb279e0f6c33529929fe354ef75136b40868595cd88f727119ea071f537613e4b3765bea
+  languageName: node
+  linkType: hard
+
 "@lerna/package-graph@npm:3.18.5":
   version: 3.18.5
   resolution: "@lerna/package-graph@npm:3.18.5"
@@ -2123,6 +2156,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lerna/package-graph@patch:@lerna/package-graph@npm:3.18.5#.yarn-patches/@lerna/package-graph.patch::locator=babel-polyfills%40workspace%3A.":
+  version: 3.18.5
+  resolution: "@lerna/package-graph@patch:@lerna/package-graph@npm%3A3.18.5#.yarn-patches/@lerna/package-graph.patch::version=3.18.5&hash=62e304&locator=babel-polyfills%40workspace%3A."
+  dependencies:
+    "@lerna/prerelease-id-from-version": 3.16.0
+    "@lerna/validation-error": 3.13.0
+    npm-package-arg: ^6.1.0
+    npmlog: ^4.1.2
+    semver: ^6.2.0
+  checksum: ff496290b1e601ef878f8a91c4b0509c6bc8b55a8388304b206f98259862cfaa8e132430e826af4ece6c965ae4b983258ac0016cb617205acc209f0922655def
+  languageName: node
+  linkType: hard
+
 "@lerna/package@npm:3.16.0":
   version: 3.16.0
   resolution: "@lerna/package@npm:3.16.0"
@@ -2131,6 +2177,17 @@ __metadata:
     npm-package-arg: ^6.1.0
     write-pkg: ^3.1.0
   checksum: 98e6254a3121d3eb4be4045a9709d37bda462a87bd680d6a0da0e114502489c8698577da3e254a08333b24c5cb9e2c25c4bd9fb0a45fba44dcf938acecfaea66
+  languageName: node
+  linkType: hard
+
+"@lerna/package@patch:@lerna/package@npm:3.16.0#.yarn-patches/@lerna/package.patch::locator=babel-polyfills%40workspace%3A.":
+  version: 3.16.0
+  resolution: "@lerna/package@patch:@lerna/package@npm%3A3.16.0#.yarn-patches/@lerna/package.patch::version=3.16.0&hash=80ec18&locator=babel-polyfills%40workspace%3A."
+  dependencies:
+    load-json-file: ^5.3.0
+    npm-package-arg: ^6.1.0
+    write-pkg: ^3.1.0
+  checksum: 438372261e30abb1fef8402f7e4008c414ce0fb53c6801c34aeb7d91d1e4d0f303ef9aff92e9be429bbe33b5c9ed0e1e265e59dc9a7a5f27776b069bb224b818
   languageName: node
   linkType: hard
 
