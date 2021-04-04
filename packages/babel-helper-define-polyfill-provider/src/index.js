@@ -3,10 +3,11 @@
 import { declare } from "@babel/helper-plugin-utils";
 import type { NodePath } from "@babel/traverse";
 
-import getTargets, {
+import _getTargets, {
   isRequired,
   getInclusionReasons,
 } from "@babel/helper-compilation-targets";
+const getTargets = _getTargets.default || _getTargets;
 
 import { createUtilsGetter } from "./utils";
 import ImportsCache from "./imports-cache";
