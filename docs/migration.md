@@ -32,15 +32,11 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
 
 ```json
 {
-  "presets": [
-    ["@babel/preset-env", {
-      "targets": { "firefox": 42 }
-    }]
-  ],
+  "targets": { "firefox": 42 },
+  "presets": ["@babel/preset-env"],
   "plugins": [
     ["polyfill-corejs3", {
-      "method": "usage-global",
-      "targets": { "firefox": 42 }
+      "method": "usage-global"
     }]
   ]
 }
@@ -78,15 +74,11 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
 
 ```json
 {
-  "presets": [
-    ["@babel/preset-env", {
-      "targets": { "firefox": 42 }
-    }]
-  ],
+  "targets": { "firefox": 42 },
+  "presets": ["@babel/preset-env"],
   "plugins": [
     ["polyfill-corejs3", {
-      "method": "entry-global",
-      "targets": { "firefox": 42 }
+      "method": "entry-global"
     }]
   ]
 }
@@ -135,14 +127,13 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
   "plugins": [
     "@babel/transform-runtime",
     ["polyfill-corejs3", {
-      "method": "usage-pure",
-      // "targets": { "firefox": 42 }
+      "method": "usage-pure"
     }]
   ]
 }
 ```
 
-**NOTE**: The "Old" config doesn't support targets for polyfills, but you'll likely want to enable them.
+**NOTE**: The "Old" config doesn't support targets for polyfills, but you'll likely want to enable them by moving the `targets` option to the top-level.
 
 </td>
 </tr>
@@ -177,15 +168,11 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
 
 ```json
 {
-  "presets": [
-    ["@babel/preset-env", {
-      "targets": { "firefox": 42 }
-    }]
-  ],
+  "targets": { "firefox": 42 },
+  "presets": ["@babel/preset-env"],
   "plugins": [
     ["polyfill-es-shims", {
-      "method": "usage-global",
-      "targets": { "firefox": 42 }
+      "method": "usage-global"
     }]
   ]
 }
@@ -234,13 +221,12 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
     "@babel/transform-runtime",
     ["polyfill-es-shims", {
       "method": "usage-pure",
-      // "targets": { "firefox": 42 }
     }]
   ]
 }
 ```
 
-**NOTE**: The "Old" config doesn't support targets for polyfills, but you'll likely want to enable them.
+**NOTE**: The "Old" config doesn't support targets for polyfills, but you'll likely want to enable them by moving the `targets` option to the top-level.
 
 </td>
 </tr>
@@ -275,15 +261,11 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
 
 ```json
 {
-  "presets": [
-    ["@babel/preset-env", {
-      "targets": { "firefox": 42 }
-    }]
-  ],
+  "targets": { "firefox": 42 },
+  "presets": ["@babel/preset-env"],
   "plugins": [
     ["polyfill-corejs2", {
-      "method": "usage-global",
-      "targets": { "firefox": 42 }
+      "method": "usage-global"
     }]
   ]
 }
@@ -321,15 +303,11 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
 
 ```json
 {
-  "presets": [
-    ["@babel/preset-env", {
-      "targets": { "firefox": 42 }
-    }]
-  ],
+  "targets": { "firefox": 42 },
+  "presets": ["@babel/preset-env"],
   "plugins": [
     ["polyfill-corejs2", {
-      "method": "entry-global",
-      "targets": { "firefox": 42 }
+      "method": "entry-global"
     }]
   ]
 }
@@ -377,14 +355,13 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
   "plugins": [
     "@babel/transform-runtime",
     ["polyfill-corejs2", {
-      "method": "usage-pure",
-      // "targets": { "firefox": 42 }
+      "method": "usage-pure"
     }]
   ]
 }
 ```
 
-**NOTE**: The "Old" config doesn't support targets for polyfills, but you'll likely want to enable them.
+**NOTE**: The "Old" config doesn't support targets for polyfills, but you'll likely want to enable them by moving the `targets` option to the top-level.
 
 </td>
 </tr>

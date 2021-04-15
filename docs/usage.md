@@ -54,6 +54,8 @@ It can be one of `usage-pure`, `usage-global`, or `entry-global`.
 
 See the same options at https://babeljs.io/docs/en/babel-preset-env
 
+> **NOTE**: It's recommended to use the [top-level options](https://babeljs.io/docs/en/options#output-targets) instead.
+
 ### `include`, `exclude`
 
 All polyfill providers accept two options: `include` and `exclude`. They are an array of strings to polyfills to be considered as not supported by the targets (`include`) or to be considered as supported (`exclude`).

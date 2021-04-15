@@ -36,15 +36,14 @@ For example, if you want to inject imports to [`es-shims`](https://github.com/es
 
 ```json
 {
+  "targets": { "firefox": 65 },
   "plugins": [
     ["polyfill-es-shims", {
-      "method": "usage-global",
-      "targets": {
-        "firefox": 65
-      }
+      "method": "usage-global"
     }]
   ]
 }
+
 ```
 
 </td>
@@ -60,7 +59,6 @@ Promise.allSettled([
 ]).finally(() => {
   console.log("Done!");
 });
- 
 ```
 
 </td>
@@ -76,7 +74,6 @@ Promise.allSettled([
 ]).finally(() => {
   console.log("Done!");
 });
- 
 ```
 
 </td>
