@@ -50,9 +50,9 @@ For example, if you want to inject imports to [`es-shims`](https://github.com/es
 <td>
 
 ```js
- 
- 
- 
+
+
+
 Promise.allSettled([
   p1,
   p2
@@ -120,14 +120,14 @@ Note that polyfill plugins don't automatically add the necessary package(s) to y
     </tr></thead>
     <tr>
     <td>
-          
+
     ```js
     import "core-js";
     ```
-    
+
     </td>
     <td>
-    
+
     ```js
     import "core-js/modules/es7.array.flat-map.js";
     import "core-js/modules/es6.array.sort.js";
@@ -139,7 +139,7 @@ Note that polyfill plugins don't automatically add the necessary package(s) to y
     import "core-js/modules/web.immediate.js";
     import "core-js/modules/web.dom.iterable.js";
     ```
-    
+
     </td>
     </tr>
     </table>
@@ -158,26 +158,26 @@ Note that polyfill plugins don't automatically add the necessary package(s) to y
     </tr></thead>
     <tr>
     <td>
-          
+
     ```js
     foo.flatMap(x => [x, x+1]);
     bar.trimLeft();
     arr.includes(2);
     ```
-    
+
     </td>
     <td>
-    
+
     ```js
     import "core-js/modules/es.array.flat-map.js";
     import "core-js/modules/es.array.unscopables.flat-map.js";
     import "core-js/modules/es.string.trim-start.js";
-    
+
     foo.flatMap(x => [x, x + 1]);
     bar.trimLeft();
     arr.includes(2);
     ```
-    
+
     </td>
     </tr>
     </table>
@@ -195,25 +195,25 @@ Note that polyfill plugins don't automatically add the necessary package(s) to y
     </tr></thead>
     <tr>
     <td>
-          
+
     ```js
     foo.flatMap(x => [x, x+1]);
     bar.trimLeft();
     arr.includes(2);
     ```
-    
+
     </td>
     <td>
-    
+
     ```js
     import _flatMapInstanceProperty from "core-js-pure/stable/instance/flat-map.js";
     import _trimLeftInstanceProperty from "core-js-pure/stable/instance/trim-left.js";
-    
+
     _flatMapInstanceProperty(foo).call(foo, x => [x, x + 1]);
     _trimLeftInstanceProperty(bar).call(bar);
     arr.includes(2);
     ```
-    
+
     </td>
     </tr>
     </table>
@@ -225,13 +225,13 @@ In the last three years and a half, `@babel/preset-env` has shown its full poten
 
 So far Babel provided three different ways to inject `core-js` polyfills in the source code:
 
-- By using `@babel/preset-env`'s `useBuiltIns: "entry"` option, it is possible to inject polyfills for every ECMAScript functionality not natively supported by the target browsers;
-- By using `@babel/preset-env`'s `useBuiltIns: "usage"`, Babel will only inject polyfills for unsupported ECMAScript features but _only_ if they are actually used in the input souce code;
-- By using `@babel/plugin-transform-runtime`, Babel will inject po<i>n</i>yfills (which are "pure" and don't pollute the global scope) for every used ECMAScript feature supported by `core-js`. This is usually used by library authors.
+- By using `@babel/preset-env`'s `useBuiltIns: "entry"` option, it is possible to inject self-installing polyfills for every ECMAScript functionality not natively supported by the target browsers;
+- By using `@babel/preset-env`'s `useBuiltIns: "usage"`, Babel will only inject self-installing polyfills for unsupported ECMAScript features but _only_ if they are actually used in the input souce code;
+- By using `@babel/plugin-transform-runtime`, Babel will inject "pure" polyfills (which, unlike self-installing ones, don't pollute the global scope) for every used ECMAScript feature supported by `core-js`. This is usually used by library authors.
 
 Our old approach has two main problems:
 
-- It wasn't possible to use `@babel/preset-env`'s `targets` option with "pure" po<i>n</i>yfills, because `@babel/plugin-transform-runtime` is a completely separate package.
+- It wasn't possible to use `@babel/preset-env`'s `targets` option with "pure" polyfills, because `@babel/plugin-transform-runtime` is a completely separate package.
 - We forced our users to use `core-js` if they wanted a Babel integration. `core-js` is a good and comprehensive polyfill, but it doesn't fit the needs of all of our users.
 
 With this new packages we are proposing a solution for both of these problem, while still maintaining full backward compatibility.
