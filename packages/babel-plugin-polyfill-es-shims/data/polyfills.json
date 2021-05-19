@@ -12,6 +12,7 @@
   },
   "AggregateError": {
     "chrome": "85",
+    "opera": "71",
     "edge": "85",
     "firefox": "79",
     "safari": "14",
@@ -65,6 +66,20 @@
     "electron": "0.20"
   },
   "Array.prototype.every": {
+    "chrome": "5",
+    "opera": "10.10",
+    "edge": "12",
+    "firefox": "2",
+    "safari": "3.1",
+    "node": "0.10",
+    "ie": "9",
+    "android": "4",
+    "ios": "6",
+    "phantom": "2",
+    "samsung": "1",
+    "electron": "0.20"
+  },
+  "Array.prototype.filter": {
     "chrome": "5",
     "opera": "10.10",
     "edge": "12",
@@ -329,6 +344,40 @@
     "samsung": "3",
     "electron": "0.20"
   },
+  "Number.isFinite": {
+    "chrome": "19",
+    "opera": "15",
+    "edge": "12",
+    "firefox": "16",
+    "safari": "9",
+    "node": "0.12",
+    "android": "4.1",
+    "ios": "9",
+    "samsung": "1.5",
+    "electron": "0.20"
+  },
+  "Number.isInteger": {
+    "chrome": "34",
+    "opera": "21",
+    "edge": "12",
+    "firefox": "16",
+    "safari": "9",
+    "node": "0.12",
+    "ios": "9",
+    "samsung": "2",
+    "electron": "0.20"
+  },
+  "Number.isSafeInteger": {
+    "chrome": "34",
+    "opera": "21",
+    "edge": "12",
+    "firefox": "32",
+    "safari": "9",
+    "node": "0.12",
+    "ios": "9",
+    "samsung": "2",
+    "electron": "0.20"
+  },
   "Number.isNaN": {
     "chrome": "19",
     "opera": "15",
@@ -339,6 +388,28 @@
     "android": "4.1",
     "ios": "9",
     "samsung": "1.5",
+    "electron": "0.20"
+  },
+  "Number.parseFloat": {
+    "chrome": "34",
+    "opera": "21",
+    "edge": "12",
+    "firefox": "25",
+    "safari": "9",
+    "node": "0.12",
+    "ios": "9",
+    "samsung": "2",
+    "electron": "0.20"
+  },
+  "Number.parseInt": {
+    "chrome": "34",
+    "opera": "21",
+    "edge": "12",
+    "firefox": "25",
+    "safari": "9",
+    "node": "0.12",
+    "ios": "9",
+    "samsung": "2",
     "electron": "0.20"
   },
   "Object.assign": {
@@ -435,6 +506,7 @@
   },
   "Promise.any": {
     "chrome": "85",
+    "opera": "71",
     "edge": "85",
     "firefox": "79",
     "safari": "14",
@@ -600,6 +672,7 @@
   },
   "String.prototype.replaceAll": {
     "chrome": "85",
+    "opera": "71",
     "edge": "85",
     "firefox": "77",
     "safari": "13.1",

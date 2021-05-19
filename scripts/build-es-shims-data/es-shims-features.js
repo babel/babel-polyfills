@@ -11,6 +11,7 @@ module.exports = {
   "Array.prototype.entries":
     "Array.prototype methods / Array.prototype.entries",
   "Array.prototype.every": "Array methods / Array.prototype.every",
+  "Array.prototype.filter": "Array methods / Array.prototype.filter",
   "Array.prototype.find": "Array.prototype methods / Array.prototype.find",
   "Array.prototype.findIndex":
     "Array.prototype methods / Array.prototype.findIndex",
@@ -40,7 +41,12 @@ module.exports = {
   "Math.fround": "Math methods / Math.fround",
   "Math.log1p": "Math methods / Math.log1p",
   "Math.sign": "Math methods / Math.sign",
+  "Number.isFinite": "Number properties / Number.isFinite",
+  "Number.isInteger": "Number properties / Number.isInteger",
+  "Number.isSafeInteger": "Number properties / Number.isSafeInteger",
   "Number.isNaN": "Number properties / Number.isNaN",
+  "Number.parseFloat": "Number properties / Number.parseFloat",
+  "Number.parseInt": "Number properties / Number.parseInt",
   "Object.assign": "Object static methods / Object.assign",
   "Object.is": "Object static methods / Object.is",
   "Object.entries": "Object static methods / Object.entries",

@@ -49,6 +49,7 @@ defineStatic("Array", "of", "1.0.0");
 defineInstance("Array", "copyWithin", "1.0.0", arrayCheck);
 defineInstance("Array", "entries", "1.0.0", arrayCheck, excludeObject);
 defineInstance("Array", "every", "1.1.0", arrayCheck);
+defineInstance("Array", "filter", "1.0.0", arrayCheck);
 defineInstance("Array", "find", "2.1.1", arrayCheck);
 defineInstance("Array", "findIndex", "2.1.0", arrayCheck);
 defineInstance("Array", "flat", "1.2.3", arrayCheck);
@@ -76,7 +77,12 @@ defineStatic("Math", "fround", "1.0.0");
 defineStatic("Math", "log1p", "1.0.1");
 defineStatic("Math", "sign", "2.0.0");
 
+defineStatic("Number", "isFinite", "1.0.0");
+defineStatic("Number", "isInteger", "1.0.0");
+defineStatic("Number", "isSafeInteger", "1.0.0");
 defineStatic("Number", "isNaN", "1.2.1", "is-nan");
+defineStatic("Number", "parseFloat", "1.0.0");
+defineStatic("Number", "parseInt", "1.0.0");
 
 defineStatic("Object", "assign", "4.1.0");
 defineStatic("Object", "entries", "1.1.1");
