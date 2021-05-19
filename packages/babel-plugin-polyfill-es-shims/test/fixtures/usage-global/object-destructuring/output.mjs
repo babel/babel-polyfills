@@ -1,5 +1,6 @@
 import "object.entries/auto";
 import "string.prototype.trim/auto";
+import "array.prototype.filter/auto";
 import "array-includes/auto";
 import "string.prototype.includes/auto";
 import "array.from/auto";
