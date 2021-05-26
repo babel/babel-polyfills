@@ -224,7 +224,11 @@ function instantiateProvider<Options>(
 
       const found = missingDependencies.all
         ? false
-        : mapGetOr(depsCache, name, () => !deps.has(dirname, name));
+        : mapGetOr(
+            depsCache,
+            `${name} :: ${dirname}`,
+            () => !deps.has(dirname, name),
+          );
 
       if (!found) {
         debugLog().missingDeps.add(dep);
