@@ -15,7 +15,7 @@ function transform(plugin, code = "Array.from(it)") {
   return transformSync(code, {
     configFile: false,
     browserslistConfigFile: false,
-    plugins: [[plugin, { method: "usage-global" }]],
+    plugins: [[plugin, { method: "usage-global", missingDependencies: false }]],
   }).code;
 }
 
