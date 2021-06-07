@@ -87,6 +87,7 @@ defineStatic("Number", "parseInt", "1.0.0");
 defineStatic("Object", "assign", "4.1.0");
 defineStatic("Object", "entries", "1.1.1");
 defineStatic("Object", "fromEntries", "2.0.2");
+defineStatic("Object", "hasOwn", "1.0.0");
 defineStatic("Object", "is", "1.1.2", "object-is");
 defineStatic("Object", "getOwnPropertyDescriptors", "2.1.0");
 defineStatic("Object", "getPrototypeOf", "1.0.1");
