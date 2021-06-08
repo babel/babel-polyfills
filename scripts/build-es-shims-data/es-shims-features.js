@@ -54,6 +54,7 @@ module.exports = {
   "Object.getOwnPropertyDescriptors":
     "Object static methods / Object.getOwnPropertyDescriptors",
   "Object.getPrototypeOf": "Object static methods / Object.getPrototypeOf",
+  "Object.hasOwn": "Object.hasOwn",
   "Object.values": "Object static methods / Object.values",
   "Promise.allSettled": "Promise.allSettled",
   "Promise.any": "Promise.any",
