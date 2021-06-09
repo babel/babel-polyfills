@@ -1,0 +1,14 @@
+{
+  "plugins": [
+    [
+      "@@/polyfill-regenerator",
+      {
+        "method": "usage-pure",
+        "absoluteImports": true,
+        "#__secret_key__@babel/runtime__compatibility": {
+          "useBabelRuntime": "@babel/runtime"
+        }
+      }
+    ]
+  ]
+}
