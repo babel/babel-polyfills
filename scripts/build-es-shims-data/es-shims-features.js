@@ -15,6 +15,9 @@ module.exports = {
   "Array.prototype.find": "Array.prototype methods / Array.prototype.find",
   "Array.prototype.findIndex":
     "Array.prototype methods / Array.prototype.findIndex",
+  "Array.prototype.findLast": "Array find from last / Array.prototype.findLast",
+  "Array.prototype.findLastIndex":
+    "Array find from last / Array.prototype.findLastIndex",
   "Array.prototype.flat":
     "Array.prototype.{flat, flatMap} / Array.prototype.flat",
   "Array.prototype.flatMap":

@@ -1,0 +1,15 @@
+{
+  "plugins": [
+    [
+      "@@/polyfill-corejs3",
+      {
+        "method": "usage-global",
+        "targets": {
+          "chrome": 90
+        },
+        "version": "3.9",
+        "proposals": true
+      }
+    ]
+  ]
+}

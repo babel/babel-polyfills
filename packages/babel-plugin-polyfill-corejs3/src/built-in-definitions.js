@@ -503,6 +503,10 @@ export const InstanceProperties = {
   finally: define(null, ["es.promise.finally", ...PromiseDependencies]),
   find: define("instance/find", ["es.array.find"]),
   findIndex: define("instance/find-index", ["es.array.find-index"]),
+  findLast: define("instance/find-last", ["esnext.array.find-last"]),
+  findLastIndex: define("instance/find-last-index", [
+    "esnext.array.find-last-index",
+  ]),
   fixed: define(null, ["es.string.fixed"]),
   flags: define("instance/flags", ["es.regexp.flags"]),
   flatMap: define("instance/flat-map", [
