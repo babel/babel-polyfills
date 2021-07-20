@@ -52,6 +52,8 @@ defineInstance("Array", "every", "1.1.0", arrayCheck);
 defineInstance("Array", "filter", "1.0.0", arrayCheck);
 defineInstance("Array", "find", "2.1.1", arrayCheck);
 defineInstance("Array", "findIndex", "2.1.0", arrayCheck);
+defineInstance("Array", "findLast", "1.0.0", arrayCheck);
+defineInstance("Array", "findLastIndex", "1.0.0", arrayCheck);
 defineInstance("Array", "flat", "1.2.3", arrayCheck);
 defineInstance("Array", "flatMap", "1.2.3", arrayCheck);
 defineInstance("Array", "includes", "3.1.1", arrayCheck, {

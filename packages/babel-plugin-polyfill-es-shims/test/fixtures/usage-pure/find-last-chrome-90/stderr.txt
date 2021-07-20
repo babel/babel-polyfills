@@ -1,0 +1,4 @@
+Some polyfills have been added but are not present in your dependencies.
+Please run one of the following commands:
+	npm install --save array.prototype.findlast@^1.0.0 array.prototype.findlastindex@^1.0.0
+	yarn add array.prototype.findlast@^1.0.0 array.prototype.findlastindex@^1.0.0

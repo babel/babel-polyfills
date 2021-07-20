@@ -18,6 +18,7 @@
     "safari": "14",
     "node": "15",
     "ios": "14",
+    "samsung": "14",
     "electron": "10"
   },
   "Array.from": {
@@ -115,6 +116,8 @@
     "samsung": "5",
     "electron": "0.31"
   },
+  "Array.prototype.findLast": {},
+  "Array.prototype.findLastIndex": {},
   "Array.prototype.flat": {
     "chrome": "69",
     "opera": "56",
@@ -513,6 +516,7 @@
     "safari": "14",
     "node": "15",
     "ios": "14",
+    "samsung": "14",
     "electron": "10"
   },
   "Promise.try": {},
@@ -679,6 +683,7 @@
     "safari": "13.1",
     "node": "15",
     "ios": "13.4",
+    "samsung": "14",
     "electron": "10"
   },
   "String.prototype.split": {

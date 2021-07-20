@@ -1,0 +1,2 @@
+[].findLast(fn);
+[].findLastIndex(fn);
