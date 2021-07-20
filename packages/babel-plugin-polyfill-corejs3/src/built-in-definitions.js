@@ -483,7 +483,11 @@ export const StaticProperties: ObjectMap<
 };
 
 export const InstanceProperties = {
-  at: define("instance/at", ["esnext.string.at"]),
+  at: define("instance/at", [
+    "esnext.string.at",
+    "esnext.array.at",
+    "esnext.typed-array.at",
+  ]),
   anchor: define(null, ["es.string.anchor"]),
   big: define(null, ["es.string.big"]),
   bind: define("instance/bind", ["es.function.bind"]),
