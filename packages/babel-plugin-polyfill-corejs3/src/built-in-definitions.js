@@ -145,11 +145,14 @@ const WeakSetDependencies = [
   ...CommonIteratorsWithTag,
 ];
 
-const URLSearchParamsDependencies = ["web.url", ...CommonIteratorsWithTag];
+const URLSearchParamsDependencies = [
+  "web.url-search-params",
+  ...CommonIteratorsWithTag,
+];
 
 export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   AggregateError: define("aggregate-error", [
-    "esnext.aggregate-error",
+    "es.aggregate-error",
     ...CommonIterators,
   ]),
   ArrayBuffer: define(null, [
@@ -338,10 +341,7 @@ export const StaticProperties: ObjectMap<
       "es.promise.all-settled",
       ...PromiseDependenciesWithIterators,
     ]),
-    any: define(null, [
-      "esnext.promise.any",
-      ...PromiseDependenciesWithIterators,
-    ]),
+    any: define(null, ["es.promise.any", ...PromiseDependenciesWithIterators]),
     race: define(null, PromiseDependenciesWithIterators),
     try: define(null, [
       "esnext.promise.try",
@@ -546,7 +546,7 @@ export const InstanceProperties = {
   reduceRight: define("instance/reduce-right", ["es.array.reduce-right"]),
   repeat: define("instance/repeat", ["es.string.repeat"]),
   replace: define(null, ["es.string.replace", "es.regexp.exec"]),
-  replaceAll: define("instance/replace-all", ["esnext.string.replace-all"]),
+  replaceAll: define("instance/replace-all", ["es.string.replace-all"]),
   reverse: define("instance/reverse", ["es.array.reverse"]),
   search: define(null, ["es.string.search", "es.regexp.exec"]),
   slice: define("instance/slice", ["es.array.slice"]),
