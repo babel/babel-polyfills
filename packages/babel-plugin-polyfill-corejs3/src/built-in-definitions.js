@@ -73,6 +73,12 @@ const TypedArrayDependencies = [
   "es.object.to-string",
   "es.array.iterator",
   "es.array-buffer.slice",
+  "esnext.typed-array.at",
+  "esnext.typed-array.filter-reject",
+  "esnext.typed-array.find-last",
+  "esnext.typed-array.find-last-index",
+  "esnext.typed-array.group-by",
+  "esnext.typed-array.unique-by",
 ];
 
 const TypedArrayStaticMethods = {
@@ -96,6 +102,7 @@ const SymbolDependencies = [
 const MapDependencies = [
   "es.map",
   "esnext.map.delete-all",
+  "esnext.map.emplace",
   "esnext.map.every",
   "esnext.map.filter",
   "esnext.map.find",
@@ -135,6 +142,7 @@ const SetDependencies = [
 const WeakMapDependencies = [
   "es.weak-map",
   "esnext.weak-map.delete-all",
+  "esnext.weak-map.emplace",
   ...CommonIteratorsWithTag,
 ];
 
@@ -150,10 +158,18 @@ const URLSearchParamsDependencies = [
   ...CommonIteratorsWithTag,
 ];
 
+const AsyncIteratorDependencies = [
+  "esnext.async-iterator.constructor",
+  ...PromiseDependencies,
+];
+
+const IteratorDependencies = [
+  "esnext.iterator.constructor",
+  "es.object.to-string",
+];
+
 export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
-  AsyncIterator: define("async-iterator/index", [
-    "esnext.async-iterator.constructor",
-  ]),
+  AsyncIterator: define("async-iterator/index", AsyncIteratorDependencies),
   AggregateError: define("aggregate-error", [
     "es.aggregate-error",
     ...CommonIterators,
@@ -174,7 +190,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   Int8Array: typed("es.typed-array.int8-array"),
   Int16Array: typed("es.typed-array.int16-array"),
   Int32Array: typed("es.typed-array.int32-array"),
-  Iterator: define("iterator/index", ["esnext.iterator.constructor"]),
+  Iterator: define("iterator/index", IteratorDependencies),
   Uint8Array: typed("es.typed-array.uint8-array"),
   Uint8ClampedArray: typed("es.typed-array.uint8-clamped-array"),
   Uint16Array: typed("es.typed-array.uint16-array"),
@@ -190,7 +206,9 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   Promise: define("promise/index", PromiseDependencies),
   RegExp: define(null, [
     "es.regexp.constructor",
+    "es.regexp.dot-all",
     "es.regexp.exec",
+    "es.regexp.sticky",
     "es.regexp.to-string",
   ]),
   Set: define("set/index", SetDependencies),
@@ -217,7 +235,10 @@ export const StaticProperties: ObjectMap<
   ObjectMap<CoreJSPolyfillDescriptor>,
 > = {
   AsyncIterator: {
-    from: define("async-iterator/from", ["esnext.async-iterator.from"]),
+    from: define("async-iterator/from", [
+      "esnext.async-iterator.from",
+      ...AsyncIteratorDependencies,
+    ]),
   },
   Array: {
     from: define("array/from", ["es.array.from", "es.string.iterator"]),
@@ -241,7 +262,10 @@ export const StaticProperties: ObjectMap<
   },
 
   Iterator: {
-    from: define("iterator/from", ["esnext.iterator.from"]),
+    from: define("iterator/from", [
+      "esnext.iterator.from",
+      ...IteratorDependencies,
+    ]),
   },
 
   JSON: {
@@ -360,7 +384,11 @@ export const StaticProperties: ObjectMap<
       "es.promise.all-settled",
       ...PromiseDependenciesWithIterators,
     ]),
-    any: define(null, ["es.promise.any", ...PromiseDependenciesWithIterators]),
+    any: define(null, [
+      "es.promise.any",
+      "es.aggregate-error",
+      ...PromiseDependenciesWithIterators,
+    ]),
     race: define(null, PromiseDependenciesWithIterators),
     try: define(null, [
       "esnext.promise.try",
@@ -517,7 +545,9 @@ export const StaticProperties: ObjectMap<
 export const InstanceProperties = {
   asIndexedPairs: define("instance/asIndexedPairs", [
     "esnext.async-iterator.as-indexed-pairs",
+    ...AsyncIteratorDependencies,
     "esnext.iterator.as-indexed-pairs",
+    ...IteratorDependencies,
   ]),
   at: define("instance/at", [
     "esnext.string.at",
@@ -537,7 +567,9 @@ export const InstanceProperties = {
   dotAll: define("instance/dot-all", ["es.regexp.dot-all"]),
   drop: define("instance/drop", [
     "esnext.async-iterator.drop",
+    ...AsyncIteratorDependencies,
     "esnext.iterator.drop",
+    ...IteratorDependencies,
   ]),
   emplace: define("instance/emplace", [
     "esnext.map.emplace",
@@ -647,11 +679,15 @@ export const InstanceProperties = {
   sup: define(null, ["es.string.sup"]),
   take: define("instance/take", [
     "esnext.async-iterator.take",
+    ...AsyncIteratorDependencies,
     "esnext.iterator.take",
+    ...IteratorDependencies,
   ]),
   toArray: define("instance/to-array", [
     "esnext.async-iterator.to-array",
+    ...AsyncIteratorDependencies,
     "esnext.iterator.to-array",
+    ...IteratorDependencies,
   ]),
   toFixed: define(null, ["es.number.to-fixed"]),
   toISOString: define(null, ["es.date.to-iso-string"]),
