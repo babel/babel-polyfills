@@ -12,6 +12,7 @@ import "core-js/modules/es.symbol.description.js";
 import "core-js/modules/es.symbol.iterator.js";
 import "core-js/modules/es.regexp.exec.js";
 import "core-js/modules/web.queue-microtask.js";
+import "core-js/modules/esnext.global-this.js";
 Array.from; // static method
 
 Map; // built-in
