@@ -116,6 +116,7 @@ export default defineProvider<Options>(function(
       }
       const coreJSPureBase = getCoreJSPureBase(useProposalBase);
       return utils.injectDefaultImport(
+        // $FlowIgnore, we already guard desc.pure
         `${coreJSPureBase}/${desc.pure}${ext}`,
         hint,
       );
