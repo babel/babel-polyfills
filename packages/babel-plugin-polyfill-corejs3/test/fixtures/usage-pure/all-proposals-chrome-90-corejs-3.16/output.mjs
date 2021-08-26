@@ -17,7 +17,6 @@ import _emplaceInstanceProperty from "core-js-pure/features/instance/emplace.js"
 import _Symbol$asyncDispose from "core-js-pure/features/symbol/async-dispose.js";
 import _Symbol$matcher from "core-js-pure/features/symbol/matcher.js";
 import _Symbol$metadata from "core-js-pure/features/symbol/metadata.js";
-import _Symbol$replaceAll from "core-js-pure/features/symbol/replace.js";
 
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
@@ -53,4 +52,4 @@ _Symbol$asyncDispose;
 _Symbol$matcher;
 Symbol.matchAll;
 _Symbol$metadata;
-_Symbol$replaceAll;
+Symbol.replaceAll;

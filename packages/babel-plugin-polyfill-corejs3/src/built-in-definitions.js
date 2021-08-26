@@ -160,12 +160,12 @@ const URLSearchParamsDependencies = [
 
 const AsyncIteratorDependencies = [
   "esnext.async-iterator.constructor",
-  ...PromiseDependencies,
+  ...PromiseDependenciesWithIterators,
 ];
 
 const IteratorDependencies = [
   "esnext.iterator.constructor",
-  "es.object.to-string",
+  ...CommonIteratorsWithTag,
 ];
 
 export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
@@ -254,7 +254,10 @@ export const StaticProperties: ObjectMap<
   },
 
   BigInt: {
-    range: define("bigint/range", ["esnext.bigint.range"]),
+    range: define("bigint/range", [
+      "esnext.bigint.range",
+      "es.object.to-string",
+    ]),
   },
 
   Date: {
@@ -329,7 +332,10 @@ export const StaticProperties: ObjectMap<
     ]),
     parseFloat: define("number/parse-float", ["es.number.parse-float"]),
     parseInt: define("number/parse-int", ["es.number.parse-int"]),
-    range: define("number/range", ["esnext.number.range"]),
+    range: define("number/range", [
+      "esnext.number.range",
+      "es.object.to-string",
+    ]),
   },
 
   Object: {
@@ -497,10 +503,6 @@ export const StaticProperties: ObjectMap<
     replace: define("symbol/replace", [
       "es.symbol.replace",
       "es.string.replace",
-    ]),
-    replaceAll: define("symbol/replace", [
-      "esnext.symbol.replace-all",
-      "es.string.replace-all",
     ]),
     search: define("symbol/search", ["es.symbol.search", "es.string.search"]),
     species: define("symbol/species", [

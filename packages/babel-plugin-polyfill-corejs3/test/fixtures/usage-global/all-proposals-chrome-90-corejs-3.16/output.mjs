@@ -43,7 +43,6 @@ import "core-js/modules/esnext.map.update.js";
 import "core-js/modules/esnext.symbol.async-dispose.js";
 import "core-js/modules/esnext.symbol.matcher.js";
 import "core-js/modules/esnext.symbol.metadata.js";
-import "core-js/modules/esnext.symbol.replace-all.js";
 [].findLast(fn);
 [].findLastIndex(fn);
 [].asIndexedPairs();

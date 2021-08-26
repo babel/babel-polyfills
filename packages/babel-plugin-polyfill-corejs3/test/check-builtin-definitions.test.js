@@ -78,6 +78,7 @@ is not in "core-js-compat/entries": This is very likely a typo`,
         "esnext.object.iterate-entries",
         "esnext.object.iterate-keys",
         "esnext.object.iterate-values",
+        "esnext.symbol.replace-all",
         "esnext.typed-array.filter-out",
         "esnext.weak-map.upsert",
       ]
