@@ -109,7 +109,7 @@ export default defineProvider<Options>(function(
     ) {
       const { name } = desc;
       let useProposalBase = false;
-      if (proposals || name.startsWith("es.next")) {
+      if (proposals) {
         useProposalBase = true;
       } else if (name.startsWith("es.") && !available.has(name)) {
         useProposalBase = true;
