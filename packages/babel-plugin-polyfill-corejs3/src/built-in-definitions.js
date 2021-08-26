@@ -272,7 +272,7 @@ export const StaticProperties: ObjectMap<
   },
 
   JSON: {
-    stringify: define("json/stringify", [], "es.symbol"),
+    stringify: define("json/stringify", ["es.json.stringify"], "es.symbol"),
   },
 
   Math: {
