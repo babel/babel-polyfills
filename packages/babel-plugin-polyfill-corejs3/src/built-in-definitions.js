@@ -651,7 +651,10 @@ export const InstanceProperties = {
     "esnext.iterator.map",
   ]),
   match: define(null, ["es.string.match", "es.regexp.exec"]),
-  matchAll: define("instance/match-all", ["es.string.match-all"]),
+  matchAll: define("instance/match-all", [
+    "es.string.match-all",
+    "es.regexp.exec",
+  ]),
   name: define(null, ["es.function.name"]),
   padEnd: define("instance/pad-end", ["es.string.pad-end"]),
   padStart: define("instance/pad-start", ["es.string.pad-start"]),
@@ -663,7 +666,11 @@ export const InstanceProperties = {
   reduceRight: define("instance/reduce-right", ["es.array.reduce-right"]),
   repeat: define("instance/repeat", ["es.string.repeat"]),
   replace: define(null, ["es.string.replace", "es.regexp.exec"]),
-  replaceAll: define("instance/replace-all", ["es.string.replace-all"]),
+  replaceAll: define("instance/replace-all", [
+    "es.string.replace-all",
+    "es.string.replace",
+    "es.regexp.exec",
+  ]),
   reverse: define("instance/reverse", ["es.array.reverse"]),
   search: define(null, ["es.string.search", "es.regexp.exec"]),
   slice: define("instance/slice", ["es.array.slice"]),
@@ -680,6 +687,7 @@ export const InstanceProperties = {
   sticky: define("instance/sticky", ["es.regexp.sticky"]),
   strike: define(null, ["es.string.strike"]),
   sub: define(null, ["es.string.sub"]),
+  substr: define(null, ["es.string.substr"]),
   sup: define(null, ["es.string.sup"]),
   take: define("instance/take", [
     "esnext.async-iterator.take",
