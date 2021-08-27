@@ -160,12 +160,12 @@ const URLSearchParamsDependencies = [
 
 const AsyncIteratorDependencies = [
   "esnext.async-iterator.constructor",
-  ...PromiseDependenciesWithIterators,
+  ...PromiseDependencies,
 ];
 
 const IteratorDependencies = [
   "esnext.iterator.constructor",
-  ...CommonIteratorsWithTag,
+  "es.object.to-string",
 ];
 
 export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
@@ -238,6 +238,7 @@ export const StaticProperties: ObjectMap<
     from: define("async-iterator/from", [
       "esnext.async-iterator.from",
       ...AsyncIteratorDependencies,
+      ...CommonIterators,
     ]),
   },
   Array: {
@@ -268,6 +269,7 @@ export const StaticProperties: ObjectMap<
     from: define("iterator/from", [
       "esnext.iterator.from",
       ...IteratorDependencies,
+      ...CommonIterators,
     ]),
   },
 
