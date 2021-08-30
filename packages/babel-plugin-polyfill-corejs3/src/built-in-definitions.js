@@ -521,6 +521,7 @@ export const StaticProperties: ObjectMap<
       "es.object.to-string",
       "es.math.to-string-tag",
       "es.json.to-string-tag",
+      "es.reflect.to-string-tag",
     ]),
     unscopables: define("symbol/unscopables", ["es.symbol.unscopables"]),
   },
