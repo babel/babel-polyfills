@@ -42,6 +42,8 @@ module.exports = {
   "Math.clz32": "Math methods / Math.clz32",
   "Math.cbrt": "Math methods / Math.cbrt",
   "Math.fround": "Math methods / Math.fround",
+  "Math.imul": "Math methods / Math.imul",
+  "Math.log10": "Math methods / Math.log10",
   "Math.log1p": "Math methods / Math.log1p",
   "Math.sign": "Math methods / Math.sign",
   "Number.isFinite": "Number properties / Number.isFinite",

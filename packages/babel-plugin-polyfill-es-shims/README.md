@@ -64,7 +64,9 @@ This plugin supports the following `es-shims` polyfills.
 | `Math.clz32`                   | [`math.clz32`](https://github.com/es-shims/Math.clz32)                                          |
 | `Math.cbrt`                    | [`math.cbrt`](https://github.com/es-shims/Math.cbrt)                                            |
 | `Math.fround`                  | [`math.fround`](https://github.com/es-shims/Math.fround)                                        |
-| `Math.fround`                  | [`math.log1p`](https://github.com/es-shims/Math.log1p)                                          |
+| `Math.imul`                    | [`math.log1p`](https://github.com/es-shims/Math.imul)                                           |
+| `Math.log10`                   | [`math.log1p`](https://github.com/es-shims/Math.log10)                                          |
+| `Math.log1p`                   | [`math.log1p`](https://github.com/es-shims/Math.log1p)                                          |
 | `Math.sign`                    | [`math.sign`](https://github.com/es-shims/Math.sign)                                            |
 | `Number.isNaN`                 | [`is-nan`](https://github.com/es-shims/is-nan)                                                  |
 | `Object.assign`                | [`object.assign`](https://github.com/ljharb/object.assign)                                      | [@ljharb](https://github.com/ljharb)               |
