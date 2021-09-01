@@ -1,4 +1,5 @@
 import "core-js/modules/es.array.at.js";
+import "core-js/modules/es.string.at-alternative.js";
 import "core-js/modules/es.typed-array.at.js";
 import "core-js/modules/esnext.string.at.js";
 import "core-js/modules/es.array.iterator.js";

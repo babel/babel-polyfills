@@ -556,6 +556,7 @@ export const InstanceProperties = {
     ...IteratorDependencies,
   ]),
   at: define("instance/at", [
+    "es.string.at-alternative",
     "esnext.string.at",
     "es.array.at",
     "es.typed-array.at",
