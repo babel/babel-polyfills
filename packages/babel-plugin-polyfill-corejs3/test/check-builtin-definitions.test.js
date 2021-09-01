@@ -63,11 +63,6 @@ is not in "core-js-compat/entries": This is very likely a typo`,
     // the feature in `src/builtin-definitions.js`
     expect(allowList).toMatchInlineSnapshot(`
       Array [
-        "es.date.get-year",
-        "es.date.set-year",
-        "es.date.to-gmt-string",
-        "es.escape",
-        "es.unescape",
         "esnext.array.filter-out",
         "esnext.map.update-or-insert",
         "esnext.map.upsert",

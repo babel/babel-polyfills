@@ -222,6 +222,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   clearImmediate: define("clear-immediate", ["web.immediate"]),
   compositeKey: define("composite-key", ["esnext.composite-key"]),
   compositeSymbol: define("composite-symbol", ["esnext.composite-symbol"]),
+  escape: define("escape", ["es.escape"]),
   fetch: define(null, PromiseDependencies),
   globalThis: define("global-this", ["es.global-this"]),
   parseFloat: define("parse-float", ["es.parse-float"]),
@@ -230,6 +231,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   setImmediate: define("set-immediate", ["web.immediate"]),
   setInterval: define("set-interval", ["web.timers"]),
   setTimeout: define("set-timeout", ["web.timers"]),
+  unescape: define("unescape", ["es.unescape"]),
 };
 
 export const StaticProperties: ObjectMap<
@@ -624,6 +626,7 @@ export const InstanceProperties = {
     "esnext.iterator.flat-map",
   ]),
   flat: define("instance/flat", ["es.array.flat", "es.array.unscopables.flat"]),
+  getYear: define(null, ["es.date.get-year"]),
   groupBy: define("instance/group-by", [
     "esnext.array.group-by",
     "esnext.typed-array.group-by",
@@ -676,6 +679,7 @@ export const InstanceProperties = {
   ]),
   reverse: define("instance/reverse", ["es.array.reverse"]),
   search: define(null, ["es.string.search", "es.regexp.exec"]),
+  setYear: define(null, ["es.date.set-year"]),
   slice: define("instance/slice", ["es.array.slice"]),
   small: define(null, ["es.string.small"]),
   some: define("instance/some", [
@@ -706,6 +710,7 @@ export const InstanceProperties = {
     ...IteratorDependencies,
   ]),
   toFixed: define(null, ["es.number.to-fixed"]),
+  toGMTString: define(null, ["es.date.to-gmt-string"]),
   toISOString: define(null, ["es.date.to-iso-string"]),
   toJSON: define(null, ["es.date.to-json", "web.url.to-json"]),
   toPrecision: define(null, ["es.number.to-precision"]),
