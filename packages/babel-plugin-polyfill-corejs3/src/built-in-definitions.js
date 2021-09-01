@@ -204,6 +204,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
     ...CommonIteratorsWithTag,
   ]),
   Promise: define("promise/index", PromiseDependencies),
+  Reflect: define(null, ["es.reflect.to-string-tag", "es.object.to-string"]),
   RegExp: define(null, [
     "es.regexp.constructor",
     "es.regexp.dot-all",
