@@ -52,6 +52,12 @@ module.exports = {
   "Number.isNaN": "Number properties / Number.isNaN",
   "Number.parseFloat": "Number properties / Number.parseFloat",
   "Number.parseInt": "Number properties / Number.parseInt",
+  "Number.prototype.toExponential": {
+    features: [
+      "Number methods / Number.prototype.toExponential rounds properly",
+      "Number methods / Number.prototype.toExponential throws on ±Infinity fractionDigits",
+    ],
+  },
   "Object.assign": "Object static methods / Object.assign",
   "Object.is": "Object static methods / Object.is",
   "Object.entries": "Object static methods / Object.entries",

@@ -438,6 +438,20 @@
     "samsung": "2",
     "electron": "0.20"
   },
+  "Number.prototype.toExponential": {
+    "chrome": "15",
+    "opera": "15",
+    "edge": "18",
+    "firefox": "3",
+    "safari": "4",
+    "node": "0.12",
+    "ie": "9",
+    "android": "4.4",
+    "ios": "6",
+    "phantom": "2",
+    "samsung": "1",
+    "electron": "0.20"
+  },
   "Object.assign": {
     "chrome": "45",
     "opera": "32",
