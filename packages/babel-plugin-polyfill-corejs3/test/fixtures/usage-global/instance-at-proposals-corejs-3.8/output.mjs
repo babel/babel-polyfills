@@ -26,9 +26,7 @@ import "core-js/modules/es.typed-array.subarray.js";
 import "core-js/modules/es.typed-array.to-locale-string.js";
 import "core-js/modules/es.typed-array.to-string.js";
 import "core-js/modules/esnext.typed-array.at.js";
-import "core-js/modules/es.array.at.js";
-import "core-js/modules/es.string.at-alternative.js";
-import "core-js/modules/es.typed-array.at.js";
+import "core-js/modules/esnext.array.at.js";
 import "core-js/modules/esnext.string.at.js";
 // obscuring instance type
 let tmp;

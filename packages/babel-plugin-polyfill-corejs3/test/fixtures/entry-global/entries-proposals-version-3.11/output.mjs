@@ -1,5 +1,4 @@
 import "core-js/modules/es.map.js";
-import "core-js/modules/es.string.at-alternative.js";
 import "core-js/modules/esnext.aggregate-error.js";
 import "core-js/modules/esnext.array.at.js";
 import "core-js/modules/esnext.array.filter-out.js";

@@ -1,4 +1,3 @@
-import "core-js/modules/es.string.at-alternative.js";
 import "core-js/modules/esnext.aggregate-error.js";
 import "core-js/modules/esnext.array.last-index.js";
 import "core-js/modules/esnext.array.last-item.js";

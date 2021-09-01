@@ -1,2 +1,2 @@
-import "core-js/modules/es.object.has-own.js";
+import "core-js/modules/esnext.object.has-own.js";
 Object.hasOwn;

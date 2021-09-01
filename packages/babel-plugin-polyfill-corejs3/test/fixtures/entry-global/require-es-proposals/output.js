@@ -2,8 +2,6 @@ require("core-js/modules/es.symbol.description.js");
 
 require("core-js/modules/es.symbol.async-iterator.js");
 
-require("core-js/modules/es.array.at.js");
-
 require("core-js/modules/es.array.flat.js");
 
 require("core-js/modules/es.array.flat-map.js");
@@ -28,8 +26,6 @@ require("core-js/modules/es.object.define-setter.js");
 
 require("core-js/modules/es.object.from-entries.js");
 
-require("core-js/modules/es.object.has-own.js");
-
 require("core-js/modules/es.object.lookup-getter.js");
 
 require("core-js/modules/es.object.lookup-setter.js");
@@ -44,8 +40,6 @@ require("core-js/modules/es.regexp.exec.js");
 
 require("core-js/modules/es.regexp.flags.js");
 
-require("core-js/modules/es.string.at-alternative.js");
-
 require("core-js/modules/es.string.pad-end.js");
 
 require("core-js/modules/es.string.pad-start.js");
@@ -57,8 +51,6 @@ require("core-js/modules/es.string.trim.js");
 require("core-js/modules/es.string.trim-end.js");
 
 require("core-js/modules/es.string.trim-start.js");
-
-require("core-js/modules/es.typed-array.at.js");
 
 require("core-js/modules/es.typed-array.sort.js");
 

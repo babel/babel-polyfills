@@ -1,5 +1,3 @@
-var _atInstanceProperty = require("core-js-pure/stable/instance/at.js");
-
 var _bindInstanceProperty = require("core-js-pure/stable/instance/bind.js");
 
 var _codePointAtInstanceProperty = require("core-js-pure/stable/instance/code-point-at.js");
@@ -78,7 +76,7 @@ var _trimStartInstanceProperty = require("core-js-pure/stable/instance/trim-star
 
 var _valuesInstanceProperty = require("core-js-pure/stable/instance/values.js");
 
-_atInstanceProperty(object);
+object.at;
 
 _bindInstanceProperty(object);
 
@@ -161,8 +159,7 @@ _trimStartInstanceProperty(object);
 _valuesInstanceProperty(object);
 
 object.something;
-
-_atInstanceProperty(object).call(object, arg);
+object.at(arg);
 
 _bindInstanceProperty(object).call(object, arg);
 

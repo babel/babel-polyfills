@@ -1,5 +1,4 @@
 import "core-js/modules/es.object.from-entries.js";
-import "core-js/modules/es.object.has-own.js";
 import "core-js/modules/esnext.reflect.define-metadata.js";
 import "core-js/modules/esnext.reflect.delete-metadata.js";
 import "core-js/modules/esnext.reflect.get-metadata.js";
