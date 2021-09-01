@@ -3818,7 +3818,7 @@ __metadata:
     "@babel/plugin-transform-for-of": ^7.10.4
     "@babel/plugin-transform-modules-commonjs": ^7.10.4
     "@babel/plugin-transform-spread": ^7.13.0
-    core-js-compat: ^3.16.2
+    core-js-compat: ^3.17.0
     core-js-pure: ^3.8.1
   peerDependencies:
     "@babel/core": ^7.0.0-0
@@ -4163,7 +4163,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.14.5, browserslist@npm:^4.16.7":
+"browserslist@npm:^4.14.5, browserslist@npm:^4.16.8":
   version: 4.16.8
   resolution: "browserslist@npm:4.16.8"
   dependencies:
@@ -4996,13 +4996,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-compat@npm:^3.16.2, core-js-compat@npm:^3.8.1, core-js-compat@npm:^3.9.0":
-  version: 3.16.2
-  resolution: "core-js-compat@npm:3.16.2"
+"core-js-compat@npm:^3.17.0, core-js-compat@npm:^3.8.1, core-js-compat@npm:^3.9.0":
+  version: 3.17.0
+  resolution: "core-js-compat@npm:3.17.0"
   dependencies:
-    browserslist: ^4.16.7
+    browserslist: ^4.16.8
     semver: 7.0.0
-  checksum: 2ab3f6a7973a9b2037c97e11ad6eff1b749902426acc167c132936d13816c436e8d84396ec074c0aa6ff00a2390bde6f7fb187210b760bdb75820cb02c8f29e0
+  checksum: b0d519dbcd1bafa2c5aa1a91af33ebb0a3e18d5b1423ef6dffd0537180ffca1506459ebd7fc0c0fb1786b08a1c9ebc46bedfc21b83edf7e2f4c571eaf49f766b
   languageName: node
   linkType: hard
 

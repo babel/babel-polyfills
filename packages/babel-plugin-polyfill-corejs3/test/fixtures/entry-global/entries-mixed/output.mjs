@@ -14,6 +14,7 @@ import "core-js/modules/es.object.get-own-property-descriptor.js";
 import "core-js/modules/es.object.get-own-property-descriptors.js";
 import "core-js/modules/es.object.get-own-property-names.js";
 import "core-js/modules/es.object.get-prototype-of.js";
+import "core-js/modules/es.object.has-own.js";
 import "core-js/modules/es.object.is.js";
 import "core-js/modules/es.object.is-extensible.js";
 import "core-js/modules/es.object.is-frozen.js";

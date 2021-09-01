@@ -370,7 +370,7 @@ export const StaticProperties: ObjectMap<
     getPrototypeOf: define("object/get-prototype-of", [
       "es.object.get-prototype-of",
     ]),
-    hasOwn: define("object/has-own", ["esnext.object.has-own"]),
+    hasOwn: define("object/has-own", ["es.object.has-own"]),
     is: define("object/is", ["es.object.is"]),
     isExtensible: define("object/is-extensible", ["es.object.is-extensible"]),
     isFrozen: define("object/is-frozen", ["es.object.is-frozen"]),
@@ -556,8 +556,8 @@ export const InstanceProperties = {
   ]),
   at: define("instance/at", [
     "esnext.string.at",
-    "esnext.array.at",
-    "esnext.typed-array.at",
+    "es.array.at",
+    "es.typed-array.at",
   ]),
   anchor: define(null, ["es.string.anchor"]),
   big: define(null, ["es.string.big"]),
