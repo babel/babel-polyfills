@@ -508,7 +508,10 @@
     "samsung": "1",
     "electron": "0.20"
   },
-  "Object.hasOwn": {},
+  "Object.hasOwn": {
+    "chrome": "93",
+    "firefox": "92"
+  },
   "Object.values": {
     "chrome": "54",
     "opera": "41",
