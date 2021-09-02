@@ -66,13 +66,16 @@ export default defineProvider<Options>(function(
   });
 
   const available = new Set(getModulesListForTargetVersion(version));
-  const coreJSPureBase = useBabelRuntime
-    ? proposals
-      ? `${useBabelRuntime}/core-js`
-      : `${useBabelRuntime}/core-js-stable`
-    : proposals
-    ? "core-js-pure/features"
-    : "core-js-pure/stable";
+
+  function getCoreJSPureBase(useProposalBase) {
+    return useBabelRuntime
+      ? useProposalBase
+        ? `${useBabelRuntime}/core-js`
+        : `${useBabelRuntime}/core-js-stable`
+      : useProposalBase
+      ? "core-js-pure/features"
+      : "core-js-pure/stable";
+  }
 
   function maybeInjectGlobalImpl(name: string, utils) {
     if (shouldInjectPolyfill(name)) {
@@ -104,11 +107,30 @@ export default defineProvider<Options>(function(
       !(object && desc.exclude && desc.exclude.includes(object)) &&
       esnextFallback(desc.name, shouldInjectPolyfill)
     ) {
+      const { name } = desc;
+      let useProposalBase = false;
+      if (proposals || (shippedProposals && name.startsWith("esnext."))) {
+        useProposalBase = true;
+      } else if (name.startsWith("es.") && !available.has(name)) {
+        useProposalBase = true;
+      }
+      const coreJSPureBase = getCoreJSPureBase(useProposalBase);
       return utils.injectDefaultImport(
+        // $FlowIgnore, we already guard desc.pure
         `${coreJSPureBase}/${desc.pure}${ext}`,
         hint,
       );
     }
+  }
+
+  function isFeatureStable(name) {
+    if (name.startsWith("esnext.")) {
+      const esName = `es.${name.slice(7)}`;
+      // If its imaginative esName is not in latest compat data, it means
+      // the proposal is not stage 4
+      return esName in corejs3Polyfills;
+    }
+    return true;
   }
 
   return {
@@ -122,7 +144,7 @@ export default defineProvider<Options>(function(
       if (shippedProposals && corejs3ShippedProposalsList.has(name)) {
         return true;
       }
-      return !name.startsWith("esnext.");
+      return isFeatureStable(name);
     },
 
     entryGlobal(meta, utils, path) {
