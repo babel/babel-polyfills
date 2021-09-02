@@ -42,6 +42,8 @@ module.exports = {
   "Math.clz32": "Math methods / Math.clz32",
   "Math.cbrt": "Math methods / Math.cbrt",
   "Math.fround": "Math methods / Math.fround",
+  "Math.imul": "Math methods / Math.imul",
+  "Math.log10": "Math methods / Math.log10",
   "Math.log1p": "Math methods / Math.log1p",
   "Math.sign": "Math methods / Math.sign",
   "Number.isFinite": "Number properties / Number.isFinite",
@@ -50,6 +52,12 @@ module.exports = {
   "Number.isNaN": "Number properties / Number.isNaN",
   "Number.parseFloat": "Number properties / Number.parseFloat",
   "Number.parseInt": "Number properties / Number.parseInt",
+  "Number.prototype.toExponential": {
+    features: [
+      "Number methods / Number.prototype.toExponential rounds properly",
+      "Number methods / Number.prototype.toExponential throws on ±Infinity fractionDigits",
+    ],
+  },
   "Object.assign": "Object static methods / Object.assign",
   "Object.is": "Object static methods / Object.is",
   "Object.entries": "Object static methods / Object.entries",

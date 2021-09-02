@@ -34,17 +34,18 @@ This plugin supports the following `es-shims` polyfills.
 
 ### ES5
 
-| Builtin object or function    | Package name                                                                             | Owner |
-| :---------------------------- | :--------------------------------------------------------------------------------------- | :---- |
-| `Array.prototype.every`       | [`array.prototype.every`](https://github.com/es-shims/Array.prototype.every)             |
-| `Array.prototype.indexOf`     | [`array.prototype.indexof`](https://github.com/es-shims/Array.prototype.indexOf)         |
-| `Array.prototype.lastIndexOf` | [`array.prototype.lastindexof`](https://github.com/es-shims/Array.prototype.lastIndexOf) |
-| `Array.prototype.map`         | [`array.prototype.map`](https://github.com/es-shims/Array.prototype.map)                 |
-| `Array.prototype.reduce`      | [`array.prototype.reduce`](https://github.com/es-shims/Array.prototype.reduce)           |
-| `Array.prototype.reduceRight` | [`array.prototype.reduceright`](https://github.com/es-shims/Array.prototype.reduceRight) |
-| `Array.prototype.some`        | [`array.prototype.some`](https://github.com/es-shims/Array.prototype.some)               |
-| `String.prototype.split`      | [`string.prototype.split`](https://github.com/es-shims/String.prototype.split)           |
-| `String.prototype.trim`       | [`string.prototype.trim`](https://github.com/es-shims/String.prototype.trim)             |
+| Builtin object or function       | Package name                                                                                   | Owner |
+| :------------------------------- | :--------------------------------------------------------------------------------------------- | :---- |
+| `Array.prototype.every`          | [`array.prototype.every`](https://github.com/es-shims/Array.prototype.every)                   |
+| `Array.prototype.indexOf`        | [`array.prototype.indexof`](https://github.com/es-shims/Array.prototype.indexOf)               |
+| `Array.prototype.lastIndexOf`    | [`array.prototype.lastindexof`](https://github.com/es-shims/Array.prototype.lastIndexOf)       |
+| `Array.prototype.map`            | [`array.prototype.map`](https://github.com/es-shims/Array.prototype.map)                       |
+| `Array.prototype.reduce`         | [`array.prototype.reduce`](https://github.com/es-shims/Array.prototype.reduce)                 |
+| `Array.prototype.reduceRight`    | [`array.prototype.reduceright`](https://github.com/es-shims/Array.prototype.reduceRight)       |
+| `Array.prototype.some`           | [`array.prototype.some`](https://github.com/es-shims/Array.prototype.some)                     |
+| `Number.prototype.toExponential` | [`number.prototype.toexponential`](https://github.com/es-shims/Number.prototype.toExponential) |
+| `String.prototype.split`         | [`string.prototype.split`](https://github.com/es-shims/String.prototype.split)                 |
+| `String.prototype.trim`          | [`string.prototype.trim`](https://github.com/es-shims/String.prototype.trim)                   |
 
 ### ES2015 (ES6)
 
@@ -64,7 +65,9 @@ This plugin supports the following `es-shims` polyfills.
 | `Math.clz32`                   | [`math.clz32`](https://github.com/es-shims/Math.clz32)                                          |
 | `Math.cbrt`                    | [`math.cbrt`](https://github.com/es-shims/Math.cbrt)                                            |
 | `Math.fround`                  | [`math.fround`](https://github.com/es-shims/Math.fround)                                        |
-| `Math.fround`                  | [`math.log1p`](https://github.com/es-shims/Math.log1p)                                          |
+| `Math.imul`                    | [`math.log1p`](https://github.com/es-shims/Math.imul)                                           |
+| `Math.log10`                   | [`math.log1p`](https://github.com/es-shims/Math.log10)                                          |
+| `Math.log1p`                   | [`math.log1p`](https://github.com/es-shims/Math.log1p)                                          |
 | `Math.sign`                    | [`math.sign`](https://github.com/es-shims/Math.sign)                                            |
 | `Number.isNaN`                 | [`is-nan`](https://github.com/es-shims/is-nan)                                                  |
 | `Object.assign`                | [`object.assign`](https://github.com/ljharb/object.assign)                                      | [@ljharb](https://github.com/ljharb)               |

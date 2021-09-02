@@ -18,8 +18,6 @@
 - `Math.cosh()`
 - `Math.expm1()`
 - `Math.hypot()`
-- `Math.imul()`
-- `Math.log10()`
 - `Math.log2()`
 - `Math.sinh()`
 - `Math.tanh()`

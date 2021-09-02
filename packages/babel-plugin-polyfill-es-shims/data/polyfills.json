@@ -325,6 +325,29 @@
     "samsung": "3",
     "electron": "0.20"
   },
+  "Math.imul": {
+    "chrome": "30",
+    "opera": "17",
+    "edge": "12",
+    "firefox": "23",
+    "safari": "7",
+    "node": "0.12",
+    "android": "4.4",
+    "ios": "7",
+    "samsung": "2",
+    "electron": "0.20"
+  },
+  "Math.log10": {
+    "chrome": "38",
+    "opera": "25",
+    "edge": "12",
+    "firefox": "25",
+    "safari": "7.1",
+    "node": "0.12",
+    "ios": "8",
+    "samsung": "3",
+    "electron": "0.20"
+  },
   "Math.log1p": {
     "chrome": "38",
     "opera": "25",
@@ -415,6 +438,20 @@
     "samsung": "2",
     "electron": "0.20"
   },
+  "Number.prototype.toExponential": {
+    "chrome": "15",
+    "opera": "15",
+    "edge": "18",
+    "firefox": "3",
+    "safari": "4",
+    "node": "0.12",
+    "ie": "9",
+    "android": "4.4",
+    "ios": "6",
+    "phantom": "2",
+    "samsung": "1",
+    "electron": "0.20"
+  },
   "Object.assign": {
     "chrome": "45",
     "opera": "32",
@@ -485,7 +522,10 @@
     "samsung": "1",
     "electron": "0.20"
   },
-  "Object.hasOwn": {},
+  "Object.hasOwn": {
+    "chrome": "93",
+    "firefox": "92"
+  },
   "Object.values": {
     "chrome": "54",
     "opera": "41",
