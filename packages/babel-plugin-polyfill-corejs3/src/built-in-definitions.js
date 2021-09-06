@@ -47,6 +47,7 @@ const ArrayNatureIteratorsWithTag = [
 const CommonIteratorsWithTag = ["es.object.to-string", ...CommonIterators];
 
 const TypedArrayDependencies = [
+  "es.typed-array.at",
   "es.typed-array.copy-within",
   "es.typed-array.every",
   "es.typed-array.fill",
@@ -73,7 +74,6 @@ const TypedArrayDependencies = [
   "es.object.to-string",
   "es.array.iterator",
   "es.array-buffer.slice",
-  "esnext.typed-array.at",
   "esnext.typed-array.filter-reject",
   "esnext.typed-array.find-last",
   "esnext.typed-array.find-last-index",
@@ -524,7 +524,6 @@ export const StaticProperties: ObjectMap<
       "es.object.to-string",
       "es.math.to-string-tag",
       "es.json.to-string-tag",
-      "es.reflect.to-string-tag",
     ]),
     unscopables: define("symbol/unscopables", ["es.symbol.unscopables"]),
   },
@@ -561,7 +560,6 @@ export const InstanceProperties = {
     "es.string.at-alternative",
     "esnext.string.at",
     "es.array.at",
-    "es.typed-array.at",
   ]),
   anchor: define(null, ["es.string.anchor"]),
   big: define(null, ["es.string.big"]),
@@ -598,10 +596,7 @@ export const InstanceProperties = {
     "esnext.async-iterator.filter",
     "esnext.iterator.filter",
   ]),
-  filterReject: define("instance/filterReject", [
-    "esnext.array.filter-reject",
-    "esnext.typed-array.filter-reject",
-  ]),
+  filterReject: define("instance/filterReject", ["esnext.array.filter-reject"]),
   finally: define(null, ["es.promise.finally", ...PromiseDependencies]),
   find: define("instance/find", [
     "es.array.find",
@@ -609,13 +604,9 @@ export const InstanceProperties = {
     "esnext.iterator.find",
   ]),
   findIndex: define("instance/find-index", ["es.array.find-index"]),
-  findLast: define("instance/find-last", [
-    "esnext.array.find-last",
-    "esnext.typed-array.find-last",
-  ]),
+  findLast: define("instance/find-last", ["esnext.array.find-last"]),
   findLastIndex: define("instance/find-last-index", [
     "esnext.array.find-last-index",
-    "esnext.typed-array.find-last-index",
   ]),
   fixed: define(null, ["es.string.fixed"]),
   flags: define("instance/flags", ["es.regexp.flags"]),
@@ -627,10 +618,7 @@ export const InstanceProperties = {
   ]),
   flat: define("instance/flat", ["es.array.flat", "es.array.unscopables.flat"]),
   getYear: define(null, ["es.date.get-year"]),
-  groupBy: define("instance/group-by", [
-    "esnext.array.group-by",
-    "esnext.typed-array.group-by",
-  ]),
+  groupBy: define("instance/group-by", ["esnext.array.group-by"]),
   fontcolor: define(null, ["es.string.fontcolor"]),
   fontsize: define(null, ["es.string.fontsize"]),
   forEach: define("instance/for-each", [
@@ -724,10 +712,7 @@ export const InstanceProperties = {
   trimLeft: define("instance/trim-left", ["es.string.trim-start"]),
   trimRight: define("instance/trim-right", ["es.string.trim-end"]),
   trimStart: define("instance/trim-start", ["es.string.trim-start"]),
-  uniqueBy: define("instance/unique-by", [
-    "esnext.array.unique-by",
-    "esnext.typed-array.unique-by",
-  ]),
+  uniqueBy: define("instance/unique-by", ["esnext.array.unique-by"]),
   values: define("instance/values", ArrayNatureIteratorsWithTag),
   __defineGetter__: define(null, ["es.object.define-getter"]),
   __defineSetter__: define(null, ["es.object.define-setter"]),
