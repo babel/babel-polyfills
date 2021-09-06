@@ -587,7 +587,13 @@ export const InstanceProperties = {
   every: define("instance/every", [
     "es.array.every",
     "esnext.async-iterator.every",
+    // TODO: add async iterator dependencies when we support sub-dependencies
+    // esnext.async-iterator.every depends on es.promise
+    // but we don't want to pull es.promise when esnext.async-iterator is disabled
+    //
+    // ...AsyncIteratorDependencies
     "esnext.iterator.every",
+    ...IteratorDependencies,
   ]),
   exec: define(null, ["es.regexp.exec"]),
   fill: define("instance/fill", ["es.array.fill"]),
@@ -595,6 +601,7 @@ export const InstanceProperties = {
     "es.array.filter",
     "esnext.async-iterator.filter",
     "esnext.iterator.filter",
+    ...IteratorDependencies,
   ]),
   filterReject: define("instance/filterReject", ["esnext.array.filter-reject"]),
   finally: define(null, ["es.promise.finally", ...PromiseDependencies]),
@@ -602,6 +609,7 @@ export const InstanceProperties = {
     "es.array.find",
     "esnext.async-iterator.find",
     "esnext.iterator.find",
+    ...IteratorDependencies,
   ]),
   findIndex: define("instance/find-index", ["es.array.find-index"]),
   findLast: define("instance/find-last", ["esnext.array.find-last"]),
@@ -615,6 +623,7 @@ export const InstanceProperties = {
     "es.array.unscopables.flat-map",
     "esnext.async-iterator.flat-map",
     "esnext.iterator.flat-map",
+    ...IteratorDependencies,
   ]),
   flat: define("instance/flat", ["es.array.flat", "es.array.unscopables.flat"]),
   getYear: define(null, ["es.date.get-year"]),
@@ -625,6 +634,7 @@ export const InstanceProperties = {
     "es.array.for-each",
     "esnext.async-iterator.for-each",
     "esnext.iterator.for-each",
+    ...IteratorDependencies,
     "web.dom-collections.for-each",
   ]),
   includes: define("instance/includes", [
@@ -656,6 +666,7 @@ export const InstanceProperties = {
     "es.array.reduce",
     "esnext.async-iterator.reduce",
     "esnext.iterator.reduce",
+    ...IteratorDependencies,
   ]),
   reduceRight: define("instance/reduce-right", ["es.array.reduce-right"]),
   repeat: define("instance/repeat", ["es.string.repeat"]),
@@ -674,6 +685,7 @@ export const InstanceProperties = {
     "es.array.some",
     "esnext.async-iterator.some",
     "esnext.iterator.some",
+    ...IteratorDependencies,
   ]),
   sort: define("instance/sort", ["es.array.sort"]),
   splice: define("instance/splice", ["es.array.splice"]),
