@@ -524,7 +524,8 @@
   },
   "Object.hasOwn": {
     "chrome": "93",
-    "firefox": "92"
+    "firefox": "92",
+    "electron": "14"
   },
   "Object.values": {
     "chrome": "54",
