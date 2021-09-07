@@ -557,8 +557,14 @@ export const InstanceProperties = {
     ...IteratorDependencies,
   ]),
   at: define("instance/at", [
-    "es.string.at-alternative",
+    // TODO: We should introduce overloaded instance methods definition
+    // Before that is implemented, the `esnext.string.at` must be the first
+    // In pure mode, the provider resolves the descriptor as a "pure" `esnext.string.at`
+    // and treats the compat-data of `esnext.string.at` as the compat-data of
+    // pure import `instance/at`. The first polyfill here should have the lowest corejs
+    // supported versions.
     "esnext.string.at",
+    "es.string.at-alternative",
     "es.array.at",
   ]),
   anchor: define(null, ["es.string.anchor"]),
