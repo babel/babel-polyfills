@@ -57,7 +57,7 @@ export default defineProvider<{||}>(function({
     assertDependency(desc.package, desc.version);
     debug(desc.name);
 
-    return utils.injectDefaultImport(desc.package, desc.name);
+    return utils.injectDefaultImport(desc.path, desc.name);
   }
 
   const seen = new WeakSet();
@@ -71,7 +71,7 @@ export default defineProvider<{||}>(function({
 
       assertDependency(desc.package, desc.version);
 
-      utils.injectGlobalImport(`${desc.package}/auto`);
+      utils.injectGlobalImport(`${desc.path}/auto`);
 
       debug(desc.name);
     }),

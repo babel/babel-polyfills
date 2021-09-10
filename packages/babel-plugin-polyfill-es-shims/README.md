@@ -84,6 +84,7 @@ This plugin supports the following `es-shims` polyfills.
 | `String.prototype.includes`    | [`string.prototype.includes`](https://github.com/mathiasbynens/String.prototype.includes)       | [@mathiasbynens](https://github.com/mathiasbynens) |
 | `String.prototype.repeat`      | [`string.prototype.repeat`](https://github.com/mathiasbynens/String.prototype.repeat)           | [@mathiasbynens](https://github.com/mathiasbynens) |
 | `String.prototype.startWith`   | [`string.prototype.startwith`](https://github.com/mathiasbynens/String.prototype.startsWith)    | [@mathiasbynens](https://github.com/mathiasbynens) |
+| Annex B `String.prototype.*`   | [`es-string-html-methods`](https://github.com/es-shims/es-string-html-methods)                  |
 
 ### ES2016
 

@@ -102,4 +102,19 @@ module.exports = {
   "String.prototype.trimRight": "string trimming / String.prototype.trimRight",
   "String.prototype.trimStart": "string trimming / String.prototype.trimStart",
   "Symbol.prototype.description": "Symbol.prototype.description",
+
+  // Annex B
+  "String.prototype.anchor": "String.prototype HTML methods",
+  "String.prototype.big": "String.prototype HTML methods",
+  "String.prototype.blink": "String.prototype HTML methods",
+  "String.prototype.bold": "String.prototype HTML methods",
+  "String.prototype.fixed": "String.prototype HTML methods",
+  "String.prototype.fontcolor": "String.prototype HTML methods",
+  "String.prototype.fontsize": "String.prototype HTML methods",
+  "String.prototype.italics": "String.prototype HTML methods",
+  "String.prototype.link": "String.prototype HTML methods",
+  "String.prototype.small": "String.prototype HTML methods",
+  "String.prototype.strike": "String.prototype HTML methods",
+  "String.prototype.sub": "String.prototype HTML methods",
+  "String.prototype.sup": "String.prototype HTML methods",
 };
