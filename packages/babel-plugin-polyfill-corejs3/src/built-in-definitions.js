@@ -730,7 +730,7 @@ export const InstanceProperties = {
   trimLeft: define("instance/trim-left", ["es.string.trim-start"]),
   trimRight: define("instance/trim-right", ["es.string.trim-end"]),
   trimStart: define("instance/trim-start", ["es.string.trim-start"]),
-  uniqueBy: define("instance/unique-by", ["esnext.array.unique-by"]),
+  uniqueBy: define("instance/unique-by", ["esnext.array.unique-by", "es.map"]),
   values: define("instance/values", ArrayNatureIteratorsWithTag),
   __defineGetter__: define(null, ["es.object.define-getter"]),
   __defineSetter__: define(null, ["es.object.define-setter"]),
