@@ -81,11 +81,6 @@ const TypedArrayDependencies = [
   "esnext.typed-array.unique-by",
 ];
 
-const TypedArrayStaticMethods = {
-  from: define(null, ["es.typed-array.from"]),
-  of: define(null, ["es.typed-array.of"]),
-};
-
 export const PromiseDependencies = ["es.promise", "es.object.to-string"];
 
 export const PromiseDependenciesWithIterators = [
@@ -168,6 +163,15 @@ const IteratorDependencies = [
   "es.object.to-string",
 ];
 
+const TypedArrayStaticMethods = {
+  from: define(null, ["es.typed-array.from"]),
+  fromAsync: define(null, [
+    "esnext.typed-array.from-async",
+    ...PromiseDependenciesWithIterators,
+  ]),
+  of: define(null, ["es.typed-array.of"]),
+};
+
 export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   AsyncIterator: define("async-iterator/index", AsyncIteratorDependencies),
   AggregateError: define("aggregate-error", [
@@ -246,6 +250,10 @@ export const StaticProperties: ObjectMap<
   },
   Array: {
     from: define("array/from", ["es.array.from", "es.string.iterator"]),
+    fromAsync: define("array/from-async", [
+      "esnext.array.from-async",
+      ...PromiseDependenciesWithIterators,
+    ]),
     isArray: define("array/is-array", ["es.array.is-array"]),
     isTemplateObject: define("array/is-template-object", [
       "esnext.array.is-template-object",
