@@ -14,6 +14,7 @@ export type Descriptor = {
   name: string,
   version: string,
   package: string,
+  path: string, // This is different from .package for multi-entry-point packages
   pure?: false,
   global?: false,
   thisCheck?: (thisObj: Object) => Object,
@@ -139,8 +140,35 @@ defineInstance(
   getter,
 );
 
-function createDescriptor(name, version, pkg = name.toLowerCase()) {
-  return { name, version, package: pkg };
+// Annex B
+for (const name of [
+  "anchor",
+  "big",
+  "blink",
+  "bold",
+  "fixed",
+  "fontcolor",
+  "fontsize",
+  "italics",
+  "link",
+  "small",
+  "strike",
+  "sub",
+  "sup",
+]) {
+  defineInstance("String", name, "1.0.0", stringCheck, {
+    pkg: `es-string-html-methods`,
+    subfolder: name,
+  });
+}
+
+function createDescriptor(name, version, pkg = name.toLowerCase(), subfolder) {
+  return {
+    name,
+    version,
+    package: pkg,
+    path: subfolder ? `${pkg}/${subfolder}` : pkg,
+  };
 }
 
 function defineGlobal(name, version, pkg) {
@@ -164,16 +192,23 @@ function defineInstance(
     getter = false,
     exclude,
     pkg,
+    subfolder,
   }: {
     getter?: boolean,
     exclude?: (meta: MetaDescriptor) => boolean,
     pkg?: string,
+    subfolder?: string,
   } = {},
 ) {
   if (!has(InstanceProperties, property)) InstanceProperties[property] = [];
 
   InstanceProperties[property].push({
-    ...createDescriptor(`${object}.prototype.${property}`, version, pkg),
+    ...createDescriptor(
+      `${object}.prototype.${property}`,
+      version,
+      pkg,
+      subfolder,
+    ),
     thisCheck,
     exclude,
     getter,

@@ -1,0 +1,13 @@
+"str".anchor();
+"str".big();
+"str".blink();
+"str".bold();
+"str".fixed();
+"str".fontcolor();
+"str".fontsize();
+"str".italics();
+"str".link();
+"str".small();
+"str".strike();
+"str".sub();
+"str".sup();
