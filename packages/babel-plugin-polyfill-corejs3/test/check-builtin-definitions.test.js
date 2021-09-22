@@ -29,7 +29,7 @@ const allowList = [];
 describe("corejs3 builtin definitions", () => {
   it("should support most corejs3 features", () => {
     let todoListItem = 0;
-    for (const name of corejs3Modules.values()) {
+    for (const name of corejs3Modules) {
       if (supportedCorejs3Modules.has(name)) continue;
       if (name.startsWith("es.")) {
         const esNextName = "esnext." + name.slice(3);
