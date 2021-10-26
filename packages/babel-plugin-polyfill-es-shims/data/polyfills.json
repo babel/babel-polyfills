@@ -265,6 +265,16 @@
     "samsung": "9",
     "electron": "3"
   },
+  "Error cause": {
+    "chrome": "94",
+    "opera": "80",
+    "edge": "94",
+    "firefox": "91",
+    "safari": "15",
+    "node": "16.11",
+    "ios": "15",
+    "electron": "15"
+  },
   "Function.prototype.name": {
     "chrome": "5",
     "opera": "10.50",

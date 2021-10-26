@@ -31,6 +31,7 @@ module.exports = {
   "Array.prototype.reduceRight": "Array methods / Array.prototype.reduceRight",
   "Array.prototype.some": "Array methods / Array.prototype.some",
   "Array.prototype.values": "Array.prototype methods / Array.prototype.values",
+  "Error cause": "Error.cause property",
   "Function.prototype.name": {
     features: [
       'function "name" property / function statements',

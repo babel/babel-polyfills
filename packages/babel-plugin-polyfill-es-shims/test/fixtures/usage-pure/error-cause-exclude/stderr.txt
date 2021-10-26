@@ -1,4 +1,4 @@
 Some polyfills have been added but are not present in your dependencies.
 Please run one of the following commands:
-	npm install --save error-cause@^1.0.1 globalthis@^1.0.0
-	yarn add error-cause@^1.0.1 globalthis@^1.0.0
+	npm install --save es-aggregate-error@^1.0.2
+	yarn add es-aggregate-error@^1.0.2

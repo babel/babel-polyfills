@@ -49,8 +49,14 @@ export default defineProvider<{}>(function ({
       }
 
       for (const desc of resolved.desc) {
-        if (!desc.exclude?.(meta) && shouldInjectPolyfill(desc.name)) {
+        if (!desc.exclude?.(meta, path) && shouldInjectPolyfill(desc.name)) {
           cb(desc, utils, path);
+
+          // Since global and static polyfills are unambiguous, we only need to
+          // inject the first non-excluded one.
+          if (resolved.kind !== "instance") {
+            break;
+          }
         }
       }
     };
@@ -60,7 +66,11 @@ export default defineProvider<{}>(function ({
     assertDependency(desc.package, desc.version);
     debug(desc.name);
 
-    return utils.injectDefaultImport(desc.path, desc.name);
+    return utils.injectDefaultImport(
+      desc.path,
+      // $FlowIgnore
+      desc.nameHint || desc.name,
+    );
   }
 
   const seen = new WeakSet();

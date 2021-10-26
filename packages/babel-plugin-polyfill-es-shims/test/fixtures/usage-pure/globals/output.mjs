@@ -1,4 +1,4 @@
-import _AggregateError from "es-aggregate-error";
+import _AggregateError from "error-cause/AggregateError";
 import _globalThis from "globalthis";
 _AggregateError;
 _globalThis;
