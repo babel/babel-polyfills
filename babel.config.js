@@ -5,7 +5,9 @@ module.exports = function(api) {
 
   return {
     sourceType: "unambiguous",
-    targets: { node: env === "production" ? "6.9" : "current" },
+    targets: {
+      node: env === "production" ? "6.9" : env === "esm" ? "12.20" : "current",
+    },
     presets: [["@babel/preset-env", { loose: true }], "@babel/preset-flow"],
   };
 };
