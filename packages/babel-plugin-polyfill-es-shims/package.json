@@ -31,7 +31,8 @@
   "devDependencies": {
     "@babel/core": "^7.13.0",
     "@babel/helper-plugin-test-runner": "^7.10.4",
-    "array.from": "^1.1.0"
+    "array.from": "^1.1.0",
+    "math.clz32": "^1.0.0"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0-0"

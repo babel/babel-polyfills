@@ -18,32 +18,15 @@ export function resolve(
     basedir = path.resolve(basedir, absoluteImports);
   }
 
-  let modulePackage, moduleNestedPath;
-
-  let slash = moduleName.indexOf("/");
-  if (moduleName[0] === "@") {
-    slash = moduleName.indexOf("/", slash + 1);
-  }
-
-  if (slash === -1) {
-    modulePackage = moduleName;
-    moduleNestedPath = "";
-  } else {
-    modulePackage = moduleName.slice(0, slash);
-    moduleNestedPath = moduleName.slice(slash);
-  }
-
   try {
-    let pkg;
     if (nativeRequireResolve) {
       // $FlowIgnore
-      pkg = require.resolve(`${modulePackage}/package.json`, {
+      return require.resolve(moduleName, {
         paths: [basedir],
       });
     } else {
-      pkg = requireResolve.sync(`${modulePackage}/package.json`, { basedir });
+      return requireResolve.sync(moduleName, { basedir });
     }
-    return path.dirname(pkg) + moduleNestedPath;
   } catch (err) {
     if (err.code !== "MODULE_NOT_FOUND") throw err;
 
