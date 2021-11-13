@@ -1,0 +1,16 @@
+{
+  "sourceType": "unambiguous",
+  "presets": [
+    ["@babel/preset-env", { "loose": true }],
+    "@babel/preset-flow"
+  ],
+  "targets": { "node": "current" },
+  "env": {
+    "production": {
+      "targets": { "node": "6.9" }
+    },
+    "esm": {
+      "targets": { "node": "12.20" }
+    }
+  }
+}

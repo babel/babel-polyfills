@@ -93,7 +93,7 @@ async function buildRollup() {
             envName: "esm",
             babelrc: false,
             babelHelpers: "bundled",
-            extends: "./babel.config.js",
+            extends: "./babel.config.json",
             extensions: [".ts", ".js", ".mjs", ".cjs"],
           }),
           rollupNodeResolve({
