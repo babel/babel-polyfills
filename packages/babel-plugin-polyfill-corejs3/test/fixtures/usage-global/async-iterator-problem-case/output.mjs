@@ -1,0 +1,17 @@
+import "core-js/modules/es.array.every.js";
+import "core-js/modules/es.object.to-string.js";
+import "core-js/modules/esnext.async-iterator.every.js";
+import "core-js/modules/esnext.iterator.constructor.js";
+import "core-js/modules/esnext.iterator.every.js";
+import "core-js/modules/es.promise.js";
+import "core-js/modules/esnext.async-iterator.constructor.js";
+import "core-js/modules/esnext.async-iterator.filter.js";
+import "core-js/modules/esnext.async-iterator.find.js";
+import "core-js/modules/esnext.async-iterator.flat-map.js";
+import "core-js/modules/esnext.async-iterator.for-each.js";
+import "core-js/modules/esnext.async-iterator.map.js";
+import "core-js/modules/esnext.async-iterator.reduce.js";
+import "core-js/modules/esnext.async-iterator.some.js";
+import "core-js/modules/esnext.iterator.to-async.js";
+import "core-js/modules/es.array.iterator.js";
+[1, 2, 3].values().toAsync().every(fn);

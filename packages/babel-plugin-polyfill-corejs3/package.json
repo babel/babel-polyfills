@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "@babel/helper-define-polyfill-provider": "workspace:^0.3.0",
-    "core-js-compat": "^3.18.0"
+    "core-js-compat": "^3.20.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.0",
@@ -37,8 +37,8 @@
     "@babel/plugin-transform-for-of": "^7.10.4",
     "@babel/plugin-transform-modules-commonjs": "^7.10.4",
     "@babel/plugin-transform-spread": "^7.13.0",
-    "core-js": "^3.9.1",
-    "core-js-pure": "^3.9.1"
+    "core-js": "^3.20.0",
+    "core-js-pure": "^3.20.0"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0-0"

@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    [
+      "@@/polyfill-corejs3",
+      {
+        "version": "3.20",
+        "method": "usage-global",
+        "proposals": true
+      }
+    ]
+  ]
+}
