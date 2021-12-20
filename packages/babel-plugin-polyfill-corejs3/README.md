@@ -20,7 +20,7 @@ Add this plugin to your Babel configuration:
 
 ```json
 {
-  "plugins": [["polyfill-corejs3", { "method": "usage-global" }]]
+  "plugins": [["polyfill-corejs3", { "method": "usage-global", "version": "3.20" }]]
 }
 ```
 

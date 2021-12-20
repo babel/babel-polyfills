@@ -46,6 +46,8 @@ const ArrayNatureIteratorsWithTag = [
 
 const CommonIteratorsWithTag = ["es.object.to-string", ...CommonIterators];
 
+const ErrorDependencies = ["es.error.cause", "es.error.to-string"];
+
 const TypedArrayDependencies = [
   "es.typed-array.at",
   "es.typed-array.copy-within",
@@ -78,7 +80,11 @@ const TypedArrayDependencies = [
   "esnext.typed-array.find-last",
   "esnext.typed-array.find-last-index",
   "esnext.typed-array.group-by",
+  "esnext.typed-array.to-reversed",
+  "esnext.typed-array.to-sorted",
+  "esnext.typed-array.to-spliced",
   "esnext.typed-array.unique-by",
+  "esnext.typed-array.with",
 ];
 
 export const PromiseDependencies = ["es.promise", "es.object.to-string"];
@@ -148,6 +154,13 @@ const WeakSetDependencies = [
   ...CommonIteratorsWithTag,
 ];
 
+const DOMExceptionDependencies = [
+  "web.dom-exception.constructor",
+  "web.dom-exception.stack",
+  "web.dom-exception.to-string-tag",
+  "es.error.to-string",
+];
+
 const URLSearchParamsDependencies = [
   "web.url-search-params",
   ...CommonIteratorsWithTag,
@@ -156,6 +169,17 @@ const URLSearchParamsDependencies = [
 const AsyncIteratorDependencies = [
   "esnext.async-iterator.constructor",
   ...PromiseDependencies,
+];
+
+const AsyncIteratorProblemMethods = [
+  "esnext.async-iterator.every",
+  "esnext.async-iterator.filter",
+  "esnext.async-iterator.find",
+  "esnext.async-iterator.flat-map",
+  "esnext.async-iterator.for-each",
+  "esnext.async-iterator.map",
+  "esnext.async-iterator.reduce",
+  "esnext.async-iterator.some",
 ];
 
 const IteratorDependencies = [
@@ -176,7 +200,9 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   AsyncIterator: define("async-iterator/index", AsyncIteratorDependencies),
   AggregateError: define("aggregate-error", [
     "es.aggregate-error",
-    ...CommonIterators,
+    ...ErrorDependencies,
+    ...CommonIteratorsWithTag,
+    "es.aggregate-error.cause",
   ]),
   ArrayBuffer: define(null, [
     "es.array-buffer.constructor",
@@ -189,6 +215,9 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
     "es.object.to-string",
   ]),
   Date: define(null, ["es.date.to-string"]),
+  DOMException: define("dom-exception", DOMExceptionDependencies),
+  Error: define(null, ErrorDependencies),
+  EvalError: define(null, ErrorDependencies),
   Float32Array: typed("es.typed-array.float32-array"),
   Float64Array: typed("es.typed-array.float64-array"),
   Int8Array: typed("es.typed-array.int8-array"),
@@ -208,6 +237,8 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
     ...CommonIteratorsWithTag,
   ]),
   Promise: define("promise/index", PromiseDependencies),
+  RangeError: define(null, ErrorDependencies),
+  ReferenceError: define(null, ErrorDependencies),
   Reflect: define(null, ["es.reflect.to-string-tag", "es.object.to-string"]),
   RegExp: define(null, [
     "es.regexp.constructor",
@@ -218,6 +249,9 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   ]),
   Set: define("set/index", SetDependencies),
   Symbol: define("symbol/index", SymbolDependencies),
+  SyntaxError: define(null, ErrorDependencies),
+  TypeError: define(null, ErrorDependencies),
+  URIError: define(null, ErrorDependencies),
   URL: define("url/index", ["web.url", ...URLSearchParamsDependencies]),
   URLSearchParams: define("url-search-params/index", URLSearchParamsDependencies),
   WeakMap: define("weak-map/index", WeakMapDependencies),
@@ -235,6 +269,15 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   setImmediate: define("set-immediate", ["web.immediate"]),
   setInterval: define("set-interval", ["web.timers"]),
   setTimeout: define("set-timeout", ["web.timers"]),
+  structuredClone: define("structured-clone", [
+    "web.structured-clone",
+    ...DOMExceptionDependencies,
+    "es.array.iterator",
+    "es.object.keys",
+    "es.object.to-string",
+    "es.map",
+    "es.set",
+  ]),
   unescape: define("unescape", ["es.unescape"]),
 };
 
@@ -245,6 +288,7 @@ export const StaticProperties: ObjectMap<
     from: define("async-iterator/from", [
       "esnext.async-iterator.from",
       ...AsyncIteratorDependencies,
+      ...AsyncIteratorProblemMethods,
       ...CommonIterators,
     ]),
   },
@@ -274,6 +318,13 @@ export const StaticProperties: ObjectMap<
 
   Date: {
     now: define("date/now", ["es.date.now"]),
+  },
+
+  Function: {
+    isCallable: define("function/is-callable", ["esnext.function.is-callable"]),
+    isConstructor: define("function/is-constructor", [
+      "esnext.function.is-constructor",
+    ]),
   },
 
   Iterator: {
@@ -474,6 +525,7 @@ export const StaticProperties: ObjectMap<
   },
 
   String: {
+    cooked: define("string/cooked", ["esnext.string.cooked"]),
     fromCodePoint: define("string/from-code-point", [
       "es.string.from-code-point",
     ]),
@@ -555,6 +607,12 @@ export const StaticProperties: ObjectMap<
   Uint32Array: TypedArrayStaticMethods,
   Float32Array: TypedArrayStaticMethods,
   Float64Array: TypedArrayStaticMethods,
+
+  WebAssembly: {
+    CompileError: define(null, ErrorDependencies),
+    LinkError: define(null, ErrorDependencies),
+    RuntimeError: define(null, ErrorDependencies),
+  },
 };
 
 export const InstanceProperties = {
@@ -642,6 +700,11 @@ export const InstanceProperties = {
   flat: define("instance/flat", ["es.array.flat", "es.array.unscopables.flat"]),
   getYear: define(null, ["es.date.get-year"]),
   groupBy: define("instance/group-by", ["esnext.array.group-by"]),
+  groupByToMap: define("instance/group-by-to-map", [
+    "esnext.array.group-by-to-map",
+    "es.map",
+    "es.object.to-string",
+  ]),
   fontcolor: define(null, ["es.string.fontcolor"]),
   fontsize: define(null, ["es.string.fontsize"]),
   forEach: define("instance/for-each", [
@@ -723,15 +786,29 @@ export const InstanceProperties = {
     "esnext.iterator.to-array",
     ...IteratorDependencies,
   ]),
+  toAsync: define(null, [
+    "esnext.iterator.to-async",
+    ...IteratorDependencies,
+    ...AsyncIteratorDependencies,
+    ...AsyncIteratorProblemMethods,
+  ]),
+  toExponential: define(null, ["es.number.to-exponential"]),
   toFixed: define(null, ["es.number.to-fixed"]),
   toGMTString: define(null, ["es.date.to-gmt-string"]),
   toISOString: define(null, ["es.date.to-iso-string"]),
   toJSON: define(null, ["es.date.to-json", "web.url.to-json"]),
   toPrecision: define(null, ["es.number.to-precision"]),
+  toReversed: define("instance/to-reversed", ["esnext.array.to-reversed"]),
+  toSorted: define("instance/to-sorted", [
+    "esnext.array.to-sorted",
+    "es.array.sort",
+  ]),
+  toSpliced: define("instance/to-reversed", ["esnext.array.to-spliced"]),
   toString: define(null, [
     "es.object.to-string",
-    "es.regexp.to-string",
+    "es.error.to-string",
     "es.date.to-string",
+    "es.regexp.to-string",
   ]),
   trim: define("instance/trim", ["es.string.trim"]),
   trimEnd: define("instance/trim-end", ["es.string.trim-end"]),
@@ -739,7 +816,9 @@ export const InstanceProperties = {
   trimRight: define("instance/trim-right", ["es.string.trim-end"]),
   trimStart: define("instance/trim-start", ["es.string.trim-start"]),
   uniqueBy: define("instance/unique-by", ["esnext.array.unique-by", "es.map"]),
+  unThis: define("instance/un-this", ["esnext.function.un-this"]),
   values: define("instance/values", ArrayNatureIteratorsWithTag),
+  with: define("instance/with", ["esnext.array.with"]),
   __defineGetter__: define(null, ["es.object.define-getter"]),
   __defineSetter__: define(null, ["es.object.define-setter"]),
   __lookupGetter__: define(null, ["es.object.lookup-getter"]),

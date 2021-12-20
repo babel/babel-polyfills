@@ -67,6 +67,7 @@ import "core-js/modules/es.typed-array.uint8-clamped-array.js";
 import "core-js/modules/es.typed-array.uint16-array.js";
 import "core-js/modules/es.typed-array.uint32-array.js";
 import "core-js/modules/es.typed-array.from.js";
+import "core-js/modules/es.typed-array.iterator.js";
 import "core-js/modules/es.typed-array.of.js";
 import "core-js/modules/es.typed-array.sort.js";
 import "core-js/modules/es.typed-array.to-string.js";
