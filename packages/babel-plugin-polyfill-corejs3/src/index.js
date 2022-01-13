@@ -164,7 +164,17 @@ export default defineProvider<Options>(function(
         return;
       }
 
-      maybeInjectGlobal(modules, utils, false);
+      const modulesSet = new Set(modules);
+      const filteredModules = modules.filter(module => {
+        if (!module.startsWith("esnext.")) return true;
+        const stable = module.replace("esnext.", "es.");
+        if (modulesSet.has(stable) && shouldInjectPolyfill(stable)) {
+          return false;
+        }
+        return true;
+      });
+
+      maybeInjectGlobal(filteredModules, utils, false);
       path.remove();
     },
 
