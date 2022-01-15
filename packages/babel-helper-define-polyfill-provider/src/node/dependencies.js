@@ -6,6 +6,11 @@ import requireResolve from "resolve";
 
 const nativeRequireResolve = parseFloat(process.versions.node) >= 8.9;
 
+// $FlowIgnore
+import { createRequire } from "module";
+// $FlowIgnore
+const require = createRequire(import/*::(_)*/.meta.url); // eslint-disable-line
+
 export function resolve(
   dirname: string,
   moduleName: string,
@@ -20,7 +25,6 @@ export function resolve(
 
   try {
     if (nativeRequireResolve) {
-      // $FlowIgnore
       return require.resolve(moduleName, {
         paths: [basedir],
       });
@@ -45,7 +49,6 @@ export function resolve(
 export function has(basedir: string, name: string) {
   try {
     if (nativeRequireResolve) {
-      // $FlowIgnore
       require.resolve(name, { paths: [basedir] });
     } else {
       requireResolve.sync(name, { basedir });
