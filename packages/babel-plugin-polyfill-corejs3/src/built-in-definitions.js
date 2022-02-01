@@ -257,6 +257,8 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   WeakMap: define("weak-map/index", WeakMapDependencies),
   WeakSet: define("weak-set/index", WeakSetDependencies),
 
+  atob: define("atob", ["web.atob", ...DOMExceptionDependencies]),
+  btoa: define("btoa", ["web.btoa", ...DOMExceptionDependencies]),
   clearImmediate: define("clear-immediate", ["web.immediate"]),
   compositeKey: define("composite-key", ["esnext.composite-key"]),
   compositeSymbol: define("composite-symbol", ["esnext.composite-symbol"]),

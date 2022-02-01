@@ -232,6 +232,8 @@ import "core-js/modules/esnext.symbol.replace-all.js";
 import "core-js/modules/esnext.typed-array.find-last.js";
 import "core-js/modules/esnext.typed-array.find-last-index.js";
 import "core-js/modules/esnext.typed-array.group-by.js";
+import "core-js/modules/web.atob.js";
+import "core-js/modules/web.btoa.js";
 import "core-js/modules/web.dom-collections.for-each.js";
 import "core-js/modules/web.dom-collections.iterator.js";
 import "core-js/modules/web.dom-exception.constructor.js";

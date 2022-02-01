@@ -30,3 +30,5 @@ Observable.from(10);
 new EvalError(1, { cause: 2 });
 structuredClone;
 [].groupByToMap;
+
+btoa('hi');
