@@ -21,6 +21,7 @@ import "core-js/modules/web.dom-exception.constructor.js";
 import "core-js/modules/web.dom-exception.stack.js";
 import "core-js/modules/web.dom-exception.to-string-tag.js";
 import "core-js/modules/web.structured-clone.js";
+import "core-js/modules/web.btoa.js";
 Array.from; // static method
 
 Map; // built-in
@@ -62,3 +63,4 @@ new EvalError(1, {
 });
 structuredClone;
 [].groupByToMap;
+btoa('hi');

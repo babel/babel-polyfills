@@ -12,6 +12,7 @@ import _replaceAllInstanceProperty from "core-js-pure/stable/instance/replace-al
 import _URL from "core-js-pure/stable/url/index.js";
 import _DOMException from "core-js-pure/stable/dom-exception.js";
 import _structuredClone from "core-js-pure/stable/structured-clone.js";
+import _btoa from "core-js-pure/stable/btoa.js";
 [].findLast(fn);
 [].findLastIndex(fn);
 [].asIndexedPairs();
@@ -52,3 +53,5 @@ Function.isConstructor;
 throw new _DOMException();
 
 _structuredClone(72);
+
+_btoa('hi');

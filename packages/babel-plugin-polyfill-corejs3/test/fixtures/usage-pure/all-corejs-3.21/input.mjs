@@ -45,3 +45,5 @@ Function.isConstructor;
 throw new DOMException();
 
 structuredClone(72);
+
+btoa('hi');
