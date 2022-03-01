@@ -2,8 +2,6 @@
 
 All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform-runtime` related to `core-js` are supported by the polyfill providers implemented in this repository.
 
-> You'll notice that you currently have to duplicate your `targets` (unles you are using a `.browserslistrc` file). We are working on deduplicating the option: [`babel/rfcs#2`](https://github.com/babel/rfcs/pull/2).
-
 ### `core-js@3`
 
 <!-- prettier-ignore-start -->
@@ -117,7 +115,7 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
 </td>
 <td>
 
-```json5
+```json
 {
   "presets": [
     ["@babel/preset-env", {
@@ -145,7 +143,7 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
 <!-- prettier-ignore-start -->
 <table>
 <thead><tr>
-<th align="center">Old configuration (with `core-js`)</th>
+<th align="center">Old configuration (with <code>core-js</code>)</th>
 <th align="center">New configuration</th>
 </tr></thead>
 <tr>
@@ -186,7 +184,7 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
 <!-- prettier-ignore-start -->
 <table>
 <thead><tr>
-<th align="center">Old configuration (with `core-js`)</th>
+<th align="center">Old configuration (with <code>core-js</code>)</th>
 <th align="center">New configuration</th>
 </tr></thead>
 <tr>
@@ -210,7 +208,7 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
 </td>
 <td>
 
-```json5
+```json
 {
   "presets": [
     ["@babel/preset-env", {
@@ -345,7 +343,7 @@ All the existig capabilities of `@babel/preset-env` and `@babel/plugin-transform
 </td>
 <td>
 
-```jsonc
+```json
 {
   "presets": [
     ["@babel/preset-env", {
