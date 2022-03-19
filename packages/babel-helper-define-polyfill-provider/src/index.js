@@ -60,6 +60,20 @@ function resolveOptions<Options>(
     ...providerOptions
   } = options;
 
+  if (isEmpty(options)) {
+    throw new Error(
+      `\
+This plugin requires options, for example:
+    {
+      "plugins": [
+        ["<plugin name>", { method: "usage-pure" }]
+      ]
+    }
+
+See more options at https://github.com/babel/babel-polyfills/blob/main/docs/usage.md`,
+    );
+  }
+
   let methodName;
   if (method === "usage-global") methodName = "usageGlobal";
   else if (method === "entry-global") methodName = "entryGlobal";
@@ -395,4 +409,8 @@ function mapGetOr(map, key, getDefault) {
     map.set(key, val);
   }
   return val;
+}
+
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
 }

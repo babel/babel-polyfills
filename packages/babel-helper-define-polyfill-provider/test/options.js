@@ -8,6 +8,12 @@ function transform(code, opts, provider) {
   });
 }
 
+describe("options", () => {
+  it("must be non-empty", () => {
+    expect(() => transform("code", {}, () => {})).toThrow(/requires/);
+  });
+});
+
 function withMethod(method) {
   return transform("code", { method }, () => {});
 }
