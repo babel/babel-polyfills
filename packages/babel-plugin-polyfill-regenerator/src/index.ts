@@ -8,7 +8,16 @@ type Options = {
   };
 };
 
-export default defineProvider<Options>(({ debug }, options) => {
+export default defineProvider<Options>(({ debug, targets, babel }, options) => {
+  if (!shallowEqual(targets, babel.targets())) {
+    throw new Error(
+      "This plugin does not use the targets option. Only preset-env's targets" +
+        " or top-level targets need to be configured for this plugin to work." +
+        " See https://github.com/babel/babel-polyfills/issues/36 for more" +
+        " details",
+    );
+  }
+
   const { [runtimeCompat]: { useBabelRuntime } = { useBabelRuntime: "" } } =
     options;
 
@@ -39,3 +48,7 @@ export default defineProvider<Options>(({ debug }, options) => {
 
 const isRegenerator = meta =>
   meta.kind === "global" && meta.name === "regeneratorRuntime";
+
+function shallowEqual(obj1: any, obj2: any) {
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
