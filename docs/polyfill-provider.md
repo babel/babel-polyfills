@@ -3,7 +3,7 @@ Their job is to provide the correct import paths for every functionality that th
 
 > You can find some examples in the [`packages`](https://github.com/nicolo-ribaudo/babel-polyfills/tree/main/packages) folder of this repository
 
-A _"polyfill provider"_ is defined passing a factory function to `@babel/helper-define-polyfill-provider`. The factory functiontakes two parameters (`api` and `options`) and returns an object with the provider implementation.
+A _"polyfill provider"_ is defined passing a factory function to `@babel/helper-define-polyfill-provider`. The factory function takes two parameters (`api` and `options`) and returns an object with the provider implementation.
 
 ```ts
 function polyfillProvider(api: ProviderApi, options: Options): Provider;
