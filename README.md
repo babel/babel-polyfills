@@ -235,3 +235,7 @@ Our old approach has two main problems:
 - We forced our users to use `core-js` if they wanted a Babel integration. `core-js` is a good and comprehensive polyfill, but it doesn't fit the needs of all of our users.
 
 With this new packages we are proposing a solution for both of these problem, while still maintaining full backward compatibility.
+
+### Want to contribute?
+
+See our [CONTRIBUTING.md](CONTRIBUTING.md) to get started with setting up the repo.
