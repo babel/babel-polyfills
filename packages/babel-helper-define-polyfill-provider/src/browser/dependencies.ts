@@ -1,5 +1,3 @@
-// @flow
-
 export function resolve(
   dirname: string,
   moduleName: string,

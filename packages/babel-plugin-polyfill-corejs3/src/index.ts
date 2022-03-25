@@ -1,5 +1,3 @@
-// @flow
-
 import corejs3Polyfills from "../core-js-compat/data.js";
 import corejs3ShippedProposalsList from "./shipped-proposals";
 import getModulesListForTargetVersion from "../core-js-compat/get-modules-list-for-target-version.js";
@@ -27,15 +25,15 @@ import defineProvider from "@babel/helper-define-polyfill-provider";
 
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 
-type Options = {|
-  version?: number | string,
-  proposals?: boolean,
-  shippedProposals?: boolean,
+type Options = {
+  version?: number | string;
+  proposals?: boolean;
+  shippedProposals?: boolean;
   "#__secret_key__@babel/runtime__compatibility": void | {
-    useBabelRuntime: string,
-    ext: string,
-  },
-|};
+    useBabelRuntime: string;
+    ext: string;
+  };
+};
 
 const esnextFallback = (
   name: string,
@@ -216,7 +214,7 @@ export default defineProvider<Options>(function (
 
       if (path.parentPath.isUnaryExpression({ operator: "delete" })) return;
 
-      let isCall: ?boolean;
+      let isCall: boolean | undefined | null;
 
       if (meta.kind === "property") {
         // We can't compile destructuring.

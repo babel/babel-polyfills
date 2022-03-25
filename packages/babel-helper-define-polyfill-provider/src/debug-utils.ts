@@ -1,5 +1,3 @@
-// @flow
-
 import { prettifyTargets } from "@babel/helper-compilation-targets";
 
 import type { Targets } from "./types";

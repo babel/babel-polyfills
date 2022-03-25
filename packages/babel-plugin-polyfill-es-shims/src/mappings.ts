@@ -1,5 +1,3 @@
-// @flow
-
 import * as babel from "@babel/core";
 const { types: t, template } = babel.default || babel;
 
@@ -11,15 +9,15 @@ const expr = template.expression.ast;
 const has = Function.call.bind(Object.hasOwnProperty);
 
 export type Descriptor = {
-  name: string,
-  version: string,
-  package: string,
-  path: string, // This is different from .package for multi-entry-point packages
-  pure?: false,
-  global?: false,
-  thisCheck?: (thisObj: Object) => Object,
-  exclude?: (meta: MetaDescriptor) => boolean,
-  getter?: true,
+  name: string;
+  version: string;
+  package: string;
+  path: string; // This is different from .package for multi-entry-point packages,
+  pure?: false;
+  global?: false;
+  thisCheck?: (thisObj: any) => any;
+  exclude?: (meta: MetaDescriptor) => boolean;
+  getter?: true;
 };
 
 export const Globals = {};
@@ -194,10 +192,10 @@ function defineInstance(
     pkg,
     subfolder,
   }: {
-    getter?: boolean,
-    exclude?: (meta: MetaDescriptor) => boolean,
-    pkg?: string,
-    subfolder?: string,
+    getter?: boolean;
+    exclude?: (meta: MetaDescriptor) => boolean;
+    pkg?: string;
+    subfolder?: string;
   } = {},
 ) {
   if (!has(InstanceProperties, property)) InstanceProperties[property] = [];

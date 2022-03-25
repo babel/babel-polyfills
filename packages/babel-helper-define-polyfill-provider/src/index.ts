@@ -1,5 +1,3 @@
-// @flow
-
 import { declare } from "@babel/helper-plugin-utils";
 import type { NodePath } from "@babel/traverse";
 
@@ -41,13 +39,16 @@ function resolveOptions<Options>(
   options: PluginOptions,
   babelApi,
 ): {
-  method: MethodString,
-  methodName: "usageGlobal" | "entryGlobal" | "usagePure",
-  targets: Targets,
-  debug: boolean,
-  shouldInjectPolyfill: ?(name: string, shouldInject: boolean) => boolean,
-  providerOptions: ProviderOptions<Options>,
-  absoluteImports: string | boolean,
+  method: MethodString;
+  methodName: "usageGlobal" | "entryGlobal" | "usagePure";
+  targets: Targets;
+  debug: boolean;
+  shouldInjectPolyfill:
+    | ((name: string, shouldInject: boolean) => boolean)
+    | undefined
+    | null;
+  providerOptions: ProviderOptions<Options>;
+  absoluteImports: string | boolean;
 } {
   const {
     method,
@@ -141,7 +142,7 @@ See more options at https://github.com/babel/babel-polyfills/blob/main/docs/usag
     absoluteImports: absoluteImports ?? false,
     shouldInjectPolyfill,
     debug: !!debug,
-    providerOptions: ((providerOptions: Object): ProviderOptions<Options>),
+    providerOptions: providerOptions as any as ProviderOptions<Options>,
   };
 }
 

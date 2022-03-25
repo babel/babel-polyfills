@@ -1,5 +1,3 @@
-// @flow
-
 import type { NodePath } from "@babel/traverse";
 import * as babel from "@babel/core";
 const { types: t } = babel.default || babel;
@@ -48,7 +46,7 @@ export default class ImportsCache {
       source: t.StringLiteral,
       // eslint-disable-next-line no-undef
       name: t.Identifier,
-    ) => { node: t.Node, name: string },
+    ) => { node: t.Node; name: string },
   ) {
     const key = this._normalizeKey(programPath, url, name);
     const imports = this._ensure(this._imports, programPath, Map);
@@ -106,10 +104,10 @@ export default class ImportsCache {
     });*/
   }
 
-  _ensure<C: Map<*, *> | Set<*>>(
+  _ensure<C extends Map<any, any> | Set<any>>(
     map: WeakMap<NodePath, C>,
     programPath: NodePath,
-    Collection: Class<C>,
+    Collection: { new (...args: any): C },
   ): C {
     let collection = map.get(programPath);
     if (!collection) {

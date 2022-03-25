@@ -1,25 +1,23 @@
-// @flow
-
 import corejs2Polyfills from "@babel/compat-data/corejs2-built-ins";
 
 type ObjectMap<V> = { [name: string]: V };
 
 type PolyfillDescriptor<T> = {
-  name: string,
-  pure: ?string,
-  global: string[],
-  meta: ?T,
+  name: string;
+  pure: string | undefined | null;
+  global: string[];
+  meta: T | undefined | null;
 };
 
 type CoreJS2Meta = {
-  minRuntimeVersion: ?string,
+  minRuntimeVersion: string | undefined | null;
 };
 
 const define = <T>(
   name: string,
-  pure: ?string,
+  pure?: string | null,
   global: string[] = [],
-  meta: ?T,
+  meta?: T | null,
 ): PolyfillDescriptor<T> => {
   return { name, pure, global, meta };
 };
@@ -27,7 +25,7 @@ const define = <T>(
 const pureAndGlobal = (
   pure: string,
   global: string[],
-  minRuntimeVersion: ?string = null,
+  minRuntimeVersion: string | undefined | null = null,
 ) => define<CoreJS2Meta>(global[0], pure, global, { minRuntimeVersion });
 
 const globalOnly = (global: string[]) => define(global[0], null, global);
@@ -142,7 +140,7 @@ if ("es6.array.slice" in corejs2Polyfills) {
 }
 
 export const StaticProperties: ObjectMap<
-  ObjectMap<PolyfillDescriptor<CoreJS2Meta>>,
+  ObjectMap<PolyfillDescriptor<CoreJS2Meta>>
 > = {
   Array: {
     from: pureAndGlobal("array/from", [

@@ -1,10 +1,8 @@
-// @flow
-
 import * as babel from "@babel/core";
 const { types: t } = babel.default || babel;
 import corejsEntries from "../core-js-compat/entries.js";
 
-export function callMethod(path: *, id: t.Identifier) {
+export function callMethod(path: any, id: t.Identifier) {
   const { object } = path.node;
 
   let context1, context2;

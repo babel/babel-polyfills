@@ -1,5 +1,3 @@
-// @flow
-
 import * as babel from "@babel/core";
 const { types: t, template } = babel.default || babel;
 import type NodePath from "@babel/traverse";
@@ -12,7 +10,7 @@ export function intersection<T>(a: Set<T>, b: Set<T>): Set<T> {
   return result;
 }
 
-export function has(object: Object, key: string) {
+export function has(object: any, key: string) {
   return Object.prototype.hasOwnProperty.call(object, key);
 }
 

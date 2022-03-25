@@ -1,5 +1,3 @@
-// @flow
-
 import defineProvider, {
   type Utils,
   type MetaDescriptor,
@@ -14,7 +12,7 @@ import {
   InstanceProperties,
 } from "./mappings";
 
-export default defineProvider<{||}>(function ({
+export default defineProvider<{}>(function ({
   shouldInjectPolyfill,
   assertDependency,
   createMetaResolver,
@@ -30,8 +28,13 @@ export default defineProvider<{||}>(function ({
   });
 
   function createDescIterator(
-    cb: (Descriptor, Utils, Object) => void,
-    instance?: (MetaDescriptor, *, Utils, Object) => void,
+    cb: (desc: Descriptor, utils: Utils, path: any) => void,
+    instance?: (
+      meta: MetaDescriptor,
+      resolved: any,
+      utils: Utils,
+      path: any,
+    ) => void,
   ) {
     return (meta, utils, path) => {
       if (path.parentPath.isUnaryExpression({ operator: "delete" })) return;
@@ -91,7 +94,7 @@ export default defineProvider<{||}>(function ({
         const isGetter = resolved.desc[0].getter;
 
         const matchesPolyfill = ({ name }) =>
-          name.startsWith(((meta.object: any): string));
+          name.startsWith(meta.object as any as string);
 
         let index = -1;
         if (

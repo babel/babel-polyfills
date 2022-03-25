@@ -1,5 +1,3 @@
-// @flow
-
 import type { NodePath } from "@babel/traverse";
 import type { MetaDescriptor } from "../types";
 

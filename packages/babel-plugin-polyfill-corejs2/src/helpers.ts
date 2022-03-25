@@ -1,8 +1,8 @@
 import semver from "semver";
 
 export function hasMinVersion(
-  minVersion: ?string,
-  runtimeVersion: ?(string | number),
+  minVersion?: string | null,
+  runtimeVersion?: string | number | null,
 ) {
   // If the range is unavailable, we're running the script during Babel's
   // build process, and we want to assume that all versions are satisfied so

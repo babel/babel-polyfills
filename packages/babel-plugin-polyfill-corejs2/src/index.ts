@@ -1,5 +1,3 @@
-// @flow
-
 import corejs2Polyfills from "@babel/compat-data/corejs2-built-ins";
 import {
   BuiltIns,
@@ -20,16 +18,16 @@ const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 // $FlowIgnore
 const has = Function.call.bind(Object.hasOwnProperty);
 
-type Options = {|
+type Options = {
   "#__secret_key__@babel/preset-env__compatibility": void | {
-    entryInjectRegenerator: boolean,
-  },
+    entryInjectRegenerator: boolean;
+  };
   "#__secret_key__@babel/runtime__compatibility": void | {
-    useBabelRuntime: string,
-    runtimeVersion: string,
-    ext: string,
-  },
-|};
+    useBabelRuntime: string;
+    runtimeVersion: string;
+    ext: string;
+  };
+};
 
 export default defineProvider<Options>(function (
   api,

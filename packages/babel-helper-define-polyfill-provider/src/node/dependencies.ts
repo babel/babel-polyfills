@@ -1,5 +1,3 @@
-// @flow
-
 import path from "path";
 import debounce from "lodash.debounce";
 import requireResolve from "resolve";
