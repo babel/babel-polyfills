@@ -1,0 +1,21 @@
+{
+  "include": ["./packages/*/src/**/*.ts"],
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "lib": [
+      "esnext"
+    ],
+    "noEmit": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@babel/helper-define-polyfill-provider": [
+        "./packages/babel-helper-define-polyfill-provider/src"
+      ]
+    }
+  }
+}
