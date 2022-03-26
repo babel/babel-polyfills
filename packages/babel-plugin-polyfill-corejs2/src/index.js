@@ -31,7 +31,7 @@ type Options = {|
   },
 |};
 
-export default defineProvider<Options>(function(
+export default defineProvider<Options>(function (
   api,
   {
     [presetEnvCompat]: { entryInjectRegenerator } = {},

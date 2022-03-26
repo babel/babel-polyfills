@@ -14,7 +14,7 @@ import {
   InstanceProperties,
 } from "./mappings";
 
-export default defineProvider<{||}>(function({
+export default defineProvider<{||}>(function ({
   shouldInjectPolyfill,
   assertDependency,
   createMetaResolver,

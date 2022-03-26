@@ -302,20 +302,15 @@ export default function definePolyfillProvider<Options>(
       babelApi,
     );
 
-    const {
-      debug,
-      method,
-      targets,
-      provider,
-      callProvider,
-    } = instantiateProvider<Options>(
-      factory,
-      options,
-      missingDependencies,
-      dirname,
-      () => debugLog,
-      babelApi,
-    );
+    const { debug, method, targets, provider, callProvider } =
+      instantiateProvider<Options>(
+        factory,
+        options,
+        missingDependencies,
+        dirname,
+        () => debugLog,
+        babelApi,
+      );
 
     const createVisitor = method === "entry-global" ? v.entry : v.usage;
 

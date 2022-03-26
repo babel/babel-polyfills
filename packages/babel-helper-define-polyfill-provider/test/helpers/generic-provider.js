@@ -1,6 +1,6 @@
 const defineProvider = require("../..").default;
 
-module.exports = defineProvider(function({ assertDependency }, options) {
+module.exports = defineProvider(function ({ assertDependency }, options) {
   return {
     name: "es-shims",
     polyfills: Object.keys(options.globals),
