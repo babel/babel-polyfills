@@ -42,7 +42,7 @@ function resolveOptions<Options>(
   method: MethodString;
   methodName: "usageGlobal" | "entryGlobal" | "usagePure";
   targets: Targets;
-  debug: boolean;
+  debug: boolean | typeof presetEnvSilentDebugHeader;
   shouldInjectPolyfill:
     | ((name: string, shouldInject: boolean) => boolean)
     | undefined

@@ -12,8 +12,7 @@ import {
   type CoreJSPolyfillDescriptor,
 } from "./built-in-definitions";
 
-import * as babel from "@babel/core";
-const { types: t } = babel.default || babel;
+import { types as t } from "@babel/core";
 import {
   callMethod,
   coreJSModule,
@@ -52,7 +51,7 @@ export default defineProvider<Options>(function (
     version = 3,
     proposals,
     shippedProposals,
-    [runtimeCompat]: { useBabelRuntime, ext = ".js" } = {},
+    [runtimeCompat]: { useBabelRuntime, ext = ".js" } = { useBabelRuntime: "" },
   },
 ) {
   const isWebpack = babel.caller(caller => caller?.name === "babel-loader");
@@ -98,7 +97,7 @@ export default defineProvider<Options>(function (
     desc: CoreJSPolyfillDescriptor,
     hint,
     utils,
-    object,
+    object?,
   ) {
     if (
       desc.pure &&
@@ -184,6 +183,7 @@ export default defineProvider<Options>(function (
 
       if (
         resolved.kind !== "global" &&
+        "object" in meta &&
         meta.object &&
         meta.placement === "prototype"
       ) {

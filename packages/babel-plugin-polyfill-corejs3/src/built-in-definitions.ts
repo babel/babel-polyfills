@@ -19,7 +19,7 @@ const define = (
   pure,
   global,
   name = global[0],
-  exclude,
+  exclude?,
 ): CoreJSPolyfillDescriptor => {
   return {
     name,

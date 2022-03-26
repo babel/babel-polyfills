@@ -1,6 +1,5 @@
 import type { NodePath } from "@babel/traverse";
-import * as babel from "@babel/core";
-const { types: t } = babel.default || babel;
+import { types as t } from "@babel/core";
 import createMetaResolver from "./meta-resolver";
 
 type ObjectMap<T> = { [k: string]: T };
@@ -40,7 +39,7 @@ export type PolyfillProvider<Opts = {}> = (
   dirname: string,
 ) => ProviderResult;
 
-export type PolyfillProviderInternal = PolyfillProvider<Opts>;
+export type PolyfillProviderInternal<Opts> = PolyfillProvider<Opts>;
 
 export type MethodString = "entry-global" | "usage-global" | "usage-pure";
 

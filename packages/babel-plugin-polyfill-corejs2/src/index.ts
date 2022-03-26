@@ -9,8 +9,7 @@ import addPlatformSpecificPolyfills from "./add-platform-specific-polyfills";
 import { hasMinVersion } from "./helpers";
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
-import * as babel from "@babel/core";
-const { types: t } = babel.default || babel;
+import { types as t } from "@babel/core";
 
 const presetEnvCompat = "#__secret_key__@babel/preset-env__compatibility";
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
@@ -32,8 +31,13 @@ type Options = {
 export default defineProvider<Options>(function (
   api,
   {
-    [presetEnvCompat]: { entryInjectRegenerator } = {},
-    [runtimeCompat]: { useBabelRuntime, runtimeVersion, ext = ".js" } = {},
+    [presetEnvCompat]: { entryInjectRegenerator } = {
+      entryInjectRegenerator: false,
+    },
+    [runtimeCompat]: { useBabelRuntime, runtimeVersion, ext = ".js" } = {
+      useBabelRuntime: "",
+      runtimeVersion: "",
+    },
   },
 ) {
   const resolve = api.createMetaResolver({
@@ -114,6 +118,7 @@ export default defineProvider<Options>(function (
 
       if (
         resolved.kind !== "global" &&
+        "object" in meta &&
         meta.object &&
         meta.placement === "prototype"
       ) {

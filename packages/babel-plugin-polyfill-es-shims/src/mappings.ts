@@ -1,6 +1,4 @@
-import * as babel from "@babel/core";
-const { types: t, template } = babel.default || babel;
-
+import { types as t, template } from "@babel/core";
 import type { MetaDescriptor } from "@babel/helper-define-polyfill-provider";
 
 const expr = template.expression.ast;
@@ -160,7 +158,7 @@ for (const name of [
   });
 }
 
-function createDescriptor(name, version, pkg = name.toLowerCase(), subfolder) {
+function createDescriptor(name, version, pkg = name.toLowerCase(), subfolder?) {
   return {
     name,
     version,
@@ -169,11 +167,11 @@ function createDescriptor(name, version, pkg = name.toLowerCase(), subfolder) {
   };
 }
 
-function defineGlobal(name, version, pkg) {
+function defineGlobal(name, version, pkg?) {
   Globals[name] = [createDescriptor(name, version, pkg)];
 }
 
-function defineStatic(object, property, version, pkg) {
+function defineStatic(object, property, version, pkg?) {
   if (!has(StaticProperties, object)) StaticProperties[object] = {};
 
   StaticProperties[object][property] = [

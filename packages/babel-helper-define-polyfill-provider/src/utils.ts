@@ -1,11 +1,10 @@
-import * as babel from "@babel/core";
-const { types: t, template } = babel.default || babel;
-import type NodePath from "@babel/traverse";
+import { types as t, template } from "@babel/core";
+import type { NodePath } from "@babel/traverse";
 import type { Utils } from "./types";
 import type ImportsCache from "./imports-cache";
 
 export function intersection<T>(a: Set<T>, b: Set<T>): Set<T> {
-  const result = new Set();
+  const result = new Set<T>();
   a.forEach(v => b.has(v) && result.add(v));
   return result;
 }

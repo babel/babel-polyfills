@@ -28,7 +28,8 @@ const pureAndGlobal = (
   minRuntimeVersion: string | undefined | null = null,
 ) => define<CoreJS2Meta>(global[0], pure, global, { minRuntimeVersion });
 
-const globalOnly = (global: string[]) => define(global[0], null, global);
+const globalOnly = (global: string[]) =>
+  define<CoreJS2Meta>(global[0], null, global);
 
 const pureOnly = (pure: string, name: string) =>
   define<CoreJS2Meta>(name, pure, []);

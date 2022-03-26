@@ -3,7 +3,8 @@ import defineProvider from "@babel/helper-define-polyfill-provider";
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 
 export default defineProvider(({ debug }, options) => {
-  const { [runtimeCompat]: { useBabelRuntime } = {} } = options;
+  const { [runtimeCompat]: { useBabelRuntime } = { useBabelRuntime: "" } } =
+    options;
 
   const pureName = useBabelRuntime
     ? `${useBabelRuntime}/regenerator`

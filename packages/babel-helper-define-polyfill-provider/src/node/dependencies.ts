@@ -72,11 +72,11 @@ export function logMissing(missingDeps: Set<string>) {
   process.exitCode = 1;
 }
 
-let allMissingDeps = new Set();
+let allMissingDeps = new Set<string>();
 
 const laterLogMissingDependencies = debounce(() => {
   logMissing(allMissingDeps);
-  allMissingDeps = new Set();
+  allMissingDeps = new Set<string>();
 }, 100);
 
 export function laterLogMissing(missingDeps: Set<string>) {
