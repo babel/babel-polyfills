@@ -9,7 +9,16 @@
   "env": { "node": true },
   "overrides": [
     {
-      "files": ["packages/*/src/**/*.js"],
+      "files": ["**/*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "error"
+      }
+    },
+    {
+      "files": ["packages/*/src/**/*.{js,ts}"],
       "rules": {
         "@babel/development/no-undefined-identifier": "error",
         "@babel/development/no-deprecated-clone": "error",

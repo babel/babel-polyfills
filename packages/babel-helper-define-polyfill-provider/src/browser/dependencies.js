@@ -12,13 +12,13 @@ export function resolve(
   );
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function has(basedir: string, name: string) {
   return true;
 }
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function logMissing(missingDeps: Set<string>) {}
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function laterLogMissing(missingDeps: Set<string>) {}
