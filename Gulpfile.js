@@ -55,7 +55,7 @@ function build() {
   const base = path.join(__dirname, "packages");
 
   return gulp
-    .src("./packages/*/src/**/*.js", { base: base })
+    .src("./packages/*/src/**/*.{js,ts}", { base: base })
     .pipe(errorsLogger())
     .pipe(newer({ dest: base, map: swapSrcWithLib }))
     .pipe(compilationLogger())
@@ -85,7 +85,7 @@ async function buildRollup() {
       };
 
       const bundle = await rollup({
-        input: `${dir}/src/index.js`,
+        input: `${dir}/src/index.ts`,
         external,
         plugins: [
           rollupJson(),
@@ -127,7 +127,7 @@ gulp.task(
   "watch",
   gulp.series("build", function watch() {
     gulpWatch(
-      "./packages/*/src/**/*.js",
+      "./packages/*/src/**/*.{js,ts}",
       { debounceDelay: 200 },
       gulp.task("build")
     );

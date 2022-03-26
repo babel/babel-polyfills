@@ -2,7 +2,8 @@
   "sourceType": "unambiguous",
   "presets": [
     ["@babel/preset-env", { "loose": true }],
-    "@babel/preset-flow"
+    "@babel/preset-flow",
+    "@babel/preset-typescript"
   ],
   "plugins": ["./scripts/babel-plugin-remove-create-require"],
   "targets": { "node": "current" },
