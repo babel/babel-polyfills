@@ -48,7 +48,7 @@ const esnextFallback = (
   return cb(fallback);
 };
 
-export default defineProvider<Options>(function(
+export default defineProvider<Options>(function (
   { getUtils, method, shouldInjectPolyfill, createMetaResolver, debug, babel },
   {
     version = 3,

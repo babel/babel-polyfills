@@ -3,6 +3,7 @@
 import corejs3Polyfills from "../core-js-compat/data.js";
 
 type ObjectMap<V> = { [name: string]: V };
+type ObjectMap2<V> = ObjectMap<ObjectMap<V>>;
 
 export type CoreJSPolyfillDescriptor = {
   name: string,
@@ -253,7 +254,10 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   TypeError: define(null, ErrorDependencies),
   URIError: define(null, ErrorDependencies),
   URL: define("url/index", ["web.url", ...URLSearchParamsDependencies]),
-  URLSearchParams: define("url-search-params/index", URLSearchParamsDependencies),
+  URLSearchParams: define(
+    "url-search-params/index",
+    URLSearchParamsDependencies,
+  ),
   WeakMap: define("weak-map/index", WeakMapDependencies),
   WeakSet: define("weak-set/index", WeakSetDependencies),
 
@@ -283,9 +287,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   unescape: define("unescape", ["es.unescape"]),
 };
 
-export const StaticProperties: ObjectMap<
-  ObjectMap<CoreJSPolyfillDescriptor>,
-> = {
+export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   AsyncIterator: {
     from: define("async-iterator/from", [
       "esnext.async-iterator.from",
