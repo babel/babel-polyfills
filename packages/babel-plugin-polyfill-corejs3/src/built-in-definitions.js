@@ -3,6 +3,7 @@
 import corejs3Polyfills from "../core-js-compat/data.js";
 
 type ObjectMap<V> = { [name: string]: V };
+type ObjectMap2<V> = ObjectMap<ObjectMap<V>>;
 
 export type CoreJSPolyfillDescriptor = {
   name: string,
@@ -286,342 +287,337 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   unescape: define("unescape", ["es.unescape"]),
 };
 
-export const StaticProperties: ObjectMap<ObjectMap<CoreJSPolyfillDescriptor>> =
-  {
-    AsyncIterator: {
-      from: define("async-iterator/from", [
-        "esnext.async-iterator.from",
-        ...AsyncIteratorDependencies,
-        ...AsyncIteratorProblemMethods,
-        ...CommonIterators,
-      ]),
-    },
-    Array: {
-      from: define("array/from", ["es.array.from", "es.string.iterator"]),
-      fromAsync: define("array/from-async", [
-        "esnext.array.from-async",
-        ...PromiseDependenciesWithIterators,
-      ]),
-      isArray: define("array/is-array", ["es.array.is-array"]),
-      isTemplateObject: define("array/is-template-object", [
-        "esnext.array.is-template-object",
-      ]),
-      of: define("array/of", ["es.array.of"]),
-    },
+export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
+  AsyncIterator: {
+    from: define("async-iterator/from", [
+      "esnext.async-iterator.from",
+      ...AsyncIteratorDependencies,
+      ...AsyncIteratorProblemMethods,
+      ...CommonIterators,
+    ]),
+  },
+  Array: {
+    from: define("array/from", ["es.array.from", "es.string.iterator"]),
+    fromAsync: define("array/from-async", [
+      "esnext.array.from-async",
+      ...PromiseDependenciesWithIterators,
+    ]),
+    isArray: define("array/is-array", ["es.array.is-array"]),
+    isTemplateObject: define("array/is-template-object", [
+      "esnext.array.is-template-object",
+    ]),
+    of: define("array/of", ["es.array.of"]),
+  },
 
-    ArrayBuffer: {
-      isView: define(null, ["es.array-buffer.is-view"]),
-    },
+  ArrayBuffer: {
+    isView: define(null, ["es.array-buffer.is-view"]),
+  },
 
-    BigInt: {
-      range: define("bigint/range", [
-        "esnext.bigint.range",
-        "es.object.to-string",
-      ]),
-    },
+  BigInt: {
+    range: define("bigint/range", [
+      "esnext.bigint.range",
+      "es.object.to-string",
+    ]),
+  },
 
-    Date: {
-      now: define("date/now", ["es.date.now"]),
-    },
+  Date: {
+    now: define("date/now", ["es.date.now"]),
+  },
 
-    Function: {
-      isCallable: define("function/is-callable", [
-        "esnext.function.is-callable",
-      ]),
-      isConstructor: define("function/is-constructor", [
-        "esnext.function.is-constructor",
-      ]),
-    },
+  Function: {
+    isCallable: define("function/is-callable", ["esnext.function.is-callable"]),
+    isConstructor: define("function/is-constructor", [
+      "esnext.function.is-constructor",
+    ]),
+  },
 
-    Iterator: {
-      from: define("iterator/from", [
-        "esnext.iterator.from",
-        ...IteratorDependencies,
-        ...CommonIterators,
-      ]),
-    },
+  Iterator: {
+    from: define("iterator/from", [
+      "esnext.iterator.from",
+      ...IteratorDependencies,
+      ...CommonIterators,
+    ]),
+  },
 
-    JSON: {
-      stringify: define("json/stringify", ["es.json.stringify"], "es.symbol"),
-    },
+  JSON: {
+    stringify: define("json/stringify", ["es.json.stringify"], "es.symbol"),
+  },
 
-    Math: {
-      DEG_PER_RAD: define("math/deg-per-rad", ["esnext.math.deg-per-rad"]),
-      RAD_PER_DEG: define("math/rad-per-deg", ["esnext.math.rad-per-deg"]),
-      acosh: define("math/acosh", ["es.math.acosh"]),
-      asinh: define("math/asinh", ["es.math.asinh"]),
-      atanh: define("math/atanh", ["es.math.atanh"]),
-      cbrt: define("math/cbrt", ["es.math.cbrt"]),
-      clamp: define("math/clamp", ["esnext.math.clamp"]),
-      clz32: define("math/clz32", ["es.math.clz32"]),
-      cosh: define("math/cosh", ["es.math.cosh"]),
-      degrees: define("math/degrees", ["esnext.math.degrees"]),
-      expm1: define("math/expm1", ["es.math.expm1"]),
-      fround: define("math/fround", ["es.math.fround"]),
-      fscale: define("math/fscale", ["esnext.math.fscale"]),
-      hypot: define("math/hypot", ["es.math.hypot"]),
-      iaddh: define("math/iaddh", ["esnext.math.iaddh"]),
-      imul: define("math/imul", ["es.math.imul"]),
-      imulh: define("math/imulh", ["esnext.math.imulh"]),
-      isubh: define("math/isubh", ["esnext.math.isubh"]),
-      log10: define("math/log10", ["es.math.log10"]),
-      log1p: define("math/log1p", ["es.math.log1p"]),
-      log2: define("math/log2", ["es.math.log2"]),
-      radians: define("math/radians", ["esnext.math.radians"]),
-      scale: define("math/scale", ["esnext.math.scale"]),
-      seededPRNG: define("math/seeded-prng", ["esnext.math.seeded-prng"]),
-      sign: define("math/sign", ["es.math.sign"]),
-      signbit: define("math/signbit", ["esnext.math.signbit"]),
-      sinh: define("math/sinh", ["es.math.sinh"]),
-      tanh: define("math/tanh", ["es.math.tanh"]),
-      trunc: define("math/trunc", ["es.math.trunc"]),
-      umulh: define("math/umulh", ["esnext.math.umulh"]),
-    },
+  Math: {
+    DEG_PER_RAD: define("math/deg-per-rad", ["esnext.math.deg-per-rad"]),
+    RAD_PER_DEG: define("math/rad-per-deg", ["esnext.math.rad-per-deg"]),
+    acosh: define("math/acosh", ["es.math.acosh"]),
+    asinh: define("math/asinh", ["es.math.asinh"]),
+    atanh: define("math/atanh", ["es.math.atanh"]),
+    cbrt: define("math/cbrt", ["es.math.cbrt"]),
+    clamp: define("math/clamp", ["esnext.math.clamp"]),
+    clz32: define("math/clz32", ["es.math.clz32"]),
+    cosh: define("math/cosh", ["es.math.cosh"]),
+    degrees: define("math/degrees", ["esnext.math.degrees"]),
+    expm1: define("math/expm1", ["es.math.expm1"]),
+    fround: define("math/fround", ["es.math.fround"]),
+    fscale: define("math/fscale", ["esnext.math.fscale"]),
+    hypot: define("math/hypot", ["es.math.hypot"]),
+    iaddh: define("math/iaddh", ["esnext.math.iaddh"]),
+    imul: define("math/imul", ["es.math.imul"]),
+    imulh: define("math/imulh", ["esnext.math.imulh"]),
+    isubh: define("math/isubh", ["esnext.math.isubh"]),
+    log10: define("math/log10", ["es.math.log10"]),
+    log1p: define("math/log1p", ["es.math.log1p"]),
+    log2: define("math/log2", ["es.math.log2"]),
+    radians: define("math/radians", ["esnext.math.radians"]),
+    scale: define("math/scale", ["esnext.math.scale"]),
+    seededPRNG: define("math/seeded-prng", ["esnext.math.seeded-prng"]),
+    sign: define("math/sign", ["es.math.sign"]),
+    signbit: define("math/signbit", ["esnext.math.signbit"]),
+    sinh: define("math/sinh", ["es.math.sinh"]),
+    tanh: define("math/tanh", ["es.math.tanh"]),
+    trunc: define("math/trunc", ["es.math.trunc"]),
+    umulh: define("math/umulh", ["esnext.math.umulh"]),
+  },
 
-    Map: {
-      from: define(null, ["esnext.map.from", ...MapDependencies]),
-      groupBy: define(null, ["esnext.map.group-by", ...MapDependencies]),
-      keyBy: define(null, ["esnext.map.key-by", ...MapDependencies]),
-      of: define(null, ["esnext.map.of", ...MapDependencies]),
-    },
+  Map: {
+    from: define(null, ["esnext.map.from", ...MapDependencies]),
+    groupBy: define(null, ["esnext.map.group-by", ...MapDependencies]),
+    keyBy: define(null, ["esnext.map.key-by", ...MapDependencies]),
+    of: define(null, ["esnext.map.of", ...MapDependencies]),
+  },
 
-    Number: {
-      EPSILON: define("number/epsilon", ["es.number.epsilon"]),
-      MAX_SAFE_INTEGER: define("number/max-safe-integer", [
-        "es.number.max-safe-integer",
-      ]),
-      MIN_SAFE_INTEGER: define("number/min-safe-integer", [
-        "es.number.min-safe-integer",
-      ]),
-      fromString: define("number/from-string", ["esnext.number.from-string"]),
-      isFinite: define("number/is-finite", ["es.number.is-finite"]),
-      isInteger: define("number/is-integer", ["es.number.is-integer"]),
-      isNaN: define("number/is-nan", ["es.number.is-nan"]),
-      isSafeInteger: define("number/is-safe-integer", [
-        "es.number.is-safe-integer",
-      ]),
-      parseFloat: define("number/parse-float", ["es.number.parse-float"]),
-      parseInt: define("number/parse-int", ["es.number.parse-int"]),
-      range: define("number/range", [
-        "esnext.number.range",
-        "es.object.to-string",
-      ]),
-    },
+  Number: {
+    EPSILON: define("number/epsilon", ["es.number.epsilon"]),
+    MAX_SAFE_INTEGER: define("number/max-safe-integer", [
+      "es.number.max-safe-integer",
+    ]),
+    MIN_SAFE_INTEGER: define("number/min-safe-integer", [
+      "es.number.min-safe-integer",
+    ]),
+    fromString: define("number/from-string", ["esnext.number.from-string"]),
+    isFinite: define("number/is-finite", ["es.number.is-finite"]),
+    isInteger: define("number/is-integer", ["es.number.is-integer"]),
+    isNaN: define("number/is-nan", ["es.number.is-nan"]),
+    isSafeInteger: define("number/is-safe-integer", [
+      "es.number.is-safe-integer",
+    ]),
+    parseFloat: define("number/parse-float", ["es.number.parse-float"]),
+    parseInt: define("number/parse-int", ["es.number.parse-int"]),
+    range: define("number/range", [
+      "esnext.number.range",
+      "es.object.to-string",
+    ]),
+  },
 
-    Object: {
-      assign: define("object/assign", ["es.object.assign"]),
-      create: define("object/create", ["es.object.create"]),
-      defineProperties: define("object/define-properties", [
-        "es.object.define-properties",
-      ]),
-      defineProperty: define("object/define-property", [
-        "es.object.define-property",
-      ]),
-      entries: define("object/entries", ["es.object.entries"]),
-      freeze: define("object/freeze", ["es.object.freeze"]),
-      fromEntries: define("object/from-entries", [
-        "es.object.from-entries",
-        "es.array.iterator",
-      ]),
-      getOwnPropertyDescriptor: define("object/get-own-property-descriptor", [
-        "es.object.get-own-property-descriptor",
-      ]),
-      getOwnPropertyDescriptors: define("object/get-own-property-descriptors", [
-        "es.object.get-own-property-descriptors",
-      ]),
-      getOwnPropertyNames: define("object/get-own-property-names", [
-        "es.object.get-own-property-names",
-      ]),
-      getOwnPropertySymbols: define("object/get-own-property-symbols", [
-        "es.symbol",
-      ]),
-      getPrototypeOf: define("object/get-prototype-of", [
-        "es.object.get-prototype-of",
-      ]),
-      hasOwn: define("object/has-own", ["es.object.has-own"]),
-      is: define("object/is", ["es.object.is"]),
-      isExtensible: define("object/is-extensible", ["es.object.is-extensible"]),
-      isFrozen: define("object/is-frozen", ["es.object.is-frozen"]),
-      isSealed: define("object/is-sealed", ["es.object.is-sealed"]),
-      keys: define("object/keys", ["es.object.keys"]),
-      preventExtensions: define("object/prevent-extensions", [
-        "es.object.prevent-extensions",
-      ]),
-      seal: define("object/seal", ["es.object.seal"]),
-      setPrototypeOf: define("object/set-prototype-of", [
-        "es.object.set-prototype-of",
-      ]),
-      values: define("object/values", ["es.object.values"]),
-    },
+  Object: {
+    assign: define("object/assign", ["es.object.assign"]),
+    create: define("object/create", ["es.object.create"]),
+    defineProperties: define("object/define-properties", [
+      "es.object.define-properties",
+    ]),
+    defineProperty: define("object/define-property", [
+      "es.object.define-property",
+    ]),
+    entries: define("object/entries", ["es.object.entries"]),
+    freeze: define("object/freeze", ["es.object.freeze"]),
+    fromEntries: define("object/from-entries", [
+      "es.object.from-entries",
+      "es.array.iterator",
+    ]),
+    getOwnPropertyDescriptor: define("object/get-own-property-descriptor", [
+      "es.object.get-own-property-descriptor",
+    ]),
+    getOwnPropertyDescriptors: define("object/get-own-property-descriptors", [
+      "es.object.get-own-property-descriptors",
+    ]),
+    getOwnPropertyNames: define("object/get-own-property-names", [
+      "es.object.get-own-property-names",
+    ]),
+    getOwnPropertySymbols: define("object/get-own-property-symbols", [
+      "es.symbol",
+    ]),
+    getPrototypeOf: define("object/get-prototype-of", [
+      "es.object.get-prototype-of",
+    ]),
+    hasOwn: define("object/has-own", ["es.object.has-own"]),
+    is: define("object/is", ["es.object.is"]),
+    isExtensible: define("object/is-extensible", ["es.object.is-extensible"]),
+    isFrozen: define("object/is-frozen", ["es.object.is-frozen"]),
+    isSealed: define("object/is-sealed", ["es.object.is-sealed"]),
+    keys: define("object/keys", ["es.object.keys"]),
+    preventExtensions: define("object/prevent-extensions", [
+      "es.object.prevent-extensions",
+    ]),
+    seal: define("object/seal", ["es.object.seal"]),
+    setPrototypeOf: define("object/set-prototype-of", [
+      "es.object.set-prototype-of",
+    ]),
+    values: define("object/values", ["es.object.values"]),
+  },
 
-    Promise: {
-      all: define(null, PromiseDependenciesWithIterators),
-      allSettled: define(null, [
-        "es.promise.all-settled",
-        ...PromiseDependenciesWithIterators,
-      ]),
-      any: define(null, [
-        "es.promise.any",
-        "es.aggregate-error",
-        ...PromiseDependenciesWithIterators,
-      ]),
-      race: define(null, PromiseDependenciesWithIterators),
-      try: define(null, [
-        "esnext.promise.try",
-        ...PromiseDependenciesWithIterators,
-      ]),
-    },
+  Promise: {
+    all: define(null, PromiseDependenciesWithIterators),
+    allSettled: define(null, [
+      "es.promise.all-settled",
+      ...PromiseDependenciesWithIterators,
+    ]),
+    any: define(null, [
+      "es.promise.any",
+      "es.aggregate-error",
+      ...PromiseDependenciesWithIterators,
+    ]),
+    race: define(null, PromiseDependenciesWithIterators),
+    try: define(null, [
+      "esnext.promise.try",
+      ...PromiseDependenciesWithIterators,
+    ]),
+  },
 
-    Reflect: {
-      apply: define("reflect/apply", ["es.reflect.apply"]),
-      construct: define("reflect/construct", ["es.reflect.construct"]),
-      defineMetadata: define("reflect/define-metadata", [
-        "esnext.reflect.define-metadata",
-      ]),
-      defineProperty: define("reflect/define-property", [
-        "es.reflect.define-property",
-      ]),
-      deleteMetadata: define("reflect/delete-metadata", [
-        "esnext.reflect.delete-metadata",
-      ]),
-      deleteProperty: define("reflect/delete-property", [
-        "es.reflect.delete-property",
-      ]),
-      get: define("reflect/get", ["es.reflect.get"]),
-      getMetadata: define("reflect/get-metadata", [
-        "esnext.reflect.get-metadata",
-      ]),
-      getMetadataKeys: define("reflect/get-metadata-keys", [
-        "esnext.reflect.get-metadata-keys",
-      ]),
-      getOwnMetadata: define("reflect/get-own-metadata", [
-        "esnext.reflect.get-own-metadata",
-      ]),
-      getOwnMetadataKeys: define("reflect/get-own-metadata-keys", [
-        "esnext.reflect.get-own-metadata-keys",
-      ]),
-      getOwnPropertyDescriptor: define("reflect/get-own-property-descriptor", [
-        "es.reflect.get-own-property-descriptor",
-      ]),
-      getPrototypeOf: define("reflect/get-prototype-of", [
-        "es.reflect.get-prototype-of",
-      ]),
-      has: define("reflect/has", ["es.reflect.has"]),
-      hasMetadata: define("reflect/has-metadata", [
-        "esnext.reflect.has-metadata",
-      ]),
-      hasOwnMetadata: define("reflect/has-own-metadata", [
-        "esnext.reflect.has-own-metadata",
-      ]),
-      isExtensible: define("reflect/is-extensible", [
-        "es.reflect.is-extensible",
-      ]),
-      metadata: define("reflect/metadata", ["esnext.reflect.metadata"]),
-      ownKeys: define("reflect/own-keys", ["es.reflect.own-keys"]),
-      preventExtensions: define("reflect/prevent-extensions", [
-        "es.reflect.prevent-extensions",
-      ]),
-      set: define("reflect/set", ["es.reflect.set"]),
-      setPrototypeOf: define("reflect/set-prototype-of", [
-        "es.reflect.set-prototype-of",
-      ]),
-    },
+  Reflect: {
+    apply: define("reflect/apply", ["es.reflect.apply"]),
+    construct: define("reflect/construct", ["es.reflect.construct"]),
+    defineMetadata: define("reflect/define-metadata", [
+      "esnext.reflect.define-metadata",
+    ]),
+    defineProperty: define("reflect/define-property", [
+      "es.reflect.define-property",
+    ]),
+    deleteMetadata: define("reflect/delete-metadata", [
+      "esnext.reflect.delete-metadata",
+    ]),
+    deleteProperty: define("reflect/delete-property", [
+      "es.reflect.delete-property",
+    ]),
+    get: define("reflect/get", ["es.reflect.get"]),
+    getMetadata: define("reflect/get-metadata", [
+      "esnext.reflect.get-metadata",
+    ]),
+    getMetadataKeys: define("reflect/get-metadata-keys", [
+      "esnext.reflect.get-metadata-keys",
+    ]),
+    getOwnMetadata: define("reflect/get-own-metadata", [
+      "esnext.reflect.get-own-metadata",
+    ]),
+    getOwnMetadataKeys: define("reflect/get-own-metadata-keys", [
+      "esnext.reflect.get-own-metadata-keys",
+    ]),
+    getOwnPropertyDescriptor: define("reflect/get-own-property-descriptor", [
+      "es.reflect.get-own-property-descriptor",
+    ]),
+    getPrototypeOf: define("reflect/get-prototype-of", [
+      "es.reflect.get-prototype-of",
+    ]),
+    has: define("reflect/has", ["es.reflect.has"]),
+    hasMetadata: define("reflect/has-metadata", [
+      "esnext.reflect.has-metadata",
+    ]),
+    hasOwnMetadata: define("reflect/has-own-metadata", [
+      "esnext.reflect.has-own-metadata",
+    ]),
+    isExtensible: define("reflect/is-extensible", ["es.reflect.is-extensible"]),
+    metadata: define("reflect/metadata", ["esnext.reflect.metadata"]),
+    ownKeys: define("reflect/own-keys", ["es.reflect.own-keys"]),
+    preventExtensions: define("reflect/prevent-extensions", [
+      "es.reflect.prevent-extensions",
+    ]),
+    set: define("reflect/set", ["es.reflect.set"]),
+    setPrototypeOf: define("reflect/set-prototype-of", [
+      "es.reflect.set-prototype-of",
+    ]),
+  },
 
-    Set: {
-      from: define(null, ["esnext.set.from", ...SetDependencies]),
-      of: define(null, ["esnext.set.of", ...SetDependencies]),
-    },
+  Set: {
+    from: define(null, ["esnext.set.from", ...SetDependencies]),
+    of: define(null, ["esnext.set.of", ...SetDependencies]),
+  },
 
-    String: {
-      cooked: define("string/cooked", ["esnext.string.cooked"]),
-      fromCodePoint: define("string/from-code-point", [
-        "es.string.from-code-point",
-      ]),
-      raw: define("string/raw", ["es.string.raw"]),
-    },
+  String: {
+    cooked: define("string/cooked", ["esnext.string.cooked"]),
+    fromCodePoint: define("string/from-code-point", [
+      "es.string.from-code-point",
+    ]),
+    raw: define("string/raw", ["es.string.raw"]),
+  },
 
-    Symbol: {
-      asyncDispose: define("symbol/async-dispose", [
-        "esnext.symbol.async-dispose",
-      ]),
-      asyncIterator: define("symbol/async-iterator", [
-        "es.symbol.async-iterator",
-      ]),
-      dispose: define("symbol/dispose", ["esnext.symbol.dispose"]),
-      for: define("symbol/for", [], "es.symbol"),
-      hasInstance: define("symbol/has-instance", [
-        "es.symbol.has-instance",
-        "es.function.has-instance",
-      ]),
-      isConcatSpreadable: define("symbol/is-concat-spreadable", [
-        "es.symbol.is-concat-spreadable",
-        "es.array.concat",
-      ]),
-      iterator: define("symbol/iterator", [
-        "es.symbol.iterator",
-        ...CommonIteratorsWithTag,
-      ]),
-      keyFor: define("symbol/key-for", [], "es.symbol"),
-      match: define("symbol/match", ["es.symbol.match", "es.string.match"]),
-      matcher: define("symbol/matcher", ["esnext.symbol.matcher"]),
-      matchAll: define("symbol/match-all", [
-        "es.symbol.match-all",
-        "es.string.match-all",
-      ]),
-      metadata: define("symbol/metadata", ["esnext.symbol.metadata"]),
-      observable: define("symbol/observable", ["esnext.symbol.observable"]),
-      patternMatch: define("symbol/pattern-match", [
-        "esnext.symbol.pattern-match",
-      ]),
-      replace: define("symbol/replace", [
-        "es.symbol.replace",
-        "es.string.replace",
-      ]),
-      search: define("symbol/search", ["es.symbol.search", "es.string.search"]),
-      species: define("symbol/species", [
-        "es.symbol.species",
-        "es.array.species",
-      ]),
-      split: define("symbol/split", ["es.symbol.split", "es.string.split"]),
-      toPrimitive: define("symbol/to-primitive", [
-        "es.symbol.to-primitive",
-        "es.date.to-primitive",
-      ]),
-      toStringTag: define("symbol/to-string-tag", [
-        "es.symbol.to-string-tag",
-        "es.object.to-string",
-        "es.math.to-string-tag",
-        "es.json.to-string-tag",
-      ]),
-      unscopables: define("symbol/unscopables", ["es.symbol.unscopables"]),
-    },
+  Symbol: {
+    asyncDispose: define("symbol/async-dispose", [
+      "esnext.symbol.async-dispose",
+    ]),
+    asyncIterator: define("symbol/async-iterator", [
+      "es.symbol.async-iterator",
+    ]),
+    dispose: define("symbol/dispose", ["esnext.symbol.dispose"]),
+    for: define("symbol/for", [], "es.symbol"),
+    hasInstance: define("symbol/has-instance", [
+      "es.symbol.has-instance",
+      "es.function.has-instance",
+    ]),
+    isConcatSpreadable: define("symbol/is-concat-spreadable", [
+      "es.symbol.is-concat-spreadable",
+      "es.array.concat",
+    ]),
+    iterator: define("symbol/iterator", [
+      "es.symbol.iterator",
+      ...CommonIteratorsWithTag,
+    ]),
+    keyFor: define("symbol/key-for", [], "es.symbol"),
+    match: define("symbol/match", ["es.symbol.match", "es.string.match"]),
+    matcher: define("symbol/matcher", ["esnext.symbol.matcher"]),
+    matchAll: define("symbol/match-all", [
+      "es.symbol.match-all",
+      "es.string.match-all",
+    ]),
+    metadata: define("symbol/metadata", ["esnext.symbol.metadata"]),
+    observable: define("symbol/observable", ["esnext.symbol.observable"]),
+    patternMatch: define("symbol/pattern-match", [
+      "esnext.symbol.pattern-match",
+    ]),
+    replace: define("symbol/replace", [
+      "es.symbol.replace",
+      "es.string.replace",
+    ]),
+    search: define("symbol/search", ["es.symbol.search", "es.string.search"]),
+    species: define("symbol/species", [
+      "es.symbol.species",
+      "es.array.species",
+    ]),
+    split: define("symbol/split", ["es.symbol.split", "es.string.split"]),
+    toPrimitive: define("symbol/to-primitive", [
+      "es.symbol.to-primitive",
+      "es.date.to-primitive",
+    ]),
+    toStringTag: define("symbol/to-string-tag", [
+      "es.symbol.to-string-tag",
+      "es.object.to-string",
+      "es.math.to-string-tag",
+      "es.json.to-string-tag",
+    ]),
+    unscopables: define("symbol/unscopables", ["es.symbol.unscopables"]),
+  },
 
-    WeakMap: {
-      from: define(null, ["esnext.weak-map.from", ...WeakMapDependencies]),
-      of: define(null, ["esnext.weak-map.of", ...WeakMapDependencies]),
-    },
+  WeakMap: {
+    from: define(null, ["esnext.weak-map.from", ...WeakMapDependencies]),
+    of: define(null, ["esnext.weak-map.of", ...WeakMapDependencies]),
+  },
 
-    WeakSet: {
-      from: define(null, ["esnext.weak-set.from", ...WeakSetDependencies]),
-      of: define(null, ["esnext.weak-set.of", ...WeakSetDependencies]),
-    },
+  WeakSet: {
+    from: define(null, ["esnext.weak-set.from", ...WeakSetDependencies]),
+    of: define(null, ["esnext.weak-set.of", ...WeakSetDependencies]),
+  },
 
-    Int8Array: TypedArrayStaticMethods,
-    Uint8Array: TypedArrayStaticMethods,
-    Uint8ClampedArray: TypedArrayStaticMethods,
-    Int16Array: TypedArrayStaticMethods,
-    Uint16Array: TypedArrayStaticMethods,
-    Int32Array: TypedArrayStaticMethods,
-    Uint32Array: TypedArrayStaticMethods,
-    Float32Array: TypedArrayStaticMethods,
-    Float64Array: TypedArrayStaticMethods,
+  Int8Array: TypedArrayStaticMethods,
+  Uint8Array: TypedArrayStaticMethods,
+  Uint8ClampedArray: TypedArrayStaticMethods,
+  Int16Array: TypedArrayStaticMethods,
+  Uint16Array: TypedArrayStaticMethods,
+  Int32Array: TypedArrayStaticMethods,
+  Uint32Array: TypedArrayStaticMethods,
+  Float32Array: TypedArrayStaticMethods,
+  Float64Array: TypedArrayStaticMethods,
 
-    WebAssembly: {
-      CompileError: define(null, ErrorDependencies),
-      LinkError: define(null, ErrorDependencies),
-      RuntimeError: define(null, ErrorDependencies),
-    },
-  };
+  WebAssembly: {
+    CompileError: define(null, ErrorDependencies),
+    LinkError: define(null, ErrorDependencies),
+    RuntimeError: define(null, ErrorDependencies),
+  },
+};
 
 export const InstanceProperties = {
   asIndexedPairs: define("instance/asIndexedPairs", [
