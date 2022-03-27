@@ -1,4 +1,5 @@
 import _Reflect$construct from "core-js-pure/stable/reflect/construct.js";
+import _createClass from "@babel/runtime/helpers/createClass";
 import _classCallCheck from "@babel/runtime/helpers/classCallCheck";
 import _assertThisInitialized from "@babel/runtime/helpers/assertThisInitialized";
 import _inherits from "@babel/runtime/helpers/inherits";
@@ -30,5 +31,5 @@ let A = /*#__PURE__*/function (_B) {
     return _this;
   }
 
-  return A;
+  return _createClass(A);
 }(B);
