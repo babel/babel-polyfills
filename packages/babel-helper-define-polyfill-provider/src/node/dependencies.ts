@@ -4,9 +4,7 @@ import requireResolve from "resolve";
 
 const nativeRequireResolve = parseFloat(process.versions.node) >= 8.9;
 
-// $FlowIgnore
 import { createRequire } from "module";
-// $FlowIgnore
 const require = createRequire(import/*::(_)*/.meta.url); // eslint-disable-line
 
 export function resolve(
@@ -32,7 +30,6 @@ export function resolve(
   } catch (err) {
     if (err.code !== "MODULE_NOT_FOUND") throw err;
 
-    // $FlowIgnore
     throw Object.assign(
       new Error(`Failed to resolve "${moduleName}" relative to "${dirname}"`),
       {

@@ -14,7 +14,6 @@ import { types as t } from "@babel/core";
 const presetEnvCompat = "#__secret_key__@babel/preset-env__compatibility";
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 
-// $FlowIgnore
 const has = Function.call.bind(Object.hasOwnProperty);
 
 type Options = {

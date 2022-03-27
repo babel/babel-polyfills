@@ -283,7 +283,6 @@ function instantiateProvider<Options>(
     provider,
     callProvider(payload: MetaDescriptor, path: NodePath) {
       const utils = getUtils(path);
-      // $FlowIgnore
       provider[methodName](payload, utils, path);
     },
   };
@@ -337,11 +336,9 @@ export default function definePolyfillProvider<Options>(
           missingDeps: new Set(),
         };
 
-        // $FlowIgnore - Flow doesn't support optional calls
         provider.pre?.apply(this, arguments);
       },
       post() {
-        // $FlowIgnore - Flow doesn't support optional calls
         provider.post?.apply(this, arguments);
 
         if (missingDependencies !== false) {

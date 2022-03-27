@@ -113,7 +113,6 @@ export default defineProvider<Options>(function (
       }
       const coreJSPureBase = getCoreJSPureBase(useProposalBase);
       return utils.injectDefaultImport(
-        // $FlowIgnore, we already guard desc.pure
         `${coreJSPureBase}/${desc.pure}${ext}`,
         hint,
       );
@@ -289,7 +288,7 @@ export default defineProvider<Options>(function (
           resolved.desc,
           resolved.name,
           utils,
-          // $FlowIgnore
+          // @ts-expect-error
           meta.object,
         );
         if (id) path.replaceWith(id);
@@ -298,7 +297,7 @@ export default defineProvider<Options>(function (
           resolved.desc,
           `${resolved.name}InstanceProperty`,
           utils,
-          // $FlowIgnore
+          // @ts-expect-error
           meta.object,
         );
         if (!id) return;

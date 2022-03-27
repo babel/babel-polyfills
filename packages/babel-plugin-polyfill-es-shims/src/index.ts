@@ -48,7 +48,6 @@ export default defineProvider<{}>(function ({
       }
 
       for (const desc of resolved.desc) {
-        // $FlowIgnore
         if (!desc.exclude?.(meta) && shouldInjectPolyfill(desc.name)) {
           cb(desc, utils, path);
         }
@@ -136,7 +135,6 @@ export default defineProvider<{}>(function ({
             const { thisCheck } = desc;
             if (
               !thisCheck ||
-              // $FlowIgnore
               desc.exclude?.(meta) ||
               !shouldInjectPolyfill(desc.name)
             ) {

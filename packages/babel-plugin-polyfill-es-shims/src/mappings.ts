@@ -3,7 +3,6 @@ import type { MetaDescriptor } from "@babel/helper-define-polyfill-provider";
 
 const expr = template.expression.ast;
 
-// $FlowIgnore
 const has = Function.call.bind(Object.hasOwnProperty);
 
 export type Descriptor = {
