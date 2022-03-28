@@ -2,6 +2,7 @@ import defineProvider, {
   type Utils,
   type MetaDescriptor,
 } from "@babel/helper-define-polyfill-provider";
+import type { NodePath } from "@babel/traverse";
 
 import polyfills from "../data/polyfills.js";
 
@@ -28,7 +29,7 @@ export default defineProvider<{}>(function ({
   });
 
   function createDescIterator(
-    cb: (desc: Descriptor, utils: Utils, path: any) => void,
+    cb: (desc: Descriptor, utils: Utils, path: NodePath) => void,
     instance?: (
       meta: MetaDescriptor,
       resolved: any,
@@ -36,7 +37,7 @@ export default defineProvider<{}>(function ({
       path: any,
     ) => void,
   ) {
-    return (meta, utils, path) => {
+    return (meta: MetaDescriptor, utils: Utils, path: NodePath) => {
       if (path.parentPath.isUnaryExpression({ operator: "delete" })) return;
 
       const resolved = resolvePolyfill(meta);

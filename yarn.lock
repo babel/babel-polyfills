@@ -2858,12 +2858,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/babel__traverse@npm:*, @types/babel__traverse@npm:^7.0.6":
-  version: 7.0.10
-  resolution: "@types/babel__traverse@npm:7.0.10"
+"@types/babel__traverse@npm:*, @types/babel__traverse@npm:^7.0.6, @types/babel__traverse@npm:^7.14.2":
+  version: 7.14.2
+  resolution: "@types/babel__traverse@npm:7.14.2"
   dependencies:
     "@babel/types": ^7.3.0
-  checksum: 177c01e1e5d3793624c3bbb3474f5582c15f2a66151d308bbd2ee910120eae7ecab34b0b1462b310a9d731f6caeaf8b4707a4a37debfddea42c2cda2790ae5b4
+  checksum: a797ea09c72307569e3ee08aa3900ca744ce3091114084f2dc59b67a45ee7d01df7865252790dbfa787a7915ce892cdc820c9b920f3683292765fc656b08dc63
   languageName: node
   linkType: hard
 
@@ -4170,6 +4170,7 @@ __metadata:
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-json": ^4.1.0
     "@rollup/plugin-node-resolve": ^11.2.0
+    "@types/babel__traverse": ^7.14.2
     "@typescript-eslint/eslint-plugin": ^5.16.0
     "@typescript-eslint/parser": ^5.16.0
     babel-jest: ^24.8.0

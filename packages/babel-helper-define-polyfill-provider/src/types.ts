@@ -22,7 +22,10 @@ export type ProviderOptions<Opts = {}> = {
 
 export type PluginOptions = {
   method: MethodString;
-  targets?: { browsers: string | string[]; [target: string]: string | number };
+  targets?: {
+    browsers: string | string[];
+    [target: string]: string | string[] | number;
+  };
   ignoreBrowserslistConfig?: boolean;
   configPath?: string;
   debug?: boolean;

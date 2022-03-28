@@ -9,6 +9,7 @@ import addPlatformSpecificPolyfills from "./add-platform-specific-polyfills";
 import { hasMinVersion } from "./helpers";
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
+import type { NodePath } from "@babel/traverse";
 import { types as t } from "@babel/core";
 
 const presetEnvCompat = "#__secret_key__@babel/preset-env__compatibility";
@@ -137,7 +138,7 @@ export default defineProvider<Options>(function (
                 `${coreJSBase}/is-iterable${ext}`,
                 "isIterable",
               ),
-              [path.node.right],
+              [(path.node as t.BinaryExpression).right], // meta.kind === "in" narrows this
             ),
           );
         }
@@ -156,7 +157,7 @@ export default defineProvider<Options>(function (
           meta.key === "Symbol.iterator" &&
           shouldInjectPolyfill("es6.symbol") &&
           path.parentPath.isCallExpression({ callee: path.node }) &&
-          path.parent.arguments.length === 0
+          path.parentPath.node.arguments.length === 0
         ) {
           path.parentPath.replaceWith(
             t.callExpression(
@@ -182,14 +183,16 @@ export default defineProvider<Options>(function (
 
     visitor: method === "usage-global" && {
       // yield*
-      YieldExpression(path) {
+      YieldExpression(path: NodePath<t.YieldExpression>) {
         if (path.node.delegate) {
           inject("web.dom.iterable", api.getUtils(path));
         }
       },
 
       // for-of, [a, b] = c
-      "ForOfStatement|ArrayPattern"(path) {
+      "ForOfStatement|ArrayPattern"(
+        path: NodePath<t.ForOfStatement | t.ArrayPattern>,
+      ) {
         CommonIterators.forEach(name => inject(name, api.getUtils(path)));
       },
     },

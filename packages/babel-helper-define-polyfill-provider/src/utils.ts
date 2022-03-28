@@ -17,7 +17,7 @@ function getType(target: any): string {
   return Object.prototype.toString.call(target).slice(8, -1);
 }
 
-function resolveId(path) {
+function resolveId(path): string {
   if (
     path.isIdentifier() &&
     !path.scope.hasBinding(path.node.name, /* noGlobals */ true)
@@ -31,12 +31,19 @@ function resolveId(path) {
   }
 }
 
-export function resolveKey(path: NodePath, computed: boolean = false) {
-  const { node, parent, scope } = path;
-  if (path.isStringLiteral()) return node.value;
-  const { name } = node;
+export function resolveKey(
+  path: NodePath<t.Expression | t.PrivateName>,
+  computed: boolean = false,
+) {
+  const { scope } = path;
+  if (path.isStringLiteral()) return path.node.value;
   const isIdentifier = path.isIdentifier();
-  if (isIdentifier && !(computed || parent.computed)) return name;
+  if (
+    isIdentifier &&
+    !(computed || (path.parent as t.MemberExpression).computed)
+  ) {
+    return path.node.name;
+  }
 
   if (
     computed &&
@@ -48,13 +55,16 @@ export function resolveKey(path: NodePath, computed: boolean = false) {
     if (sym) return "Symbol." + sym;
   }
 
-  if (!isIdentifier || scope.hasBinding(name, /* noGlobals */ true)) {
+  if (!isIdentifier || scope.hasBinding(path.node.name, /* noGlobals */ true)) {
     const { value } = path.evaluate();
     if (typeof value === "string") return value;
   }
 }
 
-export function resolveSource(obj: NodePath) {
+export function resolveSource(obj: NodePath): {
+  id: string;
+  placement: "prototype" | "static";
+} {
   if (
     obj.isMemberExpression() &&
     obj.get("property").isIdentifier({ name: "prototype" })
@@ -84,30 +94,33 @@ export function resolveSource(obj: NodePath) {
   return { id: null, placement: null };
 }
 
-export function getImportSource({ node }: NodePath) {
+export function getImportSource({ node }: NodePath<t.ImportDeclaration>) {
   if (node.specifiers.length === 0) return node.source.value;
 }
 
-export function getRequireSource({ node }: NodePath) {
+export function getRequireSource({ node }: NodePath<t.Statement>) {
   if (!t.isExpressionStatement(node)) return;
   const { expression } = node;
-  const isRequire =
+  if (
     t.isCallExpression(expression) &&
     t.isIdentifier(expression.callee) &&
     expression.callee.name === "require" &&
     expression.arguments.length === 1 &&
-    t.isStringLiteral(expression.arguments[0]);
-  if (isRequire) return expression.arguments[0].value;
+    t.isStringLiteral(expression.arguments[0])
+  ) {
+    return expression.arguments[0].value;
+  }
 }
 
 function hoist(node: t.Node) {
+  // @ts-expect-error
   node._blockHoist = 3;
   return node;
 }
 
 export function createUtilsGetter(cache: ImportsCache) {
   return (path: NodePath): Utils => {
-    const prog = path.findParent(p => p.isProgram());
+    const prog = path.findParent(p => p.isProgram()) as NodePath<t.Program>;
 
     return {
       injectGlobalImport(url) {

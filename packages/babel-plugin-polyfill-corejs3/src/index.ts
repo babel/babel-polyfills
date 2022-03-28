@@ -12,6 +12,7 @@ import {
   type CoreJSPolyfillDescriptor,
 } from "./built-in-definitions";
 
+import type { NodePath } from "@babel/traverse";
 import { types as t } from "@babel/core";
 import {
   callMethod,
@@ -204,7 +205,7 @@ export default defineProvider<Options>(function (
                 coreJSPureHelper("is-iterable", useBabelRuntime, ext),
                 "isIterable",
               ),
-              [path.node.right],
+              [(path.node as t.BinaryExpression).right], // meta.kind === "in" narrows this
             ),
           );
         }
@@ -213,20 +214,16 @@ export default defineProvider<Options>(function (
 
       if (path.parentPath.isUnaryExpression({ operator: "delete" })) return;
 
-      let isCall: boolean | undefined | null;
-
       if (meta.kind === "property") {
         // We can't compile destructuring.
         if (!path.isMemberExpression()) return;
         if (!path.isReferenced()) return;
 
-        isCall = path.parentPath.isCallExpression({ callee: path.node });
-
         if (meta.key === "Symbol.iterator") {
           if (!shouldInjectPolyfill("es.symbol.iterator")) return;
 
-          if (isCall) {
-            if (path.parent.arguments.length === 0) {
+          if (path.parentPath.isCallExpression({ callee: path.node })) {
+            if (path.parentPath.node.arguments.length === 0) {
               path.parentPath.replaceWith(
                 t.callExpression(
                   utils.injectDefaultImport(
@@ -302,7 +299,7 @@ export default defineProvider<Options>(function (
         );
         if (!id) return;
 
-        if (isCall) {
+        if (path.parentPath.isCallExpression({ callee: path.node })) {
           callMethod(path, id);
         } else {
           path.replaceWith(t.callExpression(id, [path.node.object]));
@@ -312,7 +309,7 @@ export default defineProvider<Options>(function (
 
     visitor: method === "usage-global" && {
       // import("foo")
-      CallExpression(path) {
+      CallExpression(path: NodePath<t.CallExpression>) {
         if (path.get("callee").isImport()) {
           const utils = getUtils(path);
 
@@ -326,26 +323,28 @@ export default defineProvider<Options>(function (
       },
 
       // (async function () { }).finally(...)
-      Function(path) {
+      Function(path: NodePath<t.Function>) {
         if (path.node.async) {
           maybeInjectGlobal(PromiseDependencies, getUtils(path));
         }
       },
 
       // for-of, [a, b] = c
-      "ForOfStatement|ArrayPattern"(path) {
+      "ForOfStatement|ArrayPattern"(
+        path: NodePath<t.ForOfStatement | t.ArrayPattern>,
+      ) {
         maybeInjectGlobal(CommonIterators, getUtils(path));
       },
 
       // [...spread]
-      SpreadElement(path) {
+      SpreadElement(path: NodePath<t.SpreadElement>) {
         if (!path.parentPath.isObjectExpression()) {
           maybeInjectGlobal(CommonIterators, getUtils(path));
         }
       },
 
       // yield*
-      YieldExpression(path) {
+      YieldExpression(path: NodePath<t.YieldExpression>) {
         if (path.node.delegate) {
           maybeInjectGlobal(CommonIterators, getUtils(path));
         }
