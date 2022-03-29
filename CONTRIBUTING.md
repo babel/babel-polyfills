@@ -40,14 +40,6 @@ $ yarn lint
 
 #### Type-check
 
-To run Flow type-checking, run:
-
-```sh
-$ yarn flow
-```
-
-To run TypeScript type-checking, run:
-
 ```sh
 $ yarn tscheck
 ```
