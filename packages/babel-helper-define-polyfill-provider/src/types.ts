@@ -23,8 +23,10 @@ export type ProviderOptions<Opts = {}> = {
 export type PluginOptions = {
   method: MethodString;
   targets?: {
+    // @ts-expect-error - This is technically unsound, because the type of
+    // "browsers" is not assignable to "string | number".
     browsers: string | string[];
-    [target: string]: string | string[] | number;
+    [target: string]: string | number;
   };
   ignoreBrowserslistConfig?: boolean;
   configPath?: string;
