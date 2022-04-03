@@ -4,7 +4,10 @@
     ["@babel/preset-env", { "loose": true }],
     "@babel/preset-typescript"
   ],
-  "plugins": ["./scripts/babel-plugin-remove-create-require"],
+  "plugins": [
+    "./scripts/babel-plugin-remove-create-require",
+    "./scripts/babel-plugin-compat-core-import"
+  ],
   "targets": { "node": "current" },
   "env": {
     "production": {
