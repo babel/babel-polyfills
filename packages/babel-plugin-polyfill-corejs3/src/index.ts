@@ -222,15 +222,16 @@ export default defineProvider<Options>(function (
         if (meta.key === "Symbol.iterator") {
           if (!shouldInjectPolyfill("es.symbol.iterator")) return;
 
-          if (path.parentPath.isCallExpression({ callee: path.node })) {
-            if (path.parentPath.node.arguments.length === 0) {
+          const { parent, node } = path;
+          if (t.isCallExpression(parent, { callee: node })) {
+            if (parent.arguments.length === 0) {
               path.parentPath.replaceWith(
                 t.callExpression(
                   utils.injectDefaultImport(
                     coreJSPureHelper("get-iterator", useBabelRuntime, ext),
                     "getIterator",
                   ),
-                  [path.node.object],
+                  [node.object],
                 ),
               );
               path.skip();
@@ -299,10 +300,11 @@ export default defineProvider<Options>(function (
         );
         if (!id) return;
 
-        if (path.parentPath.isCallExpression({ callee: path.node })) {
+        const { node } = path as NodePath<t.MemberExpression>;
+        if (t.isCallExpression(path.parent, { callee: node })) {
           callMethod(path, id);
         } else {
-          path.replaceWith(t.callExpression(id, [path.node.object]));
+          path.replaceWith(t.callExpression(id, [node.object]));
         }
       }
     },
