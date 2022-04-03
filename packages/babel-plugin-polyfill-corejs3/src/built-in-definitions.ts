@@ -5,9 +5,9 @@ type ObjectMap2<V> = ObjectMap<ObjectMap<V>>;
 
 export type CoreJSPolyfillDescriptor = {
   name: string;
-  pure: string | undefined | null;
+  pure: string | null;
   global: string[];
-  exclude: string[] | undefined | null;
+  exclude: string[] | null;
 };
 
 const polyfillsOrder = {};

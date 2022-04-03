@@ -45,8 +45,7 @@ function resolveOptions<Options>(
   debug: boolean | typeof presetEnvSilentDebugHeader;
   shouldInjectPolyfill:
     | ((name: string, shouldInject: boolean) => boolean)
-    | undefined
-    | null;
+    | undefined;
   providerOptions: ProviderOptions<Options>;
   absoluteImports: string | boolean;
 } {

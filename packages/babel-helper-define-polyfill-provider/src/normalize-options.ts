@@ -5,7 +5,7 @@ import type {
   MissingDependenciesOption,
 } from "./types";
 
-function patternToRegExp(pattern: Pattern): RegExp | undefined | null {
+function patternToRegExp(pattern: Pattern): RegExp | null {
   if (pattern instanceof RegExp) return pattern;
 
   try {

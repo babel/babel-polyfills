@@ -62,8 +62,8 @@ export function resolveKey(
 }
 
 export function resolveSource(obj: NodePath): {
-  id: string;
-  placement: "prototype" | "static";
+  id: string | null;
+  placement: "prototype" | "static" | null;
 } {
   if (
     obj.isMemberExpression() &&

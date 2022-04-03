@@ -4,13 +4,13 @@ type ObjectMap<V> = { [name: string]: V };
 
 type PolyfillDescriptor<T> = {
   name: string;
-  pure: string | undefined | null;
+  pure: string | null;
   global: string[];
-  meta: T | undefined | null;
+  meta: T | null;
 };
 
 type CoreJS2Meta = {
-  minRuntimeVersion: string | undefined | null;
+  minRuntimeVersion: string | null;
 };
 
 const define = <T>(
@@ -25,7 +25,7 @@ const define = <T>(
 const pureAndGlobal = (
   pure: string,
   global: string[],
-  minRuntimeVersion: string | undefined | null = null,
+  minRuntimeVersion: string | null = null,
 ) => define<CoreJS2Meta>(global[0], pure, global, { minRuntimeVersion });
 
 const globalOnly = (global: string[]) =>

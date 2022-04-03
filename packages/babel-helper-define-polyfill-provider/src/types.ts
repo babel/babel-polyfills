@@ -86,14 +86,14 @@ export type MetaDescriptor =
   | { kind: "global"; name: string }
   | {
       kind: "property";
-      placement: "static" | "prototype" | undefined | null;
-      object: string | undefined | null;
+      placement: "static" | "prototype" | null;
+      object: string | null;
       key: string;
     }
   | {
       kind: "in";
-      placement: "static" | "prototype" | undefined | null;
-      object: string | undefined | null;
+      placement: "static" | "prototype" | null;
+      object: string | null;
       key: string;
     };
 
