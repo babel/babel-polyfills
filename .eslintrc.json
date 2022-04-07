@@ -1,12 +1,12 @@
 {
   "root": true,
   "plugins": ["prettier", "@babel/development", "import"],
-  "extends": "babel",
+  "extends": "eslint:recommended",
   "parser": "@babel/eslint-parser",
   "rules": {
     "prettier/prettier": "error"
   },
-  "env": { "node": true },
+  "env": { "node": true, "es6": true },
   "overrides": [
     {
       "files": ["**/*.ts"],

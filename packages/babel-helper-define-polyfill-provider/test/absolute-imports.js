@@ -11,7 +11,9 @@ function transformTest(name, cwd, file, options = {}) {
     let expected;
     try {
       expected = readFileSync(outputPath, "utf8");
-    } catch {}
+    } catch {
+      // file not yet created
+    }
 
     let { code } = babel.transformSync(input, {
       cwd,
