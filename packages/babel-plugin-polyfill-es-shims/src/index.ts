@@ -66,11 +66,7 @@ export default defineProvider<{}>(function ({
     assertDependency(desc.package, desc.version);
     debug(desc.name);
 
-    return utils.injectDefaultImport(
-      desc.path,
-      // $FlowIgnore
-      desc.nameHint || desc.name,
-    );
+    return utils.injectDefaultImport(desc.path, desc.nameHint || desc.name);
   }
 
   const seen = new WeakSet();
