@@ -1,5 +1,3 @@
-// @flow
-
 import { intersection } from "./utils";
 import type {
   Pattern,
@@ -7,7 +5,7 @@ import type {
   MissingDependenciesOption,
 } from "./types";
 
-function patternToRegExp(pattern: Pattern): ?RegExp {
+function patternToRegExp(pattern: Pattern): RegExp | null {
   if (pattern instanceof RegExp) return pattern;
 
   try {
@@ -82,7 +80,7 @@ export function validateIncludeExclude(
 
 export function applyMissingDependenciesDefaults(
   options: PluginOptions,
-  babelApi: Object,
+  babelApi: any,
 ): MissingDependenciesOption {
   const { missingDependencies = {} } = options;
   if (missingDependencies === false) return false;

@@ -1,5 +1,3 @@
-// @flow
-
 import type { Targets } from "@babel/helper-define-polyfill-provider";
 
 const webPolyfills = {
@@ -14,7 +12,7 @@ const purePolyfills = {
   "es7.string.at": {},
 };
 
-export default function (targets: Targets, method: string, polyfills: Object) {
+export default function (targets: Targets, method: string, polyfills: any) {
   const targetNames = Object.keys(targets);
   const isAnyTarget = !targetNames.length;
   const isWebTarget = targetNames.some(name => name !== "node");

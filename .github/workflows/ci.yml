@@ -50,8 +50,8 @@ jobs:
         run: yarn install
       - name: Lint
         run: yarn lint
-      - name: Flow
-        run: yarn flow
+      - name: TSCheck
+        run: yarn tscheck
       - name: Check compat-data
         run: yarn build-es-shims-data
         env:

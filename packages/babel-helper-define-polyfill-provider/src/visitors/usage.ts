@@ -1,6 +1,5 @@
-// @flow
-
 import type { NodePath } from "@babel/traverse";
+import { types as t } from "@babel/core";
 import type { MetaDescriptor } from "../types";
 
 import { resolveKey, resolveSource } from "../utils";
@@ -14,7 +13,7 @@ export default (
 
   return {
     // Symbol(), new Promise
-    ReferencedIdentifier(path: NodePath) {
+    ReferencedIdentifier(path: NodePath<t.Identifier>) {
       const {
         node: { name },
         scope,
@@ -24,19 +23,21 @@ export default (
       callProvider({ kind: "global", name }, path);
     },
 
-    MemberExpression(path: NodePath) {
+    MemberExpression(path: NodePath<t.MemberExpression>) {
       const key = resolveKey(path.get("property"), path.node.computed);
       if (!key || key === "prototype") return;
 
       const object = path.get("object");
-      const binding = object.scope.getBinding(object.node.name);
-      if (binding && binding.path.isImportNamespaceSpecifier()) return;
+      if (object.isIdentifier()) {
+        const binding = object.scope.getBinding(object.node.name);
+        if (binding && binding.path.isImportNamespaceSpecifier()) return;
+      }
 
       const source = resolveSource(object);
       return property(source.id, key, source.placement, path);
     },
 
-    ObjectPattern(path: NodePath) {
+    ObjectPattern(path: NodePath<t.ObjectPattern>) {
       const { parentPath, parent } = path;
       let obj;
 
@@ -69,7 +70,7 @@ export default (
       }
     },
 
-    BinaryExpression(path: NodePath) {
+    BinaryExpression(path: NodePath<t.BinaryExpression>) {
       if (path.node.operator !== "in") return;
 
       const source = resolveSource(path.get("right"));

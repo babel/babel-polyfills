@@ -1,9 +1,8 @@
-// @flow
-
 import defineProvider, {
   type Utils,
   type MetaDescriptor,
 } from "@babel/helper-define-polyfill-provider";
+import type { NodePath } from "@babel/traverse";
 
 import polyfills from "../data/polyfills.js";
 
@@ -14,7 +13,7 @@ import {
   InstanceProperties,
 } from "./mappings";
 
-export default defineProvider<{||}>(function ({
+export default defineProvider<{}>(function ({
   shouldInjectPolyfill,
   assertDependency,
   createMetaResolver,
@@ -30,10 +29,15 @@ export default defineProvider<{||}>(function ({
   });
 
   function createDescIterator(
-    cb: (Descriptor, Utils, Object) => void,
-    instance?: (MetaDescriptor, *, Utils, Object) => void,
+    cb: (desc: Descriptor, utils: Utils, path: NodePath) => void,
+    instance?: (
+      meta: MetaDescriptor,
+      resolved: any,
+      utils: Utils,
+      path: any,
+    ) => void,
   ) {
-    return (meta, utils, path) => {
+    return (meta: MetaDescriptor, utils: Utils, path: NodePath) => {
       if (path.parentPath.isUnaryExpression({ operator: "delete" })) return;
 
       const resolved = resolvePolyfill(meta);
@@ -45,7 +49,6 @@ export default defineProvider<{||}>(function ({
       }
 
       for (const desc of resolved.desc) {
-        // $FlowIgnore
         if (!desc.exclude?.(meta) && shouldInjectPolyfill(desc.name)) {
           cb(desc, utils, path);
         }
@@ -91,7 +94,7 @@ export default defineProvider<{||}>(function ({
         const isGetter = resolved.desc[0].getter;
 
         const matchesPolyfill = ({ name }) =>
-          name.startsWith(((meta.object: any): string));
+          name.startsWith(meta.object as any as string);
 
         let index = -1;
         if (
@@ -133,7 +136,6 @@ export default defineProvider<{||}>(function ({
             const { thisCheck } = desc;
             if (
               !thisCheck ||
-              // $FlowIgnore
               desc.exclude?.(meta) ||
               !shouldInjectPolyfill(desc.name)
             ) {

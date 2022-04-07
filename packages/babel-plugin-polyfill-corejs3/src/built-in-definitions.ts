@@ -1,15 +1,13 @@
-// @flow
-
 import corejs3Polyfills from "../core-js-compat/data.js";
 
 type ObjectMap<V> = { [name: string]: V };
 type ObjectMap2<V> = ObjectMap<ObjectMap<V>>;
 
 export type CoreJSPolyfillDescriptor = {
-  name: string,
-  pure: ?string,
-  global: string[],
-  exclude: ?(string[]),
+  name: string;
+  pure: string | null;
+  global: string[];
+  exclude: string[] | null;
 };
 
 const polyfillsOrder = {};
@@ -21,7 +19,7 @@ const define = (
   pure,
   global,
   name = global[0],
-  exclude,
+  exclude?,
 ): CoreJSPolyfillDescriptor => {
   return {
     name,

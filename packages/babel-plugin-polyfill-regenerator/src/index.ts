@@ -1,11 +1,16 @@
-// @flow
-
 import defineProvider from "@babel/helper-define-polyfill-provider";
 
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 
-export default defineProvider(({ debug }, options) => {
-  const { [runtimeCompat]: { useBabelRuntime } = {} } = options;
+type Options = {
+  "#__secret_key__@babel/runtime__compatibility": void | {
+    useBabelRuntime: string;
+  };
+};
+
+export default defineProvider<Options>(({ debug }, options) => {
+  const { [runtimeCompat]: { useBabelRuntime } = { useBabelRuntime: "" } } =
+    options;
 
   const pureName = useBabelRuntime
     ? `${useBabelRuntime}/regenerator`

@@ -1,14 +1,10 @@
-// @flow
-
 import path from "path";
 import debounce from "lodash.debounce";
 import requireResolve from "resolve";
 
 const nativeRequireResolve = parseFloat(process.versions.node) >= 8.9;
 
-// $FlowIgnore
 import { createRequire } from "module";
-// $FlowIgnore
 const require = createRequire(import/*::(_)*/.meta.url); // eslint-disable-line
 
 export function resolve(
@@ -34,7 +30,6 @@ export function resolve(
   } catch (err) {
     if (err.code !== "MODULE_NOT_FOUND") throw err;
 
-    // $FlowIgnore
     throw Object.assign(
       new Error(`Failed to resolve "${moduleName}" relative to "${dirname}"`),
       {
@@ -74,11 +69,11 @@ export function logMissing(missingDeps: Set<string>) {
   process.exitCode = 1;
 }
 
-let allMissingDeps = new Set();
+let allMissingDeps = new Set<string>();
 
 const laterLogMissingDependencies = debounce(() => {
   logMissing(allMissingDeps);
-  allMissingDeps = new Set();
+  allMissingDeps = new Set<string>();
 }, 100);
 
 export function laterLogMissing(missingDeps: Set<string>) {

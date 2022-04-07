@@ -10,7 +10,7 @@
   "printWidth": 80,
   "overrides": [
     {
-      "files": ["**/packages/*/src/**/*.js", "**/packages/*/test/**/*.js"],
+      "files": ["**/packages/*/src/**/*.{js,ts}", "**/packages/*/test/**/*.{js,ts}"],
       "parser": "babylon",
       "options": {
         "trailingComma": "all"

@@ -1,5 +1,3 @@
-// @flow
-
 import corejs3Polyfills from "../core-js-compat/data.js";
 import corejs3ShippedProposalsList from "./shipped-proposals";
 import getModulesListForTargetVersion from "../core-js-compat/get-modules-list-for-target-version.js";
@@ -14,8 +12,8 @@ import {
   type CoreJSPolyfillDescriptor,
 } from "./built-in-definitions";
 
-import * as babel from "@babel/core";
-const { types: t } = babel.default || babel;
+import type { NodePath } from "@babel/traverse";
+import { types as t } from "@babel/core";
 import {
   callMethod,
   coreJSModule,
@@ -27,15 +25,15 @@ import defineProvider from "@babel/helper-define-polyfill-provider";
 
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 
-type Options = {|
-  version?: number | string,
-  proposals?: boolean,
-  shippedProposals?: boolean,
+type Options = {
+  version?: number | string;
+  proposals?: boolean;
+  shippedProposals?: boolean;
   "#__secret_key__@babel/runtime__compatibility": void | {
-    useBabelRuntime: string,
-    ext: string,
-  },
-|};
+    useBabelRuntime: string;
+    ext: string;
+  };
+};
 
 const esnextFallback = (
   name: string,
@@ -54,7 +52,7 @@ export default defineProvider<Options>(function (
     version = 3,
     proposals,
     shippedProposals,
-    [runtimeCompat]: { useBabelRuntime, ext = ".js" } = {},
+    [runtimeCompat]: { useBabelRuntime, ext = ".js" } = { useBabelRuntime: "" },
   },
 ) {
   const isWebpack = babel.caller(caller => caller?.name === "babel-loader");
@@ -100,7 +98,7 @@ export default defineProvider<Options>(function (
     desc: CoreJSPolyfillDescriptor,
     hint,
     utils,
-    object,
+    object?,
   ) {
     if (
       desc.pure &&
@@ -116,7 +114,6 @@ export default defineProvider<Options>(function (
       }
       const coreJSPureBase = getCoreJSPureBase(useProposalBase);
       return utils.injectDefaultImport(
-        // $FlowIgnore, we already guard desc.pure
         `${coreJSPureBase}/${desc.pure}${ext}`,
         hint,
       );
@@ -186,6 +183,7 @@ export default defineProvider<Options>(function (
 
       if (
         resolved.kind !== "global" &&
+        "object" in meta &&
         meta.object &&
         meta.placement === "prototype"
       ) {
@@ -207,7 +205,7 @@ export default defineProvider<Options>(function (
                 coreJSPureHelper("is-iterable", useBabelRuntime, ext),
                 "isIterable",
               ),
-              [path.node.right],
+              [(path.node as t.BinaryExpression).right], // meta.kind === "in" narrows this
             ),
           );
         }
@@ -216,27 +214,24 @@ export default defineProvider<Options>(function (
 
       if (path.parentPath.isUnaryExpression({ operator: "delete" })) return;
 
-      let isCall: ?boolean;
-
       if (meta.kind === "property") {
         // We can't compile destructuring.
         if (!path.isMemberExpression()) return;
         if (!path.isReferenced()) return;
 
-        isCall = path.parentPath.isCallExpression({ callee: path.node });
-
         if (meta.key === "Symbol.iterator") {
           if (!shouldInjectPolyfill("es.symbol.iterator")) return;
 
-          if (isCall) {
-            if (path.parent.arguments.length === 0) {
+          const { parent, node } = path;
+          if (t.isCallExpression(parent, { callee: node })) {
+            if (parent.arguments.length === 0) {
               path.parentPath.replaceWith(
                 t.callExpression(
                   utils.injectDefaultImport(
                     coreJSPureHelper("get-iterator", useBabelRuntime, ext),
                     "getIterator",
                   ),
-                  [path.node.object],
+                  [node.object],
                 ),
               );
               path.skip();
@@ -291,7 +286,7 @@ export default defineProvider<Options>(function (
           resolved.desc,
           resolved.name,
           utils,
-          // $FlowIgnore
+          // @ts-expect-error
           meta.object,
         );
         if (id) path.replaceWith(id);
@@ -300,22 +295,23 @@ export default defineProvider<Options>(function (
           resolved.desc,
           `${resolved.name}InstanceProperty`,
           utils,
-          // $FlowIgnore
+          // @ts-expect-error
           meta.object,
         );
         if (!id) return;
 
-        if (isCall) {
+        const { node } = path as NodePath<t.MemberExpression>;
+        if (t.isCallExpression(path.parent, { callee: node })) {
           callMethod(path, id);
         } else {
-          path.replaceWith(t.callExpression(id, [path.node.object]));
+          path.replaceWith(t.callExpression(id, [node.object]));
         }
       }
     },
 
     visitor: method === "usage-global" && {
       // import("foo")
-      CallExpression(path) {
+      CallExpression(path: NodePath<t.CallExpression>) {
         if (path.get("callee").isImport()) {
           const utils = getUtils(path);
 
@@ -329,26 +325,28 @@ export default defineProvider<Options>(function (
       },
 
       // (async function () { }).finally(...)
-      Function(path) {
+      Function(path: NodePath<t.Function>) {
         if (path.node.async) {
           maybeInjectGlobal(PromiseDependencies, getUtils(path));
         }
       },
 
       // for-of, [a, b] = c
-      "ForOfStatement|ArrayPattern"(path) {
+      "ForOfStatement|ArrayPattern"(
+        path: NodePath<t.ForOfStatement | t.ArrayPattern>,
+      ) {
         maybeInjectGlobal(CommonIterators, getUtils(path));
       },
 
       // [...spread]
-      SpreadElement(path) {
+      SpreadElement(path: NodePath<t.SpreadElement>) {
         if (!path.parentPath.isObjectExpression()) {
           maybeInjectGlobal(CommonIterators, getUtils(path));
         }
       },
 
       // yield*
-      YieldExpression(path) {
+      YieldExpression(path: NodePath<t.YieldExpression>) {
         if (path.node.delegate) {
           maybeInjectGlobal(CommonIterators, getUtils(path));
         }

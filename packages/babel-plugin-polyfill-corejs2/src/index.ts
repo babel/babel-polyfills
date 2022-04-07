@@ -1,5 +1,3 @@
-// @flow
-
 import corejs2Polyfills from "@babel/compat-data/corejs2-built-ins";
 import {
   BuiltIns,
@@ -11,31 +9,35 @@ import addPlatformSpecificPolyfills from "./add-platform-specific-polyfills";
 import { hasMinVersion } from "./helpers";
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
-import * as babel from "@babel/core";
-const { types: t } = babel.default || babel;
+import type { NodePath } from "@babel/traverse";
+import { types as t } from "@babel/core";
 
 const presetEnvCompat = "#__secret_key__@babel/preset-env__compatibility";
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 
-// $FlowIgnore
 const has = Function.call.bind(Object.hasOwnProperty);
 
-type Options = {|
+type Options = {
   "#__secret_key__@babel/preset-env__compatibility": void | {
-    entryInjectRegenerator: boolean,
-  },
+    entryInjectRegenerator: boolean;
+  };
   "#__secret_key__@babel/runtime__compatibility": void | {
-    useBabelRuntime: string,
-    runtimeVersion: string,
-    ext: string,
-  },
-|};
+    useBabelRuntime: string;
+    runtimeVersion: string;
+    ext: string;
+  };
+};
 
 export default defineProvider<Options>(function (
   api,
   {
-    [presetEnvCompat]: { entryInjectRegenerator } = {},
-    [runtimeCompat]: { useBabelRuntime, runtimeVersion, ext = ".js" } = {},
+    [presetEnvCompat]: { entryInjectRegenerator } = {
+      entryInjectRegenerator: false,
+    },
+    [runtimeCompat]: { useBabelRuntime, runtimeVersion, ext = ".js" } = {
+      useBabelRuntime: "",
+      runtimeVersion: "",
+    },
   },
 ) {
   const resolve = api.createMetaResolver({
@@ -116,6 +118,7 @@ export default defineProvider<Options>(function (
 
       if (
         resolved.kind !== "global" &&
+        "object" in meta &&
         meta.object &&
         meta.placement === "prototype"
       ) {
@@ -135,7 +138,7 @@ export default defineProvider<Options>(function (
                 `${coreJSBase}/is-iterable${ext}`,
                 "isIterable",
               ),
-              [path.node.right],
+              [(path.node as t.BinaryExpression).right], // meta.kind === "in" narrows this
             ),
           );
         }
@@ -154,7 +157,7 @@ export default defineProvider<Options>(function (
           meta.key === "Symbol.iterator" &&
           shouldInjectPolyfill("es6.symbol") &&
           path.parentPath.isCallExpression({ callee: path.node }) &&
-          path.parent.arguments.length === 0
+          path.parentPath.node.arguments.length === 0
         ) {
           path.parentPath.replaceWith(
             t.callExpression(
@@ -180,14 +183,16 @@ export default defineProvider<Options>(function (
 
     visitor: method === "usage-global" && {
       // yield*
-      YieldExpression(path) {
+      YieldExpression(path: NodePath<t.YieldExpression>) {
         if (path.node.delegate) {
           inject("web.dom.iterable", api.getUtils(path));
         }
       },
 
       // for-of, [a, b] = c
-      "ForOfStatement|ArrayPattern"(path) {
+      "ForOfStatement|ArrayPattern"(
+        path: NodePath<t.ForOfStatement | t.ArrayPattern>,
+      ) {
         CommonIterators.forEach(name => inject(name, api.getUtils(path)));
       },
     },

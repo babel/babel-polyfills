@@ -41,7 +41,7 @@ $ yarn lint
 #### Type-check
 
 ```sh
-$ yarn flow
+$ yarn tscheck
 ```
 
 #### Test

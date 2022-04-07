@@ -1,5 +1,3 @@
-// @flow
-
 import type { PolyfillProviderInternal, PolyfillProvider } from "./types";
 
 export function defineProvider<Options>(
@@ -7,5 +5,5 @@ export function defineProvider<Options>(
 ): PolyfillProviderInternal<Options> {
   // This will allow us to do some things
 
-  return (factory: any);
+  return factory as any;
 }

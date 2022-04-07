@@ -1,10 +1,7 @@
-// @flow
-
-import * as babel from "@babel/core";
-const { types: t } = babel.default || babel;
+import { types as t } from "@babel/core";
 import corejsEntries from "../core-js-compat/entries.js";
 
-export function callMethod(path: *, id: t.Identifier) {
+export function callMethod(path: any, id: t.Identifier) {
   const { object } = path.node;
 
   let context1, context2;
@@ -31,7 +28,10 @@ export function isCoreJSSource(source: string) {
       .toLowerCase();
   }
 
-  return hasOwnProperty.call(corejsEntries, source) && corejsEntries[source];
+  return (
+    Object.prototype.hasOwnProperty.call(corejsEntries, source) &&
+    corejsEntries[source]
+  );
 }
 
 export function coreJSModule(name: string) {

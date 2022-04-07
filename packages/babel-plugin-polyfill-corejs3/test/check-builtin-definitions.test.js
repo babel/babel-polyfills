@@ -4,7 +4,7 @@ import {
   BuiltIns,
   StaticProperties,
   InstanceProperties,
-} from "../src/built-in-definitions.js";
+} from "../src/built-in-definitions";
 
 const supportedCorejs3Modules = new Set();
 

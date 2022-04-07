@@ -1,25 +1,20 @@
-// @flow
-
-import * as babel from "@babel/core";
-const { types: t, template } = babel.default || babel;
-
+import { types as t, template } from "@babel/core";
 import type { MetaDescriptor } from "@babel/helper-define-polyfill-provider";
 
 const expr = template.expression.ast;
 
-// $FlowIgnore
 const has = Function.call.bind(Object.hasOwnProperty);
 
 export type Descriptor = {
-  name: string,
-  version: string,
-  package: string,
-  path: string, // This is different from .package for multi-entry-point packages
-  pure?: false,
-  global?: false,
-  thisCheck?: (thisObj: Object) => Object,
-  exclude?: (meta: MetaDescriptor) => boolean,
-  getter?: true,
+  name: string;
+  version: string;
+  package: string;
+  path: string; // This is different from .package for multi-entry-point packages,
+  pure?: false;
+  global?: false;
+  thisCheck?: (thisObj: any) => any;
+  exclude?: (meta: MetaDescriptor) => boolean;
+  getter?: true;
 };
 
 export const Globals = {};
@@ -162,7 +157,7 @@ for (const name of [
   });
 }
 
-function createDescriptor(name, version, pkg = name.toLowerCase(), subfolder) {
+function createDescriptor(name, version, pkg = name.toLowerCase(), subfolder?) {
   return {
     name,
     version,
@@ -171,11 +166,11 @@ function createDescriptor(name, version, pkg = name.toLowerCase(), subfolder) {
   };
 }
 
-function defineGlobal(name, version, pkg) {
+function defineGlobal(name, version, pkg?) {
   Globals[name] = [createDescriptor(name, version, pkg)];
 }
 
-function defineStatic(object, property, version, pkg) {
+function defineStatic(object, property, version, pkg?) {
   if (!has(StaticProperties, object)) StaticProperties[object] = {};
 
   StaticProperties[object][property] = [
@@ -194,10 +189,10 @@ function defineInstance(
     pkg,
     subfolder,
   }: {
-    getter?: boolean,
-    exclude?: (meta: MetaDescriptor) => boolean,
-    pkg?: string,
-    subfolder?: string,
+    getter?: boolean;
+    exclude?: (meta: MetaDescriptor) => boolean;
+    pkg?: string;
+    subfolder?: string;
   } = {},
 ) {
   if (!has(InstanceProperties, property)) InstanceProperties[property] = [];

@@ -1,15 +1,12 @@
-// @flow
-
 import type { NodePath } from "@babel/traverse";
-import * as babel from "@babel/core";
-const { types: t } = babel.default || babel;
+import { types as t } from "@babel/core";
 
 type StrMap<K> = Map<string, K>;
 
 export default class ImportsCache {
-  _imports: WeakMap<NodePath, StrMap<string>>;
-  _anonymousImports: WeakMap<NodePath, Set<string>>;
-  _lastImports: WeakMap<NodePath, NodePath>;
+  _imports: WeakMap<NodePath<t.Program>, StrMap<string>>;
+  _anonymousImports: WeakMap<NodePath<t.Program>, Set<string>>;
+  _lastImports: WeakMap<NodePath<t.Program>, NodePath<t.Node>>;
   _resolver: (url: string) => string;
 
   constructor(resolver: (url: string) => string) {
@@ -20,13 +17,17 @@ export default class ImportsCache {
   }
 
   storeAnonymous(
-    programPath: NodePath,
+    programPath: NodePath<t.Program>,
     url: string,
     // eslint-disable-next-line no-undef
     getVal: (isScript: boolean, source: t.StringLiteral) => t.Node,
   ) {
     const key = this._normalizeKey(programPath, url);
-    const imports = this._ensure(this._anonymousImports, programPath, Set);
+    const imports = this._ensure<Set<string>>(
+      this._anonymousImports,
+      programPath,
+      Set,
+    );
 
     if (imports.has(key)) return;
 
@@ -39,7 +40,7 @@ export default class ImportsCache {
   }
 
   storeNamed(
-    programPath: NodePath,
+    programPath: NodePath<t.Program>,
     url: string,
     name: string,
     getVal: (
@@ -48,10 +49,14 @@ export default class ImportsCache {
       source: t.StringLiteral,
       // eslint-disable-next-line no-undef
       name: t.Identifier,
-    ) => { node: t.Node, name: string },
+    ) => { node: t.Node; name: string },
   ) {
     const key = this._normalizeKey(programPath, url, name);
-    const imports = this._ensure(this._imports, programPath, Map);
+    const imports = this._ensure<Map<string, any>>(
+      this._imports,
+      programPath,
+      Map,
+    );
 
     if (!imports.has(key)) {
       const { node, name: id } = getVal(
@@ -66,8 +71,9 @@ export default class ImportsCache {
     return t.identifier(imports.get(key));
   }
 
-  _injectImport(programPath: NodePath, node: t.Node) {
-    let lastImport = this._lastImports.get(programPath);
+  _injectImport(programPath: NodePath<t.Program>, node: t.Node) {
+    const lastImport = this._lastImports.get(programPath);
+    let newNodes: [NodePath];
     if (
       lastImport &&
       lastImport.node &&
@@ -76,12 +82,12 @@ export default class ImportsCache {
       lastImport.parent === programPath.node &&
       lastImport.container === programPath.node.body
     ) {
-      lastImport = lastImport.insertAfter(node);
+      newNodes = lastImport.insertAfter(node);
     } else {
-      lastImport = programPath.unshiftContainer("body", node);
+      newNodes = programPath.unshiftContainer("body", node);
     }
-    lastImport = lastImport[lastImport.length - 1];
-    this._lastImports.set(programPath, lastImport);
+    const newNode = newNodes[newNodes.length - 1];
+    this._lastImports.set(programPath, newNode);
 
     /*
     let lastImport;
@@ -106,10 +112,10 @@ export default class ImportsCache {
     });*/
   }
 
-  _ensure<C: Map<*, *> | Set<*>>(
-    map: WeakMap<NodePath, C>,
-    programPath: NodePath,
-    Collection: Class<C>,
+  _ensure<C extends Map<string, any> | Set<string>>(
+    map: WeakMap<NodePath<t.Program>, C>,
+    programPath: NodePath<t.Program>,
+    Collection: { new (...args: any): C },
   ): C {
     let collection = map.get(programPath);
     if (!collection) {
@@ -119,7 +125,11 @@ export default class ImportsCache {
     return collection;
   }
 
-  _normalizeKey(programPath: NodePath, url: string, name: string = ""): string {
+  _normalizeKey(
+    programPath: NodePath<t.Program>,
+    url: string,
+    name: string = "",
+  ): string {
     const { sourceType } = programPath.node;
 
     // If we rely on the imported binding (the "name" parameter), we also need to cache
