@@ -116,8 +116,16 @@
     "samsung": "5",
     "electron": "0.31"
   },
-  "Array.prototype.findLast": {},
-  "Array.prototype.findLastIndex": {},
+  "Array.prototype.findLast": {
+    "chrome": "97",
+    "safari": "tp",
+    "electron": "17"
+  },
+  "Array.prototype.findLastIndex": {
+    "chrome": "97",
+    "safari": "tp",
+    "electron": "17"
+  },
   "Array.prototype.flat": {
     "chrome": "69",
     "opera": "56",
@@ -256,6 +264,16 @@
     "ios": "9",
     "samsung": "9",
     "electron": "3"
+  },
+  "Error cause": {
+    "chrome": "94",
+    "opera": "80",
+    "edge": "94",
+    "firefox": "91",
+    "safari": "15",
+    "node": "16.11",
+    "ios": "15",
+    "electron": "15"
   },
   "Function.prototype.name": {
     "chrome": "5",
@@ -442,10 +460,9 @@
     "chrome": "15",
     "opera": "15",
     "edge": "18",
-    "firefox": "3",
+    "firefox": "87",
     "safari": "4",
     "node": "0.12",
-    "ie": "9",
     "android": "4.4",
     "ios": "6",
     "phantom": "2",
@@ -524,7 +541,11 @@
   },
   "Object.hasOwn": {
     "chrome": "93",
+    "opera": "79",
+    "edge": "93",
     "firefox": "92",
+    "safari": "tp",
+    "node": "16.9",
     "electron": "14"
   },
   "Object.values": {

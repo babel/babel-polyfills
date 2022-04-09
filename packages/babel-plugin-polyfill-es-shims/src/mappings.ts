@@ -1,4 +1,5 @@
 import { types as t, template } from "@babel/core";
+import type { NodePath } from "@babel/traverse";
 import type { MetaDescriptor } from "@babel/helper-define-polyfill-provider";
 
 const expr = template.expression.ast;
@@ -13,7 +14,7 @@ export type Descriptor = {
   pure?: false;
   global?: false;
   thisCheck?: (thisObj: any) => any;
-  exclude?: (meta: MetaDescriptor) => boolean;
+  exclude?: (meta: MetaDescriptor, path: NodePath) => boolean;
   getter?: true;
 };
 
@@ -21,9 +22,33 @@ export const Globals = {};
 export const StaticProperties = {};
 export const InstanceProperties = {};
 
-defineGlobal("globalThis", "1.0.0");
+const lessThanArgs = num => (meta, path: NodePath) => {
+  const { node, parent } = path;
+  if (!t.isNewExpression(parent, { callee: node })) return false;
+  if (parent.arguments.length >= num) return false;
+  return parent.arguments.every(arg => !t.isSpreadElement(arg));
+};
 
+for (const [name, causeArgNum] of [
+  ["Error", 2],
+  ["AggregateError", 3],
+  ["EvalError", 2],
+  ["RangeError", 2],
+  ["ReferenceError", 2],
+  ["SyntaxError", 2],
+  ["TypeError", 2],
+  ["URIError", 2],
+] as [string, number][]) {
+  defineGlobal(name, "1.0.1", "error-cause", {
+    exclude: lessThanArgs(causeArgNum),
+    subfolder: name,
+    polyfillName: "Error cause",
+  });
+}
+// This needs to come after the AggregateError cause polyfill, since this
+// one polyfills less features.
 defineGlobal("AggregateError", "1.0.2", "es-aggregate-error");
+defineGlobal("globalThis", "1.0.0");
 
 const arrayCheck = thisObj => expr`Array.isArray(${thisObj})`;
 const typeofCheck = type => thisObj => expr`typeof ${thisObj} === "${type}"`;
@@ -166,8 +191,28 @@ function createDescriptor(name, version, pkg = name.toLowerCase(), subfolder?) {
   };
 }
 
-function defineGlobal(name, version, pkg?) {
-  Globals[name] = [createDescriptor(name, version, pkg)];
+type ExcludeFilter = (meta: MetaDescriptor, path: NodePath) => boolean;
+
+function defineGlobal(
+  name,
+  version,
+  pkg?,
+  {
+    exclude,
+    subfolder,
+    polyfillName = name,
+  }: {
+    exclude?: ExcludeFilter;
+    subfolder?: string;
+    polyfillName?: string;
+  } = {},
+) {
+  if (!has(Globals, name)) Globals[name] = [];
+  Globals[name].push({
+    ...createDescriptor(polyfillName, version, pkg, subfolder),
+    exclude,
+    nameHint: name,
+  });
 }
 
 function defineStatic(object, property, version, pkg?) {
@@ -190,7 +235,7 @@ function defineInstance(
     subfolder,
   }: {
     getter?: boolean;
-    exclude?: (meta: MetaDescriptor) => boolean;
+    exclude?: ExcludeFilter;
     pkg?: string;
     subfolder?: string;
   } = {},
