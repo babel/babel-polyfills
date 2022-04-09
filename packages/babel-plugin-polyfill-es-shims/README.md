@@ -28,26 +28,70 @@ This package supports the `usage-pure` and `usage-global` methods.
 
 ## Supported polyfills
 
-This plugin supports the following `es-shims` polyfills.
+This polyfill provider is compatible with polyfills that follow the [`es-shims-api`](https://github.com/es-shims/es-shim-api) specification. Those polyfills must live under the [`@es-shims`](https://github.com/es-shims) organization, but for historical reasons some of them are owned by different people: they are explicitly marked as such in the following tables.
 
-> For historical reasons, some of these packages are not under the [@es-shims](https://github.com/es-shims/) organization. They are explicitly marked in the following tables.
+### ES2022
 
-### ES5
+| Builtin object or function | Package name                                                                 | Owner |
+| :------------------------- | :--------------------------------------------------------------------------- | :---- |
+| `Array.prototype.at`     | [`array.prototype.at`](https://github.com/es-shims/Array.prototype.at)   |
+| `Object.hasOwn`          | [`object.hasown`](https://github.com/es-shims/object.hasown)             |
+| `String.prototype.at`    | [`string.prototype.at`](https://github.com/es-shims/String.prototype.at) |
 
-| Builtin object or function       | Package name                                                                                   | Owner |
-| :------------------------------- | :--------------------------------------------------------------------------------------------- | :---- |
-| `Array.prototype.every`          | [`array.prototype.every`](https://github.com/es-shims/Array.prototype.every)                   |
-| `Array.prototype.indexOf`        | [`array.prototype.indexof`](https://github.com/es-shims/Array.prototype.indexOf)               |
-| `Array.prototype.lastIndexOf`    | [`array.prototype.lastindexof`](https://github.com/es-shims/Array.prototype.lastIndexOf)       |
-| `Array.prototype.map`            | [`array.prototype.map`](https://github.com/es-shims/Array.prototype.map)                       |
-| `Array.prototype.reduce`         | [`array.prototype.reduce`](https://github.com/es-shims/Array.prototype.reduce)                 |
-| `Array.prototype.reduceRight`    | [`array.prototype.reduceright`](https://github.com/es-shims/Array.prototype.reduceRight)       |
-| `Array.prototype.some`           | [`array.prototype.some`](https://github.com/es-shims/Array.prototype.some)                     |
-| `Number.prototype.toExponential` | [`number.prototype.toexponential`](https://github.com/es-shims/Number.prototype.toExponential) |
-| `String.prototype.split`         | [`string.prototype.split`](https://github.com/es-shims/String.prototype.split)                 |
-| `String.prototype.trim`          | [`string.prototype.trim`](https://github.com/es-shims/String.prototype.trim)                   |
+### ES2021
+
+| Builtin object or function           | Package name                                                                             | Owner |
+| :----------------------------------- | :--------------------------------------------------------------------------------------- | :---- |
+| `AggregateError` (for `Promise.any`) | [`es-aggregate-error`](https://github.com/es-shims/AggregateError)                       |
+| `Promise.any`                        | [`promise.any`](https://github.com/es-shims/Promise.any)                                 |
+| `String.prototype.replaceAll`        | [`string.prototype.replaceall`](https://github.com/es-shims/String.prototype.replaceAll) |
+
+### ES2020
+
+| Builtin object or function  | Package name                                                                       | Owner |
+| :-------------------------- | :--------------------------------------------------------------------------------- | :---- |
+| `globalThis`                | [`globalthis`](https://github.com/es-shims/globalThis)                             |
+| `Promise.allSettled`        | [`promise.allsettled`](https://github.com/es-shims/Promise.allSettled)             |
+| `String.prototype.matchAll` | [`string.prototype.matchall`](https://github.com/ljharb/String.prototype.matchAll) |               |
+
+### ES2019
+
+| Builtin object or function     | Package name                                                                               | Owner |
+| :----------------------------- | :----------------------------------------------------------------------------------------- | :---- |
+| `Array.prototype.flat`         | [`array.prototype.flat`](https://github.com/es-shims/Array.prototype.flat)                 |
+| `Array.prototype.flatMap`      | [`array.prototype.flatmap`](https://github.com/es-shims/Array.prototype.flatMap)           |
+| `Object.fromEntries`           | [`object.fromentries`](https://github.com/es-shims/Object.fromEntries)                     |
+| `String.prototype.trimStart`   | [`string.prototype.trimstart`](https://github.com/es-shims/String.prototype.trimStart)     |
+| `String.prototype.trimEnd`     | [`string.prototype.trimend`](https://github.com/es-shims/String.prototype.trimEnd)         |
+| `String.prototype.trimLeft`    | [`string.prototype.trimleft`](https://github.com/es-shims/String.prototype.trimLeft)       |
+| `String.prototype.trimRight`   | [`string.prototype.trimright`](https://github.com/es-shims/String.prototype.trimRight)     |
+| `Symbol.prototype.description` | [`symbol.prototype.description`](https://github.com/es-shims/Symbol.prototype.description) |
+
+### ES2018
+
+| Builtin object or function  | Package name                                                                         | Owner |
+| :-------------------------- | :----------------------------------------------------------------------------------- | :---- |
+| `Promise.prototype.finally` | [`promise.prototype.finally`](https://github.com/es-shims/Promise.prototype.finally) |
+
+### ES2017
+
+| Builtin object or function         | Package name                                                                                       | Owner |
+| :--------------------------------- | :------------------------------------------------------------------------------------------------- | :---- |
+| `Object.values`                    | [`object.values`](https://github.com/es-shims/Object.values)                                       |
+| `Object.entries`                   | [`object.entries`](https://github.com/es-shims/Object.entries)                                     |
+| `Object.getOwnPropertyDescriptors` | [`object.getownpropertydescriptors`](https://github.com/es-shims/object.getownpropertydescriptors) |
+| `String.prototype.padStart`        | [`string.prototype.padstart`](https://github.com/es-shims/String.prototype.padStart)               |
+| `String.prototype.padEnd`          | [`string.prototype.padend`](https://github.com/es-shims/String.prototype.padEnd)                   |
+
+### ES2016
+
+| Builtin object or function | Package name                                                   | Owner |
+| :------------------------- | :------------------------------------------------------------- | :---- |
+| `Array.prototype.includes` | [`array-includes`](https://github.com/es-shims/array-includes) |
 
 ### ES2015 (ES6)
+
+> ⚠️ This provider fully supports ES2016+ polyfills, but we are still working on ES5 and ES6 support. You can find the list of missing polyfills at [`missing-polyfills.md`](./missing-polyfills.md).
 
 | Builtin object or function     | Package name                                                                                    | Owner                                              |
 | :----------------------------- | :---------------------------------------------------------------------------------------------- | :------------------------------------------------- |
@@ -86,66 +130,19 @@ This plugin supports the following `es-shims` polyfills.
 | `String.prototype.startWith`   | [`string.prototype.startwith`](https://github.com/mathiasbynens/String.prototype.startsWith)    | [@mathiasbynens](https://github.com/mathiasbynens) |
 | Annex B `String.prototype.*`   | [`es-string-html-methods`](https://github.com/es-shims/es-string-html-methods)                  |
 
-### ES2016
+### ES5
 
-| Builtin object or function | Package name                                                   | Owner |
-| :------------------------- | :------------------------------------------------------------- | :---- |
-| `Array.prototype.includes` | [`array-includes`](https://github.com/es-shims/array-includes) |
+> ⚠️ This provider fully supports ES2016+ polyfills, but we are still working on ES5 and ES6 support. You can find the list of missing polyfills at [`missing-polyfills.md`](./missing-polyfills.md).
 
-### ES2017
-
-| Builtin object or function         | Package name                                                                                       | Owner |
-| :--------------------------------- | :------------------------------------------------------------------------------------------------- | :---- |
-| `Object.values`                    | [`object.values`](https://github.com/es-shims/Object.values)                                       |
-| `Object.entries`                   | [`object.entries`](https://github.com/es-shims/Object.entries)                                     |
-| `Object.getOwnPropertyDescriptors` | [`object.getownpropertydescriptors`](https://github.com/es-shims/object.getownpropertydescriptors) |
-| `String.prototype.padStart`        | [`string.prototype.padstart`](https://github.com/es-shims/String.prototype.padStart)               |
-| `String.prototype.padEnd`          | [`string.prototype.padend`](https://github.com/es-shims/String.prototype.padEnd)                   |
-
-### ES2018
-
-| Builtin object or function  | Package name                                                                         | Owner |
-| :-------------------------- | :----------------------------------------------------------------------------------- | :---- |
-| `Promise.prototype.finally` | [`promise.prototype.finally`](https://github.com/es-shims/Promise.prototype.finally) |
-
-### ES2019
-
-| Builtin object or function     | Package name                                                                               | Owner |
-| :----------------------------- | :----------------------------------------------------------------------------------------- | :---- |
-| `Array.prototype.flat`         | [`array.prototype.flat`](https://github.com/es-shims/Array.prototype.flat)                 |
-| `Array.prototype.flatMap`      | [`array.prototype.flatmap`](https://github.com/es-shims/Array.prototype.flatMap)           |
-| `Object.fromEntries`           | [`object.fromentries`](https://github.com/es-shims/Object.fromEntries)                     |
-| `String.prototype.trimStart`   | [`string.prototype.trimstart`](https://github.com/es-shims/String.prototype.trimStart)     |
-| `String.prototype.trimEnd`     | [`string.prototype.trimend`](https://github.com/es-shims/String.prototype.trimEnd)         |
-| `String.prototype.trimLeft`    | [`string.prototype.trimleft`](https://github.com/es-shims/String.prototype.trimLeft)       |
-| `String.prototype.trimRight`   | [`string.prototype.trimright`](https://github.com/es-shims/String.prototype.trimRight)     |
-| `Symbol.prototype.description` | [`symbol.prototype.description`](https://github.com/es-shims/Symbol.prototype.description) |
-
-### ES2020
-
-| Builtin object or function  | Package name                                                                       | Owner |
-| :-------------------------- | :--------------------------------------------------------------------------------- | :---- |
-| `globalThis`                | [`globalthis`](https://github.com/es-shims/globalThis)                             |
-| `Promise.allSettled`        | [`promise.allsettled`](https://github.com/es-shims/Promise.allSettled)             |
-| `String.prototype.matchAll` | [`string.prototype.matchall`](https://github.com/ljharb/String.prototype.matchAll) |
-
-### ES2021
-
-| Builtin object or function           | Package name                                                                             | Owner |
-| :----------------------------------- | :--------------------------------------------------------------------------------------- | :---- |
-| `AggregateError` (for `Promise.any`) | [`es-aggregate-error`](https://github.com/es-shims/AggregateError)                       |
-| `Promise.any`                        | [`promise.any`](https://github.com/es-shims/Promise.any)                                 |
-| `String.prototype.replaceAll`        | [`string.prototype.replaceall`](https://github.com/es-shims/String.prototype.replaceAll) |
-
-### Proposals
-
-| Builtin object or function | Package name                                                                 | Owner |
-| :------------------------- | :--------------------------------------------------------------------------- | :---- |
-| `Array.prototype.item`     | [`array.prototype.item`](https://github.com/es-shims/Array.prototype.item)   |
-| `String.prototype.item`    | [`string.prototype.item`](https://github.com/es-shims/String.prototype.item) |
-
-## Missing polyfills
-
-**NOTE**: This polyfill provider is only compatible with polyfills that follow the [`es-shims-api`](https://github.com/es-shims/es-shim-api) specification. Additionally, those polyfills must live under the [`@es-shims`](https://github.com/es-shims) organization.
-
-This provider fully supports ES2016+, but we are still working on ES5 and ES6 support. You can find the list of missing polyfills at [`missing-polyfills.md`](./missing-polyfills.md).
+| Builtin object or function       | Package name                                                                                   | Owner |
+| :------------------------------- | :--------------------------------------------------------------------------------------------- | :---- |
+| `Array.prototype.every`          | [`array.prototype.every`](https://github.com/es-shims/Array.prototype.every)                   |
+| `Array.prototype.indexOf`        | [`array.prototype.indexof`](https://github.com/es-shims/Array.prototype.indexOf)               |
+| `Array.prototype.lastIndexOf`    | [`array.prototype.lastindexof`](https://github.com/es-shims/Array.prototype.lastIndexOf)       |
+| `Array.prototype.map`            | [`array.prototype.map`](https://github.com/es-shims/Array.prototype.map)                       |
+| `Array.prototype.reduce`         | [`array.prototype.reduce`](https://github.com/es-shims/Array.prototype.reduce)                 |
+| `Array.prototype.reduceRight`    | [`array.prototype.reduceright`](https://github.com/es-shims/Array.prototype.reduceRight)       |
+| `Array.prototype.some`           | [`array.prototype.some`](https://github.com/es-shims/Array.prototype.some)                     |
+| `Number.prototype.toExponential` | [`number.prototype.toexponential`](https://github.com/es-shims/Number.prototype.toExponential) |
+| `String.prototype.split`         | [`string.prototype.split`](https://github.com/es-shims/String.prototype.split)                 |
+| `String.prototype.trim`          | [`string.prototype.trim`](https://github.com/es-shims/String.prototype.trim)    
