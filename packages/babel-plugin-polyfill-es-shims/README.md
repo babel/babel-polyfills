@@ -35,6 +35,7 @@ This polyfill provider is compatible with polyfills that follow the [`es-shims-a
 | Builtin object or function | Package name                                                                 | Owner |
 | :------------------------- | :--------------------------------------------------------------------------- | :---- |
 | `Array.prototype.at`     | [`array.prototype.at`](https://github.com/es-shims/Array.prototype.at)   |
+| `Error`'s `cause` property | [`error-cause`](https://github.com/es-shims/error-cause)               |
 | `Object.hasOwn`          | [`object.hasown`](https://github.com/es-shims/object.hasown)             |
 | `String.prototype.at`    | [`string.prototype.at`](https://github.com/es-shims/String.prototype.at) |
 
