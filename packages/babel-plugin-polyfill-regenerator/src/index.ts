@@ -14,7 +14,7 @@ export default defineProvider<Options>(({ debug, targets, babel }, options) => {
       "This plugin does not use the targets option. Only preset-env's targets" +
         " or top-level targets need to be configured for this plugin to work." +
         " See https://github.com/babel/babel-polyfills/issues/36 for more" +
-        " details",
+        " details.",
     );
   }
 
