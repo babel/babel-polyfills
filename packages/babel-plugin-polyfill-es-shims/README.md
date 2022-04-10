@@ -30,14 +30,21 @@ This package supports the `usage-pure` and `usage-global` methods.
 
 This polyfill provider is compatible with polyfills that follow the [`es-shims-api`](https://github.com/es-shims/es-shim-api) specification. Those polyfills must live under the [`@es-shims`](https://github.com/es-shims) organization, but for historical reasons some of them are owned by different people: they are explicitly marked as such in the following tables.
 
+### Proposals (Stage 3)
+
+| Builtin object or function      | Package name                                                                                 | Owner |
+| :------------------------------ | :------------------------------------------------------------------------------------------- | :---- |
+| `Array.prototype.findLast`      | [`array.prototype.findlast`](https://github.com/es-shims/Array.prototype.findLast)           |
+| `Array.prototype.findLastIndex` | [`array.prototype.findlastindex`](https://github.com/es-shims/Array.prototype.findLastIndex) |
+
 ### ES2022
 
-| Builtin object or function | Package name                                                                 | Owner |
-| :------------------------- | :--------------------------------------------------------------------------- | :---- |
-| `Array.prototype.at`     | [`array.prototype.at`](https://github.com/es-shims/Array.prototype.at)   |
-| `Error`'s `cause` property | [`error-cause`](https://github.com/es-shims/error-cause)               |
-| `Object.hasOwn`          | [`object.hasown`](https://github.com/es-shims/object.hasown)             |
-| `String.prototype.at`    | [`string.prototype.at`](https://github.com/es-shims/String.prototype.at) |
+| Builtin object or function | Package name                                                             | Owner |
+| :------------------------- | :----------------------------------------------------------------------- | :---- |
+| `Array.prototype.at`       | [`array.prototype.at`](https://github.com/es-shims/Array.prototype.at)   |
+| `Error`'s `cause` property | [`error-cause`](https://github.com/es-shims/error-cause)                 |
+| `Object.hasOwn`            | [`object.hasown`](https://github.com/es-shims/object.hasown)             |
+| `String.prototype.at`      | [`string.prototype.at`](https://github.com/es-shims/String.prototype.at) |
 
 ### ES2021
 
@@ -53,7 +60,7 @@ This polyfill provider is compatible with polyfills that follow the [`es-shims-a
 | :-------------------------- | :--------------------------------------------------------------------------------- | :---- |
 | `globalThis`                | [`globalthis`](https://github.com/es-shims/globalThis)                             |
 | `Promise.allSettled`        | [`promise.allsettled`](https://github.com/es-shims/Promise.allSettled)             |
-| `String.prototype.matchAll` | [`string.prototype.matchall`](https://github.com/ljharb/String.prototype.matchAll) |               |
+| `String.prototype.matchAll` | [`string.prototype.matchall`](https://github.com/ljharb/String.prototype.matchAll) |
 
 ### ES2019
 
@@ -146,4 +153,4 @@ This polyfill provider is compatible with polyfills that follow the [`es-shims-a
 | `Array.prototype.some`           | [`array.prototype.some`](https://github.com/es-shims/Array.prototype.some)                     |
 | `Number.prototype.toExponential` | [`number.prototype.toexponential`](https://github.com/es-shims/Number.prototype.toExponential) |
 | `String.prototype.split`         | [`string.prototype.split`](https://github.com/es-shims/String.prototype.split)                 |
-| `String.prototype.trim`          | [`string.prototype.trim`](https://github.com/es-shims/String.prototype.trim)    
+| `String.prototype.trim`          | [`string.prototype.trim`](https://github.com/es-shims/String.prototype.trim)                   |
