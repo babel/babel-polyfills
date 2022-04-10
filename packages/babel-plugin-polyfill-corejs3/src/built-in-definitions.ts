@@ -805,7 +805,7 @@ export const InstanceProperties = {
     "esnext.array.to-sorted",
     "es.array.sort",
   ]),
-  toSpliced: define("instance/to-reversed", ["esnext.array.to-spliced"]),
+  toSpliced: define("instance/to-spliced", ["esnext.array.to-spliced"]),
   toString: define(null, [
     "es.object.to-string",
     "es.error.to-string",
