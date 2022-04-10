@@ -1014,5 +1014,9 @@
     "phantom": "2",
     "samsung": "1",
     "electron": "0.20"
-  }
+  },
+  "Array.prototype.toReversed": {},
+  "Array.prototype.toSorted": {},
+  "Array.prototype.toSpliced": {},
+  "Array.prototype.with": {}
 }
