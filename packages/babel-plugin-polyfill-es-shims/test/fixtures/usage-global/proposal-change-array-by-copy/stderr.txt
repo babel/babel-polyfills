@@ -1,0 +1,4 @@
+Some polyfills have been added but are not present in your dependencies.
+Please run one of the following commands:
+	npm install --save array.prototype.toreversed@^1.0.1 array.prototype.tosorted@^1.0.0 array.prototype.tospliced@^1.0.0 array.prototype.with@^1.0.1
+	yarn add array.prototype.toreversed@^1.0.1 array.prototype.tosorted@^1.0.0 array.prototype.tospliced@^1.0.0 array.prototype.with@^1.0.1

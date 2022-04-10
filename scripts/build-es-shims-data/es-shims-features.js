@@ -30,7 +30,11 @@ module.exports = {
   "Array.prototype.reduce": "Array methods / Array.prototype.reduce",
   "Array.prototype.reduceRight": "Array methods / Array.prototype.reduceRight",
   "Array.prototype.some": "Array methods / Array.prototype.some",
+  //"Array.prototype.toReversed": MISSING,
+  //"Array.prototype.toSpliced": MISSING,
+  //"Array.prototype.toSorted": MISSING,
   "Array.prototype.values": "Array.prototype methods / Array.prototype.values",
+  //"Array.prototype.with": MISSING,
   "Error cause": "Error.cause property",
   "Function.prototype.name": {
     features: [

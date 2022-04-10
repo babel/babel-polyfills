@@ -36,6 +36,10 @@ This polyfill provider is compatible with polyfills that follow the [`es-shims-a
 | :------------------------------ | :------------------------------------------------------------------------------------------- | :---- |
 | `Array.prototype.findLast`      | [`array.prototype.findlast`](https://github.com/es-shims/Array.prototype.findLast)           |
 | `Array.prototype.findLastIndex` | [`array.prototype.findlastindex`](https://github.com/es-shims/Array.prototype.findLastIndex) |
+| `Array.prototype.toReversed`    | [`array.prototype.toreversed`](https://github.com/es-shims/Array.prototype.toReversed)       |
+| `Array.prototype.toSorted`      | [`array.prototype.tosorted`](https://github.com/es-shims/Array.prototype.toSorted)           |
+| `Array.prototype.toSpliced`     | [`array.prototype.tospliced`](https://github.com/es-shims/Array.prototype.toSpliced)         |
+| `Array.prototype.with`          | [`array.prototype.with`](https://github.com/es-shims/Array.prototype.with)                   |
 
 ### ES2022
 
