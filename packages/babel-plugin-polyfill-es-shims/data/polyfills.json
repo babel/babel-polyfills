@@ -10,6 +10,20 @@
     "samsung": "10",
     "electron": "5"
   },
+  "parseInt": {
+    "chrome": "23",
+    "opera": "15",
+    "edge": "12",
+    "firefox": "21",
+    "safari": "6",
+    "node": "0.10",
+    "ie": "9",
+    "android": "4.4",
+    "ios": "7",
+    "phantom": "1.9",
+    "samsung": "1.5",
+    "electron": "0.20"
+  },
   "AggregateError": {
     "chrome": "85",
     "opera": "71",

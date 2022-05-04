@@ -49,6 +49,7 @@ for (const [name, causeArgNum] of [
 // one polyfills less features.
 defineGlobal("AggregateError", "1.0.2", "es-aggregate-error");
 defineGlobal("globalThis", "1.0.0");
+defineGlobal("parseInt", "2.0.0");
 
 const arrayCheck = thisObj => expr`Array.isArray(${thisObj})`;
 const typeofCheck = type => thisObj => expr`typeof ${thisObj} === "${type}"`;

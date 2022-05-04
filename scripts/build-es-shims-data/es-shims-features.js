@@ -2,6 +2,7 @@
 
 module.exports = {
   globalThis: "globalThis",
+  parseInt: "Miscellaneous / parseInt ignores leading zeros",
   AggregateError: "Promise.any / AggregateError",
   "Array.from": "Array static methods / Array.from",
   "Array.of": "Array static methods / Array.of",

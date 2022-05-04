@@ -1,0 +1,18 @@
+{
+  "validateLogs": true,
+  "targets": {
+    "ie": 8
+  },
+  "plugins": [
+    [
+      "@@/polyfill-es-shims",
+      {
+        "method": "usage-global",
+        "missingDependencies": {
+          "log": "per-file",
+          "all": true
+        }
+      }
+    ]
+  ]
+}
