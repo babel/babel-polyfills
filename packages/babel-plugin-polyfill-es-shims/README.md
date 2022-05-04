@@ -148,6 +148,7 @@ This polyfill provider is compatible with polyfills that follow the [`es-shims-a
 
 | Builtin object or function       | Package name                                                                                   | Owner |
 | :------------------------------- | :--------------------------------------------------------------------------------------------- | :---- |
+| `parseInt`                       | [`parseint`](https://github.com/es-shims/parseInt)                                             |
 | `Array.prototype.every`          | [`array.prototype.every`](https://github.com/es-shims/Array.prototype.every)                   |
 | `Array.prototype.indexOf`        | [`array.prototype.indexof`](https://github.com/es-shims/Array.prototype.indexOf)               |
 | `Array.prototype.lastIndexOf`    | [`array.prototype.lastindexof`](https://github.com/es-shims/Array.prototype.lastIndexOf)       |
