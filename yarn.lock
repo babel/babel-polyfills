@@ -4190,7 +4190,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.16.0
     babel-jest: ^24.8.0
     chalk: ^3.0.0
-    electron-to-chromium: ^1.3.683
+    electron-to-chromium: ^1.4.132
     eslint: ^8.12.0
     eslint-formatter-codeframe: ^7.32.1
     eslint-plugin-import: ^2.26.0
@@ -5863,10 +5863,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron-to-chromium@npm:^1.3.683, electron-to-chromium@npm:^1.4.84":
-  version: 1.4.96
-  resolution: "electron-to-chromium@npm:1.4.96"
-  checksum: 6a7f97c5fc7080b8739df269a9da0047aee9153807af99e72138dc416ea1dd8ccc167812c66c49d3bb83a55098cd8669ef075515d999aad13b266da72bc98cee
+"electron-to-chromium@npm:^1.4.132, electron-to-chromium@npm:^1.4.84":
+  version: 1.4.132
+  resolution: "electron-to-chromium@npm:1.4.132"
+  checksum: 133be125d1fa9693ce1d2f83d3f03a79ee19059fb95c203af87c4f833e661b7185ddb918fc53e272a7c8ff4169907cf1879790d1681011c6035c5c4f66b2848a
   languageName: node
   linkType: hard
 
