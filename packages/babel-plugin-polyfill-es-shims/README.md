@@ -159,5 +159,6 @@ This polyfill provider is compatible with polyfills that follow the [`es-shims-a
 | `Array.prototype.reduceRight`    | [`array.prototype.reduceright`](https://github.com/es-shims/Array.prototype.reduceRight)       |
 | `Array.prototype.some`           | [`array.prototype.some`](https://github.com/es-shims/Array.prototype.some)                     |
 | `Number.prototype.toExponential` | [`number.prototype.toexponential`](https://github.com/es-shims/Number.prototype.toExponential) |
+| `Object.defineProperties`        | [`object.defineproperties`](https://github.com/es-shims/Object.defineProperties)               |
 | `String.prototype.split`         | [`string.prototype.split`](https://github.com/es-shims/String.prototype.split)                 |
 | `String.prototype.trim`          | [`string.prototype.trim`](https://github.com/es-shims/String.prototype.trim)                   |

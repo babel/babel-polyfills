@@ -73,6 +73,7 @@ module.exports = {
   },
   "Object.assign": "Object static methods / Object.assign",
   "Object.is": "Object static methods / Object.is",
+  "Object.defineProperties": "Object static methods / Object.defineProperties",
   "Object.entries": "Object static methods / Object.entries",
   "Object.fromEntries": "Object.fromEntries",
   "Object.getOwnPropertyDescriptors":

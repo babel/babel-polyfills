@@ -526,6 +526,20 @@
     "samsung": "1.5",
     "electron": "0.20"
   },
+  "Object.defineProperties": {
+    "chrome": "5",
+    "opera": "12",
+    "edge": "12",
+    "firefox": "4",
+    "safari": "4",
+    "node": "0.4",
+    "ie": "9",
+    "android": "4",
+    "ios": "6",
+    "phantom": "1.9",
+    "samsung": "1",
+    "electron": "0.20"
+  },
   "Object.entries": {
     "chrome": "54",
     "opera": "41",
