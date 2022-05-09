@@ -7,6 +7,12 @@ module.exports = {
   "Array.from": "Array static methods / Array.from",
   "Array.of": "Array static methods / Array.of",
   "Array.prototype.at": "`.item` method / Array.prototype.item",
+  "Array.prototype.concat": {
+    features: [
+      "well-known symbols / Symbol.isConcatSpreadable, non-spreadable array",
+      "well-known symbols / Symbol.isConcatSpreadable, spreadable object with poisoned getter",
+    ],
+  },
   "Array.prototype.copyWithin":
     "Array.prototype methods / Array.prototype.copyWithin",
   "Array.prototype.entries":

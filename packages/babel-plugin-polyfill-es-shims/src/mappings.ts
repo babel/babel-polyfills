@@ -68,6 +68,7 @@ const excludeObject = excludeStatic("Object");
 
 defineStatic("Array", "from", "1.1.0");
 defineStatic("Array", "of", "1.0.0");
+defineInstance("Array", "concat", "1.0.2", arrayCheck);
 defineInstance("Array", "copyWithin", "1.0.0", arrayCheck);
 defineInstance("Array", "entries", "1.0.0", arrayCheck, excludeObject);
 defineInstance("Array", "every", "1.1.0", arrayCheck);
