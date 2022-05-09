@@ -90,6 +90,7 @@ defineInstance("Array", "map", "1.0.2", arrayCheck);
 defineInstance("Array", "reduce", "1.0.1", arrayCheck);
 defineInstance("Array", "reduceRight", "1.0.1", arrayCheck);
 defineInstance("Array", "some", "1.1.1", arrayCheck);
+defineInstance("Array", "splice", "1.0.1", arrayCheck);
 defineInstance("Array", "toReversed", "1.0.1", arrayCheck);
 defineInstance("Array", "toSorted", "1.0.0", arrayCheck);
 defineInstance("Array", "toSpliced", "1.0.0", arrayCheck);
