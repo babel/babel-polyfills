@@ -33,7 +33,7 @@
     "@typescript-eslint/parser": "^5.16.0",
     "babel-jest": "^24.8.0",
     "chalk": "^3.0.0",
-    "electron-to-chromium": "^1.3.683",
+    "electron-to-chromium": "^1.4.132",
     "eslint": "^8.12.0",
     "eslint-formatter-codeframe": "^7.32.1",
     "eslint-plugin-import": "^2.26.0",

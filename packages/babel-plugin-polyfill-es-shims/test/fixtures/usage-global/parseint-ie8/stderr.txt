@@ -1,0 +1,4 @@
+Some polyfills have been added but are not present in your dependencies.
+Please run one of the following commands:
+	npm install --save parseint@^2.0.0
+	yarn add parseint@^2.0.0

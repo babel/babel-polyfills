@@ -49,6 +49,7 @@ for (const [name, causeArgNum] of [
 // one polyfills less features.
 defineGlobal("AggregateError", "1.0.2", "es-aggregate-error");
 defineGlobal("globalThis", "1.0.0");
+defineGlobal("parseInt", "2.0.0");
 
 const arrayCheck = thisObj => expr`Array.isArray(${thisObj})`;
 const typeofCheck = type => thisObj => expr`typeof ${thisObj} === "${type}"`;
@@ -67,6 +68,7 @@ const excludeObject = excludeStatic("Object");
 
 defineStatic("Array", "from", "1.1.0");
 defineStatic("Array", "of", "1.0.0");
+defineInstance("Array", "concat", "1.0.2", arrayCheck);
 defineInstance("Array", "copyWithin", "1.0.0", arrayCheck);
 defineInstance("Array", "entries", "1.0.0", arrayCheck, excludeObject);
 defineInstance("Array", "every", "1.1.0", arrayCheck);
@@ -88,6 +90,7 @@ defineInstance("Array", "map", "1.0.2", arrayCheck);
 defineInstance("Array", "reduce", "1.0.1", arrayCheck);
 defineInstance("Array", "reduceRight", "1.0.1", arrayCheck);
 defineInstance("Array", "some", "1.1.1", arrayCheck);
+defineInstance("Array", "splice", "1.0.1", arrayCheck);
 defineInstance("Array", "toReversed", "1.0.1", arrayCheck);
 defineInstance("Array", "toSorted", "1.0.0", arrayCheck);
 defineInstance("Array", "toSpliced", "1.0.0", arrayCheck);
@@ -112,6 +115,7 @@ defineStatic("Number", "parseFloat", "1.0.0");
 defineStatic("Number", "parseInt", "1.0.0");
 
 defineStatic("Object", "assign", "4.1.0");
+defineStatic("Object", "defineProperties", "1.0.0");
 defineStatic("Object", "entries", "1.1.1");
 defineStatic("Object", "fromEntries", "2.0.2");
 defineStatic("Object", "hasOwn", "1.0.0");

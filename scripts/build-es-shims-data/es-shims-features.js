@@ -2,10 +2,17 @@
 
 module.exports = {
   globalThis: "globalThis",
+  parseInt: "Miscellaneous / parseInt ignores leading zeros",
   AggregateError: "Promise.any / AggregateError",
   "Array.from": "Array static methods / Array.from",
   "Array.of": "Array static methods / Array.of",
   "Array.prototype.at": "`.item` method / Array.prototype.item",
+  "Array.prototype.concat": {
+    features: [
+      "well-known symbols / Symbol.isConcatSpreadable, non-spreadable array",
+      "well-known symbols / Symbol.isConcatSpreadable, spreadable object with poisoned getter",
+    ],
+  },
   "Array.prototype.copyWithin":
     "Array.prototype methods / Array.prototype.copyWithin",
   "Array.prototype.entries":
@@ -30,6 +37,7 @@ module.exports = {
   "Array.prototype.reduce": "Array methods / Array.prototype.reduce",
   "Array.prototype.reduceRight": "Array methods / Array.prototype.reduceRight",
   "Array.prototype.some": "Array methods / Array.prototype.some",
+  "Array.prototype.splice": "Array.prototype methods / Array.prototype.splice",
   //"Array.prototype.toReversed": MISSING,
   //"Array.prototype.toSpliced": MISSING,
   //"Array.prototype.toSorted": MISSING,
@@ -65,6 +73,7 @@ module.exports = {
   },
   "Object.assign": "Object static methods / Object.assign",
   "Object.is": "Object static methods / Object.is",
+  "Object.defineProperties": "Object static methods / Object.defineProperties",
   "Object.entries": "Object static methods / Object.entries",
   "Object.fromEntries": "Object.fromEntries",
   "Object.getOwnPropertyDescriptors":
