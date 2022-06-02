@@ -41,6 +41,7 @@ module.exports = {
   //"Array.prototype.toReversed": MISSING,
   //"Array.prototype.toSpliced": MISSING,
   //"Array.prototype.toSorted": MISSING,
+  "Array.prototype.unshift": "Array methods / Array.prototype.unshift",
   "Array.prototype.values": "Array.prototype methods / Array.prototype.values",
   //"Array.prototype.with": MISSING,
   //"Date": MISSING,

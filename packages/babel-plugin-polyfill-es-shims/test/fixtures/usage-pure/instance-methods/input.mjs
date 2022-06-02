@@ -31,6 +31,7 @@ object.trimEnd;
 object.trimLeft;
 object.trimRight;
 object.trimStart;
+object.unshift;
 object.values;
 object.something;
 
@@ -74,6 +75,7 @@ object.trimEnd(arg);
 object.trimLeft(arg);
 object.trimRight(arg);
 object.trimStart(arg);
+object.unshift(arg);
 object.values(arg);
 
 date.toISOString();

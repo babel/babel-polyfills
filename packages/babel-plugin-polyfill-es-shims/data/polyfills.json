@@ -289,6 +289,20 @@
     "samsung": "1",
     "electron": "0.20"
   },
+  "Array.prototype.unshift": {
+    "chrome": "15",
+    "opera": "10.60",
+    "edge": "12",
+    "firefox": "3",
+    "safari": "4",
+    "node": "0.6",
+    "ie": "8",
+    "android": "4.4",
+    "ios": "6",
+    "phantom": "1.9",
+    "samsung": "1",
+    "electron": "0.20"
+  },
   "Array.prototype.values": {
     "chrome": "66",
     "opera": "53",

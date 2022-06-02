@@ -96,6 +96,7 @@ defineInstance("Array", "splice", "1.0.1", arrayCheck);
 defineInstance("Array", "toReversed", "1.0.1", arrayCheck);
 defineInstance("Array", "toSorted", "1.0.0", arrayCheck);
 defineInstance("Array", "toSpliced", "1.0.0", arrayCheck);
+defineInstance("Array", "unshift", "1.0.0", arrayCheck);
 defineInstance("Array", "values", "1.0.0", arrayCheck, excludeObject);
 defineInstance("Array", "with", "1.0.1", arrayCheck);
 
