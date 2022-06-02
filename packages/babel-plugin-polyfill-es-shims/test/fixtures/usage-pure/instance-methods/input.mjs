@@ -76,6 +76,9 @@ object.trimRight(arg);
 object.trimStart(arg);
 object.values(arg);
 
+date.toISOString();
+date.toJSON();
+
 Function.bind
 
 object.something(arg);

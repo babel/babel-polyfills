@@ -1,5 +1,6 @@
 import _ArrayFrom from "array.from";
 import _ArrayOf from "array.of";
+import _DateNow from "date/Date.now";
 import _MathAcosh from "math.acosh";
 import _MathAtanh from "math.atanh";
 import _MathCbrt from "math.cbrt";
@@ -29,7 +30,7 @@ import _StringRaw from "string.raw";
 _ArrayFrom;
 Array.isArray;
 _ArrayOf;
-Date.now;
+_DateNow;
 JSON.stringify;
 Math.DEG_PER_RAD;
 Math.RAD_PER_DEG;

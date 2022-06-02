@@ -300,6 +300,47 @@
     "samsung": "9",
     "electron": "3"
   },
+  "Date.prototype.toISOString": {
+    "chrome": "5",
+    "opera": "10.50",
+    "edge": "12",
+    "firefox": "3.5",
+    "safari": "4",
+    "node": "0.4",
+    "ie": "9",
+    "android": "4",
+    "ios": "6",
+    "phantom": "1.9",
+    "samsung": "1",
+    "electron": "0.20"
+  },
+  "Date.prototype.toJSON": {
+    "chrome": "5",
+    "opera": "12.10",
+    "edge": "12",
+    "firefox": "4",
+    "safari": "10",
+    "node": "0.4",
+    "ie": "9",
+    "android": "4",
+    "ios": "10",
+    "samsung": "1",
+    "electron": "0.20"
+  },
+  "Date.now": {
+    "chrome": "5",
+    "opera": "10.50",
+    "edge": "12",
+    "firefox": "2",
+    "safari": "4",
+    "node": "0.4",
+    "ie": "9",
+    "android": "4",
+    "ios": "6",
+    "phantom": "1.9",
+    "samsung": "1",
+    "electron": "0.20"
+  },
   "Error cause": {
     "chrome": "94",
     "opera": "80",

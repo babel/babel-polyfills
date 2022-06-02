@@ -1,4 +1,4 @@
-var _object, _object2, _object3, _object4, _object5, _object6, _object7, _object8, _object9, _object10, _object11, _object12, _object13, _object14, _object15, _object16, _object17, _object18, _object19, _object20, _object21, _object22, _object23, _object24, _object25, _object26, _object27, _object28, _object29, _object30, _object31, _object32, _object33, _object34, _object35, _object36, _object37, _object38, _object39, _object40, _object41, _object42, _object43, _object44, _object45, _object46, _object47, _object48, _object49, _object50, _object51, _object52, _object53, _object54, _object55, _object56, _object57, _object58, _object59, _object60, _object61, _object62;
+var _object, _object2, _object3, _object4, _object5, _object6, _object7, _object8, _object9, _object10, _object11, _object12, _object13, _object14, _object15, _object16, _object17, _object18, _object19, _object20, _object21, _object22, _object23, _object24, _object25, _object26, _object27, _object28, _object29, _object30, _object31, _object32, _object33, _object34, _object35, _object36, _object37, _object38, _object39, _object40, _object41, _object42, _object43, _object44, _object45, _object46, _object47, _object48, _object49, _object50, _object51, _object52, _object53, _object54, _object55, _object56, _object57, _object58, _object59, _object60, _object61, _object62, _date, _date2;
 
 import _ArrayPrototypeEntries from "array.prototype.entries";
 import _ArrayPrototypeEvery from "array.prototype.every";
@@ -35,6 +35,8 @@ import _StringPrototypeAt from "string.prototype.at";
 import _ArrayPrototypeConcat from "array.prototype.concat";
 import _ArrayPrototypeCopyWithin from "array.prototype.copywithin";
 import _StringPrototypeEndsWith from "string.prototype.endswith";
+import _DatePrototypeToISOString from "date/Date.prototype.toISOString";
+import _DatePrototypeToJSON from "date/Date.prototype.toJSON";
 _object = object, Array.isArray(_object) ? _ArrayPrototypeEntries.getPolyfill() : _object.entries;
 _object2 = object, Array.isArray(_object2) ? _ArrayPrototypeEvery.getPolyfill() : _object2.every;
 object.fill;
@@ -111,5 +113,7 @@ object.sort(arg);
 (_object60 = object, typeof _object60 === "string" ? _StringPrototypeTrimRight : Function.call.bind(_object60.trimRight))(_object60, arg);
 (_object61 = object, typeof _object61 === "string" ? _StringPrototypeTrimStart : Function.call.bind(_object61.trimStart))(_object61, arg);
 (_object62 = object, Array.isArray(_object62) ? _ArrayPrototypeValues : Function.call.bind(_object62.values))(_object62, arg);
+(_date = date, _date instanceof Date ? _DatePrototypeToISOString : Function.call.bind(_date.toISOString))(_date);
+(_date2 = date, _date2 instanceof Date ? _DatePrototypeToJSON : Function.call.bind(_date2.toJSON))(_date2);
 Function.bind;
 object.something(arg);

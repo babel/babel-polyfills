@@ -48,6 +48,8 @@ for (const [name, causeArgNum] of [
 // This needs to come after the AggregateError cause polyfill, since this
 // one polyfills less features.
 defineGlobal("AggregateError", "1.0.2", "es-aggregate-error");
+const DATE_VERSION = "2.0.0";
+// MISSING DATA: defineGlobal("Date", DATE_VERSION, "date", { subfolder: "Date" });
 defineGlobal("globalThis", "1.0.0");
 defineGlobal("parseInt", "2.0.0");
 
@@ -97,6 +99,34 @@ defineInstance("Array", "toSpliced", "1.0.0", arrayCheck);
 defineInstance("Array", "values", "1.0.0", arrayCheck, excludeObject);
 defineInstance("Array", "with", "1.0.1", arrayCheck);
 
+for (const name of [
+  "now",
+  // MISSING DATA: "parse"
+]) {
+  defineStatic("Date", name, DATE_VERSION, {
+    pkg: "date",
+    subfolder: `Date.${name}`,
+  });
+}
+for (const name of [
+  // MISSING DATA: "getFullYear",
+  // MISSING DATA: "getMonth",
+  // MISSING DATA: "getDate",
+  // MISSING DATA: "getUTCDate",
+  // MISSING DATA: "getUTCFullYear",
+  // MISSING DATA: "getUTCMonth",
+  // MISSING DATA: "toUTCString",
+  // MISSING DATA: "toDateString",
+  // MISSING DATA: "toString",
+  "toISOString",
+  "toJSON",
+]) {
+  defineInstance("Date", name, DATE_VERSION, instanceofCheck("Date"), {
+    pkg: "date",
+    subfolder: `Date.prototype.${name}`,
+  });
+}
+
 defineInstance("Function", "name", "1.1.2", typeofCheck("function"), getter);
 
 defineStatic("Math", "acosh", "1.0.0");
@@ -110,7 +140,7 @@ defineStatic("Math", "sign", "2.0.0");
 defineStatic("Number", "isFinite", "1.0.0");
 defineStatic("Number", "isInteger", "1.0.0");
 defineStatic("Number", "isSafeInteger", "1.0.0");
-defineStatic("Number", "isNaN", "1.2.1", "is-nan");
+defineStatic("Number", "isNaN", "1.2.1", { pkg: "is-nan" });
 defineStatic("Number", "parseFloat", "1.0.0");
 defineStatic("Number", "parseInt", "1.0.0");
 
@@ -119,7 +149,7 @@ defineStatic("Object", "defineProperties", "1.0.0");
 defineStatic("Object", "entries", "1.1.1");
 defineStatic("Object", "fromEntries", "2.0.2");
 defineStatic("Object", "hasOwn", "1.0.0");
-defineStatic("Object", "is", "1.1.2", "object-is");
+defineStatic("Object", "is", "1.1.2", { pkg: "object-is" });
 defineStatic("Object", "getOwnPropertyDescriptors", "2.1.0");
 defineStatic("Object", "getPrototypeOf", "1.0.1");
 defineStatic("Object", "values", "1.1.1");
@@ -223,11 +253,16 @@ function defineGlobal(
   });
 }
 
-function defineStatic(object, property, version, pkg?) {
+function defineStatic(
+  object,
+  property,
+  version,
+  { pkg, subfolder }: { pkg?: string; subfolder?: string } = {},
+) {
   if (!has(StaticProperties, object)) StaticProperties[object] = {};
 
   StaticProperties[object][property] = [
-    createDescriptor(`${object}.${property}`, version, pkg),
+    createDescriptor(`${object}.${property}`, version, pkg, subfolder),
   ];
 }
 
