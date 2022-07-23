@@ -215,9 +215,10 @@ export default defineProvider<Options>(function (
       if (path.parentPath.isUnaryExpression({ operator: "delete" })) return;
 
       if (meta.kind === "property") {
-        // We can't compile destructuring.
+        // We can't compile destructuring and updateExpression.
         if (!path.isMemberExpression()) return;
         if (!path.isReferenced()) return;
+        if (path.parentPath.isUpdateExpression()) return;
 
         if (meta.key === "Symbol.iterator") {
           if (!shouldInjectPolyfill("es.symbol.iterator")) return;
