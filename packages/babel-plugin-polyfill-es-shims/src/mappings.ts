@@ -70,6 +70,7 @@ const excludeObject = excludeStatic("Object");
 
 defineStatic("Array", "from", "1.1.0");
 defineStatic("Array", "of", "1.0.0");
+defineInstance("Array", "at", "1.0.0", arrayCheck);
 defineInstance("Array", "concat", "1.0.2", arrayCheck);
 defineInstance("Array", "copyWithin", "1.0.0", arrayCheck);
 defineInstance("Array", "entries", "1.0.0", arrayCheck, excludeObject);
@@ -85,12 +86,13 @@ defineInstance("Array", "includes", "3.1.1", arrayCheck, {
   pkg: "array-includes",
 });
 defineInstance("Array", "indexOf", "1.0.1", arrayCheck);
-defineInstance("Array", "at", "1.0.0", arrayCheck);
+// MISSING DATA: defineInstance("Array", "join", "1.0.0", arrayCheck);
 defineInstance("Array", "keys", "1.0.0", arrayCheck, excludeObject);
 defineInstance("Array", "lastIndexOf", "1.0.0", arrayCheck);
 defineInstance("Array", "map", "1.0.2", arrayCheck);
 defineInstance("Array", "reduce", "1.0.1", arrayCheck);
 defineInstance("Array", "reduceRight", "1.0.1", arrayCheck);
+// MISSING DATA: defineInstance("Array", "slice", "1.0.0", arrayCheck);
 defineInstance("Array", "some", "1.1.1", arrayCheck);
 defineInstance("Array", "splice", "1.0.1", arrayCheck);
 defineInstance("Array", "toReversed", "1.0.1", arrayCheck);
@@ -141,7 +143,7 @@ defineStatic("Math", "sign", "2.0.0");
 defineStatic("Number", "isFinite", "1.0.0");
 defineStatic("Number", "isInteger", "1.0.0");
 defineStatic("Number", "isSafeInteger", "1.0.0");
-defineStatic("Number", "isNaN", "1.2.1", { pkg: "is-nan" });
+defineStatic("Number", "isNaN", "1.0.0", { pkg: "number.isnan" });
 defineStatic("Number", "parseFloat", "1.0.0");
 defineStatic("Number", "parseInt", "1.0.0");
 
