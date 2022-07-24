@@ -1,2 +1,2 @@
-import "is-nan/auto";
+import "number.isnan/auto";
 Number.isNaN("3.14");
