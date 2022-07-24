@@ -127,7 +127,7 @@ This polyfill provider is compatible with polyfills that follow the [`es-shims-a
 | `Math.log10`                                | [`math.log1p`](https://github.com/es-shims/Math.log10)                                          |
 | `Math.log1p`                                | [`math.log1p`](https://github.com/es-shims/Math.log1p)                                          |
 | `Math.sign`                                 | [`math.sign`](https://github.com/es-shims/Math.sign)                                            |
-| `Number.isNaN`                              | [`is-nan`](https://github.com/es-shims/is-nan)                                                  |
+| `Number.isNaN`                              | [`number.isnan`](https://github.com/es-shims/Number.isNaN)                                      |
 | `Object.assign`                             | [`object.assign`](https://github.com/ljharb/object.assign)                                      | [@ljharb](https://github.com/ljharb)               |
 | `Object.getPrototypeOf`                     | [`object.getprototypeof`](https://github.com/es-shims/Object.getPrototypeOf)                    |
 | `Object.is`                                 | [`object-is`](https://github.com/es-shims/object-is)                                            |
@@ -161,4 +161,5 @@ This polyfill provider is compatible with polyfills that follow the [`es-shims-a
 | `Number.prototype.toExponential` | [`number.prototype.toexponential`](https://github.com/es-shims/Number.prototype.toExponential) |
 | `Object.defineProperties`        | [`object.defineproperties`](https://github.com/es-shims/Object.defineProperties)               |
 | `String.prototype.split`         | [`string.prototype.split`](https://github.com/es-shims/String.prototype.split)                 |
+| `String.prototype.substr`        | [`string.prototype.substr`](https://github.com/es-shims/String.prototype.substr)               |
 | `String.prototype.trim`          | [`string.prototype.trim`](https://github.com/es-shims/String.prototype.trim)                   |
