@@ -185,6 +185,7 @@ defineInstance(
   excludeStatic("Symbol"),
 );
 defineInstance("String", "startsWith", "1.0.0", stringCheck);
+defineInstance("String", "substr", "1.0.0", stringCheck);
 defineInstance("String", "trim", "1.2.1", stringCheck);
 defineInstance("String", "trimEnd", "1.0.0", stringCheck);
 defineInstance("String", "trimLeft", "2.1.1", stringCheck);

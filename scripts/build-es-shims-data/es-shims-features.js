@@ -124,6 +124,8 @@ module.exports = {
     "String properties and methods / String.prototype.split",
   "String.prototype.startsWith":
     "String.prototype methods / String.prototype.startsWith",
+  "String.prototype.substr":
+    "String properties and methods / String.prototype.substr",
   "String.prototype.trim":
     "String properties and methods / String.prototype.trim",
   "String.prototype.trimEnd": "string trimming / String.prototype.trimEnd",

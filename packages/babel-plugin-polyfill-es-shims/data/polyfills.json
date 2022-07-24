@@ -881,6 +881,17 @@
     "samsung": "3.4",
     "electron": "0.21"
   },
+  "String.prototype.substr": {
+    "chrome": "15",
+    "opera": "11",
+    "edge": "12",
+    "firefox": "3",
+    "node": "0.6",
+    "ie": "9",
+    "android": "4.4",
+    "samsung": "1",
+    "electron": "0.20"
+  },
   "String.prototype.trim": {
     "chrome": "5",
     "opera": "10.50",
