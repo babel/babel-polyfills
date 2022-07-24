@@ -10,7 +10,7 @@ import _MathLog1p from "math.log1p";
 import _MathSign from "math.sign";
 import _NumberIsFinite from "number.isfinite";
 import _NumberIsInteger from "number.isinteger";
-import _NumberIsNaN from "is-nan";
+import _NumberIsNaN from "number.isnan";
 import _NumberIsSafeInteger from "number.issafeinteger";
 import _NumberParseFloat from "number.parsefloat";
 import _NumberParseInt from "number.parseint";
