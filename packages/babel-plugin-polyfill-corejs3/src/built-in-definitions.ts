@@ -86,7 +86,7 @@ const TypedArrayDependencies = [
   "esnext.typed-array.with",
 ];
 
-export const PromiseDependencies = ["es.promise", "es.object.to-string"];
+export const PromiseDependencies = ["es.promise", "es.promise.finally", "es.object.to-string"];
 
 export const PromiseDependenciesWithIterators = [
   ...PromiseDependencies,
@@ -678,7 +678,7 @@ export const InstanceProperties = {
     ...IteratorDependencies,
   ]),
   filterReject: define("instance/filterReject", ["esnext.array.filter-reject"]),
-  finally: define(null, ["es.promise.finally", ...PromiseDependencies]),
+  finally: define(null, PromiseDependencies),
   find: define("instance/find", [
     "es.array.find",
     "esnext.async-iterator.find",
