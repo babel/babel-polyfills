@@ -55,6 +55,8 @@ const TypedArrayDependencies = [
   "es.typed-array.filter",
   "es.typed-array.find",
   "es.typed-array.find-index",
+  "es.typed-array.find-last",
+  "es.typed-array.find-last-index",
   "es.typed-array.for-each",
   "es.typed-array.includes",
   "es.typed-array.index-of",
@@ -76,8 +78,6 @@ const TypedArrayDependencies = [
   "es.array.iterator",
   "es.array-buffer.slice",
   "esnext.typed-array.filter-reject",
-  "esnext.typed-array.find-last",
-  "esnext.typed-array.find-last-index",
   "esnext.typed-array.group-by",
   "esnext.typed-array.to-reversed",
   "esnext.typed-array.to-sorted",
@@ -563,6 +563,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       "es.string.match-all",
     ]),
     metadata: define("symbol/metadata", ["esnext.symbol.metadata"]),
+    metadataKey: define("symbol/metadata-key", ["esnext.symbol.metadata-key"]),
     observable: define("symbol/observable", ["esnext.symbol.observable"]),
     patternMatch: define("symbol/pattern-match", [
       "esnext.symbol.pattern-match",
@@ -686,9 +687,9 @@ export const InstanceProperties = {
     ...IteratorDependencies,
   ]),
   findIndex: define("instance/find-index", ["es.array.find-index"]),
-  findLast: define("instance/find-last", ["esnext.array.find-last"]),
+  findLast: define("instance/find-last", ["es.array.find-last"]),
   findLastIndex: define("instance/find-last-index", [
-    "esnext.array.find-last-index",
+    "es.array.find-last-index",
   ]),
   fixed: define(null, ["es.string.fixed"]),
   flags: define("instance/flags", ["es.regexp.flags"]),
@@ -701,9 +702,15 @@ export const InstanceProperties = {
   ]),
   flat: define("instance/flat", ["es.array.flat", "es.array.unscopables.flat"]),
   getYear: define(null, ["es.date.get-year"]),
+  group: define("instance/group", ["esnext.array.group"]),
   groupBy: define("instance/group-by", ["esnext.array.group-by"]),
   groupByToMap: define("instance/group-by-to-map", [
     "esnext.array.group-by-to-map",
+    "es.map",
+    "es.object.to-string",
+  ]),
+  groupToMap: define("instance/group-to-map", [
+    "esnext.array.group-to-map",
     "es.map",
     "es.object.to-string",
   ]),
@@ -719,6 +726,12 @@ export const InstanceProperties = {
   includes: define("instance/includes", [
     "es.array.includes",
     "es.string.includes",
+  ]),
+  indexed: define("instance/indexed", [
+    "esnext.async-iterator.indexed",
+    ...AsyncIteratorDependencies,
+    "esnext.iterator.indexed",
+    ...IteratorDependencies,
   ]),
   indexOf: define("instance/index-of", ["es.array.index-of"]),
   italic: define(null, ["es.string.italics"]),
@@ -741,6 +754,7 @@ export const InstanceProperties = {
   name: define(null, ["es.function.name"]),
   padEnd: define("instance/pad-end", ["es.string.pad-end"]),
   padStart: define("instance/pad-start", ["es.string.pad-start"]),
+  push: define("instance/push", ["es.array.push"]),
   reduce: define("instance/reduce", [
     "es.array.reduce",
     "esnext.async-iterator.reduce",
@@ -818,6 +832,7 @@ export const InstanceProperties = {
   trimRight: define("instance/trim-right", ["es.string.trim-end"]),
   trimStart: define("instance/trim-start", ["es.string.trim-start"]),
   uniqueBy: define("instance/unique-by", ["esnext.array.unique-by", "es.map"]),
+  unshift: define("instance/unshift", ["es.array.unshift"]),
   unThis: define("instance/un-this", ["esnext.function.un-this"]),
   values: define("instance/values", ArrayNatureIteratorsWithTag),
   with: define("instance/with", ["esnext.array.with"]),
@@ -825,6 +840,7 @@ export const InstanceProperties = {
   __defineSetter__: define(null, ["es.object.define-setter"]),
   __lookupGetter__: define(null, ["es.object.lookup-getter"]),
   __lookupSetter__: define(null, ["es.object.lookup-setter"]),
+  ["__proto__"]: define(null, ["es.object.proto"]),
 };
 
 export const CommonInstanceDependencies = new Set<string>([

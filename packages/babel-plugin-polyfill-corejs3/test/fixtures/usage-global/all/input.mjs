@@ -24,3 +24,7 @@ const foo = new Promise((resolve) => {
 queueMicrotask(() => globalThis);
 
 Observable.from(10);
+
+foo.indexed;
+bar.with;
+buz.push;

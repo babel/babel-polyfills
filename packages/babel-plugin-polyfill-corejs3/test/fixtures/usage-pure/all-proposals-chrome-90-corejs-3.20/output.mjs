@@ -21,6 +21,7 @@ import _groupByToMapInstanceProperty from "core-js-pure/features/instance/group-
 import _unThisInstanceProperty from "core-js-pure/features/instance/un-this.js";
 import _Function$isConstructor from "core-js-pure/features/function/is-constructor.js";
 import _structuredClone from "core-js-pure/features/structured-clone.js";
+import _withInstanceProperty from "core-js-pure/features/instance/with.js";
 
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
@@ -67,3 +68,9 @@ _Function$isConstructor;
 throw new DOMException();
 
 _structuredClone(72);
+
+foo.indexed;
+
+_withInstanceProperty(bar);
+
+buz.push;

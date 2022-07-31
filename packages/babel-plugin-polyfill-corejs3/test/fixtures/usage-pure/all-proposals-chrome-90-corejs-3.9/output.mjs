@@ -6,3 +6,7 @@ import _findLastIndexInstanceProperty from "core-js-pure/features/instance/find-
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
 _findLastIndexInstanceProperty(_context2 = []).call(_context2, fn);
+
+foo.indexed;
+bar.with;
+buz.push;

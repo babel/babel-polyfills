@@ -33,3 +33,7 @@ Symbol.matcher
 Symbol.matchAll
 Symbol.metadata
 Symbol.replaceAll
+
+foo.indexed;
+bar.with;
+buz.push;

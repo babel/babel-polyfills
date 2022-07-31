@@ -47,3 +47,7 @@ throw new DOMException();
 structuredClone(72);
 
 btoa('hi');
+
+foo.indexed;
+bar.with;
+buz.push;

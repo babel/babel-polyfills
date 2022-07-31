@@ -1,7 +1,7 @@
 var _context, _context2, _context3, _context4, _context5;
 
-import _findLastInstanceProperty from "core-js-pure/features/instance/find-last.js";
-import _findLastIndexInstanceProperty from "core-js-pure/features/instance/find-last-index.js";
+import _findLastInstanceProperty from "core-js-pure/stable/instance/find-last.js";
+import _findLastIndexInstanceProperty from "core-js-pure/stable/instance/find-last-index.js";
 import _forEachInstanceProperty from "core-js-pure/stable/instance/for-each.js";
 import _mapInstanceProperty from "core-js-pure/stable/instance/map.js";
 import _filterInstanceProperty from "core-js-pure/stable/instance/filter.js";
@@ -12,6 +12,7 @@ import _Symbol from "core-js-pure/stable/symbol/index.js";
 import _Symbol$matchAll from "core-js-pure/stable/symbol/match-all.js";
 import _replaceAllInstanceProperty from "core-js-pure/stable/instance/replace-all.js";
 import _URL from "core-js-pure/stable/url/index.js";
+import _pushInstanceProperty from "core-js-pure/stable/instance/push.js";
 import _DOMException from "core-js-pure/stable/dom-exception.js";
 import _structuredClone from "core-js-pure/stable/structured-clone.js";
 import _btoa from "core-js-pure/stable/btoa.js";
@@ -53,7 +54,9 @@ _replaceAllInstanceProperty(_Symbol);
 
 new _URL(url);
 const foo = [1, 2, 3].groupByToMap(bar);
-const push = [].push.unThis();
+
+const push = _pushInstanceProperty([]).unThis();
+
 Function.isConstructor;
 throw new _DOMException();
 
@@ -63,4 +66,7 @@ _btoa('hi');
 
 foo.indexed;
 bar.with;
-buz.push;
+
+_pushInstanceProperty(buz);
+
+fuz.__proto__;
