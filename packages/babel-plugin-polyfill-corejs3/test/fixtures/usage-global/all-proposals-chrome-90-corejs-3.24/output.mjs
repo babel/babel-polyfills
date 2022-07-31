@@ -1,5 +1,5 @@
-import "core-js/modules/esnext.array.find-last.js";
-import "core-js/modules/esnext.array.find-last-index.js";
+import "core-js/modules/es.array.find-last.js";
+import "core-js/modules/es.array.find-last-index.js";
 import "core-js/modules/esnext.async-iterator.constructor.js";
 import "core-js/modules/esnext.async-iterator.to-array.js";
 import "core-js/modules/esnext.iterator.constructor.js";
@@ -44,6 +44,10 @@ import "core-js/modules/esnext.map.update.js";
 import "core-js/modules/esnext.symbol.async-dispose.js";
 import "core-js/modules/esnext.symbol.matcher.js";
 import "core-js/modules/esnext.symbol.metadata.js";
+import "core-js/modules/esnext.async-iterator.indexed.js";
+import "core-js/modules/esnext.iterator.indexed.js";
+import "core-js/modules/esnext.array.with.js";
+import "core-js/modules/es.array.push.js";
 [].findLast(fn);
 [].findLastIndex(fn);
 [].asIndexedPairs();

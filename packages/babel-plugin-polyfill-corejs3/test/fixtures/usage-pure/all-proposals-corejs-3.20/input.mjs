@@ -45,3 +45,7 @@ Function.isConstructor;
 throw new DOMException();
 
 structuredClone(72);
+
+foo.indexed;
+bar.with;
+buz.push;

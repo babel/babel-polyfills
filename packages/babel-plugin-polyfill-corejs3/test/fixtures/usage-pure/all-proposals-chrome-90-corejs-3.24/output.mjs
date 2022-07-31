@@ -1,4 +1,4 @@
-var _context, _context2, _context3, _context4, _context5, _context6, _context7, _context8, _context9, _context10, _context11;
+var _context, _context2, _context3, _context4, _context5, _context6, _context7, _context8, _context9, _context10, _context11, _context12, _context13;
 
 import _findLastInstanceProperty from "core-js-pure/features/instance/find-last.js";
 import _findLastIndexInstanceProperty from "core-js-pure/features/instance/find-last-index.js";
@@ -17,6 +17,13 @@ import _emplaceInstanceProperty from "core-js-pure/features/instance/emplace.js"
 import _Symbol$asyncDispose from "core-js-pure/features/symbol/async-dispose.js";
 import _Symbol$matcher from "core-js-pure/features/symbol/matcher.js";
 import _Symbol$metadata from "core-js-pure/features/symbol/metadata.js";
+import _groupByToMapInstanceProperty from "core-js-pure/features/instance/group-by-to-map.js";
+import _unThisInstanceProperty from "core-js-pure/features/instance/un-this.js";
+import _pushInstanceProperty from "core-js-pure/features/instance/push.js";
+import _Function$isConstructor from "core-js-pure/features/function/is-constructor.js";
+import _structuredClone from "core-js-pure/features/structured-clone.js";
+import _indexedInstanceProperty from "core-js-pure/features/instance/indexed.js";
+import _withInstanceProperty from "core-js-pure/features/instance/with.js";
 
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
@@ -53,6 +60,19 @@ _Symbol$matcher;
 Symbol.matchAll;
 _Symbol$metadata;
 Symbol.replaceAll;
-foo.indexed;
-bar.with;
-buz.push;
+new URL(url);
+
+const foo = _groupByToMapInstanceProperty(_context12 = [1, 2, 3]).call(_context12, bar);
+
+const push = _unThisInstanceProperty(_context13 = _pushInstanceProperty([])).call(_context13);
+
+_Function$isConstructor;
+throw new DOMException();
+
+_structuredClone(72);
+
+_indexedInstanceProperty(foo);
+
+_withInstanceProperty(bar);
+
+_pushInstanceProperty(buz);

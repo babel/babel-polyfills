@@ -64,3 +64,6 @@ new EvalError(1, {
 structuredClone;
 [].groupByToMap;
 btoa('hi');
+foo.indexed;
+bar.with;
+buz.push;
