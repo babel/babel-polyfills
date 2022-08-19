@@ -219,7 +219,7 @@ export default defineProvider<Options>(function (
         if (!path.isMemberExpression()) return;
         if (!path.isReferenced()) return;
         if (path.parentPath.isUpdateExpression()) return;
-        if (path.isMemberExpression() && t.isSuper(path.node.object)) {
+        if (t.isSuper(path.node.object)) {
           return;
         }
 
