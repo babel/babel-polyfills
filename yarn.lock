@@ -4125,9 +4125,9 @@ __metadata:
     "@babel/plugin-transform-for-of": ^7.16.7
     "@babel/plugin-transform-modules-commonjs": ^7.17.7
     "@babel/plugin-transform-spread": ^7.16.7
-    core-js: ^3.24.1
-    core-js-compat: ^3.24.1
-    core-js-pure: ^3.24.1
+    core-js: ^3.25.0
+    core-js-compat: ^3.25.0
+    core-js-pure: ^3.25.0
   peerDependencies:
     "@babel/core": ^7.0.0-0
   languageName: unknown
@@ -5303,27 +5303,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-compat@npm:^3.21.0, core-js-compat@npm:^3.24.1":
-  version: 3.24.1
-  resolution: "core-js-compat@npm:3.24.1"
+"core-js-compat@npm:^3.21.0, core-js-compat@npm:^3.25.0":
+  version: 3.25.0
+  resolution: "core-js-compat@npm:3.25.0"
   dependencies:
     browserslist: ^4.21.3
     semver: 7.0.0
-  checksum: b14516add9d59a9fae3b96d0de6e1d8864df80b714232814fce56ce946af3696cb50a4f83c717f8f36e43e1a37adf99a4cde6fc921e6ee56021eee2ea3bdc4dc
+  checksum: a40e072a67e65f34cb4b3a85bfdbbfcb0f3e1e2e171718763b13da4da897b5b6228603468027a0920096f0ee7e2c3906de95e26c9b6fe8f9595552bf2bc8f852
   languageName: node
   linkType: hard
 
-"core-js-pure@npm:^3.24.1":
-  version: 3.24.1
-  resolution: "core-js-pure@npm:3.24.1"
-  checksum: 4b8990a65c58e2320ff607f6168656fdcbfb4f60bd4af0ce7b09f5c0e0099b0cfc2632836986cfcb11f6ffe7ea46a5b8679651bc83ca3f41690f5ef7472d6f33
+"core-js-pure@npm:^3.25.0":
+  version: 3.25.0
+  resolution: "core-js-pure@npm:3.25.0"
+  checksum: 041cef3c4fa03b30eea6aa8539db00a02ea264e8542b9b787428f43e727e67050c742f46dbd75bc9ab544524a54e1ee55d8b23602dc8a2da485a3741a5f95df7
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.24.1":
-  version: 3.24.1
-  resolution: "core-js@npm:3.24.1"
-  checksum: 6fb5bf0fd9e9f3e69d95616dd03332fea6758a715d2628c108b5faf17b48b0f580e90c4febb0a523c4665b0991a810de16289f86187fe79d70cc722dbd3edf0e
+"core-js@npm:^3.25.0":
+  version: 3.25.0
+  resolution: "core-js@npm:3.25.0"
+  checksum: 5a72740bf5babaf2e6203da4c0e831a0b97c3fe6f21b4c1aa8601d3a927660a22128dd8f0e86ce84778c4e5372ab0fc03c7944afa7e215c7fb13b2c79d5d5504
   languageName: node
   linkType: hard
 

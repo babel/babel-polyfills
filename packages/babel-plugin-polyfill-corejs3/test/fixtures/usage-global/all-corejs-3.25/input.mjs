@@ -36,3 +36,4 @@ btoa('hi');
 foo.indexed;
 bar.with;
 buz.push;
+fuz.__proto__;

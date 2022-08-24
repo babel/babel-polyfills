@@ -124,6 +124,7 @@ import "core-js/modules/es.object.keys.js";
 import "core-js/modules/es.object.lookup-getter.js";
 import "core-js/modules/es.object.lookup-setter.js";
 import "core-js/modules/es.object.prevent-extensions.js";
+import "core-js/modules/es.object.proto.js";
 import "core-js/modules/es.object.seal.js";
 import "core-js/modules/es.object.set-prototype-of.js";
 import "core-js/modules/es.object.to-string.js";

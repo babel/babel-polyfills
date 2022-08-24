@@ -68,3 +68,5 @@ foo.indexed;
 bar.with;
 
 _pushInstanceProperty(buz);
+
+fuz.__proto__;

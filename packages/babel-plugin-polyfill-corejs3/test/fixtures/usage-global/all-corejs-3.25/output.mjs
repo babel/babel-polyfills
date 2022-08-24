@@ -23,6 +23,7 @@ import "core-js/modules/web.dom-exception.to-string-tag.js";
 import "core-js/modules/web.structured-clone.js";
 import "core-js/modules/web.btoa.js";
 import "core-js/modules/es.array.push.js";
+import "core-js/modules/es.object.proto.js";
 Array.from; // static method
 
 Map; // built-in
@@ -68,3 +69,4 @@ btoa('hi');
 foo.indexed;
 bar.with;
 buz.push;
+fuz.__proto__;
