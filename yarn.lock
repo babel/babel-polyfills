@@ -4125,9 +4125,9 @@ __metadata:
     "@babel/plugin-transform-for-of": ^7.16.7
     "@babel/plugin-transform-modules-commonjs": ^7.17.7
     "@babel/plugin-transform-spread": ^7.16.7
-    core-js: ^3.25.0
-    core-js-compat: ^3.25.0
-    core-js-pure: ^3.25.0
+    core-js: ^3.25.1
+    core-js-compat: ^3.25.1
+    core-js-pure: ^3.25.1
   peerDependencies:
     "@babel/core": ^7.0.0-0
   languageName: unknown
@@ -5303,27 +5303,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-compat@npm:^3.21.0, core-js-compat@npm:^3.25.0":
-  version: 3.25.0
-  resolution: "core-js-compat@npm:3.25.0"
+"core-js-compat@npm:^3.21.0, core-js-compat@npm:^3.25.1":
+  version: 3.25.1
+  resolution: "core-js-compat@npm:3.25.1"
   dependencies:
     browserslist: ^4.21.3
-    semver: 7.0.0
-  checksum: a40e072a67e65f34cb4b3a85bfdbbfcb0f3e1e2e171718763b13da4da897b5b6228603468027a0920096f0ee7e2c3906de95e26c9b6fe8f9595552bf2bc8f852
+  checksum: 34dbec657adc2f660f4cd701709c9c5e27cbd608211c65df09458f80f3e357b9492ba1c5173e17cca72d889dcc6da01268cadf88fb407cf1726e76d301c6143e
   languageName: node
   linkType: hard
 
-"core-js-pure@npm:^3.25.0":
-  version: 3.25.0
-  resolution: "core-js-pure@npm:3.25.0"
-  checksum: 041cef3c4fa03b30eea6aa8539db00a02ea264e8542b9b787428f43e727e67050c742f46dbd75bc9ab544524a54e1ee55d8b23602dc8a2da485a3741a5f95df7
+"core-js-pure@npm:^3.25.1":
+  version: 3.25.1
+  resolution: "core-js-pure@npm:3.25.1"
+  checksum: 0123131ec7ab3a1e56f0b4df4ae659de03d9c245ce281637d4d0f18f9839d8e0cfbfa989bd577ce1b67826f889a7dcc734421f697cf1bbe59f605f29c537a678
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.25.0":
-  version: 3.25.0
-  resolution: "core-js@npm:3.25.0"
-  checksum: 5a72740bf5babaf2e6203da4c0e831a0b97c3fe6f21b4c1aa8601d3a927660a22128dd8f0e86ce84778c4e5372ab0fc03c7944afa7e215c7fb13b2c79d5d5504
+"core-js@npm:^3.25.1":
+  version: 3.25.1
+  resolution: "core-js@npm:3.25.1"
+  checksum: bfacb078e790913841e2d5008b9b6705ae56ed23f83c7f0ae08d330d874561012611089d53b71520105234ed0abba36f28d91b391514a16541a8c8d98c464239
   languageName: node
   linkType: hard
 
@@ -12443,15 +12442,6 @@ resolve@1.1.7:
   bin:
     semver: ./bin/semver
   checksum: 57fd0acfd0bac382ee87cd52cd0aaa5af086a7dc8d60379dfe65fea491fb2489b6016400813930ecd61fd0952dae75c115287a1b16c234b1550887117744dfaf
-  languageName: node
-  linkType: hard
-
-"semver@npm:7.0.0":
-  version: 7.0.0
-  resolution: "semver@npm:7.0.0"
-  bin:
-    semver: bin/semver.js
-  checksum: 272c11bf8d083274ef79fe40a81c55c184dff84dd58e3c325299d0927ba48cece1f020793d138382b85f89bab5002a35a5ba59a3a68a7eebbb597eb733838778
   languageName: node
   linkType: hard
 
