@@ -781,7 +781,7 @@ export const InstanceProperties = {
     "esnext.iterator.take",
     ...IteratorDependencies,
   ]),
-  test: define("instance/test", ["es.regexp.test", "es.regexp.exec"]),
+  test: define(null, ["es.regexp.test", "es.regexp.exec"]),
   toArray: define("instance/to-array", [
     "esnext.async-iterator.to-array",
     ...AsyncIteratorDependencies,
