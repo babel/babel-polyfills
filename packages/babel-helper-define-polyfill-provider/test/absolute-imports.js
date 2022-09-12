@@ -21,14 +21,17 @@ function transformTest(name, cwd, file, options = {}) {
       ...options,
     });
 
-    const dirname = __dirname.replace(/\\/g, "/");
-    while (code.includes(dirname)) {
-      code = code.replace(dirname, "<CWD>");
-    }
+    code = code.replace(
+      new RegExp(__dirname.replace(/\\/g, "/"), "g"),
+      "<CWD>",
+    );
 
     if (expected === undefined) {
       writeFileSync(outputPath, code);
     } else {
+      console.log(Buffer.from(code).toString("hex"));
+      console.log(Buffer.from(expected).toString("hex"));
+
       expect(code).toBe(expected);
     }
   });

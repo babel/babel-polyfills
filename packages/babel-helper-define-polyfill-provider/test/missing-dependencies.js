@@ -1,13 +1,10 @@
 import cp from "child_process";
 import fs from "fs";
 import path from "path";
+import stripAnsi from "strip-ansi";
 
 function execP(cmd, opts) {
-  const normalize = buff =>
-    String(buff)
-      // Remove ANSII escapes
-      .replace(/\u001b\[.*?m/g, "") // eslint-disable-line no-control-regex
-      .trim();
+  const normalize = buff => stripAnsi(buff + "").trim();
 
   return new Promise(resolve => {
     cp.exec(cmd, opts, (error, stdout, stderr) => {
