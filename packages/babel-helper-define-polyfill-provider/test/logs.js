@@ -114,10 +114,9 @@ describe("debug", () => {
 
     expect(exitCode).toBe(0);
 
-    const out = stdout.replace(
-      new RegExp(__dirname.replace(/\\/g, "/"), "g"),
-      "<CWD>",
-    );
+    const out = stdout
+      .replace(new RegExp(__dirname.replace(/\\/g, "\\\\"), "g"), "<CWD>")
+      .replace(/\\/g, "/");
 
     expect(out).toMatchInlineSnapshot(`
       "test: \`DEBUG\` option
