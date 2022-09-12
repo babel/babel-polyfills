@@ -29,9 +29,6 @@ function transformTest(name, cwd, file, options = {}) {
     if (expected === undefined) {
       writeFileSync(outputPath, code);
     } else {
-      console.log(Buffer.from(code).toString("hex"));
-      console.log(Buffer.from(expected).toString("hex"));
-
       expect(code).toBe(expected);
     }
   });
