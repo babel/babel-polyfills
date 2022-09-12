@@ -61,30 +61,6 @@ describe("targets", () => {
   });
 });
 
-describe("debug", () => {
-  it("logs correct reasons for including a polyfill", () => {
-    const consoleMock = jest.spyOn(console, "log").mockImplementation();
-    const targets = "firefox 67, ie 11";
-    transform(
-      "import 'core-js'",
-      { method: "entry-global", targets, debug: true },
-      ({ debug }) => {
-        return {
-          name: "test",
-          polyfills: { a: { firefox: "55.0.0" } },
-          entryGlobal() {
-            debug("a");
-          },
-        };
-      },
-    );
-    expect(console.log).toHaveBeenLastCalledWith(
-      expect.stringContaining('a { "ie":"11" }'),
-    );
-    consoleMock.mockRestore();
-  });
-});
-
 describe("shouldInjectPolyfill", () => {
   it("is not compatible with .include", () => {
     expect(() =>

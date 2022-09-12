@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    [
+      "./plugin.cjs",
+      {
+        "method": "entry-global",
+        "targets": "firefox 67, ie 11",
+        "debug": true
+      }
+    ]
+  ]
+}
