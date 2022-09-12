@@ -5,6 +5,7 @@ module.exports = {
 
   entry: path.join(__dirname, "src/main.js"),
   output: {
+    hashFunction: "sha256",
     path: __dirname,
     filename: "output.js",
   },

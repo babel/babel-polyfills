@@ -1,5 +1,6 @@
 import cp from "child_process";
 import fs from "fs";
+import path from "path";
 
 function execP(cmd, opts) {
   const normalize = buff =>
@@ -39,7 +40,7 @@ describe("missingDependencies", () => {
   });
 
   it("logs with webpack", async () => {
-    const cwd = __dirname + "/spawn-fixtures/webpack";
+    const cwd = path.join(__dirname, "spawn-fixtures/webpack/");
     const { stdout, stderr, exitCode } = await execP("yarn webpack", { cwd });
 
     expect(exitCode).not.toBe(0);
@@ -52,7 +53,7 @@ describe("missingDependencies", () => {
       // compilation time)
       .replace(/^.*\[built]\s*/s, "")
       // Replace env-specific directory path
-      .replace(new RegExp(cwd, "g"), "<CWD>");
+      .replace(new RegExp(cwd.replace(/\\/g, "\\\\"), "g"), "<CWD>/");
 
     expect(out).toMatchInlineSnapshot(`
       "ERROR in ./src/dep.js
@@ -88,7 +89,9 @@ describe("missingDependencies", () => {
     expect(stdout).toBe("");
 
     // Remove compilation time
-    const err = stderr.replace(/(?<=created output.js in )\d+/, "XXX");
+    const err = stderr
+      .replace(/(?<=created output.js in )\d+/, "XXX")
+      .replace(/\\/g, "/");
 
     expect(err).toMatchInlineSnapshot(`
       "src/main.js → output.js...
