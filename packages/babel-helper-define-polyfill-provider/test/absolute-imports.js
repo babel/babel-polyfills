@@ -21,8 +21,9 @@ function transformTest(name, cwd, file, options = {}) {
       ...options,
     });
 
-    while (code.includes(__dirname)) {
-      code = code.replace(__dirname, "<CWD>");
+    const dirname = __dirname.replace(/\\/g, "/");
+    while (code.includes(dirname)) {
+      code = code.replace(dirname, "<CWD>");
     }
 
     if (expected === undefined) {
