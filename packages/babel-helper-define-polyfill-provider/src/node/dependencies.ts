@@ -5,7 +5,19 @@ import requireResolve from "resolve";
 const nativeRequireResolve = parseFloat(process.versions.node) >= 8.9;
 
 import { createRequire } from "module";
-const require = createRequire(import/*::(_)*/.meta.url); // eslint-disable-line
+const require = createRequire(import /*::(_)*/.meta.url); // eslint-disable-line
+
+function myResolve(name: string, basedir: string) {
+  if (nativeRequireResolve) {
+    return require
+      .resolve(name, {
+        paths: [basedir],
+      })
+      .replace(/\\/g, "/");
+  } else {
+    return requireResolve.sync(name, { basedir }).replace(/\\/g, "/");
+  }
+}
 
 export function resolve(
   dirname: string,
@@ -20,13 +32,7 @@ export function resolve(
   }
 
   try {
-    if (nativeRequireResolve) {
-      return require.resolve(moduleName, {
-        paths: [basedir],
-      });
-    } else {
-      return requireResolve.sync(moduleName, { basedir });
-    }
+    return myResolve(moduleName, basedir);
   } catch (err) {
     if (err.code !== "MODULE_NOT_FOUND") throw err;
 
@@ -43,11 +49,7 @@ export function resolve(
 
 export function has(basedir: string, name: string) {
   try {
-    if (nativeRequireResolve) {
-      require.resolve(name, { paths: [basedir] });
-    } else {
-      requireResolve.sync(name, { basedir });
-    }
+    myResolve(name, basedir);
     return true;
   } catch {
     return false;
