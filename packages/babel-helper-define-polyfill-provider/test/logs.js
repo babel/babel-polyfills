@@ -112,8 +112,6 @@ describe("debug", () => {
       cwd: __dirname + "/spawn-fixtures/debug",
     });
 
-    expect(exitCode).toBe(0);
-
     const out = stdout
       .replace(new RegExp(__dirname.replace(/\\/g, "\\\\"), "g"), "<CWD>")
       .replace(/\\/g, "/");
@@ -133,5 +131,7 @@ describe("debug", () => {
         a { \\"ie\\":\\"11\\" }
       import \\"core-js\\";"
     `);
+
+    expect(exitCode).toBe(0);
   });
 });

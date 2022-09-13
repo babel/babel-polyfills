@@ -375,7 +375,7 @@ export default function definePolyfillProvider<Options>(
         }
 
         for (const name of debugLog.polyfills) {
-          if (debugLog.polyfillsSupport && debugLog.polyfillsSupport[name]) {
+          if (debugLog.polyfillsSupport?.[name]) {
             const filteredTargets = getInclusionReasons(
               name,
               targets,
