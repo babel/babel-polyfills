@@ -105,3 +105,33 @@ describe("missingDependencies", () => {
     `);
   });
 });
+
+describe("debug", () => {
+  it("logs correct reasons for including a polyfill", async () => {
+    const { stdout, exitCode } = await execP("yarn babel input.mjs", {
+      cwd: __dirname + "/spawn-fixtures/debug",
+    });
+
+    const out = stdout
+      .replace(new RegExp(__dirname.replace(/\\/g, "\\\\"), "g"), "<CWD>")
+      .replace(/\\/g, "/");
+
+    expect(out).toMatchInlineSnapshot(`
+      "test: \`DEBUG\` option
+
+      Using targets: {
+        \\"firefox\\": \\"67\\",
+        \\"ie\\": \\"11\\"
+      }
+
+      Using polyfills with \`entry-global\` method:
+
+      [<CWD>/spawn-fixtures/debug/input.mjs]
+      The test polyfill entry has been replaced with the following polyfills:
+        a { \\"ie\\":\\"11\\" }
+      import \\"core-js\\";"
+    `);
+
+    expect(exitCode).toBe(0);
+  });
+});

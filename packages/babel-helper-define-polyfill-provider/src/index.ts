@@ -220,10 +220,8 @@ function instantiateProvider<Options>(
       if (!debug || !name) return;
 
       if (debugLog().polyfills.has(provider.name)) return;
-      debugLog().polyfills.set(
-        name,
-        polyfillsSupport && name && polyfillsSupport[name],
-      );
+      debugLog().polyfills.add(name);
+      debugLog().polyfillsSupport ??= polyfillsSupport;
     },
     assertDependency(name, version = "*") {
       if (missingDependencies === false) return;
@@ -329,7 +327,8 @@ export default function definePolyfillProvider<Options>(
 
       pre() {
         debugLog = {
-          polyfills: new Map(),
+          polyfills: new Set(),
+          polyfillsSupport: undefined,
           found: false,
           providers: new Set(),
           missingDeps: new Set(),
@@ -375,9 +374,13 @@ export default function definePolyfillProvider<Options>(
           );
         }
 
-        for (const [name, support] of debugLog.polyfills) {
-          if (support) {
-            const filteredTargets = getInclusionReasons(name, targets, support);
+        for (const name of debugLog.polyfills) {
+          if (debugLog.polyfillsSupport?.[name]) {
+            const filteredTargets = getInclusionReasons(
+              name,
+              targets,
+              debugLog.polyfillsSupport,
+            );
 
             const formattedTargets = JSON.stringify(filteredTargets)
               .replace(/,/g, ", ")
