@@ -221,8 +221,7 @@ function instantiateProvider<Options>(
 
       if (debugLog().polyfills.has(provider.name)) return;
       debugLog().polyfills.add(name);
-      if (!debugLog().polyfillsSupport)
-        debugLog().polyfillsSupport = polyfillsSupport;
+      debugLog().polyfillsSupport ??= polyfillsSupport;
     },
     assertDependency(name, version = "*") {
       if (missingDependencies === false) return;
