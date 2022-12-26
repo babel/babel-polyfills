@@ -52,3 +52,13 @@ foo.indexed;
 bar.with;
 buz.push;
 fuz.__proto__;
+
+string.isWellFormed;
+string.toWellFormed;
+
+String.dedent`42`;
+
+self;
+SuppressedError
+DisposableStack;
+AsyncDisposableStack;

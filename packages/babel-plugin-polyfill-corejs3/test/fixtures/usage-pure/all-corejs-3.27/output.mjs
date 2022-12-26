@@ -16,6 +16,7 @@ import _pushInstanceProperty from "core-js-pure/stable/instance/push.js";
 import _DOMException from "core-js-pure/stable/dom-exception.js";
 import _structuredClone from "core-js-pure/stable/structured-clone.js";
 import _btoa from "core-js-pure/stable/btoa.js";
+import _self from "core-js-pure/stable/self.js";
 
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
@@ -73,7 +74,7 @@ fuz.__proto__;
 string.isWellFormed;
 string.toWellFormed;
 String.dedent`42`;
-self;
+_self;
 SuppressedError;
 DisposableStack;
 AsyncDisposableStack;

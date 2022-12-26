@@ -34,6 +34,7 @@ import "core-js/modules/web.btoa.js";
 import "core-js/modules/es.object.proto.js";
 import "core-js/modules/es.string.from-code-point.js";
 import "core-js/modules/es.weak-map.js";
+import "core-js/modules/web.self.js";
 import "core-js/modules/es.error.cause.js";
 [].findLast(fn);
 [].findLastIndex(fn);

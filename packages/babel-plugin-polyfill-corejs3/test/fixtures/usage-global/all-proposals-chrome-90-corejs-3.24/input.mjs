@@ -34,6 +34,31 @@ Symbol.matchAll
 Symbol.metadata
 Symbol.replaceAll
 
+new URL(url);
+
+const foo = [1, 2, 3].groupByToMap(bar);
+
+const push = [].push.unThis();
+
+Function.isConstructor;
+
+throw new DOMException();
+
+structuredClone(72);
+
+btoa('hi');
+
 foo.indexed;
 bar.with;
 buz.push;
+fuz.__proto__;
+
+string.isWellFormed;
+string.toWellFormed;
+
+String.dedent`42`;
+
+self;
+SuppressedError
+DisposableStack;
+AsyncDisposableStack;
