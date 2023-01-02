@@ -63,7 +63,8 @@ jobs:
       - name: Build
         run: yarn build
       - name: Test on Node.js ${{ matrix.node-version }}
-        run: yarn jest --ci --color
+        # `maxWorkers` cannot be 1 because we are using `process.exitCode` in our tests.
+        run: yarn jest --ci --color --maxWorkers=2
         env:
           BABEL_TYPES_8_BREAKING: true
       - name: Test the esm build
@@ -90,7 +91,8 @@ jobs:
       - name: Build
         run: yarn build-corejs3-shipped-proposals && gulp build && gulp bundle
       - name: Test on Node.js latest
-        run: yarn jest --ci --color
+        # `maxWorkers` cannot be 1 because we are using `process.exitCode` in our tests.
+        run: yarn jest --ci --color --maxWorkers=2
         env:
           BABEL_TYPES_8_BREAKING: true
       - name: Test the esm build
