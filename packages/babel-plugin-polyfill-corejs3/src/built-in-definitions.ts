@@ -47,6 +47,11 @@ const CommonIteratorsWithTag = ["es.object.to-string", ...CommonIterators];
 
 const ErrorDependencies = ["es.error.cause", "es.error.to-string"];
 
+const SuppressedErrorDependencies = [
+  "esnext.suppressed-error.constructor",
+  ...ErrorDependencies,
+];
+
 const TypedArrayDependencies = [
   "es.typed-array.at",
   "es.typed-array.copy-within",
@@ -123,19 +128,26 @@ const SetDependencies = [
   "esnext.set.add-all",
   "esnext.set.delete-all",
   "esnext.set.difference",
+  "esnext.set.difference.v2",
   "esnext.set.every",
   "esnext.set.filter",
   "esnext.set.find",
   "esnext.set.intersection",
+  "esnext.set.intersection.v2",
   "esnext.set.is-disjoint-from",
+  "esnext.set.is-disjoint-from.v2",
   "esnext.set.is-subset-of",
+  "esnext.set.is-subset-of.v2",
   "esnext.set.is-superset-of",
+  "esnext.set.is-superset-of.v2",
   "esnext.set.join",
   "esnext.set.map",
   "esnext.set.reduce",
   "esnext.set.some",
   "esnext.set.symmetric-difference",
+  "esnext.set.symmetric-difference.v2",
   "esnext.set.union",
+  "esnext.set.union.v2",
   ...CommonIteratorsWithTag,
 ];
 
@@ -196,6 +208,14 @@ const TypedArrayStaticMethods = {
 };
 
 export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
+  AsyncDisposableStack: define("async-disposable-stack", [
+    "esnext.async-disposable-stack.constructor",
+    "es.object.to-string",
+    "esnext.async-iterator.async-dispose",
+    "esnext.iterator.dispose",
+    ...PromiseDependencies,
+    ...SuppressedErrorDependencies,
+  ]),
   AsyncIterator: define("async-iterator/index", AsyncIteratorDependencies),
   AggregateError: define("aggregate-error", [
     "es.aggregate-error",
@@ -215,6 +235,12 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   ]),
   Date: define(null, ["es.date.to-string"]),
   DOMException: define("dom-exception", DOMExceptionDependencies),
+  DisposableStack: define("disposable-stack", [
+    "esnext.disposable-stack.constructor",
+    "es.object.to-string",
+    "esnext.iterator.dispose",
+    ...SuppressedErrorDependencies,
+  ]),
   Error: define(null, ErrorDependencies),
   EvalError: define(null, ErrorDependencies),
   Float32Array: typed("es.typed-array.float32-array"),
@@ -247,6 +273,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
     "es.regexp.to-string",
   ]),
   Set: define("set/index", SetDependencies),
+  SuppressedError: define("suppressed-error", SuppressedErrorDependencies),
   Symbol: define("symbol/index", SymbolDependencies),
   SyntaxError: define(null, ErrorDependencies),
   TypeError: define(null, ErrorDependencies),
@@ -270,6 +297,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   parseFloat: define("parse-float", ["es.parse-float"]),
   parseInt: define("parse-int", ["es.parse-int"]),
   queueMicrotask: define("queue-microtask", ["web.queue-microtask"]),
+  self: define("self", ["web.self"]),
   setImmediate: define("set-immediate", ["web.immediate"]),
   setInterval: define("set-interval", ["web.timers"]),
   setTimeout: define("set-timeout", ["web.timers"]),
@@ -528,6 +556,11 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
 
   String: {
     cooked: define("string/cooked", ["esnext.string.cooked"]),
+    dedent: define("string/dedent", [
+      "esnext.string.dedent",
+      "es.string.from-code-point",
+      "es.weak-map",
+    ]),
     fromCodePoint: define("string/from-code-point", [
       "es.string.from-code-point",
     ]),
@@ -537,11 +570,15 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   Symbol: {
     asyncDispose: define("symbol/async-dispose", [
       "esnext.symbol.async-dispose",
+      "esnext.async-iterator.async-dispose",
     ]),
     asyncIterator: define("symbol/async-iterator", [
       "es.symbol.async-iterator",
     ]),
-    dispose: define("symbol/dispose", ["esnext.symbol.dispose"]),
+    dispose: define("symbol/dispose", [
+      "esnext.symbol.dispose",
+      "esnext.iterator.dispose",
+    ]),
     for: define("symbol/for", [], "es.symbol"),
     hasInstance: define("symbol/has-instance", [
       "es.symbol.has-instance",
@@ -734,6 +771,9 @@ export const InstanceProperties = {
     ...IteratorDependencies,
   ]),
   indexOf: define("instance/index-of", ["es.array.index-of"]),
+  isWellFormed: define("instance/is-well-formed", [
+    "esnext.string.is-well-formed",
+  ]),
   italic: define(null, ["es.string.italics"]),
   join: define(null, ["es.array.join"]),
   keys: define("instance/keys", ArrayNatureIteratorsWithTag),
@@ -825,6 +865,9 @@ export const InstanceProperties = {
     "es.error.to-string",
     "es.date.to-string",
     "es.regexp.to-string",
+  ]),
+  toWellFormed: define("instance/to-well-formed", [
+    "esnext.string.to-well-formed",
   ]),
   trim: define("instance/trim", ["es.string.trim"]),
   trimEnd: define("instance/trim-end", ["es.string.trim-end"]),

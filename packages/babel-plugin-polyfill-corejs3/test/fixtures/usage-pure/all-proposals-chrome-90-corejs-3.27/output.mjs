@@ -24,6 +24,12 @@ import _Function$isConstructor from "core-js-pure/features/function/is-construct
 import _structuredClone from "core-js-pure/features/structured-clone.js";
 import _indexedInstanceProperty from "core-js-pure/features/instance/indexed.js";
 import _withInstanceProperty from "core-js-pure/features/instance/with.js";
+import _isWellFormedInstanceProperty from "core-js-pure/features/instance/is-well-formed.js";
+import _toWellFormedInstanceProperty from "core-js-pure/features/instance/to-well-formed.js";
+import _String$dedent from "core-js-pure/features/string/dedent.js";
+import _SuppressedError from "core-js-pure/features/suppressed-error.js";
+import _DisposableStack from "core-js-pure/features/disposable-stack.js";
+import _AsyncDisposableStack from "core-js-pure/features/async-disposable-stack.js";
 
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
@@ -80,10 +86,13 @@ _withInstanceProperty(bar);
 _pushInstanceProperty(buz);
 
 fuz.__proto__;
-string.isWellFormed;
-string.toWellFormed;
-String.dedent`42`;
+
+_isWellFormedInstanceProperty(string);
+
+_toWellFormedInstanceProperty(string);
+
+_String$dedent`42`;
 self;
-SuppressedError;
-DisposableStack;
-AsyncDisposableStack;
+_SuppressedError;
+_DisposableStack;
+_AsyncDisposableStack;
