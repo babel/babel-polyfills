@@ -683,7 +683,7 @@ export const InstanceProperties = {
   concat: define("instance/concat", ["es.array.concat"], undefined, ["String"]),
   copyWithin: define("instance/copy-within", ["es.array.copy-within"]),
   description: define(null, ["es.symbol", "es.symbol.description"]),
-  dotAll: define("regexp/dot-all", ["es.regexp.dot-all"]),
+  dotAll: define(null, ["es.regexp.dot-all"]),
   drop: define("instance/drop", [
     "esnext.async-iterator.drop",
     ...AsyncIteratorDependencies,
@@ -824,7 +824,7 @@ export const InstanceProperties = {
   splice: define("instance/splice", ["es.array.splice"]),
   split: define(null, ["es.string.split", "es.regexp.exec"]),
   startsWith: define("instance/starts-with", ["es.string.starts-with"]),
-  sticky: define("regexp/sticky", ["es.regexp.sticky"]),
+  sticky: define(null, ["es.regexp.sticky"]),
   strike: define(null, ["es.string.strike"]),
   sub: define(null, ["es.string.sub"]),
   substr: define(null, ["es.string.substr"]),
