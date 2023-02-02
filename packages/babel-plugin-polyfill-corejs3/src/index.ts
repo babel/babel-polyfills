@@ -4,7 +4,6 @@ import getModulesListForTargetVersion from "../core-js-compat/get-modules-list-f
 import {
   BuiltIns,
   CommonIterators,
-  CommonInstanceDependencies,
   PromiseDependencies,
   PromiseDependenciesWithIterators,
   StaticProperties,
@@ -35,6 +34,15 @@ type Options = {
     ext: string;
   };
 };
+
+const uniqueObjects = [
+  "array",
+  "string",
+
+  "iterator",
+  "async-iterator",
+  "dom-collections",
+].map(v => new RegExp(`[a-z]*\\.${v}\\..*`));
 
 const esnextFallback = (
   name: string,
@@ -191,8 +199,8 @@ export default defineProvider<Options>(function (
         meta.placement === "prototype"
       ) {
         const low = meta.object.toLowerCase();
-        deps = deps.filter(
-          m => m.includes(low) || CommonInstanceDependencies.has(m),
+        deps = deps.filter(m =>
+          uniqueObjects.some(v => v.test(m)) ? m.includes(low) : true,
         );
       }
 
