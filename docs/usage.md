@@ -4,7 +4,9 @@ Every polyfill provider accepts the following options.
 Note that they might not support filtering the polyfills based on the target
 engines, but if they do they will follow this interface.
 
-Additionally, polyfill providers can define any custom option.
+Additionally, polyfill providers can define any custom options. Here is a list
+of providers with custom options:
+- [babel-plugin-polyfill-corejs3](../packages/babel-plugin-polyfill-corejs3/README.md#options)
 
 ### `method`
 
