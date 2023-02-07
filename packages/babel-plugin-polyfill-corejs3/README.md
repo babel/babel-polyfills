@@ -50,7 +50,7 @@ This option only has an effect when used alongside `"method": "usage-global"` or
 ```
 
 If you are a library author, specify a reasonably modern `core-js` version in your
-`dependencies` and provide the plugin the minimal supported version.
+`package.json` and provide the plugin the minimal supported version.
 
 ```json
 {
