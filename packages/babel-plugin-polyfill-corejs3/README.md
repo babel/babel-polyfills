@@ -64,8 +64,8 @@ If you are a library author, specify a reasonably modern `core-js` version in yo
   plugins: [
     ["polyfill-corejs3", {
       "method": "usage-global",
-      // improvise if you have more complicated version spec
-      "version": require("./package.json").dependencies["core-js"].replace("^", "")
+      // improvise if you have more complicated version spec, e.g. > 3.1.4
+      "version": require("./package.json").dependencies["core-js"]
     }]
   ]
 }
