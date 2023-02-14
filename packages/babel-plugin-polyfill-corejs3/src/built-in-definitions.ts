@@ -885,12 +885,3 @@ export const InstanceProperties = {
   __lookupSetter__: define(null, ["es.object.lookup-setter"]),
   ["__proto__"]: define(null, ["es.object.proto"]),
 };
-
-export const CommonInstanceDependencies = new Set<string>([
-  "es.object.to-string",
-  "es.object.define-getter",
-  "es.object.define-setter",
-  "es.object.lookup-getter",
-  "es.object.lookup-setter",
-  "es.regexp.exec",
-]);
