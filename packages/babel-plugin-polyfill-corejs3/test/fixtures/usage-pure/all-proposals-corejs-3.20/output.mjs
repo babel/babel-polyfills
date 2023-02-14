@@ -18,8 +18,6 @@ import _BigInt$range from "core-js-pure/features/bigint/range.js";
 import _Array$isTemplateObject from "core-js-pure/features/array/is-template-object.js";
 import _emplaceInstanceProperty from "core-js-pure/features/instance/emplace.js";
 import _Map from "core-js-pure/features/map/index.js";
-import _dotAllInstanceProperty from "core-js-pure/features/instance/dot-all.js";
-import _stickyInstanceProperty from "core-js-pure/features/instance/sticky.js";
 import _Symbol$asyncDispose from "core-js-pure/features/symbol/async-dispose.js";
 import _Symbol$matcher from "core-js-pure/features/symbol/matcher.js";
 import _Symbol$matchAll from "core-js-pure/features/symbol/match-all.js";
@@ -62,10 +60,8 @@ _emplaceInstanceProperty(_context14 = new _Map([['x', 1]])).call(_context14, 'x'
   insert: () => 0
 });
 
-_dotAllInstanceProperty(/x/);
-
-_stickyInstanceProperty(/x/);
-
+/x/.dotAll;
+/x/.sticky;
 _Symbol$asyncDispose;
 _Symbol$matcher;
 _Symbol$matchAll;
