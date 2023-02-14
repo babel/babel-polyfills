@@ -6,8 +6,6 @@ import _forEachInstanceProperty from "core-js-pure/stable/instance/for-each.js";
 import _mapInstanceProperty from "core-js-pure/stable/instance/map.js";
 import _filterInstanceProperty from "core-js-pure/stable/instance/filter.js";
 import _Map from "core-js-pure/stable/map/index.js";
-import _dotAllInstanceProperty from "core-js-pure/stable/instance/dot-all.js";
-import _stickyInstanceProperty from "core-js-pure/stable/instance/sticky.js";
 import _Symbol from "core-js-pure/stable/symbol/index.js";
 import _Symbol$matchAll from "core-js-pure/stable/symbol/match-all.js";
 import _replaceAllInstanceProperty from "core-js-pure/stable/instance/replace-all.js";
@@ -41,11 +39,8 @@ new _Map([['x', 1]]).emplace('x', {
   update: x => x + 1,
   insert: () => 0
 });
-
-_dotAllInstanceProperty(/x/);
-
-_stickyInstanceProperty(/x/);
-
+/x/.dotAll;
+/x/.sticky;
 _Symbol.asyncDispose;
 _Symbol.matcher;
 _Symbol$matchAll;
