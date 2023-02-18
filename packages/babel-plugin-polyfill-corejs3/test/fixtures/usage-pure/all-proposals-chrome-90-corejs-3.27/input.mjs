@@ -62,3 +62,11 @@ self;
 SuppressedError
 DisposableStack;
 AsyncDisposableStack;
+
+Iterator.range(foo, bar);
+JSON.parse(foo);
+JSON.isRawJSON(foo);
+JSON.rawJSON(foo);
+Symbol.isWellKnown(foo);
+Symbol.isRegistered(foo);
+Function.demethodize();

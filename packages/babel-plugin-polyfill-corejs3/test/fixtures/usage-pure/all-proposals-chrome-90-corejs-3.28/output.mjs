@@ -30,7 +30,13 @@ import _String$dedent from "core-js-pure/features/string/dedent.js";
 import _SuppressedError from "core-js-pure/features/suppressed-error.js";
 import _DisposableStack from "core-js-pure/features/disposable-stack.js";
 import _AsyncDisposableStack from "core-js-pure/features/async-disposable-stack.js";
-import _Iterator from "core-js-pure/features/iterator/index.js";
+import _Iterator$range from "core-js-pure/features/iterator/range.js";
+import _JSON$parse from "core-js-pure/features/json/parse.js";
+import _JSON$isRawJSON from "core-js-pure/features/json/is-raw-json.js";
+import _JSON$rawJSON from "core-js-pure/features/json/raw-json.js";
+import _Symbol$isWellKnown from "core-js-pure/features/symbol/is-well-known.js";
+import _Symbol$isRegistered from "core-js-pure/features/symbol/is-registered.js";
+import _demethodizeInstanceProperty from "core-js-pure/features/instance/demethodize.js";
 
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
@@ -98,11 +104,16 @@ _SuppressedError;
 _DisposableStack;
 _AsyncDisposableStack;
 
-_Iterator.range(foo, bar);
+_Iterator$range(foo, bar);
 
-JSON.parse(foo);
-JSON.isRawJSON(foo);
-JSON.rawJSON(foo);
-Symbol.isWellKnown(foo);
-Symbol.isRegistered(foo);
-Function.demethodize();
+_JSON$parse(foo);
+
+_JSON$isRawJSON(foo);
+
+_JSON$rawJSON(foo);
+
+_Symbol$isWellKnown(foo);
+
+_Symbol$isRegistered(foo);
+
+_demethodizeInstanceProperty(Function).call(Function);

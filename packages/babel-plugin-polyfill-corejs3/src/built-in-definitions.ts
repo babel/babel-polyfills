@@ -78,17 +78,20 @@ const TypedArrayDependencies = [
   "es.typed-array.sort",
   "es.typed-array.subarray",
   "es.typed-array.to-locale-string",
+  "es.typed-array.to-reversed",
+  "es.typed-array.to-sorted",
   "es.typed-array.to-string",
+  "es.typed-array.with",
   "es.object.to-string",
   "es.array.iterator",
   "es.array-buffer.slice",
+  "esnext.array-buffer.detached",
+  "esnext.array-buffer.transfer",
+  "esnext.array-buffer.transfer-to-fixed-length",
   "esnext.typed-array.filter-reject",
   "esnext.typed-array.group-by",
-  "esnext.typed-array.to-reversed",
-  "esnext.typed-array.to-sorted",
   "esnext.typed-array.to-spliced",
   "esnext.typed-array.unique-by",
-  "esnext.typed-array.with",
 ];
 
 export const PromiseDependencies = ["es.promise", "es.object.to-string"];
@@ -363,9 +366,20 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       ...IteratorDependencies,
       ...CommonIterators,
     ]),
+    range: define("iterator/range", [
+      "esnext.iterator.range",
+      "es.object.to-string",
+    ]),
   },
 
   JSON: {
+    isRawJSON: define("json/is-raw-json", ["esnext.json.is-raw-json"]),
+    parse: define("json/parse", ["esnext.json.parse", "es.object.keys"]),
+    rawJSON: define("json/raw-json", [
+      "esnext.json.raw-json",
+      "es.object.create",
+      "es.object.freeze",
+    ]),
     stringify: define("json/stringify", ["es.json.stringify"], "es.symbol"),
   },
 
@@ -588,6 +602,14 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       "es.symbol.is-concat-spreadable",
       "es.array.concat",
     ]),
+    isRegistered: define("symbol/is-registered", [
+      "esnext.symbol.is-registered",
+      "es.symbol",
+    ]),
+    isWellKnown: define("symbol/is-well-known", [
+      "esnext.symbol.is-well-known",
+      "es.symbol",
+    ]),
     iterator: define("symbol/iterator", [
       "es.symbol.iterator",
       ...CommonIteratorsWithTag,
@@ -682,6 +704,7 @@ export const InstanceProperties = {
   codePoints: define("instance/code-points", ["esnext.string.code-points"]),
   concat: define("instance/concat", ["es.array.concat"], undefined, ["String"]),
   copyWithin: define("instance/copy-within", ["es.array.copy-within"]),
+  demethodize: define("instance/demethodize", ["esnext.function.demethodize"]),
   description: define(null, ["es.symbol", "es.symbol.description"]),
   dotAll: define(null, ["es.regexp.dot-all"]),
   drop: define("instance/drop", [
@@ -854,12 +877,12 @@ export const InstanceProperties = {
   toISOString: define(null, ["es.date.to-iso-string"]),
   toJSON: define(null, ["es.date.to-json", "web.url.to-json"]),
   toPrecision: define(null, ["es.number.to-precision"]),
-  toReversed: define("instance/to-reversed", ["esnext.array.to-reversed"]),
+  toReversed: define("instance/to-reversed", ["es.array.to-reversed"]),
   toSorted: define("instance/to-sorted", [
-    "esnext.array.to-sorted",
+    "es.array.to-sorted",
     "es.array.sort",
   ]),
-  toSpliced: define("instance/to-spliced", ["esnext.array.to-spliced"]),
+  toSpliced: define("instance/to-spliced", ["es.array.to-spliced"]),
   toString: define(null, [
     "es.object.to-string",
     "es.error.to-string",
@@ -878,7 +901,7 @@ export const InstanceProperties = {
   unshift: define("instance/unshift", ["es.array.unshift"]),
   unThis: define("instance/un-this", ["esnext.function.un-this"]),
   values: define("instance/values", ArrayNatureIteratorsWithTag),
-  with: define("instance/with", ["esnext.array.with"]),
+  with: define("instance/with", ["es.array.with"]),
   __defineGetter__: define(null, ["es.object.define-getter"]),
   __defineSetter__: define(null, ["es.object.define-setter"]),
   __lookupGetter__: define(null, ["es.object.lookup-getter"]),

@@ -14,6 +14,7 @@ import _pushInstanceProperty from "core-js-pure/stable/instance/push.js";
 import _DOMException from "core-js-pure/stable/dom-exception.js";
 import _structuredClone from "core-js-pure/stable/structured-clone.js";
 import _btoa from "core-js-pure/stable/btoa.js";
+import _withInstanceProperty from "core-js-pure/features/instance/with.js";
 
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
@@ -60,7 +61,8 @@ _structuredClone(72);
 _btoa('hi');
 
 foo.indexed;
-bar.with;
+
+_withInstanceProperty(bar);
 
 _pushInstanceProperty(buz);
 

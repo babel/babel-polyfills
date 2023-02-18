@@ -4,13 +4,6 @@ export default new Set<string>([
   "esnext.array.from-async",
   "esnext.array.group",
   "esnext.array.group-to-map",
-  "esnext.array.to-reversed",
-  "esnext.array.to-sorted",
-  "esnext.array.to-spliced",
-  "esnext.array.with",
   "esnext.string.is-well-formed",
   "esnext.string.to-well-formed",
-  "esnext.typed-array.to-reversed",
-  "esnext.typed-array.to-sorted",
-  "esnext.typed-array.with",
 ]);
