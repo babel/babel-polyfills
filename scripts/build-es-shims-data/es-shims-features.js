@@ -65,6 +65,7 @@ module.exports = {
       'function "name" property / function expressions',
     ],
   },
+  Map: "Map /", // Trailing / to exclude Map.prototype.upsert
   "Math.acosh": "Math methods / Math.acosh",
   "Math.atanh": "Math methods / Math.atanh",
   "Math.clz32": "Math methods / Math.clz32",
@@ -105,6 +106,15 @@ module.exports = {
   "Reflect.ownKeys": "Reflect / Reflect.ownKeys",
   "RegExp.prototype.flags":
     "RegExp.prototype properties / RegExp.prototype.flags",
+  Set: "Set /", // Trailing / to exclude "Set methods"
+  "Set.prototype.difference": "Set methods / Set.prototype.difference",
+  "Set.prototype.intersection": "Set methods / Set.prototype.intersection",
+  "Set.prototype.isDisjointFrom": "Set methods / Set.prototype.isDisjointFrom",
+  "Set.prototype.isSubsetOf": "Set methods / Set.prototype.isSubsetOf",
+  "Set.prototype.isSupersetOf": "Set methods / Set.prototype.isSupersetOf",
+  "Set.prototype.symmetricDifference":
+    "Set methods / Set.prototype.symmetricDifference",
+  "Set.prototype.union": "Set methods / Set.prototype.union",
   "String.fromCodePoint": "String static methods / String.fromCodePoint",
   "String.raw": "String static methods / String.raw",
   "String.prototype.codePointAt":

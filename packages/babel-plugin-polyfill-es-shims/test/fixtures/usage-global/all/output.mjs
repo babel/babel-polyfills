@@ -1,6 +1,8 @@
 import "array.from/auto";
 import "globalthis/auto";
 import "es-aggregate-error/auto";
+import "es-map/auto";
+import "es-set/auto";
 Array.from; // static method
 
 globalThis; // built-in
@@ -8,8 +10,10 @@ globalThis; // built-in
 new AggregateError(); // new builtin
 
 _arr[Symbol.iterator](); // Symbol.iterator
-// no import
 
+
+new Map();
+new Set(); // no import
 
 Array.asdf;
 Array2.from;

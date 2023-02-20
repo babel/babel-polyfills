@@ -1,4 +1,5 @@
 import "array.from/auto";
+import "es-map/auto";
 import "array-includes/auto";
 import "string.prototype.includes/auto";
 import "array.prototype.find/auto";
