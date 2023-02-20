@@ -53,11 +53,15 @@ const DATE_VERSION = "2.0.0";
 defineGlobal("globalThis", "1.0.0");
 defineGlobal("parseInt", "2.0.0");
 
+defineGlobal("Map", "1.0.4", "es-map");
+defineGlobal("Set", "1.1.0", "es-set");
+
 const arrayCheck = thisObj => expr`Array.isArray(${thisObj})`;
 const typeofCheck = type => thisObj => expr`typeof ${thisObj} === "${type}"`;
 const instanceofCheck = Class => thisObj =>
   expr`${thisObj} instanceof ${t.identifier(Class)}`;
 const stringCheck = typeofCheck("string");
+// const setCheck = instanceofCheck("Set");
 
 const getter = { getter: true };
 const excludeStatic = obj => ({
@@ -167,6 +171,15 @@ defineStatic("Reflect", "ownKeys", "1.0.1");
 defineStatic("Reflect", "getPrototypeOf", "1.0.0");
 
 defineInstance("RegExp", "flags", "1.3.0", instanceofCheck("RegExp"), getter);
+
+// TODO: Uncomment when Stage 4
+// defineInstance("Set", "difference", "1.0.2", setCheck);
+// defineInstance("Set", "intersection", "1.0.2", setCheck);
+// defineInstance("Set", "isDisjointFrom", "1.0.2", setCheck);
+// defineInstance("Set", "isSubsetOf", "1.0.2", setCheck);
+// defineInstance("Set", "isSupersetOf", "1.0.2", setCheck);
+// defineInstance("Set", "symmetricDifference", "1.0.2", setCheck);
+// defineInstance("Set", "union", "1.0.2", setCheck);
 
 defineStatic("String", "fromCodePoint", "1.0.0");
 defineStatic("String", "raw", "1.0.1");
