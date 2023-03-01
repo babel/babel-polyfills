@@ -177,6 +177,7 @@ const DOMExceptionDependencies = [
 
 const URLSearchParamsDependencies = [
   "web.url-search-params",
+  "web.url-search-params.size",
   ...CommonIteratorsWithTag,
 ];
 

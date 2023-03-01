@@ -70,3 +70,6 @@ JSON.rawJSON(foo);
 Symbol.isWellKnown(foo);
 Symbol.isRegistered(foo);
 Function.demethodize();
+
+new URLSearchParams(string).size;
+new Set(array).intersection(otherSet);

@@ -22,6 +22,7 @@ import "core-js/modules/es.string.replace.js";
 import "core-js/modules/es.string.replace-all.js";
 import "core-js/modules/web.url.js";
 import "core-js/modules/web.url-search-params.js";
+import "core-js/modules/web.url-search-params.size.js";
 import "core-js/modules/es.array.push.js";
 import "core-js/modules/es.error.to-string.js";
 import "core-js/modules/web.dom-exception.constructor.js";

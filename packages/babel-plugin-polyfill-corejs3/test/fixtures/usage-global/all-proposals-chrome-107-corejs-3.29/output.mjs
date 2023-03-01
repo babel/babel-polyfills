@@ -43,6 +43,7 @@ import "core-js/modules/esnext.async-iterator.async-dispose.js";
 import "core-js/modules/esnext.symbol.async-dispose.js";
 import "core-js/modules/esnext.symbol.matcher.js";
 import "core-js/modules/esnext.symbol.metadata.js";
+import "core-js/modules/web.url-search-params.size.js";
 import "core-js/modules/esnext.array.group-by-to-map.js";
 import "core-js/modules/esnext.function.un-this.js";
 import "core-js/modules/es.array.push.js";
