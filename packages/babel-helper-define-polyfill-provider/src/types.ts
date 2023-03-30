@@ -71,6 +71,7 @@ export type Utils = {
 
 export type ProviderResult = {
   name: string;
+  runtimeName?: string;
   polyfills?: string[] | { [name: string]: Targets };
   filterPolyfills?: (name: string) => boolean;
   entryGlobal?: (meta: MetaDescriptor, utils: Utils, path: NodePath) => void;

@@ -321,11 +321,29 @@ export default function definePolyfillProvider<Options>(
       console.log(`\nUsing polyfills with \`${method}\` method:`);
     }
 
+    const { runtimeName } = provider;
+
     return {
       name: "inject-polyfills",
       visitor,
 
-      pre() {
+      pre(file) {
+        if (runtimeName) {
+          if (
+            file.get("runtimeHelpersModuleName") &&
+            file.get("runtimeHelpersModuleName") !== runtimeName
+          ) {
+            console.warn(
+              `Two different polyfill providers are trying to define two` +
+                ` conflicting @babel/runtime alternatives:` +
+                ` ${file.get("runtimeHelpersModuleName")} and ${runtimeName}.` +
+                ` The second one will be ignored.`,
+            );
+          } else {
+            file.set("runtimeHelpersModuleName", runtimeName);
+          }
+        }
+
         debugLog = {
           polyfills: new Set(),
           polyfillsSupport: undefined,

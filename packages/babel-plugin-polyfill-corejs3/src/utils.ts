@@ -1,6 +1,8 @@
 import { types as t } from "@babel/core";
 import corejsEntries from "../core-js-compat/entries.js";
 
+export const BABEL_RUNTIME = "@babel/runtime-corejs3";
+
 export function callMethod(path: any, id: t.Identifier) {
   const { object } = path.node;
 
@@ -40,10 +42,10 @@ export function coreJSModule(name: string) {
 
 export function coreJSPureHelper(
   name: string,
-  useBabelRuntime: string,
+  useBabelRuntime: boolean,
   ext: string,
 ) {
   return useBabelRuntime
-    ? `${useBabelRuntime}/core-js/${name}${ext}`
+    ? `${BABEL_RUNTIME}/core-js/${name}${ext}`
     : `core-js-pure/features/${name}.js`;
 }

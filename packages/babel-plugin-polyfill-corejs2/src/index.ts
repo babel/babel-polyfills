@@ -12,6 +12,8 @@ import defineProvider from "@babel/helper-define-polyfill-provider";
 import type { NodePath } from "@babel/traverse";
 import { types as t } from "@babel/core";
 
+const BABEL_RUNTIME = "@babel/runtime-corejs2";
+
 const presetEnvCompat = "#__secret_key__@babel/preset-env__compatibility";
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 
@@ -22,7 +24,7 @@ type Options = {
     entryInjectRegenerator: boolean;
   };
   "#__secret_key__@babel/runtime__compatibility": void | {
-    useBabelRuntime: string;
+    useBabelRuntime: boolean;
     runtimeVersion: string;
     ext: string;
   };
@@ -34,10 +36,11 @@ export default defineProvider<Options>(function (
     [presetEnvCompat]: { entryInjectRegenerator } = {
       entryInjectRegenerator: false,
     },
-    [runtimeCompat]: { useBabelRuntime, runtimeVersion, ext = ".js" } = {
-      useBabelRuntime: "",
-      runtimeVersion: "",
-    },
+    [runtimeCompat]: {
+      useBabelRuntime = false,
+      runtimeVersion = "",
+      ext = ".js",
+    } = {},
   },
 ) {
   const resolve = api.createMetaResolver({
@@ -55,7 +58,7 @@ export default defineProvider<Options>(function (
   );
 
   const coreJSBase = useBabelRuntime
-    ? `${useBabelRuntime}/core-js`
+    ? `${BABEL_RUNTIME}/core-js`
     : method === "usage-pure"
     ? "core-js/library/fn"
     : "core-js/modules";
@@ -93,6 +96,8 @@ export default defineProvider<Options>(function (
 
   return {
     name: "corejs2",
+
+    runtimeName: BABEL_RUNTIME,
 
     polyfills,
 

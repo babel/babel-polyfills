@@ -1,4 +1,5 @@
 import defineProvider from "@babel/helper-define-polyfill-provider";
+import type { PluginPass } from "@babel/core";
 
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 
@@ -18,12 +19,7 @@ export default defineProvider<Options>(({ debug, targets, babel }, options) => {
     );
   }
 
-  const { [runtimeCompat]: { useBabelRuntime } = { useBabelRuntime: "" } } =
-    options;
-
-  const pureName = useBabelRuntime
-    ? `${useBabelRuntime}/regenerator`
-    : "regenerator-runtime";
+  const { [runtimeCompat]: { useBabelRuntime = false } = {} } = options;
 
   return {
     name: "regenerator",
@@ -38,6 +34,15 @@ export default defineProvider<Options>(({ debug, targets, babel }, options) => {
     },
     usagePure(meta, utils, path) {
       if (isRegenerator(meta)) {
+        let pureName = "regenerator-runtime";
+        if (useBabelRuntime) {
+          const runtimeName =
+            ((path.hub as any).file as PluginPass).get(
+              "runtimeHelpersModuleName",
+            ) ?? "@babel/runtime";
+          pureName = `${runtimeName}/regenerator`;
+        }
+
         path.replaceWith(
           utils.injectDefaultImport(pureName, "regenerator-runtime"),
         );
