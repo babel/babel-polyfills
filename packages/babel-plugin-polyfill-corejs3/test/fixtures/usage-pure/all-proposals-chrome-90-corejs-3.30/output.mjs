@@ -37,6 +37,7 @@ import _JSON$rawJSON from "core-js-pure/features/json/raw-json.js";
 import _Symbol$isWellKnown from "core-js-pure/features/symbol/is-well-known.js";
 import _Symbol$isRegistered from "core-js-pure/features/symbol/is-registered.js";
 import _demethodizeInstanceProperty from "core-js-pure/features/instance/demethodize.js";
+import _URL$canParse from "core-js-pure/features/url/can-parse.js";
 
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
@@ -118,4 +119,4 @@ _Symbol$isRegistered(foo);
 
 _demethodizeInstanceProperty(Function).call(Function);
 
-URL.canParse(foo);
+_URL$canParse(foo);

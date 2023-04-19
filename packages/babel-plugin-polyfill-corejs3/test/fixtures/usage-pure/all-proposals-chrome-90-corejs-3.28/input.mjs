@@ -70,3 +70,5 @@ JSON.rawJSON(foo);
 Symbol.isWellKnown(foo);
 Symbol.isRegistered(foo);
 Function.demethodize();
+
+URL.canParse(foo);

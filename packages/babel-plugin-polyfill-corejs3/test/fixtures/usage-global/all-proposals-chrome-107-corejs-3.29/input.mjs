@@ -73,3 +73,5 @@ Function.demethodize();
 
 new URLSearchParams(string).size;
 new Set(array).intersection(otherSet);
+
+URL.canParse(foo);

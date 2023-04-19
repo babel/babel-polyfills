@@ -90,6 +90,7 @@ import "core-js/modules/esnext.set.symmetric-difference.v2.js";
 import "core-js/modules/esnext.set.symmetric-difference.js";
 import "core-js/modules/esnext.set.union.v2.js";
 import "core-js/modules/esnext.set.union.js";
+import "core-js/modules/web.url.can-parse.js";
 [].findLast(fn);
 [].findLastIndex(fn);
 [].asIndexedPairs();

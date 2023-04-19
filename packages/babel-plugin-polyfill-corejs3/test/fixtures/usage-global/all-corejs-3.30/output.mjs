@@ -40,6 +40,7 @@ import "core-js/modules/web.self.js";
 import "core-js/modules/es.error.cause.js";
 import "core-js/modules/es.object.create.js";
 import "core-js/modules/es.object.freeze.js";
+import "core-js/modules/web.url.can-parse.js";
 [].findLast(fn);
 [].findLastIndex(fn);
 [].asIndexedPairs();

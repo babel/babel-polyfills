@@ -16,6 +16,7 @@ import _structuredClone from "core-js-pure/stable/structured-clone.js";
 import _btoa from "core-js-pure/stable/btoa.js";
 import _withInstanceProperty from "core-js-pure/stable/instance/with.js";
 import _self from "core-js-pure/stable/self.js";
+import _URL$canParse from "core-js-pure/stable/url/can-parse.js";
 
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
@@ -86,4 +87,4 @@ _Symbol.isRegistered(foo);
 
 Function.demethodize();
 
-_URL.canParse(foo);
+_URL$canParse(foo);
