@@ -1,4 +1,5 @@
 import compatData from "../packages/babel-plugin-polyfill-corejs3/core-js-compat/data.js";
+import specialCases from "./corejs3-shipped-proposals-special-cases.mjs";
 import fs from "node:fs";
 
 const path = new URL(
@@ -18,7 +19,7 @@ for (const feature in compatData) {
   if (!feature.startsWith("esnext.")) continue;
   const esName = "es." + feature.slice(7);
   if (esName in compatData) continue;
-  if (Object.keys(compatData[feature]).length === 0) continue;
+  if (!specialCases.includes(feature) && Object.keys(compatData[feature]).length === 0) continue;
   shippedProposals.push(feature);
 }
 
