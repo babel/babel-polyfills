@@ -20,10 +20,11 @@ const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 const has = Function.call.bind(Object.hasOwnProperty);
 
 type Options = {
-  "#__secret_key__@babel/preset-env__compatibility": void | {
+  [presetEnvCompat]?: {
     entryInjectRegenerator: boolean;
+    noRuntimeName: boolean;
   };
-  "#__secret_key__@babel/runtime__compatibility": void | {
+  [runtimeCompat]?: {
     useBabelRuntime: boolean;
     runtimeVersion: string;
     ext: string;
@@ -33,9 +34,10 @@ type Options = {
 export default defineProvider<Options>(function (
   api,
   {
-    [presetEnvCompat]: { entryInjectRegenerator } = {
-      entryInjectRegenerator: false,
-    },
+    [presetEnvCompat]: {
+      entryInjectRegenerator = false,
+      noRuntimeName = false,
+    } = {},
     [runtimeCompat]: {
       useBabelRuntime = false,
       runtimeVersion = "",
@@ -97,7 +99,7 @@ export default defineProvider<Options>(function (
   return {
     name: "corejs2",
 
-    runtimeName: BABEL_RUNTIME,
+    runtimeName: noRuntimeName ? null : BABEL_RUNTIME,
 
     polyfills,
 

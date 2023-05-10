@@ -24,13 +24,15 @@ import {
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
 
+const presetEnvCompat = "#__secret_key__@babel/preset-env__compatibility";
 const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 
 type Options = {
   version?: number | string;
   proposals?: boolean;
   shippedProposals?: boolean;
-  "#__secret_key__@babel/runtime__compatibility": void | {
+  [presetEnvCompat]?: { noRuntimeName: boolean };
+  [runtimeCompat]: {
     useBabelRuntime: boolean;
     babelRuntimePath: string;
     ext: string;
@@ -63,6 +65,7 @@ export default defineProvider<Options>(function (
     version = 3,
     proposals,
     shippedProposals,
+    [presetEnvCompat]: { noRuntimeName = false } = {},
     [runtimeCompat]: { useBabelRuntime = false, ext = ".js" } = {},
   },
 ) {
@@ -144,7 +147,7 @@ export default defineProvider<Options>(function (
   return {
     name: "corejs3",
 
-    runtimeName: BABEL_RUNTIME,
+    runtimeName: noRuntimeName ? null : BABEL_RUNTIME,
 
     polyfills: corejs3Polyfills,
 
