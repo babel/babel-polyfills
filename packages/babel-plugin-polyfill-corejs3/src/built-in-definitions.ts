@@ -651,6 +651,10 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     unscopables: define("symbol/unscopables", ["es.symbol.unscopables"]),
   },
 
+  URL: {
+    canParse: define("url/can-parse", ["web.url.can-parse", "web.url"]),
+  },
+
   WeakMap: {
     from: define(null, ["esnext.weak-map.from", ...WeakMapDependencies]),
     of: define(null, ["esnext.weak-map.of", ...WeakMapDependencies]),
