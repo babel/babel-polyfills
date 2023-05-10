@@ -192,7 +192,7 @@ function instantiateProvider<Options>(
       }
       if (!polyfillsNames.has(name)) {
         console.warn(
-          `Internal error in the ${provider.name} provider: ` +
+          `Internal error in the ${providerName} provider: ` +
             `unknown polyfill "${name}".`,
         );
       }
@@ -219,7 +219,7 @@ function instantiateProvider<Options>(
 
       if (!debug || !name) return;
 
-      if (debugLog().polyfills.has(provider.name)) return;
+      if (debugLog().polyfills.has(providerName)) return;
       debugLog().polyfills.add(name);
       debugLog().polyfillsSupport ??= polyfillsSupport;
     },
@@ -247,11 +247,11 @@ function instantiateProvider<Options>(
   };
 
   const provider = factory(api, providerOptions, dirname);
+  const providerName = provider.name || factory.name;
 
   if (typeof provider[methodName] !== "function") {
     throw new Error(
-      `The "${provider.name || factory.name}" provider doesn't ` +
-        `support the "${method}" polyfilling method.`,
+      `The "${providerName}" provider doesn't support the "${method}" polyfilling method.`,
     );
   }
 
@@ -267,7 +267,7 @@ function instantiateProvider<Options>(
   }
 
   ({ include, exclude } = validateIncludeExclude(
-    provider.name || factory.name,
+    providerName,
     polyfillsNames,
     providerOptions.include || [],
     providerOptions.exclude || [],
@@ -278,6 +278,7 @@ function instantiateProvider<Options>(
     method,
     targets,
     provider,
+    providerName,
     callProvider(payload: MetaDescriptor, path: NodePath) {
       const utils = getUtils(path);
       provider[methodName](payload, utils, path);
@@ -299,7 +300,7 @@ export default function definePolyfillProvider<Options>(
       babelApi,
     );
 
-    const { debug, method, targets, provider, callProvider } =
+    const { debug, method, targets, provider, providerName, callProvider } =
       instantiateProvider<Options>(
         factory,
         options,
@@ -316,16 +317,37 @@ export default function definePolyfillProvider<Options>(
       : createVisitor(callProvider);
 
     if (debug && debug !== presetEnvSilentDebugHeader) {
-      console.log(`${provider.name}: \`DEBUG\` option`);
+      console.log(`${providerName}: \`DEBUG\` option`);
       console.log(`\nUsing targets: ${stringifyTargetsMultiline(targets)}`);
       console.log(`\nUsing polyfills with \`${method}\` method:`);
     }
+
+    const { runtimeName } = provider;
 
     return {
       name: "inject-polyfills",
       visitor,
 
-      pre() {
+      pre(file) {
+        if (runtimeName) {
+          if (
+            file.get("runtimeHelpersModuleName") &&
+            file.get("runtimeHelpersModuleName") !== runtimeName
+          ) {
+            console.warn(
+              `Two different polyfill providers` +
+                ` (${file.get("runtimeHelpersModuleProvider")}` +
+                ` and ${providerName}) are trying to define two` +
+                ` conflicting @babel/runtime alternatives:` +
+                ` ${file.get("runtimeHelpersModuleName")} and ${runtimeName}.` +
+                ` The second one will be ignored.`,
+            );
+          } else {
+            file.set("runtimeHelpersModuleName", runtimeName);
+            file.set("runtimeHelpersModuleProvider", providerName);
+          }
+        }
+
         debugLog = {
           polyfills: new Set(),
           polyfillsSupport: undefined,
@@ -355,9 +377,9 @@ export default function definePolyfillProvider<Options>(
           console.log(
             method === "entry-global"
               ? debugLog.found
-                ? `Based on your targets, the ${provider.name} polyfill did not add any polyfill.`
-                : `The entry point for the ${provider.name} polyfill has not been found.`
-              : `Based on your code and targets, the ${provider.name} polyfill did not add any polyfill.`,
+                ? `Based on your targets, the ${providerName} polyfill did not add any polyfill.`
+                : `The entry point for the ${providerName} polyfill has not been found.`
+              : `Based on your code and targets, the ${providerName} polyfill did not add any polyfill.`,
           );
 
           return;
@@ -365,12 +387,12 @@ export default function definePolyfillProvider<Options>(
 
         if (method === "entry-global") {
           console.log(
-            `The ${provider.name} polyfill entry has been replaced with ` +
+            `The ${providerName} polyfill entry has been replaced with ` +
               `the following polyfills:`,
           );
         } else {
           console.log(
-            `The ${provider.name} polyfill added the following polyfills:`,
+            `The ${providerName} polyfill added the following polyfills:`,
           );
         }
 

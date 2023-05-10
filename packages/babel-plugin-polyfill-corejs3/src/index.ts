@@ -19,6 +19,7 @@ import {
   coreJSModule,
   isCoreJSSource,
   coreJSPureHelper,
+  BABEL_RUNTIME,
 } from "./utils";
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
@@ -30,7 +31,8 @@ type Options = {
   proposals?: boolean;
   shippedProposals?: boolean;
   "#__secret_key__@babel/runtime__compatibility": void | {
-    useBabelRuntime: string;
+    useBabelRuntime: boolean;
+    babelRuntimePath: string;
     ext: string;
   };
 };
@@ -61,7 +63,7 @@ export default defineProvider<Options>(function (
     version = 3,
     proposals,
     shippedProposals,
-    [runtimeCompat]: { useBabelRuntime, ext = ".js" } = { useBabelRuntime: "" },
+    [runtimeCompat]: { useBabelRuntime = false, ext = ".js" } = {},
   },
 ) {
   const isWebpack = babel.caller(caller => caller?.name === "babel-loader");
@@ -77,8 +79,8 @@ export default defineProvider<Options>(function (
   function getCoreJSPureBase(useProposalBase) {
     return useBabelRuntime
       ? useProposalBase
-        ? `${useBabelRuntime}/core-js`
-        : `${useBabelRuntime}/core-js-stable`
+        ? `${BABEL_RUNTIME}/core-js`
+        : `${BABEL_RUNTIME}/core-js-stable`
       : useProposalBase
       ? "core-js-pure/features"
       : "core-js-pure/stable";
@@ -141,6 +143,8 @@ export default defineProvider<Options>(function (
 
   return {
     name: "corejs3",
+
+    runtimeName: BABEL_RUNTIME,
 
     polyfills: corejs3Polyfills,
 
