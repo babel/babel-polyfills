@@ -80,7 +80,7 @@ export default defineProvider<Options>(function (
   }
 
   function maybeInjectPure(desc, hint, utils) {
-    const { pure, meta, name } = desc;
+    let { pure, meta, name } = desc;
 
     if (!pure || !shouldInjectPolyfill(name)) return;
 
@@ -92,6 +92,10 @@ export default defineProvider<Options>(function (
     ) {
       return;
     }
+
+    // Unfortunately core-js and @babel/runtime-corejs2 don't have the same
+    // directory structure, so we need to special case this.
+    if (useBabelRuntime && pure === "symbol/index") pure = "symbol";
 
     return utils.injectDefaultImport(`${coreJSBase}/${pure}${ext}`, hint);
   }
