@@ -4,7 +4,7 @@ var _Promise = require("core-js/library/fn/promise.js");
 
 var _Set = require("core-js/library/fn/set.js");
 
-var _Symbol = require("core-js/library/fn/symbol.js");
+var _Symbol = require("core-js/library/fn/symbol/index.js");
 
 var _WeakMap = require("core-js/library/fn/weak-map.js");
 
