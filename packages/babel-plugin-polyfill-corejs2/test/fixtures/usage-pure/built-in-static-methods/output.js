@@ -96,7 +96,7 @@ var _String$fromCodePoint = require("core-js/library/fn/string/from-code-point.j
 
 var _String$raw = require("core-js/library/fn/string/raw.js");
 
-var _Symbol = require("core-js/library/fn/symbol.js");
+var _Symbol = require("core-js/library/fn/symbol/index.js");
 
 var _Symbol$for = require("core-js/library/fn/symbol/for.js");
 
