@@ -1,3 +1,5 @@
 export default [
-  "esnext.set.difference.v2",
+  // legacy for compatibility with previous versions
+  "esnext.array.group",
+  "esnext.array.group-to-map",
 ];

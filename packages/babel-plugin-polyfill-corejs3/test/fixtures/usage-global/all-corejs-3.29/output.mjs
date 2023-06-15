@@ -34,6 +34,8 @@ import "core-js/modules/web.structured-clone.js";
 import "core-js/modules/web.btoa.js";
 import "core-js/modules/es.array.with.js";
 import "core-js/modules/es.object.proto.js";
+import "core-js/modules/esnext.string.is-well-formed.js";
+import "core-js/modules/esnext.string.to-well-formed.js";
 import "core-js/modules/es.string.from-code-point.js";
 import "core-js/modules/es.weak-map.js";
 import "core-js/modules/web.self.js";

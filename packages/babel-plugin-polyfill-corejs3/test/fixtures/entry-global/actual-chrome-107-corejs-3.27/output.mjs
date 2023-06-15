@@ -49,6 +49,7 @@ import "core-js/modules/esnext.set.union.v2.js";
 import "core-js/modules/esnext.string.is-well-formed.js";
 import "core-js/modules/esnext.string.to-well-formed.js";
 import "core-js/modules/esnext.symbol.dispose.js";
+import "core-js/modules/esnext.symbol.metadata.js";
 import "core-js/modules/esnext.typed-array.to-reversed.js";
 import "core-js/modules/esnext.typed-array.to-sorted.js";
 import "core-js/modules/esnext.typed-array.to-spliced.js";

@@ -268,6 +268,7 @@ import "core-js/modules/esnext.iterator.take.js";
 import "core-js/modules/esnext.iterator.to-array.js";
 import "core-js/modules/esnext.iterator.to-async.js";
 import "core-js/modules/esnext.symbol.dispose.js";
+import "core-js/modules/esnext.symbol.metadata.js";
 import "core-js/modules/esnext.typed-array.to-reversed.js";
 import "core-js/modules/esnext.typed-array.to-sorted.js";
 import "core-js/modules/esnext.typed-array.to-spliced.js";

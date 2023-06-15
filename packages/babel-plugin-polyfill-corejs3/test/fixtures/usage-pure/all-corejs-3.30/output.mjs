@@ -15,8 +15,12 @@ import _DOMException from "core-js-pure/stable/dom-exception.js";
 import _structuredClone from "core-js-pure/stable/structured-clone.js";
 import _btoa from "core-js-pure/stable/btoa.js";
 import _withInstanceProperty from "core-js-pure/stable/instance/with.js";
+import _isWellFormedInstanceProperty from "core-js-pure/features/instance/is-well-formed.js";
+import _toWellFormedInstanceProperty from "core-js-pure/features/instance/to-well-formed.js";
 import _self from "core-js-pure/stable/self.js";
 import _URL$canParse from "core-js-pure/stable/url/can-parse.js";
+import _Promise from "core-js-pure/stable/promise/index.js";
+import _URLSearchParams from "core-js-pure/stable/url-search-params/index.js";
 
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
@@ -69,8 +73,11 @@ _withInstanceProperty(bar);
 _pushInstanceProperty(buz);
 
 fuz.__proto__;
-string.isWellFormed;
-string.toWellFormed;
+
+_isWellFormedInstanceProperty(string);
+
+_toWellFormedInstanceProperty(string);
+
 String.dedent`42`;
 _self;
 SuppressedError;
@@ -88,3 +95,16 @@ _Symbol.isRegistered(foo);
 Function.demethodize();
 
 _URL$canParse(foo);
+
+_Symbol.isWellKnownSymbol(foo);
+
+_Symbol.isRegisteredSymbol(foo);
+
+_Symbol.metadata;
+Object.groupBy(a, b);
+
+_Map.groupBy(a, b);
+
+_Promise.withResolvers();
+
+new _URLSearchParams().has(a, b);

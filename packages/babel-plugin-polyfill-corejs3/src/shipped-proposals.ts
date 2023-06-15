@@ -17,6 +17,4 @@ export default new Set<string>([
   "esnext.set.is-superset-of.v2",
   "esnext.set.symmetric-difference.v2",
   "esnext.set.union.v2",
-  "esnext.string.is-well-formed",
-  "esnext.string.to-well-formed",
 ]);

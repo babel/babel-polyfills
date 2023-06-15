@@ -61,7 +61,7 @@
     "@lerna/package": "patch:@lerna/package@npm:3.16.0#.yarn-patches/@lerna/package.patch",
     "@lerna/package-graph": "patch:@lerna/package-graph@npm:3.18.5#.yarn-patches/@lerna/package-graph.patch",
     "@lerna/pack-directory": "patch:@lerna/pack-directory@npm:3.16.4#.yarn-patches/@lerna/pack-directory.patch",
-    "@babel/preset-env/core-js-compat": "^3.30.1"
+    "@babel/preset-env/core-js-compat": "^3.31.0"
   },
   "engines": {
     "node": ">= 6.9.0",

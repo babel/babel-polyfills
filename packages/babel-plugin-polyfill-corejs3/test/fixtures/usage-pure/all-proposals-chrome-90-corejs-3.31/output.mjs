@@ -38,6 +38,9 @@ import _Symbol$isWellKnown from "core-js-pure/features/symbol/is-well-known.js";
 import _Symbol$isRegistered from "core-js-pure/features/symbol/is-registered.js";
 import _demethodizeInstanceProperty from "core-js-pure/features/instance/demethodize.js";
 import _URL$canParse from "core-js-pure/features/url/can-parse.js";
+import _Symbol$isWellKnownSymbol from "core-js-pure/features/symbol/is-well-known-symbol.js";
+import _Symbol$isRegisteredSymbol from "core-js-pure/features/symbol/is-registered-symbol.js";
+import _Object$groupBy from "core-js-pure/features/object/group-by.js";
 
 _findLastInstanceProperty(_context = []).call(_context, fn);
 
@@ -121,10 +124,14 @@ _demethodizeInstanceProperty(Function).call(Function);
 
 _URL$canParse(foo);
 
-Symbol.isWellKnownSymbol(foo);
-Symbol.isRegisteredSymbol(foo);
+_Symbol$isWellKnownSymbol(foo);
+
+_Symbol$isRegisteredSymbol(foo);
+
 _Symbol$metadata;
-Object.groupBy(a, b);
+
+_Object$groupBy(a, b);
+
 Map.groupBy(a, b);
 Promise.withResolvers();
 new URLSearchParams().has(a, b);

@@ -75,3 +75,11 @@ new URLSearchParams(string).size;
 new Set(array).intersection(otherSet);
 
 URL.canParse(foo);
+
+Symbol.isWellKnownSymbol(foo);
+Symbol.isRegisteredSymbol(foo);
+Symbol.metadata;
+Object.groupBy(a, b);
+Map.groupBy(a, b);
+Promise.withResolvers();
+new URLSearchParams().has(a, b);
