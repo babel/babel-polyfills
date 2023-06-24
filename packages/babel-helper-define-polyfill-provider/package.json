@@ -38,7 +38,7 @@
     "debug": "^4.1.1",
     "lodash.debounce": "^4.0.8",
     "resolve": "^1.14.2",
-    "semver": "^6.1.2"
+    "semver": "^7.5.2"
   },
   "peerDependencies": {
     "@babel/core": "^7.4.0-0"

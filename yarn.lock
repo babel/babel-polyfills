@@ -231,7 +231,7 @@ __metadata:
     resolve: ^1.14.2
     rollup: ^2.3.2
     rollup-plugin-babel: ^4.4.0
-    semver: ^6.1.2
+    semver: ^7.5.2
     strip-ansi: ^6.0.0
     webpack: ^4.42.1
     webpack-cli: ^3.3.11
@@ -4312,7 +4312,7 @@ __metadata:
     "@babel/helper-plugin-test-runner": ^7.16.7
     "@babel/plugin-transform-for-of": ^7.16.7
     "@babel/plugin-transform-modules-commonjs": ^7.17.7
-    semver: ^6.1.1
+    semver: ^7.5.2
   peerDependencies:
     "@babel/core": ^7.0.0-0
   languageName: unknown
@@ -12920,6 +12920,17 @@ fsevents@^1.2.7:
   bin:
     semver: bin/semver.js
   checksum: 2fa3e877568cd6ce769c75c211beaed1f9fce80b28338cadd9d0b6c40f2e2862bafd62c19a6cff42f3d54292b7c623277bcab8816a2b5521cf15210d43e75232
+  languageName: node
+  linkType: hard
+
+"semver@npm:^7.5.2":
+  version: 7.5.3
+  resolution: "semver@npm:7.5.3"
+  dependencies:
+    lru-cache: ^6.0.0
+  bin:
+    semver: bin/semver.js
+  checksum: 9d58db16525e9f749ad0a696a1f27deabaa51f66e91d2fa2b0db3de3e9644e8677de3b7d7a03f4c15bc81521e0c3916d7369e0572dbde250d9bedf5194e2a8a7
   languageName: node
   linkType: hard
 
