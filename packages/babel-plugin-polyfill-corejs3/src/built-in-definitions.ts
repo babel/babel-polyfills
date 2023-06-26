@@ -177,6 +177,8 @@ const DOMExceptionDependencies = [
 
 const URLSearchParamsDependencies = [
   "web.url-search-params",
+  "web.url-search-params.delete",
+  "web.url-search-params.has",
   "web.url-search-params.size",
   ...CommonIteratorsWithTag,
 ];
@@ -477,6 +479,10 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     getPrototypeOf: define("object/get-prototype-of", [
       "es.object.get-prototype-of",
     ]),
+    groupBy: define("object/group-by", [
+      "esnext.object.group-by",
+      "es.object.create",
+    ]),
     hasOwn: define("object/has-own", ["es.object.has-own"]),
     is: define("object/is", ["es.object.is"]),
     isExtensible: define("object/is-extensible", ["es.object.is-extensible"]),
@@ -505,9 +511,10 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       ...PromiseDependenciesWithIterators,
     ]),
     race: define(null, PromiseDependenciesWithIterators),
-    try: define(null, [
-      "esnext.promise.try",
-      ...PromiseDependenciesWithIterators,
+    try: define(null, ["esnext.promise.try", ...PromiseDependencies]),
+    withResolvers: define(null, [
+      "esnext.promise.with-resolvers",
+      ...PromiseDependencies,
     ]),
   },
 
@@ -607,8 +614,16 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       "esnext.symbol.is-registered",
       "es.symbol",
     ]),
+    isRegisteredSymbol: define("symbol/is-registered-symbol", [
+      "esnext.symbol.is-registered-symbol",
+      "es.symbol",
+    ]),
     isWellKnown: define("symbol/is-well-known", [
       "esnext.symbol.is-well-known",
+      "es.symbol",
+    ]),
+    isWellKnownSymbol: define("symbol/is-well-known-symbol", [
+      "esnext.symbol.is-well-known-symbol",
       "es.symbol",
     ]),
     iterator: define("symbol/iterator", [
@@ -622,7 +637,10 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       "es.symbol.match-all",
       "es.string.match-all",
     ]),
-    metadata: define("symbol/metadata", ["esnext.symbol.metadata"]),
+    metadata: define("symbol/metadata", [
+      "esnext.symbol.metadata",
+      "esnext.function.metadata",
+    ]),
     metadataKey: define("symbol/metadata-key", ["esnext.symbol.metadata-key"]),
     observable: define("symbol/observable", ["esnext.symbol.observable"]),
     patternMatch: define("symbol/pattern-match", [
@@ -799,9 +817,7 @@ export const InstanceProperties = {
     ...IteratorDependencies,
   ]),
   indexOf: define("instance/index-of", ["es.array.index-of"]),
-  isWellFormed: define("instance/is-well-formed", [
-    "esnext.string.is-well-formed",
-  ]),
+  isWellFormed: define("instance/is-well-formed", ["es.string.is-well-formed"]),
   italic: define(null, ["es.string.italics"]),
   join: define(null, ["es.array.join"]),
   keys: define("instance/keys", ArrayNatureIteratorsWithTag),
@@ -894,9 +910,7 @@ export const InstanceProperties = {
     "es.date.to-string",
     "es.regexp.to-string",
   ]),
-  toWellFormed: define("instance/to-well-formed", [
-    "esnext.string.to-well-formed",
-  ]),
+  toWellFormed: define("instance/to-well-formed", ["es.string.to-well-formed"]),
   trim: define("instance/trim", ["es.string.trim"]),
   trimEnd: define("instance/trim-end", ["es.string.trim-end"]),
   trimLeft: define("instance/trim-left", ["es.string.trim-start"]),

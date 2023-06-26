@@ -72,3 +72,11 @@ Symbol.isRegistered(foo);
 Function.demethodize();
 
 URL.canParse(foo);
+
+Symbol.isWellKnownSymbol(foo);
+Symbol.isRegisteredSymbol(foo);
+Symbol.metadata;
+Object.groupBy(a, b);
+Map.groupBy(a, b);
+Promise.withResolvers();
+new URLSearchParams().has(a, b);
