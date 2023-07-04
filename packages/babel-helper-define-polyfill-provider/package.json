@@ -33,7 +33,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@babel/helper-compilation-targets": "^7.17.7",
+    "@babel/helper-compilation-targets": "^7.22.6",
     "@babel/helper-plugin-utils": "^7.16.7",
     "debug": "^4.1.1",
     "lodash.debounce": "^4.0.8",
