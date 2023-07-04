@@ -92,5 +92,6 @@
       "^@babel/helper-define-polyfill-provider$": "<rootDir>/packages/babel-helper-define-polyfill-provider/"
     }
   },
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "packageManager": "yarn@3.6.1"
 }
