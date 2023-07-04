@@ -28,7 +28,7 @@
   "dependencies": {
     "@babel/compat-data": "^7.17.7",
     "@babel/helper-define-polyfill-provider": "workspace:^0.4.0",
-    "semver": "^6.1.1"
+    "@nicolo-ribaudo/semver-v6": "^6.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
