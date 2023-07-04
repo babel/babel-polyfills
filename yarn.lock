@@ -231,7 +231,6 @@ __metadata:
     resolve: ^1.14.2
     rollup: ^2.3.2
     rollup-plugin-babel: ^4.4.0
-    semver: ^6.1.2
     strip-ansi: ^6.0.0
     webpack: ^4.42.1
     webpack-cli: ^3.3.11
