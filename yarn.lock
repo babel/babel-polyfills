@@ -1219,6 +1219,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-regenerator@npm:~7.14.0":
+  version: 7.14.5
+  resolution: "@babel/plugin-transform-regenerator@npm:7.14.5"
+  dependencies:
+    regenerator-transform: ^0.14.2
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: f606bc04da7d0cfd651914cb144e85a0ea6fe20ee453ed21d002747cc47b09c853bc97166c32dc47e959581b772d9883f7d96d1c8e795c81ed21dbbb300e3aa7
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-reserved-words@npm:^7.22.5":
   version: 7.22.5
   resolution: "@babel/plugin-transform-reserved-words@npm:7.22.5"
@@ -4438,6 +4449,7 @@ __metadata:
     "@babel/core": ^7.22.6
     "@babel/helper-define-polyfill-provider": "workspace:^0.4.0"
     "@babel/helper-plugin-test-runner": ^7.22.5
+    "@babel/plugin-transform-class-properties": ^7.22.5
     "@babel/plugin-transform-classes": ^7.22.6
     "@babel/plugin-transform-for-of": ^7.22.5
     "@babel/plugin-transform-modules-commonjs": ^7.22.5
@@ -4482,6 +4494,7 @@ __metadata:
     "@babel/core": ^7.17.8
     "@babel/helper-define-polyfill-provider": "workspace:^0.4.0"
     "@babel/helper-plugin-test-runner": ^7.16.7
+    "@babel/plugin-transform-regenerator": ~7.14.0
   peerDependencies:
     "@babel/core": ^7.0.0-0
   languageName: unknown
@@ -12475,6 +12488,15 @@ fsevents@^1.2.7:
   version: 0.13.11
   resolution: "regenerator-runtime@npm:0.13.11"
   checksum: 27481628d22a1c4e3ff551096a683b424242a216fee44685467307f14d58020af1e19660bf2e26064de946bad7eff28950eae9f8209d55723e2d9351e632bbb4
+  languageName: node
+  linkType: hard
+
+"regenerator-transform@npm:^0.14.2":
+  version: 0.14.5
+  resolution: "regenerator-transform@npm:0.14.5"
+  dependencies:
+    "@babel/runtime": ^7.8.4
+  checksum: a467a3b652b4ec26ff964e9c5f1817523a73fc44cb928b8d21ff11aebeac5d10a84d297fe02cea9f282bcec81a0b0d562237da69ef0f40a0160b30a4fa98bc94
   languageName: node
   linkType: hard
 

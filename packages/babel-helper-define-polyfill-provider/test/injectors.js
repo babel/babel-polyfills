@@ -50,7 +50,6 @@ describe("injectors", () => {
 
       expect(ast).toMatchInlineSnapshot(`
         require("./polyfill/foo");
-
         foo;
       `);
 
@@ -117,7 +116,6 @@ describe("injectors", () => {
 
       expect(ast).toMatchInlineSnapshot(`
         var _fooPolyfill = require("./polyfill/foo").foo;
-
         foo;
       `);
     });
@@ -229,7 +227,6 @@ describe("injectors", () => {
 
       expect(ast).toMatchInlineSnapshot(`
         var _foo = require("./polyfill/foo");
-
         foo;
       `);
     });
@@ -354,7 +351,6 @@ describe("injectors", () => {
           "use strict";
 
           require("./polyfill/foo");
-
           foo;
           foo;
         `);
@@ -375,9 +371,7 @@ describe("injectors", () => {
           "use strict";
 
           var _foo3 = require("./polyfill/foo").foo;
-
           var _foo2 = require("./polyfill/foo");
-
           _foo2.foo;
           _foo3;
         `);
@@ -398,11 +392,8 @@ describe("injectors", () => {
           "use strict";
 
           var _foo3 = require("./polyfill/foo");
-
           var _foo2 = _interopRequireDefault(require("./polyfill/foo"));
-
           function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
           _foo2.default;
           _foo3;
         `);

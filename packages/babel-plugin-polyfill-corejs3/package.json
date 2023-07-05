@@ -32,6 +32,7 @@
   "devDependencies": {
     "@babel/core": "^7.22.6",
     "@babel/helper-plugin-test-runner": "^7.22.5",
+    "@babel/plugin-transform-class-properties": "^7.22.5",
     "@babel/plugin-transform-classes": "^7.22.6",
     "@babel/plugin-transform-for-of": "^7.22.5",
     "@babel/plugin-transform-modules-commonjs": "^7.22.5",

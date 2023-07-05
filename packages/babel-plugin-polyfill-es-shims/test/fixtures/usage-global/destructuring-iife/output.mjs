@@ -8,7 +8,6 @@ import "string.prototype.includes/auto";
 new function (foo, {
   from
 }) {}({}, Array);
-
 (({
   includes
 }) => {})('42');

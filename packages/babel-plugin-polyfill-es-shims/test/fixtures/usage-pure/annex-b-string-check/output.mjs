@@ -1,5 +1,4 @@
 var _str, _str2, _str3, _str4, _str5, _str6, _str7, _str8, _str9, _str10, _str11, _str12, _str13;
-
 import _StringPrototypeAnchor from "es-string-html-methods/anchor";
 import _StringPrototypeBig from "es-string-html-methods/big";
 import _StringPrototypeBlink from "es-string-html-methods/blink";

@@ -11,29 +11,16 @@ import _StringPrototypeSmall from "es-string-html-methods/small";
 import _StringPrototypeStrike from "es-string-html-methods/strike";
 import _StringPrototypeSub from "es-string-html-methods/sub";
 import _StringPrototypeSup from "es-string-html-methods/sup";
-
 _StringPrototypeAnchor("str");
-
 _StringPrototypeBig("str");
-
 _StringPrototypeBlink("str");
-
 _StringPrototypeBold("str");
-
 _StringPrototypeFixed("str");
-
 _StringPrototypeFontcolor("str");
-
 _StringPrototypeFontsize("str");
-
 _StringPrototypeItalics("str");
-
 _StringPrototypeLink("str");
-
 _StringPrototypeSmall("str");
-
 _StringPrototypeStrike("str");
-
 _StringPrototypeSub("str");
-
 _StringPrototypeSup("str");
