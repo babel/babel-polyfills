@@ -1,2 +1,3 @@
-function test({ ...others
+function test({
+  ...others
 }) {}

@@ -29,8 +29,8 @@
     "@babel/helper-define-polyfill-provider": "workspace:^0.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.8",
-    "@babel/helper-plugin-test-runner": "^7.16.7",
+    "@babel/core": "^7.22.6",
+    "@babel/helper-plugin-test-runner": "^7.22.5",
     "array.from": "^1.1.0",
     "math.clz32": "^1.0.0"
   },

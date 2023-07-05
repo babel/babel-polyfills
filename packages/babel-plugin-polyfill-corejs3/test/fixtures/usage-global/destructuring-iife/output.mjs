@@ -8,7 +8,6 @@ import "core-js/modules/es.string.includes.js";
 new function (foo, {
   from
 }) {}({}, Array);
-
 (({
   includes
 }) => {})('42');

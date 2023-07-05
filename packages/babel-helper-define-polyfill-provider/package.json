@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@babel/helper-compilation-targets": "^7.22.6",
-    "@babel/helper-plugin-utils": "^7.16.7",
+    "@babel/helper-plugin-utils": "^7.22.5",
     "debug": "^4.1.1",
     "lodash.debounce": "^4.0.8",
     "resolve": "^1.14.2"
@@ -43,11 +43,11 @@
     "@babel/core": "^7.4.0-0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.8",
-    "@babel/generator": "^7.17.7",
-    "@babel/plugin-transform-modules-commonjs": "^7.17.7",
-    "@babel/traverse": "^7.17.3",
+    "@babel/cli": "^7.22.6",
+    "@babel/core": "^7.22.6",
+    "@babel/generator": "^7.22.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.22.5",
+    "@babel/traverse": "^7.22.6",
     "babel-loader": "^8.1.0",
     "rollup": "^2.3.2",
     "rollup-plugin-babel": "^4.4.0",

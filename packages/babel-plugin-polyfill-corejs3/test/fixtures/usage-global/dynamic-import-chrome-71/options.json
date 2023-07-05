@@ -8,7 +8,6 @@
           "chrome": 71
         }
       }
-    ],
-    "@babel/plugin-syntax-dynamic-import"
+    ]
   ]
 }

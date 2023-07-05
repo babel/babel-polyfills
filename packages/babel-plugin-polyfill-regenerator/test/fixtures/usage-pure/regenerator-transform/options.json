@@ -8,14 +8,7 @@
       {
         "method": "usage-pure"
       }
-    ]
-  ],
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "modules": false
-      }
-    ]
+    ],
+    "@babel/plugin-transform-regenerator"
   ]
 }

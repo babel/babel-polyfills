@@ -1,5 +1,4 @@
 require("es-aggregate-error/auto");
-
 new Error(a, {
   cause: b
 });

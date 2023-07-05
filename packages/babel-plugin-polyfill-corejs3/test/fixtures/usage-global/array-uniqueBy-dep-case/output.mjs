@@ -1,6 +1,7 @@
 import "core-js/modules/es.map.js";
 import "core-js/modules/esnext.array.unique-by.js";
 // https://github.com/babel/babel/issues/15392
+
 const data = [{
   id: 1,
   uid: 10000

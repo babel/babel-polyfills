@@ -26,15 +26,15 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@babel/compat-data": "^7.17.7",
+    "@babel/compat-data": "^7.22.6",
     "@babel/helper-define-polyfill-provider": "workspace:^0.4.0",
     "@nicolo-ribaudo/semver-v6": "^6.3.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.8",
-    "@babel/helper-plugin-test-runner": "^7.16.7",
-    "@babel/plugin-transform-for-of": "^7.16.7",
-    "@babel/plugin-transform-modules-commonjs": "^7.17.7"
+    "@babel/core": "^7.22.6",
+    "@babel/helper-plugin-test-runner": "^7.22.5",
+    "@babel/plugin-transform-for-of": "^7.22.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.22.5"
   },
   "peerDependencies": {
     "@babel/core": "^7.0.0-0"

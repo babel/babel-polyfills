@@ -1,5 +1,4 @@
 var _AggregateError = require("es-aggregate-error");
-
 new Error(a, {
   cause: b
 });
