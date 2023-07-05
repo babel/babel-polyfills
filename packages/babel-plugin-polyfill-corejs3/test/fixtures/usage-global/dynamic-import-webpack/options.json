@@ -5,8 +5,7 @@
       {
         "method": "usage-global"
       }
-    ],
-    "@babel/plugin-syntax-dynamic-import"
+    ]
   ],
   "caller": {
     "name": "babel-loader",
