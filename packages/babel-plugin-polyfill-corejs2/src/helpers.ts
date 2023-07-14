@@ -1,6 +1,4 @@
-/// <reference path="../../../lib/semver.d.ts" />
-
-import semver from "@nicolo-ribaudo/semver-v6";
+import semver from "semver";
 
 export function hasMinVersion(
   minVersion?: string | null,
