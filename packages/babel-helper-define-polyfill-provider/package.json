@@ -40,7 +40,7 @@
     "resolve": "^1.14.2"
   },
   "peerDependencies": {
-    "@babel/core": "^7.4.0-0"
+    "@babel/core": "^7.4.0 || ^8.0.0-0 <8.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.6",

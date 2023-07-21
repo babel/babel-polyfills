@@ -220,12 +220,12 @@ __metadata:
     resolve: ^1.14.2
     semver: ^6.1.2
   peerDependencies:
-    "@babel/core": ^7.4.0-0
+    "@babel/core": ^7.0.0-0
   checksum: 5dca4c5e78457c5ced366bea601efa4e8c69bf5d53b0fe540283897575c49b1b88191c8ef062110de9046e886703ed3270fcda3a87f0886cdbb549204d3ff63f
   languageName: node
   linkType: hard
 
-"@babel/helper-define-polyfill-provider@workspace:^0.4.0, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
+"@babel/helper-define-polyfill-provider@workspace:^0.4.1, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
   version: 0.0.0-use.local
   resolution: "@babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider"
   dependencies:
@@ -246,7 +246,7 @@ __metadata:
     webpack: ^4.42.1
     webpack-cli: ^3.3.11
   peerDependencies:
-    "@babel/core": ^7.4.0-0
+    "@babel/core": ^7.4.0 || ^8.0.0-0 <8.0.0
   languageName: unknown
   linkType: soft
 
@@ -4420,13 +4420,13 @@ __metadata:
   dependencies:
     "@babel/compat-data": ^7.22.6
     "@babel/core": ^7.22.6
-    "@babel/helper-define-polyfill-provider": "workspace:^0.4.0"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.4.1"
     "@babel/helper-plugin-test-runner": ^7.22.5
     "@babel/plugin-transform-for-of": ^7.22.5
     "@babel/plugin-transform-modules-commonjs": ^7.22.5
     "@nicolo-ribaudo/semver-v6": ^6.3.3
   peerDependencies:
-    "@babel/core": ^7.0.0-0
+    "@babel/core": ^7.4.0 || ^8.0.0-0 <8.0.0
   languageName: unknown
   linkType: soft
 
@@ -4447,7 +4447,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-corejs3@workspace:packages/babel-plugin-polyfill-corejs3"
   dependencies:
     "@babel/core": ^7.22.6
-    "@babel/helper-define-polyfill-provider": "workspace:^0.4.0"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.4.1"
     "@babel/helper-plugin-test-runner": ^7.22.5
     "@babel/plugin-transform-class-properties": ^7.22.5
     "@babel/plugin-transform-classes": ^7.22.6
@@ -4458,7 +4458,7 @@ __metadata:
     core-js-compat: ^3.31.0
     core-js-pure: ^3.31.0
   peerDependencies:
-    "@babel/core": ^7.0.0-0
+    "@babel/core": ^7.4.0 || ^8.0.0-0 <8.0.0
   languageName: unknown
   linkType: soft
 
@@ -4467,12 +4467,12 @@ __metadata:
   resolution: "babel-plugin-polyfill-es-shims@workspace:packages/babel-plugin-polyfill-es-shims"
   dependencies:
     "@babel/core": ^7.22.6
-    "@babel/helper-define-polyfill-provider": "workspace:^0.4.0"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.4.1"
     "@babel/helper-plugin-test-runner": ^7.22.5
     array.from: ^1.1.0
     math.clz32: ^1.0.0
   peerDependencies:
-    "@babel/core": ^7.0.0-0
+    "@babel/core": ^7.4.0 || ^8.0.0-0 <8.0.0
   languageName: unknown
   linkType: soft
 
@@ -4492,11 +4492,11 @@ __metadata:
   resolution: "babel-plugin-polyfill-regenerator@workspace:packages/babel-plugin-polyfill-regenerator"
   dependencies:
     "@babel/core": ^7.17.8
-    "@babel/helper-define-polyfill-provider": "workspace:^0.4.0"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.4.1"
     "@babel/helper-plugin-test-runner": ^7.16.7
     "@babel/plugin-transform-regenerator": ~7.14.0
   peerDependencies:
-    "@babel/core": ^7.0.0-0
+    "@babel/core": ^7.4.0 || ^8.0.0-0 <8.0.0
   languageName: unknown
   linkType: soft
 
