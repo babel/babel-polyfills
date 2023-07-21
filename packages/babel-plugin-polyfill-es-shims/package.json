@@ -35,6 +35,6 @@
     "math.clz32": "^1.0.0"
   },
   "peerDependencies": {
-    "@babel/core": "^7.0.0-0"
+    "@babel/core": "^7.4.0 || ^8.0.0-0 <8.0.0"
   }
 }
