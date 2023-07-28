@@ -83,3 +83,9 @@ Object.groupBy(a, b);
 Map.groupBy(a, b);
 Promise.withResolvers();
 new URLSearchParams().has(a, b);
+
+Math.f16round(foo);
+foo.getFloat16(0);
+foo.setFloat16(0, 1);
+foo.getUint8Clamped(0);
+foo.setUint8Clamped(0, 1);
