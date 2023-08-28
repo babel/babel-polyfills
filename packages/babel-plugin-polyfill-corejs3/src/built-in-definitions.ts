@@ -213,6 +213,12 @@ const TypedArrayStaticMethods = {
   of: define(null, ["es.typed-array.of"]),
 };
 
+const DataViewDependencies = [
+  "es.data-view",
+  "es.array-buffer.slice",
+  "es.object.to-string",
+];
+
 export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   AsyncDisposableStack: define("async-disposable-stack", [
     "esnext.async-disposable-stack.constructor",
@@ -234,11 +240,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
     "es.array-buffer.slice",
     "es.object.to-string",
   ]),
-  DataView: define(null, [
-    "es.data-view",
-    "es.array-buffer.slice",
-    "es.object.to-string",
-  ]),
+  DataView: define(null, DataViewDependencies),
   Date: define(null, ["es.date.to-string"]),
   DOMException: define("dom-exception", DOMExceptionDependencies),
   DisposableStack: define("disposable-stack", [
@@ -399,6 +401,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     degrees: define("math/degrees", ["esnext.math.degrees"]),
     expm1: define("math/expm1", ["es.math.expm1"]),
     fround: define("math/fround", ["es.math.fround"]),
+    f16round: define("math/f16round", ["esnext.math.f16round"]),
     fscale: define("math/fscale", ["esnext.math.fscale"]),
     hypot: define("math/hypot", ["es.math.hypot"]),
     iaddh: define("math/iaddh", ["esnext.math.iaddh"]),
@@ -784,6 +787,14 @@ export const InstanceProperties = {
     ...IteratorDependencies,
   ]),
   flat: define("instance/flat", ["es.array.flat", "es.array.unscopables.flat"]),
+  getFloat16: define(null, [
+    "esnext.data-view.get-float16",
+    ...DataViewDependencies,
+  ]),
+  getUint8Clamped: define(null, [
+    "esnext.data-view.get-uint8-clamped",
+    ...DataViewDependencies,
+  ]),
   getYear: define(null, ["es.date.get-year"]),
   group: define("instance/group", ["esnext.array.group"]),
   groupBy: define("instance/group-by", ["esnext.array.group-by"]),
@@ -855,6 +866,14 @@ export const InstanceProperties = {
   ]),
   reverse: define("instance/reverse", ["es.array.reverse"]),
   search: define(null, ["es.string.search", "es.regexp.exec"]),
+  setFloat16: define(null, [
+    "esnext.data-view.set-float16",
+    ...DataViewDependencies,
+  ]),
+  setUint8Clamped: define(null, [
+    "esnext.data-view.set-uint8-clamped",
+    ...DataViewDependencies,
+  ]),
   setYear: define(null, ["es.date.set-year"]),
   slice: define("instance/slice", ["es.array.slice"]),
   small: define(null, ["es.string.small"]),
