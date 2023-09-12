@@ -204,6 +204,11 @@ const IteratorDependencies = [
   "es.object.to-string",
 ];
 
+export const DecoratorMetadataDependencies = [
+  "esnext.symbol.metadata",
+  "esnext.function.metadata",
+]
+
 const TypedArrayStaticMethods = {
   from: define(null, ["es.typed-array.from"]),
   fromAsync: define(null, [
@@ -640,10 +645,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       "es.symbol.match-all",
       "es.string.match-all",
     ]),
-    metadata: define("symbol/metadata", [
-      "esnext.symbol.metadata",
-      "esnext.function.metadata",
-    ]),
+    metadata: define("symbol/metadata", DecoratorMetadataDependencies),
     metadataKey: define("symbol/metadata-key", ["esnext.symbol.metadata-key"]),
     observable: define("symbol/observable", ["esnext.symbol.observable"]),
     patternMatch: define("symbol/pattern-match", [
