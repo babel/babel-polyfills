@@ -385,7 +385,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       "es.object.create",
       "es.object.freeze",
     ]),
-    stringify: define("json/stringify", ["es.json.stringify"], "es.symbol"),
+    stringify: define("json/stringify", ["es.json.stringify", "es.symbol"]),
   },
 
   Math: {
