@@ -207,7 +207,7 @@ const IteratorDependencies = [
 export const DecoratorMetadataDependencies = [
   "esnext.symbol.metadata",
   "esnext.function.metadata",
-]
+];
 
 const TypedArrayStaticMethods = {
   from: define(null, ["es.typed-array.from"]),
