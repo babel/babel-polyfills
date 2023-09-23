@@ -8,6 +8,7 @@ import {
   PromiseDependenciesWithIterators,
   StaticProperties,
   InstanceProperties,
+  DecoratorMetadataDependencies,
   type CoreJSPolyfillDescriptor,
 } from "./built-in-definitions";
 import canSkipPolyfill from "./usage-filters";
@@ -373,6 +374,18 @@ export default defineProvider<Options>(function (
       YieldExpression(path: NodePath<t.YieldExpression>) {
         if (path.node.delegate) {
           maybeInjectGlobal(CommonIterators, getUtils(path));
+        }
+      },
+
+      // Decorators metadata
+      Class(path: NodePath<t.Class>) {
+        const hasDecorators =
+          path.node.decorators?.length ||
+          path.node.body.body.some(
+            el => (el as t.ClassMethod).decorators?.length,
+          );
+        if (hasDecorators) {
+          maybeInjectGlobal(DecoratorMetadataDependencies, getUtils(path));
         }
       },
     },
