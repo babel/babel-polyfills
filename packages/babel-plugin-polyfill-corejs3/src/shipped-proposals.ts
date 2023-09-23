@@ -25,6 +25,7 @@ export default new Set<string>([
   "esnext.json.raw-json",
   "esnext.map.group-by",
   "esnext.object.group-by",
+  "esnext.promise.with-resolvers",
   "esnext.set.difference.v2",
   "esnext.set.intersection.v2",
   "esnext.set.is-disjoint-from.v2",
