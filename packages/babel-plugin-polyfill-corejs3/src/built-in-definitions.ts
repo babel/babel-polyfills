@@ -735,7 +735,7 @@ export const InstanceProperties = {
   demethodize: define("instance/demethodize", ["esnext.function.demethodize"]),
   description: define(null, ["es.symbol", "es.symbol.description"]),
   dotAll: define(null, ["es.regexp.dot-all"]),
-  drop: define("instance/drop", [
+  drop: define(null, [
     "esnext.async-iterator.drop",
     ...AsyncIteratorDependencies,
     "esnext.iterator.drop",
@@ -823,7 +823,7 @@ export const InstanceProperties = {
     "es.array.includes",
     "es.string.includes",
   ]),
-  indexed: define("instance/indexed", [
+  indexed: define(null, [
     "esnext.async-iterator.indexed",
     ...AsyncIteratorDependencies,
     "esnext.iterator.indexed",
@@ -894,14 +894,14 @@ export const InstanceProperties = {
   sub: define(null, ["es.string.sub"]),
   substr: define(null, ["es.string.substr"]),
   sup: define(null, ["es.string.sup"]),
-  take: define("instance/take", [
+  take: define(null, [
     "esnext.async-iterator.take",
     ...AsyncIteratorDependencies,
     "esnext.iterator.take",
     ...IteratorDependencies,
   ]),
   test: define(null, ["es.regexp.test", "es.regexp.exec"]),
-  toArray: define("instance/to-array", [
+  toArray: define(null, [
     "esnext.async-iterator.to-array",
     ...AsyncIteratorDependencies,
     "esnext.iterator.to-array",
