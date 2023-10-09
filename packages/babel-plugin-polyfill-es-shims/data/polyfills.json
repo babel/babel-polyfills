@@ -324,6 +324,7 @@
     "samsung": "9",
     "electron": "3"
   },
+  "ArrayBuffer.prototype.transfer": {},
   "Date.prototype.toISOString": {
     "chrome": "5",
     "opera": "10.50",
@@ -389,6 +390,19 @@
     "samsung": "1",
     "electron": "0.20"
   },
+  "Iterator": {},
+  "Iterator.from": {},
+  "Iterator.prototype.drop": {},
+  "Iterator.prototype.every": {},
+  "Iterator.prototype.filter": {},
+  "Iterator.prototype.find": {},
+  "Iterator.prototype.flatMap": {},
+  "Iterator.prototype.forEach": {},
+  "Iterator.prototype.map": {},
+  "Iterator.prototype.reduce": {},
+  "Iterator.prototype.some": {},
+  "Iterator.prototype.take": {},
+  "Iterator.prototype.toArray": {},
   "Map": {
     "chrome": "51",
     "opera": "38",
@@ -776,13 +790,25 @@
     "samsung": "5",
     "electron": "1.2"
   },
-  "Set.prototype.difference": {},
-  "Set.prototype.intersection": {},
+  "Set.prototype.difference": {
+    "safari": "17",
+    "ios": "17"
+  },
+  "Set.prototype.intersection": {
+    "safari": "17",
+    "ios": "17"
+  },
   "Set.prototype.isDisjointFrom": {},
   "Set.prototype.isSubsetOf": {},
   "Set.prototype.isSupersetOf": {},
-  "Set.prototype.symmetricDifference": {},
-  "Set.prototype.union": {},
+  "Set.prototype.symmetricDifference": {
+    "safari": "17",
+    "ios": "17"
+  },
+  "Set.prototype.union": {
+    "safari": "17",
+    "ios": "17"
+  },
   "String.fromCodePoint": {
     "chrome": "41",
     "opera": "28",
@@ -1175,5 +1201,16 @@
   "Array.prototype.toReversed": {},
   "Array.prototype.toSorted": {},
   "Array.prototype.toSpliced": {},
-  "Array.prototype.with": {}
+  "Array.prototype.with": {},
+  "ArrayBuffer.prototype.detached": {},
+  "ArrayBuffer.prototype.transferToFixedLength": {},
+  "AsyncDisposableStack": {},
+  "DisposableStack": {},
+  "Iterator.prototype.constructor": {},
+  "Promise.withResolvers": {},
+  "String.prototype.isWellFormed": {},
+  "String.prototype.toWellFormed": {},
+  "SuppressedError": {},
+  "Symbol.asyncDispose": {},
+  "Symbol.dispose": {}
 }
