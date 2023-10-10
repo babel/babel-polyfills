@@ -247,7 +247,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   ]),
   DataView: define(null, DataViewDependencies),
   Date: define(null, ["es.date.to-string"]),
-  DOMException: define("dom-exception", DOMExceptionDependencies),
+  DOMException: define("dom-exception/index", DOMExceptionDependencies),
   DisposableStack: define("disposable-stack", [
     "esnext.disposable-stack.constructor",
     "es.object.to-string",

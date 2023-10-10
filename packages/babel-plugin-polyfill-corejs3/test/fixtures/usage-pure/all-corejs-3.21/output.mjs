@@ -9,7 +9,7 @@ import _Symbol from "core-js-pure/stable/symbol/index.js";
 import _Symbol$matchAll from "core-js-pure/stable/symbol/match-all.js";
 import _replaceAllInstanceProperty from "core-js-pure/stable/instance/replace-all.js";
 import _URL from "core-js-pure/stable/url/index.js";
-import _DOMException from "core-js-pure/stable/dom-exception.js";
+import _DOMException from "core-js-pure/stable/dom-exception/index.js";
 import _structuredClone from "core-js-pure/stable/structured-clone.js";
 import _btoa from "core-js-pure/stable/btoa.js";
 import _withInstanceProperty from "core-js-pure/features/instance/with.js";
