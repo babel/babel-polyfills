@@ -30,7 +30,35 @@ This package supports the `usage-pure` and `usage-global` methods.
 
 This polyfill provider is compatible with polyfills that follow the [`es-shims-api`](https://github.com/es-shims/es-shim-api) specification. Those polyfills must live under the [`@es-shims`](https://github.com/es-shims) organization, but for historical reasons some of them are owned by different people: they are explicitly marked as such in the following tables.
 
+<!--
 ### Proposals (Stage 3)
+
+| Builtin object or function                                                         | Package name                                                                                                             | Owner |
+| :--------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- | :---- |
+| `ArrayBuffer.prototype.detached`                                                   | [`arraybuffer.prototype.detached`](https://github.com/es-shims/ArrayBuffer.prototype.detached)                           |
+| `ArrayBuffer.prototype.transfer`                                                   | [`arraybuffer.prototype.transfer`](https://github.com/es-shims/ArrayBuffer.prototype.transfer)                           |
+| `ArrayBuffer.prototype.transferToFixedLength`                                      | [`arraybuffer.prototype.transfertofixedlength`](https://github.com/es-shims/ArrayBuffer.prototype.transferToFixedLength) |
+| `DisposableStack`, `AsyncDisposableStack`, `Symbol.dispose`, `Symbol.asyncDispose` | [`disposablestack`](https://github.com/es-shims/DisposableStack)                                                         |
+| `Iterator`, `Iterator.from`, `Iterator.prototype.*` helpers                        | [`es-iterator-helpers`](https://github.com/es-shims/iterator-helpers)                                                    |
+| `Promise.withResolvers`                                                            | [`promise.withresolvers`](https://github.com/es-shims/Promise.withResolvers)                                             |
+| `Set.prototype.difference`                                                         | [`set.prototype.difference`](https://github.com/es-shims/Set.prototype.difference)                                       |
+| `Set.prototype.intersection`                                                       | [`set.prototype.intersection`](https://github.com/es-shims/Set.prototype.intersection)                                   |
+| `Set.prototype.isDisjointFrom`                                                     | [`set.prototype.isDisjointFrom`](https://github.com/es-shims/Set.prototype.isDisjointFrom)                               |
+| `Set.prototype.isSubsetOf`                                                         | [`set.prototype.isSubsetOf`](https://github.com/es-shims/Set.prototype.isSubsetOf)                                       |
+| `Set.prototype.isSupersetOf`                                                       | [`set.prototype.isSupersetOf`](https://github.com/es-shims/Set.prototype.isSupersetOf)                                   |
+| `Set.prototype.symmetricDifference`                                                | [`set.prototype.symmetricDifference`](https://github.com/es-shims/Set.prototype.symmetricDifference)                     |
+| `Set.prototype.union`                                                              | [`set.prototype.union`](https://github.com/es-shims/Set.prototype.union)                                                 |
+| `SuppressedError`                                                                  | [`suppressed-error`](https://github.com/es-shims/SuppressedError)                                                        |
+-->
+
+### ES2024
+
+| Builtin object or function      | Package name                                                                                 | Owner |
+| :------------------------------ | :------------------------------------------------------------------------------------------- | :---- |
+| `String.prototype.isWellFormed` | [`string.prototype.iswellformed`](https://github.com/es-shims/String.prototype.isWellFormed) |
+| `String.prototype.toWellFormed` | [`string.prototype.towellformed`](https://github.com/es-shims/String.prototype.toWellFormed) |
+
+### ES2023
 
 | Builtin object or function      | Package name                                                                                 | Owner |
 | :------------------------------ | :------------------------------------------------------------------------------------------- | :---- |

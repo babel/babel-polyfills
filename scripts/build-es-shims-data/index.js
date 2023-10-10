@@ -4,19 +4,18 @@ const path = require("path");
 
 const { generateData, environments, writeFile } = require("./utils-build-data");
 
-const newData = generateData(environments, require(`./es-shims-features`));
-
-// These features are missing from compat-table. Remove this from this list once they are added.
-const missing = [
-  "Array.prototype.toReversed",
-  "Array.prototype.toSorted",
-  "Array.prototype.toSpliced",
-  "Array.prototype.with",
-];
-for (const name of missing) {
-  if (newData[name]) throw new Error(`Missing feature is present: ${name}`);
-  newData[name] = {};
+const features = require(`./es-shims-features`);
+const missing = [];
+for (const name of Object.keys(features)) {
+  if (features[name] === "@@MISSING@@") {
+    missing.push(name);
+    delete features[name];
+  }
 }
+
+const newData = generateData(environments, features);
+
+for (const name of missing) newData[name] = {};
 
 const dataPath = path.join(
   __dirname,
