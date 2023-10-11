@@ -224,7 +224,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-define-polyfill-provider@workspace:^0.4.2, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
+"@babel/helper-define-polyfill-provider@workspace:^0.4.3, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
   version: 0.0.0-use.local
   resolution: "@babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider"
   dependencies:
@@ -4444,7 +4444,7 @@ __metadata:
   dependencies:
     "@babel/compat-data": ^7.22.6
     "@babel/core": ^7.22.6
-    "@babel/helper-define-polyfill-provider": "workspace:^0.4.2"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.4.3"
     "@babel/helper-plugin-test-runner": ^7.22.5
     "@babel/plugin-transform-for-of": ^7.22.5
     "@babel/plugin-transform-modules-commonjs": ^7.22.5
@@ -4471,7 +4471,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-corejs3@workspace:packages/babel-plugin-polyfill-corejs3"
   dependencies:
     "@babel/core": ^7.22.6
-    "@babel/helper-define-polyfill-provider": "workspace:^0.4.2"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.4.3"
     "@babel/helper-plugin-test-runner": ^7.22.5
     "@babel/plugin-proposal-decorators": ^7.22.15
     "@babel/plugin-transform-class-properties": ^7.22.5
@@ -4493,7 +4493,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-es-shims@workspace:packages/babel-plugin-polyfill-es-shims"
   dependencies:
     "@babel/core": ^7.22.6
-    "@babel/helper-define-polyfill-provider": "workspace:^0.4.2"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.4.3"
     "@babel/helper-plugin-test-runner": ^7.22.5
     array.from: ^1.1.0
     math.clz32: ^1.0.0
@@ -4518,7 +4518,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-regenerator@workspace:packages/babel-plugin-polyfill-regenerator"
   dependencies:
     "@babel/core": ^7.17.8
-    "@babel/helper-define-polyfill-provider": "workspace:^0.4.2"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.4.3"
     "@babel/helper-plugin-test-runner": ^7.16.7
     "@babel/plugin-transform-regenerator": ~7.14.0
   peerDependencies:
