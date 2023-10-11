@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-polyfill-regenerator",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "A Babel plugin to inject imports to regenerator-runtime",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@babel/helper-define-polyfill-provider": "workspace:^0.4.2"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
