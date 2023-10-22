@@ -104,6 +104,7 @@ import "core-js/modules/esnext.data-view.get-float16.js";
 import "core-js/modules/esnext.data-view.set-float16.js";
 import "core-js/modules/esnext.data-view.get-uint8-clamped.js";
 import "core-js/modules/esnext.data-view.set-uint8-clamped.js";
+import "core-js/modules/esnext.regexp.escape.js";
 [].findLast(fn);
 [].findLastIndex(fn);
 [].asIndexedPairs();

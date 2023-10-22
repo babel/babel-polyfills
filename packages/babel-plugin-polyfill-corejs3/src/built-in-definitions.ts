@@ -579,6 +579,10 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     ]),
   },
 
+  RegExp: {
+    escape: define("regexp/escape", ["esnext.regexp.escape"]),
+  },
+
   Set: {
     from: define(null, ["esnext.set.from", ...SetDependencies]),
     of: define(null, ["esnext.set.of", ...SetDependencies]),

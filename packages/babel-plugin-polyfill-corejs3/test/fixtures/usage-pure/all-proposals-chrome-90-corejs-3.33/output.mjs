@@ -37,6 +37,7 @@ import _Symbol$isWellKnownSymbol from "core-js-pure/features/symbol/is-well-know
 import _Symbol$isRegisteredSymbol from "core-js-pure/features/symbol/is-registered-symbol.js";
 import _Object$groupBy from "core-js-pure/features/object/group-by.js";
 import _Math$f16round from "core-js-pure/features/math/f16round.js";
+import _RegExp$escape from "core-js-pure/features/regexp/escape.js";
 _findLastInstanceProperty(_context = []).call(_context, fn);
 _findLastIndexInstanceProperty(_context2 = []).call(_context2, fn);
 _asIndexedPairsInstanceProperty(_context3 = []).call(_context3);
@@ -100,4 +101,4 @@ foo.getFloat16(0);
 foo.setFloat16(0, 1);
 foo.getUint8Clamped(0);
 foo.setUint8Clamped(0, 1);
-RegExp.escape(foo);
+_RegExp$escape(foo);
