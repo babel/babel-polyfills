@@ -23,8 +23,8 @@ import _isWellFormedInstanceProperty from "core-js-pure/features/instance/is-wel
 import _toWellFormedInstanceProperty from "core-js-pure/features/instance/to-well-formed.js";
 import _String$dedent from "core-js-pure/features/string/dedent.js";
 import _SuppressedError from "core-js-pure/features/suppressed-error.js";
-import _DisposableStack from "core-js-pure/features/disposable-stack.js";
-import _AsyncDisposableStack from "core-js-pure/features/async-disposable-stack.js";
+import _DisposableStack from "core-js-pure/features/disposable-stack/index.js";
+import _AsyncDisposableStack from "core-js-pure/features/async-disposable-stack/index.js";
 import _Iterator$range from "core-js-pure/features/iterator/range.js";
 import _JSON$parse from "core-js-pure/features/json/parse.js";
 import _JSON$isRawJSON from "core-js-pure/features/json/is-raw-json.js";
