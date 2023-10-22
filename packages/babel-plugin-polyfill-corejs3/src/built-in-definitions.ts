@@ -225,7 +225,7 @@ const DataViewDependencies = [
 ];
 
 export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
-  AsyncDisposableStack: define("async-disposable-stack", [
+  AsyncDisposableStack: define("async-disposable-stack/index", [
     "esnext.async-disposable-stack.constructor",
     "es.object.to-string",
     "esnext.async-iterator.async-dispose",
@@ -248,7 +248,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   DataView: define(null, DataViewDependencies),
   Date: define(null, ["es.date.to-string"]),
   DOMException: define("dom-exception/index", DOMExceptionDependencies),
-  DisposableStack: define("disposable-stack", [
+  DisposableStack: define("disposable-stack/index", [
     "esnext.disposable-stack.constructor",
     "es.object.to-string",
     "esnext.iterator.dispose",
@@ -577,6 +577,10 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     setPrototypeOf: define("reflect/set-prototype-of", [
       "es.reflect.set-prototype-of",
     ]),
+  },
+
+  RegExp: {
+    escape: define("regexp/escape", ["esnext.regexp.escape"]),
   },
 
   Set: {
