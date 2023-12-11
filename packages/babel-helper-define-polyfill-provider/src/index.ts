@@ -290,7 +290,7 @@ export default function definePolyfillProvider<Options>(
   factory: PolyfillProvider<Options>,
 ) {
   return declare((babelApi, options: PluginOptions, dirname: string) => {
-    babelApi.assertVersion(7);
+    babelApi.assertVersion("^7.0.0 || ^8.0.0-alpha.0");
     const { traverse } = babelApi;
 
     let debugLog;
