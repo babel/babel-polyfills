@@ -18,7 +18,7 @@ import _isWellFormedInstanceProperty from "core-js-pure/stable/instance/is-well-
 import _toWellFormedInstanceProperty from "core-js-pure/stable/instance/to-well-formed.js";
 import _self from "core-js-pure/stable/self.js";
 import _URL$canParse from "core-js-pure/stable/url/can-parse.js";
-import _Object$groupBy from "core-js-pure/features/object/group-by.js";
+import _Object$groupBy from "core-js-pure/stable/object/group-by.js";
 import _Promise from "core-js-pure/stable/promise/index.js";
 import _URLSearchParams from "core-js-pure/stable/url-search-params/index.js";
 _findLastInstanceProperty(_context = []).call(_context, fn);
@@ -85,3 +85,7 @@ foo.setFloat16(0, 1);
 foo.getUint8Clamped(0);
 foo.setUint8Clamped(0, 1);
 RegExp.escape(foo);
+Uint8Array.fromBase64(string);
+Uint8Array.fromHex(string);
+new Uint8Array(foo).toBase64();
+new Uint8Array(foo).toHex();
