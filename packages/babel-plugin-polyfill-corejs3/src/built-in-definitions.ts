@@ -29,7 +29,8 @@ const define = (
   };
 };
 
-const typed = (name: string) => define(null, [name, ...TypedArrayDependencies]);
+const typed = (...modules) =>
+  define(null, [...modules, ...TypedArrayDependencies]);
 
 const ArrayNatureIterators = [
   "es.array.iterator",
@@ -210,12 +211,13 @@ export const DecoratorMetadataDependencies = [
 ];
 
 const TypedArrayStaticMethods = {
-  from: define(null, ["es.typed-array.from"]),
+  from: define(null, ["es.typed-array.from", ...TypedArrayDependencies]),
   fromAsync: define(null, [
     "esnext.typed-array.from-async",
     ...PromiseDependenciesWithIterators,
+    ...TypedArrayDependencies,
   ]),
-  of: define(null, ["es.typed-array.of"]),
+  of: define(null, ["es.typed-array.of", ...TypedArrayDependencies]),
 };
 
 const DataViewDependencies = [
@@ -262,7 +264,11 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   Int16Array: typed("es.typed-array.int16-array"),
   Int32Array: typed("es.typed-array.int32-array"),
   Iterator: define("iterator/index", IteratorDependencies),
-  Uint8Array: typed("es.typed-array.uint8-array"),
+  Uint8Array: typed(
+    "es.typed-array.uint8-array",
+    "esnext.uint8-array.to-base64",
+    "esnext.uint8-array.to-hex",
+  ),
   Uint8ClampedArray: typed("es.typed-array.uint8-clamped-array"),
   Uint16Array: typed("es.typed-array.uint16-array"),
   Uint32Array: typed("es.typed-array.uint32-array"),
@@ -429,7 +435,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
 
   Map: {
     from: define(null, ["esnext.map.from", ...MapDependencies]),
-    groupBy: define(null, ["esnext.map.group-by", ...MapDependencies]),
+    groupBy: define(null, ["es.map.group-by", ...MapDependencies]),
     keyBy: define(null, ["esnext.map.key-by", ...MapDependencies]),
     of: define(null, ["esnext.map.of", ...MapDependencies]),
   },
@@ -488,7 +494,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       "es.object.get-prototype-of",
     ]),
     groupBy: define("object/group-by", [
-      "esnext.object.group-by",
+      "es.object.group-by",
       "es.object.create",
     ]),
     hasOwn: define("object/has-own", ["es.object.has-own"]),
@@ -521,7 +527,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     race: define(null, PromiseDependenciesWithIterators),
     try: define(null, ["esnext.promise.try", ...PromiseDependencies]),
     withResolvers: define(null, [
-      "esnext.promise.with-resolvers",
+      "es.promise.with-resolvers",
       ...PromiseDependencies,
     ]),
   },
@@ -693,7 +699,17 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   },
 
   Int8Array: TypedArrayStaticMethods,
-  Uint8Array: TypedArrayStaticMethods,
+  Uint8Array: {
+    fromBase64: define(null, [
+      "esnext.uint8-array.from-base64",
+      ...TypedArrayDependencies,
+    ]),
+    fromHex: define(null, [
+      "esnext.uint8-array.from-hex",
+      ...TypedArrayDependencies,
+    ]),
+    ...TypedArrayStaticMethods,
+  },
   Uint8ClampedArray: TypedArrayStaticMethods,
   Int16Array: TypedArrayStaticMethods,
   Uint16Array: TypedArrayStaticMethods,
