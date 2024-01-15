@@ -131,7 +131,6 @@ export default defineProvider<Options>(function (
       return utils.injectDefaultImport(
         `${coreJSPureBase}/${desc.pure}${ext}`,
         hint,
-        name,
       );
     }
   }
