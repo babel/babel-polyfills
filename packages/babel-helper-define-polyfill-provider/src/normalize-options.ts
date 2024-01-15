@@ -33,7 +33,7 @@ function buldDuplicatesError(duplicates) {
 
 export function validateIncludeExclude(
   provider: string,
-  polyfills: Set<string>,
+  polyfills: Map<string, unknown>,
   includePatterns: Pattern[],
   excludePatterns: Pattern[],
 ) {
@@ -43,7 +43,7 @@ export function validateIncludeExclude(
     if (!regexp) return false;
 
     let matched = false;
-    for (const polyfill of polyfills) {
+    for (const polyfill of polyfills.keys()) {
       if (regexp.test(polyfill)) {
         matched = true;
         current.add(polyfill);

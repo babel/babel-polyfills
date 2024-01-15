@@ -1,7 +1,7 @@
 import { types as t, template } from "@babel/core";
 import type { NodePath } from "@babel/traverse";
 import type { Utils } from "./types";
-import type ImportsCache from "./imports-cache";
+import type ImportsCachedInjector from "./imports-injector";
 
 export function intersection<T>(a: Set<T>, b: Set<T>): Set<T> {
   const result = new Set<T>();
@@ -126,41 +126,53 @@ function hoist(node: t.Node) {
   return node;
 }
 
-export function createUtilsGetter(cache: ImportsCache) {
+export function createUtilsGetter(cache: ImportsCachedInjector) {
   return (path: NodePath): Utils => {
     const prog = path.findParent(p => p.isProgram()) as NodePath<t.Program>;
 
     return {
-      injectGlobalImport(url) {
-        cache.storeAnonymous(prog, url, (isScript, source) => {
+      injectGlobalImport(url, moduleName) {
+        cache.storeAnonymous(prog, url, moduleName, (isScript, source) => {
           return isScript
             ? template.statement.ast`require(${source})`
             : t.importDeclaration([], source);
         });
       },
-      injectNamedImport(url, name, hint = name) {
-        return cache.storeNamed(prog, url, name, (isScript, source, name) => {
-          const id = prog.scope.generateUidIdentifier(hint);
-          return {
-            node: isScript
-              ? hoist(template.statement.ast`
+      injectNamedImport(url, name, hint = name, moduleName) {
+        return cache.storeNamed(
+          prog,
+          url,
+          name,
+          moduleName,
+          (isScript, source, name) => {
+            const id = prog.scope.generateUidIdentifier(hint);
+            return {
+              node: isScript
+                ? hoist(template.statement.ast`
                   var ${id} = require(${source}).${name}
                 `)
-              : t.importDeclaration([t.importSpecifier(id, name)], source),
-            name: id.name,
-          };
-        });
+                : t.importDeclaration([t.importSpecifier(id, name)], source),
+              name: id.name,
+            };
+          },
+        );
       },
-      injectDefaultImport(url, hint = url) {
-        return cache.storeNamed(prog, url, "default", (isScript, source) => {
-          const id = prog.scope.generateUidIdentifier(hint);
-          return {
-            node: isScript
-              ? hoist(template.statement.ast`var ${id} = require(${source})`)
-              : t.importDeclaration([t.importDefaultSpecifier(id)], source),
-            name: id.name,
-          };
-        });
+      injectDefaultImport(url, hint = url, moduleName) {
+        return cache.storeNamed(
+          prog,
+          url,
+          "default",
+          moduleName,
+          (isScript, source) => {
+            const id = prog.scope.generateUidIdentifier(hint);
+            return {
+              node: isScript
+                ? hoist(template.statement.ast`var ${id} = require(${source})`)
+                : t.importDeclaration([t.importDefaultSpecifier(id)], source),
+              name: id.name,
+            };
+          },
+        );
       },
     };
   };
