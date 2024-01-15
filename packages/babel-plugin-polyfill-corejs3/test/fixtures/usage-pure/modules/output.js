@@ -1,8 +1,8 @@
 "use strict";
 
 var _context;
-var _Object$defineProperty = require("core-js-pure/stable/object/define-property.js");
 var _forEachInstanceProperty = require("core-js-pure/stable/instance/for-each.js");
+var _Object$defineProperty = require("core-js-pure/stable/object/define-property.js");
 var _Object$keys = require("core-js-pure/stable/object/keys.js");
 _Object$defineProperty(exports, "__esModule", {
   value: true
