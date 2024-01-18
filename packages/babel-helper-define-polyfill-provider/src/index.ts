@@ -8,7 +8,7 @@ import _getTargets, {
 const getTargets = _getTargets.default || _getTargets;
 
 import { createUtilsGetter } from "./utils";
-import ImportsCache from "./imports-cache";
+import ImportsCachedInjector from "./imports-injector";
 import {
   stringifyTargetsMultiline,
   presetEnvSilentDebugHeader,
@@ -163,17 +163,18 @@ function instantiateProvider<Options>(
     absoluteImports,
   } = resolveOptions<Options>(options, babelApi);
 
-  const getUtils = createUtilsGetter(
-    new ImportsCache(moduleName =>
-      deps.resolve(dirname, moduleName, absoluteImports),
-    ),
-  );
-
   // eslint-disable-next-line prefer-const
   let include, exclude;
   let polyfillsSupport;
-  let polyfillsNames;
+  let polyfillsNames: Map<string, number> | undefined;
   let filterPolyfills;
+
+  const getUtils = createUtilsGetter(
+    new ImportsCachedInjector(
+      moduleName => deps.resolve(dirname, moduleName, absoluteImports),
+      (name: string) => polyfillsNames?.get(name) ?? Infinity,
+    ),
+  );
 
   const depsCache = new Map();
 
@@ -256,14 +257,18 @@ function instantiateProvider<Options>(
   }
 
   if (Array.isArray(provider.polyfills)) {
-    polyfillsNames = new Set(provider.polyfills);
+    polyfillsNames = new Map(
+      provider.polyfills.map((name, index) => [name, index]),
+    );
     filterPolyfills = provider.filterPolyfills;
   } else if (provider.polyfills) {
-    polyfillsNames = new Set(Object.keys(provider.polyfills));
+    polyfillsNames = new Map(
+      Object.keys(provider.polyfills).map((name, index) => [name, index]),
+    );
     polyfillsSupport = provider.polyfills;
     filterPolyfills = provider.filterPolyfills;
   } else {
-    polyfillsNames = new Set();
+    polyfillsNames = new Map();
   }
 
   ({ include, exclude } = validateIncludeExclude(

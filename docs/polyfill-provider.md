@@ -198,14 +198,16 @@ A `meta` object describes the statement or expression which triggered the call t
 
 When calling a provider function (e.g. `usageGlobal`), `@babel/helper-define-polyfill-provider` will provide it a few utilities to easily inject the necessary `import` statements or `require` calls, depending on the source type. Polyfill providers shouldn't worry about which AST represents an import, or about the source type of the file being transpiled.
 
-- `utils.injectGlobalImport(url: string)` can be used to inject side-effectful global imports. It is usually called when injecting global polyfills.
+- `utils.injectGlobalImport(url: string, polyfillName?: string)` can be used to inject side-effectful global imports. It is usually called when injecting global polyfills.
   For example, `utils.injectGlobalImport("my-polyfill")` would generate this code:
 
   ```js
   import "my-polyfill";
   ```
 
-- `utils.injectNamedImport(url: string, name: string, hint?: string)` and `utils.injectDefaultImport(url: string, hint?: string)` are used to inject named or defaults import. They both return an identifier referencing the imported value.
+  If `polyfillName` is specified, imports are injected respecting the order defined in [`provider.polyfills`](#providerpolyfills-string---name-string-support-).
+
+- `utils.injectNamedImport(url: string, name: string, hint?: string, polyfillName?: string)` and `utils.injectDefaultImport(url: string, hint?: string, polyfillName?: string)` are used to inject named or defaults import. They both return an identifier referencing the imported value.
   The optional `hint` parameter can be used to generate a nice-looking alias for the import.
   For example, `utils.injectNamedImport("array-polyfills", "from, "Array.from")` would generate this code:
 
@@ -221,6 +223,8 @@ When calling a provider function (e.g. `usageGlobal`), `@babel/helper-define-pol
     "name": "_ArrayFrom"
   }
   ```
+
+  If `polyfillName` is specified, imports are injected respecting the order defined in [`provider.polyfills`](#providerpolyfills-string---name-string-support-).
 
 ## The `ProviderApi` parameter
 
@@ -265,7 +269,7 @@ Sometimes you might need to inject an import outside of the `entryGlobal`/`usage
 You can use this method to create a new `utils` object with all its utilities, attached to the file the current `NodePath` belongs to.
 
 ```js
-export default function({ getUtils }) {
+export default function ({ getUtils }) {
   return {
     // ...
     visitor: {

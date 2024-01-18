@@ -64,9 +64,18 @@ export type ProviderApi = {
 };
 
 export type Utils = {
-  injectGlobalImport(url: string): void;
-  injectNamedImport(url: string, name: string, hint?: string): t.Identifier;
-  injectDefaultImport(url: string, hint?: string): t.Identifier;
+  injectGlobalImport(url: string, moduleName?: string): void;
+  injectNamedImport(
+    url: string,
+    name: string,
+    hint?: string,
+    moduleName?: string,
+  ): t.Identifier;
+  injectDefaultImport(
+    url: string,
+    hint?: string,
+    moduleName?: string,
+  ): t.Identifier;
 };
 
 export type ProviderResult = {

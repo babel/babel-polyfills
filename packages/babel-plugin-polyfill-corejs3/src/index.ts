@@ -93,7 +93,7 @@ export default defineProvider<Options>(function (
   function maybeInjectGlobalImpl(name: string, utils) {
     if (shouldInjectPolyfill(name)) {
       debug(name);
-      utils.injectGlobalImport(coreJSModule(name));
+      utils.injectGlobalImport(coreJSModule(name), name);
       return true;
     }
     return false;

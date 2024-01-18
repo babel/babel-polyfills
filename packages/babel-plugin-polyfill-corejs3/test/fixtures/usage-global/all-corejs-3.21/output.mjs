@@ -1,28 +1,28 @@
-import "core-js/modules/es.array.from.js";
-import "core-js/modules/es.string.iterator.js";
-import "core-js/modules/es.array.iterator.js";
-import "core-js/modules/es.map.js";
-import "core-js/modules/es.object.to-string.js";
-import "core-js/modules/web.dom-collections.iterator.js";
-import "core-js/modules/es.promise.js";
-import "core-js/modules/es.symbol.match.js";
-import "core-js/modules/es.string.match.js";
 import "core-js/modules/es.symbol.js";
 import "core-js/modules/es.symbol.description.js";
 import "core-js/modules/es.symbol.iterator.js";
-import "core-js/modules/es.regexp.exec.js";
-import "core-js/modules/web.queue-microtask.js";
-import "core-js/modules/es.global-this.js";
+import "core-js/modules/es.symbol.match.js";
 import "core-js/modules/es.error.cause.js";
 import "core-js/modules/es.error.to-string.js";
+import "core-js/modules/es.array.from.js";
+import "core-js/modules/es.array.iterator.js";
+import "core-js/modules/es.global-this.js";
+import "core-js/modules/es.map.js";
 import "core-js/modules/es.object.keys.js";
+import "core-js/modules/es.object.to-string.js";
+import "core-js/modules/es.promise.js";
+import "core-js/modules/es.regexp.exec.js";
 import "core-js/modules/es.set.js";
+import "core-js/modules/es.string.iterator.js";
+import "core-js/modules/es.string.match.js";
+import "core-js/modules/esnext.array.with.js";
+import "core-js/modules/web.btoa.js";
+import "core-js/modules/web.dom-collections.iterator.js";
 import "core-js/modules/web.dom-exception.constructor.js";
 import "core-js/modules/web.dom-exception.stack.js";
 import "core-js/modules/web.dom-exception.to-string-tag.js";
+import "core-js/modules/web.queue-microtask.js";
 import "core-js/modules/web.structured-clone.js";
-import "core-js/modules/web.btoa.js";
-import "core-js/modules/esnext.array.with.js";
 Array.from; // static method
 Map; // built-in
 new Promise(); // new builtin

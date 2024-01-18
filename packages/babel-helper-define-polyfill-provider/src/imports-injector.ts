@@ -3,23 +3,31 @@ import { types as t } from "@babel/core";
 
 type StrMap<K> = Map<string, K>;
 
-export default class ImportsCache {
+export default class ImportsCachedInjector {
   _imports: WeakMap<NodePath<t.Program>, StrMap<string>>;
   _anonymousImports: WeakMap<NodePath<t.Program>, Set<string>>;
-  _lastImports: WeakMap<NodePath<t.Program>, NodePath<t.Node>>;
+  _lastImports: WeakMap<
+    NodePath<t.Program>,
+    Array<{ path: NodePath<t.Node>; index: number }>
+  >;
   _resolver: (url: string) => string;
+  _getPreferredIndex: (url: string) => number;
 
-  constructor(resolver: (url: string) => string) {
+  constructor(
+    resolver: (url: string) => string,
+    getPreferredIndex: (url: string) => number,
+  ) {
     this._imports = new WeakMap();
     this._anonymousImports = new WeakMap();
     this._lastImports = new WeakMap();
     this._resolver = resolver;
+    this._getPreferredIndex = getPreferredIndex;
   }
 
   storeAnonymous(
     programPath: NodePath<t.Program>,
     url: string,
-    // eslint-disable-next-line no-undef
+    moduleName: string,
     getVal: (isScript: boolean, source: t.StringLiteral) => t.Node,
   ) {
     const key = this._normalizeKey(programPath, url);
@@ -36,13 +44,14 @@ export default class ImportsCache {
       t.stringLiteral(this._resolver(url)),
     );
     imports.add(key);
-    this._injectImport(programPath, node);
+    this._injectImport(programPath, node, moduleName);
   }
 
   storeNamed(
     programPath: NodePath<t.Program>,
     url: string,
     name: string,
+    moduleName: string,
     getVal: (
       isScript: boolean,
       // eslint-disable-next-line no-undef
@@ -65,51 +74,56 @@ export default class ImportsCache {
         t.identifier(name),
       );
       imports.set(key, id);
-      this._injectImport(programPath, node);
+      this._injectImport(programPath, node, moduleName);
     }
 
     return t.identifier(imports.get(key));
   }
 
-  _injectImport(programPath: NodePath<t.Program>, node: t.Node) {
-    const lastImport = this._lastImports.get(programPath);
-    let newNodes: [NodePath];
-    if (
-      lastImport &&
-      lastImport.node &&
+  _injectImport(
+    programPath: NodePath<t.Program>,
+    node: t.Node,
+    moduleName: string,
+  ) {
+    const newIndex = this._getPreferredIndex(moduleName);
+    const lastImports = this._lastImports.get(programPath) ?? [];
+
+    const isPathStillValid = (path: NodePath) =>
+      path.node &&
       // Sometimes the AST is modified and the "last import"
       // we have has been replaced
-      lastImport.parent === programPath.node &&
-      lastImport.container === programPath.node.body
-    ) {
-      newNodes = lastImport.insertAfter(node);
+      path.parent === programPath.node &&
+      path.container === programPath.node.body;
+
+    let last: NodePath;
+
+    if (newIndex === Infinity) {
+      // Fast path: we can always just insert at the end if newIndex is `Infinity`
+      if (lastImports.length > 0) {
+        last = lastImports[lastImports.length - 1].path;
+        if (!isPathStillValid(last)) last = undefined;
+      }
     } else {
-      newNodes = programPath.unshiftContainer("body", node);
+      for (const [i, data] of lastImports.entries()) {
+        const { path, index } = data;
+        if (isPathStillValid(path)) {
+          if (newIndex < index) {
+            const [newPath] = path.insertBefore(node);
+            lastImports.splice(i, 0, { path: newPath, index: newIndex });
+            return;
+          }
+          last = path;
+        }
+      }
     }
-    const newNode = newNodes[newNodes.length - 1];
-    this._lastImports.set(programPath, newNode);
 
-    /*
-    let lastImport;
-
-    programPath.get("body").forEach(path => {
-      if (path.isImportDeclaration()) lastImport = path;
-      if (
-        path.isExpressionStatement() &&
-        isRequireCall(path.get("expression"))
-      ) {
-        lastImport = path;
-      }
-      if (
-        path.isVariableDeclaration() &&
-        path.get("declarations").length === 1 &&
-        (isRequireCall(path.get("declarations.0.init")) ||
-          (path.get("declarations.0.init").isMemberExpression() &&
-            isRequireCall(path.get("declarations.0.init.object"))))
-      ) {
-        lastImport = path;
-      }
-    });*/
+    if (last) {
+      const [newPath] = last.insertAfter(node);
+      lastImports.push({ path: newPath, index: newIndex });
+    } else {
+      const [newPath] = programPath.unshiftContainer("body", node);
+      this._lastImports.set(programPath, [{ path: newPath, index: newIndex }]);
+    }
   }
 
   _ensure<C extends Map<string, any> | Set<string>>(
