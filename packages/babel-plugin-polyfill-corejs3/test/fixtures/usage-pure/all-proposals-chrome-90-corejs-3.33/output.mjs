@@ -37,6 +37,7 @@ import _Symbol$isWellKnownSymbol from "core-js-pure/features/symbol/is-well-know
 import _Symbol$isRegisteredSymbol from "core-js-pure/features/symbol/is-registered-symbol.js";
 import _Object$groupBy from "core-js-pure/features/object/group-by.js";
 import _Map$groupBy from "core-js-pure/features/map/group-by.js";
+import _Promise$withResolvers from "core-js-pure/features/promise/with-resolvers.js";
 import _Math$f16round from "core-js-pure/features/math/f16round.js";
 import _RegExp$escape from "core-js-pure/features/regexp/escape.js";
 _findLastInstanceProperty(_context = []).call(_context, fn);
@@ -95,7 +96,7 @@ _Symbol$isRegisteredSymbol(foo);
 _Symbol$metadata;
 _Object$groupBy(a, b);
 _Map$groupBy(a, b);
-Promise.withResolvers();
+_Promise$withResolvers();
 new URLSearchParams().has(a, b);
 _Math$f16round(foo);
 foo.getFloat16(0);

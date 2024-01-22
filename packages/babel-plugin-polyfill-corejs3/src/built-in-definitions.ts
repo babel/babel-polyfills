@@ -526,7 +526,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     ]),
     race: define(null, PromiseDependenciesWithIterators),
     try: define("promise/try", ["esnext.promise.try", ...PromiseDependencies]),
-    withResolvers: define(null, [
+    withResolvers: define("promise/with-resolvers", [
       "es.promise.with-resolvers",
       ...PromiseDependencies,
     ]),
