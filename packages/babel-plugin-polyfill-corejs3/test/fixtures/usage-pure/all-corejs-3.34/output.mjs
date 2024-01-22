@@ -19,6 +19,7 @@ import _toWellFormedInstanceProperty from "core-js-pure/stable/instance/to-well-
 import _self from "core-js-pure/stable/self.js";
 import _URL$canParse from "core-js-pure/stable/url/can-parse.js";
 import _Object$groupBy from "core-js-pure/stable/object/group-by.js";
+import _Map$groupBy from "core-js-pure/stable/map/group-by.js";
 import _Promise from "core-js-pure/stable/promise/index.js";
 import _URLSearchParams from "core-js-pure/stable/url-search-params/index.js";
 _findLastInstanceProperty(_context = []).call(_context, fn);
@@ -76,7 +77,7 @@ _Symbol.isWellKnownSymbol(foo);
 _Symbol.isRegisteredSymbol(foo);
 _Symbol.metadata;
 _Object$groupBy(a, b);
-_Map.groupBy(a, b);
+_Map$groupBy(a, b);
 _Promise.withResolvers();
 new _URLSearchParams().has(a, b);
 Math.f16round(foo);

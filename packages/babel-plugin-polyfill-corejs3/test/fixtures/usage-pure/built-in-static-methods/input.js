@@ -121,3 +121,21 @@ JSON.parse
 Math.pow
 
 Symbol.something
+
+Map.from
+Map.groupBy
+Map.keyBy
+Map.of
+
+Promise.all
+Promise.allSettled
+Promise.any
+Promise.race
+Promise.try
+Promise.withResolvers
+WeakMap.from
+
+ArrayBuffer.isView
+
+Uint8Array.from
+Uint8Array.of
