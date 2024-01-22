@@ -434,10 +434,10 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   },
 
   Map: {
-    from: define("map/from", ["esnext.map.from", ...MapDependencies]),
+    from: define(null, ["esnext.map.from", ...MapDependencies]),
     groupBy: define("map/group-by", ["es.map.group-by", ...MapDependencies]),
     keyBy: define("map/key-by", ["esnext.map.key-by", ...MapDependencies]),
-    of: define("map/of", ["esnext.map.of", ...MapDependencies]),
+    of: define(null, ["esnext.map.of", ...MapDependencies]),
   },
 
   Number: {
