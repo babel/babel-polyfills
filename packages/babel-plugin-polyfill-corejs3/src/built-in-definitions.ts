@@ -355,7 +355,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   },
 
   ArrayBuffer: {
-    isView: define("array-buffer/is-view", ["es.array-buffer.is-view"]),
+    isView: define(null, ["es.array-buffer.is-view"]),
   },
 
   BigInt: {
