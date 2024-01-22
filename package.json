@@ -5,7 +5,7 @@
   "scripts": {
     "build": "yarn build-es-shims-data && yarn build-corejs3-shipped-proposals && gulp build && gulp bundle",
     "build-corejs3-shipped-proposals": "node ./scripts/build-corejs3-shipped-proposals.mjs",
-    "build-es-shims-data": "./scripts/download-compat-table.sh && node ./scripts/build-es-shims-data",
+    "build-es-shims-data": "node ./scripts/download-compat-table.js && node ./scripts/build-es-shims-data",
     "clean": "rimraf packages/*/lib packages/*/esm",
     "clean-all": "yarn clean && rimraf packages/*/node_modules node_modules",
     "lint": "eslint packages '*.{js,ts}' --ext .js,.ts --format=codeframe",
