@@ -1,16 +1,54 @@
-String.prototype.padStart || err;
-!String.prototype.padStart || ok;
+Reflect.construct || err;
+!Reflect.construct || ok;
 
 
-String.prototype.padStart ? ok : err;
-!String.prototype.padStart ? err : ok;
+Reflect.construct ? ok : err;
+!Reflect.construct ? err : ok;
 
-if (String.prototype.padStart) {
+if (Reflect.construct) {
   ok;
 } else {
   err;
 }
-if (!String.prototype.padStart) {
+if (!Reflect.construct) {
+  err;
+} else {
+  ok;
+}
+
+
+Symbol.dispose || err;
+!Symbol.dispose || ok;
+
+
+Symbol.dispose ? ok : err;
+!Symbol.dispose ? err : ok;
+
+if (Symbol.dispose) {
+  ok;
+} else {
+  err;
+}
+if (!Symbol.dispose) {
+  err;
+} else {
+  ok;
+}
+
+
+a.padStart || err;
+!a.padStart || ok;
+
+
+a.padStart ? ok : err;
+!a.padStart ? err : ok;
+
+if (a.padStart) {
+  ok;
+} else {
+  err;
+}
+if (!a.padStart) {
   err;
 } else {
   ok;

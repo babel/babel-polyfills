@@ -13,7 +13,8 @@ export default (
 
   const polyfilled = new WeakSet();
   function maybeMark(path: NodePath, oldNode: t.Node) {
-    if (path.node !== oldNode) {
+    // Avoid Instance Properties
+    if (path.node !== oldNode && !path.isCallExpression()) {
       polyfilled.add(path.node);
     }
   }
