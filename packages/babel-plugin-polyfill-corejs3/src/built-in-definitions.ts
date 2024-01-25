@@ -435,8 +435,8 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
 
   Map: {
     from: define(null, ["esnext.map.from", ...MapDependencies]),
-    groupBy: define(null, ["es.map.group-by", ...MapDependencies]),
-    keyBy: define(null, ["esnext.map.key-by", ...MapDependencies]),
+    groupBy: define("map/group-by", ["es.map.group-by", ...MapDependencies]),
+    keyBy: define("map/key-by", ["esnext.map.key-by", ...MapDependencies]),
     of: define(null, ["esnext.map.of", ...MapDependencies]),
   },
 
@@ -515,18 +515,18 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
 
   Promise: {
     all: define(null, PromiseDependenciesWithIterators),
-    allSettled: define(null, [
+    allSettled: define("promise/all-settled", [
       "es.promise.all-settled",
       ...PromiseDependenciesWithIterators,
     ]),
-    any: define(null, [
+    any: define("promise/any", [
       "es.promise.any",
       "es.aggregate-error",
       ...PromiseDependenciesWithIterators,
     ]),
     race: define(null, PromiseDependenciesWithIterators),
-    try: define(null, ["esnext.promise.try", ...PromiseDependencies]),
-    withResolvers: define(null, [
+    try: define("promise/try", ["esnext.promise.try", ...PromiseDependencies]),
+    withResolvers: define("promise/with-resolvers", [
       "es.promise.with-resolvers",
       ...PromiseDependencies,
     ]),
