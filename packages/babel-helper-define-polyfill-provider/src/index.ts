@@ -278,16 +278,29 @@ function instantiateProvider<Options>(
     providerOptions.exclude || [],
   ));
 
+  let callProvider: (payload: MetaDescriptor, path: NodePath) => boolean;
+  if (methodName === "usageGlobal") {
+    callProvider = (payload, path) => {
+      const utils = getUtils(path);
+      return (
+        (provider[methodName](payload, utils, path) satisfies boolean) ?? false
+      );
+    };
+  } else {
+    callProvider = (payload, path) => {
+      const utils = getUtils(path);
+      provider[methodName](payload, utils, path) satisfies void;
+      return false;
+    };
+  }
+
   return {
     debug,
     method,
     targets,
     provider,
     providerName,
-    callProvider(payload: MetaDescriptor, path: NodePath) {
-      const utils = getUtils(path);
-      provider[methodName](payload, utils, path);
-    },
+    callProvider,
   };
 }
 

@@ -74,10 +74,12 @@ These three functions are the core of any polyfill provider.
 They correspond, respectively, to the `entry-global`, `usage-global` and `usage-pure` values of the `method` option of `@babel/helper-define-polyfill-provider`.
 They are all optional, but you must specify at least one of them.
 
-They take three parameters, and return nothing:
+They all take three parameters. `entryGlobal` and `usagePure` return nothing, while `usageGlobal` can return a boolean to indicate if the polyfill was injected or not. This boolean is used, in case of object properties, to avoid injecting a polyfill for the object in case the static property has been already polyfilled.
 
 ```js
 function entryGlobal(meta, utils, path): void;
+function usageGlobal(meta, utils, path): undefined | boolean;
+function usagePure(meta, utils, path): void;
 ```
 
 #### `meta`
