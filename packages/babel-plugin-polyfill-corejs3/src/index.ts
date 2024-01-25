@@ -213,6 +213,8 @@ export default defineProvider<Options>(function (
       }
 
       maybeInjectGlobal(deps, utils);
+
+      return true;
     },
 
     usagePure(meta, utils, path) {
