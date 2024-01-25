@@ -161,8 +161,8 @@ export default defineProvider<{}>(function ({
               isGetter
                 ? expr`${id}(${t.cloneNode(tmp)})`
                 : isCall
-                ? id
-                : expr`${id}.getPolyfill()`,
+                  ? id
+                  : expr`${id}.getPolyfill()`,
               replacement,
             );
 

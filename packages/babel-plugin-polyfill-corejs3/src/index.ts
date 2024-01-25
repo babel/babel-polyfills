@@ -86,8 +86,8 @@ export default defineProvider<Options>(function (
         ? `${BABEL_RUNTIME}/core-js`
         : `${BABEL_RUNTIME}/core-js-stable`
       : useProposalBase
-      ? "core-js-pure/features"
-      : "core-js-pure/stable";
+        ? "core-js-pure/features"
+        : "core-js-pure/stable";
   }
 
   function maybeInjectGlobalImpl(name: string, utils) {

@@ -62,8 +62,8 @@ export default defineProvider<Options>(function (
   const coreJSBase = useBabelRuntime
     ? `${BABEL_RUNTIME}/core-js`
     : method === "usage-pure"
-    ? "core-js/library/fn"
-    : "core-js/modules";
+      ? "core-js/library/fn"
+      : "core-js/modules";
 
   function inject(name: string | string[], utils) {
     if (typeof name === "string") {
