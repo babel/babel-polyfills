@@ -9,6 +9,8 @@ export function hasMinVersion(
   // that the built output will include all definitions.
   if (!runtimeVersion || !minVersion) return true;
 
+  runtimeVersion = String(runtimeVersion);
+
   // semver.intersects() has some surprising behavior with comparing ranges
   // with preprelease versions. We add '^' to ensure that we are always
   // comparing ranges with ranges, which sidesteps this logic.
