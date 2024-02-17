@@ -35,6 +35,7 @@ import "core-js/modules/web.dom-exception.stack.js";
 import "core-js/modules/web.dom-exception.to-string-tag.js";
 import "core-js/modules/web.structured-clone.js";
 import "core-js/modules/web.url.js";
+import "core-js/modules/web.url.to-json.js";
 import "core-js/modules/web.url-search-params.js";
 [].findLast(fn);
 [].findLastIndex(fn);

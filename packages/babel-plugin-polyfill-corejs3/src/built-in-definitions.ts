@@ -86,9 +86,10 @@ const TypedArrayDependencies = [
   "es.object.to-string",
   "es.array.iterator",
   "es.array-buffer.slice",
-  "esnext.array-buffer.detached",
-  "esnext.array-buffer.transfer",
-  "esnext.array-buffer.transfer-to-fixed-length",
+  "es.data-view",
+  "es.array-buffer.detached",
+  "es.array-buffer.transfer",
+  "es.array-buffer.transfer-to-fixed-length",
   "esnext.typed-array.filter-reject",
   "esnext.typed-array.group-by",
   "esnext.typed-array.to-spliced",
@@ -222,7 +223,11 @@ const TypedArrayStaticMethods = {
 
 const DataViewDependencies = [
   "es.data-view",
+  "es.array-buffer.constructor",
   "es.array-buffer.slice",
+  "es.array-buffer.detached",
+  "es.array-buffer.transfer",
+  "es.array-buffer.transfer-to-fixed-length",
   "es.object.to-string",
 ];
 
@@ -245,6 +250,10 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   ArrayBuffer: define(null, [
     "es.array-buffer.constructor",
     "es.array-buffer.slice",
+    "es.data-view",
+    "es.array-buffer.detached",
+    "es.array-buffer.transfer",
+    "es.array-buffer.transfer-to-fixed-length",
     "es.object.to-string",
   ]),
   DataView: define(null, DataViewDependencies),
@@ -297,7 +306,11 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   SyntaxError: define(null, ErrorDependencies),
   TypeError: define(null, ErrorDependencies),
   URIError: define(null, ErrorDependencies),
-  URL: define("url/index", ["web.url", ...URLSearchParamsDependencies]),
+  URL: define("url/index", [
+    "web.url",
+    "web.url.to-json",
+    ...URLSearchParamsDependencies,
+  ]),
   URLSearchParams: define(
     "url-search-params/index",
     URLSearchParamsDependencies,
@@ -396,7 +409,11 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       "es.object.create",
       "es.object.freeze",
     ]),
-    stringify: define("json/stringify", ["es.json.stringify"], "es.symbol"),
+    stringify: define(
+      "json/stringify",
+      ["es.json.stringify", "es.date.to-json"],
+      "es.symbol",
+    ),
   },
 
   Math: {
@@ -937,7 +954,7 @@ export const InstanceProperties = {
   toFixed: define(null, ["es.number.to-fixed"]),
   toGMTString: define(null, ["es.date.to-gmt-string"]),
   toISOString: define(null, ["es.date.to-iso-string"]),
-  toJSON: define(null, ["es.date.to-json", "web.url.to-json"]),
+  toJSON: define(null, ["es.date.to-json"]),
   toPrecision: define(null, ["es.number.to-precision"]),
   toReversed: define("instance/to-reversed", ["es.array.to-reversed"]),
   toSorted: define("instance/to-sorted", [
