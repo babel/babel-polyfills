@@ -1,12 +1,10 @@
 import type { NodePath } from "@babel/traverse";
 import { types as t } from "@babel/core";
-import type { MetaDescriptor } from "../types";
+import type { CallProvider } from "./index";
 
 import { getImportSource, getRequireSource } from "../utils";
 
-export default (
-  callProvider: (payload: MetaDescriptor, path: NodePath) => void,
-) => ({
+export default (callProvider: CallProvider) => ({
   ImportDeclaration(path: NodePath<t.ImportDeclaration>) {
     const source = getImportSource(path);
     if (!source) return;

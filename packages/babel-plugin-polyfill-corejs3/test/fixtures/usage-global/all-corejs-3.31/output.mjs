@@ -1,5 +1,4 @@
 import "core-js/modules/es.symbol.js";
-import "core-js/modules/es.symbol.description.js";
 import "core-js/modules/es.symbol.match-all.js";
 import "core-js/modules/es.error.cause.js";
 import "core-js/modules/es.error.to-string.js";
@@ -15,7 +14,6 @@ import "core-js/modules/es.array-buffer.constructor.js";
 import "core-js/modules/es.array-buffer.slice.js";
 import "core-js/modules/es.data-view.js";
 import "core-js/modules/es.map.js";
-import "core-js/modules/es.number.constructor.js";
 import "core-js/modules/es.object.create.js";
 import "core-js/modules/es.object.freeze.js";
 import "core-js/modules/es.object.keys.js";

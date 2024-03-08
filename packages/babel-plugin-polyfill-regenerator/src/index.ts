@@ -26,7 +26,7 @@ export default defineProvider<Options>(({ debug, targets, babel }, options) => {
 
     polyfills: ["regenerator-runtime"],
 
-    usageGlobal(meta, utils) {
+    usageGlobal(meta, utils): undefined {
       if (isRegenerator(meta)) {
         debug("regenerator-runtime");
         utils.injectGlobalImport("regenerator-runtime/runtime.js");

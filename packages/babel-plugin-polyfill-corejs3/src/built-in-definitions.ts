@@ -211,15 +211,16 @@ export const DecoratorMetadataDependencies = [
   "esnext.function.metadata",
 ];
 
-const TypedArrayStaticMethods = {
-  from: define(null, ["es.typed-array.from", ...TypedArrayDependencies]),
+const TypedArrayStaticMethods = (base: string) => ({
+  from: define(null, ["es.typed-array.from", base, ...TypedArrayDependencies]),
   fromAsync: define(null, [
     "esnext.typed-array.from-async",
+    base,
     ...PromiseDependenciesWithIterators,
     ...TypedArrayDependencies,
   ]),
-  of: define(null, ["es.typed-array.of", ...TypedArrayDependencies]),
-};
+  of: define(null, ["es.typed-array.of", base, ...TypedArrayDependencies]),
+});
 
 const DataViewDependencies = [
   "es.data-view",
@@ -715,7 +716,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     of: define(null, ["esnext.weak-set.of", ...WeakSetDependencies]),
   },
 
-  Int8Array: TypedArrayStaticMethods,
+  Int8Array: TypedArrayStaticMethods("es.typed-array.int8-array"),
   Uint8Array: {
     fromBase64: define(null, [
       "esnext.uint8-array.from-base64",
@@ -725,15 +726,17 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       "esnext.uint8-array.from-hex",
       ...TypedArrayDependencies,
     ]),
-    ...TypedArrayStaticMethods,
+    ...TypedArrayStaticMethods("es.typed-array.uint8-array"),
   },
-  Uint8ClampedArray: TypedArrayStaticMethods,
-  Int16Array: TypedArrayStaticMethods,
-  Uint16Array: TypedArrayStaticMethods,
-  Int32Array: TypedArrayStaticMethods,
-  Uint32Array: TypedArrayStaticMethods,
-  Float32Array: TypedArrayStaticMethods,
-  Float64Array: TypedArrayStaticMethods,
+  Uint8ClampedArray: TypedArrayStaticMethods(
+    "es.typed-array.uint8-clamped-array",
+  ),
+  Int16Array: TypedArrayStaticMethods("es.typed-array.int16-array"),
+  Uint16Array: TypedArrayStaticMethods("es.typed-array.uint16-array"),
+  Int32Array: TypedArrayStaticMethods("es.typed-array.int32-array"),
+  Uint32Array: TypedArrayStaticMethods("es.typed-array.uint32-array"),
+  Float32Array: TypedArrayStaticMethods("es.typed-array.float32-array"),
+  Float64Array: TypedArrayStaticMethods("es.typed-array.float64-array"),
 
   WebAssembly: {
     CompileError: define(null, ErrorDependencies),

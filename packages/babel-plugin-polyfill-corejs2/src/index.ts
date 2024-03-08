@@ -121,7 +121,7 @@ export default defineProvider<Options>(function (
       }
     },
 
-    usageGlobal(meta, utils) {
+    usageGlobal(meta, utils): undefined {
       const resolved = resolve(meta);
       if (!resolved) return;
 
