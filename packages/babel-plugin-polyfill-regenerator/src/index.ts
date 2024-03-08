@@ -5,7 +5,8 @@ const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
 
 type Options = {
   "#__secret_key__@babel/runtime__compatibility": void | {
-    useBabelRuntime: string;
+    useBabelRuntime: boolean;
+    moduleName: string;
   };
 };
 
@@ -19,7 +20,9 @@ export default defineProvider<Options>(({ debug, targets, babel }, options) => {
     );
   }
 
-  const { [runtimeCompat]: { useBabelRuntime = false } = {} } = options;
+  const {
+    [runtimeCompat]: { moduleName = null, useBabelRuntime = false } = {},
+  } = options;
 
   return {
     name: "regenerator",
@@ -37,9 +40,11 @@ export default defineProvider<Options>(({ debug, targets, babel }, options) => {
         let pureName = "regenerator-runtime";
         if (useBabelRuntime) {
           const runtimeName =
+            moduleName ??
             ((path.hub as any).file as PluginPass).get(
               "runtimeHelpersModuleName",
-            ) ?? "@babel/runtime";
+            ) ??
+            "@babel/runtime";
           pureName = `${runtimeName}/regenerator`;
         }
 
