@@ -42,6 +42,7 @@ import "core-js/modules/web.self.js";
 import "core-js/modules/web.structured-clone.js";
 import "core-js/modules/web.url.js";
 import "core-js/modules/web.url.can-parse.js";
+import "core-js/modules/web.url.to-json.js";
 import "core-js/modules/web.url-search-params.js";
 import "core-js/modules/web.url-search-params.size.js";
 [].findLast(fn);

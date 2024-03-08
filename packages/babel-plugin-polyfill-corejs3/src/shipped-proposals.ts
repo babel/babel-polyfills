@@ -5,9 +5,6 @@ export default new Set<string>([
   "esnext.array.from-async",
   "esnext.array.group",
   "esnext.array.group-to-map",
-  "esnext.array-buffer.detached",
-  "esnext.array-buffer.transfer",
-  "esnext.array-buffer.transfer-to-fixed-length",
   "esnext.iterator.constructor",
   "esnext.iterator.drop",
   "esnext.iterator.every",
@@ -33,4 +30,5 @@ export default new Set<string>([
   "esnext.set.union.v2",
   "esnext.symbol.async-dispose",
   "esnext.symbol.dispose",
+  "esnext.symbol.metadata",
 ]);
