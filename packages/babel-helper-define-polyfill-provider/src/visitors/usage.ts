@@ -11,16 +11,72 @@ export default (
     return callProvider({ kind: "property", object, key, placement }, path);
   }
 
+  const polyfilled = new WeakSet();
+  function maybeMark(path: NodePath, oldNode: t.Node) {
+    // Avoid Instance Properties
+    if (path.node !== oldNode && !path.isCallExpression()) {
+      polyfilled.add(path.node);
+    }
+  }
+
   return {
+    LogicalExpression: {
+      exit(path: NodePath<t.LogicalExpression>) {
+        const { node } = path;
+        if (node.operator !== "||") return;
+        if (polyfilled.has(node.left)) {
+          path.get("right").remove();
+        } else if (
+          t.isUnaryExpression(node.left) &&
+          node.left.operator === "!" &&
+          polyfilled.has(node.left.argument)
+        ) {
+          path.replaceWith(node.right);
+        }
+      },
+    },
+    IfStatement: {
+      exit(path: NodePath<t.IfStatement>) {
+        const { node } = path;
+        if (polyfilled.has(node.test)) {
+          path.replaceWith(node.consequent);
+        } else if (
+          t.isUnaryExpression(node.test) &&
+          node.test.operator === "!"
+        ) {
+          if (polyfilled.has(node.test.argument)) {
+            path.replaceWith(node.alternate);
+          }
+        }
+      },
+    },
+    ConditionalExpression: {
+      exit(path: NodePath<t.ConditionalExpression>) {
+        const { node } = path;
+        if (polyfilled.has(node.test)) {
+          path.replaceWith(node.consequent);
+        } else if (
+          t.isUnaryExpression(node.test) &&
+          node.test.operator === "!"
+        ) {
+          if (polyfilled.has(node.test.argument)) {
+            path.replaceWith(node.alternate);
+          }
+        }
+      },
+    },
     // Symbol(), new Promise
     ReferencedIdentifier(path: NodePath<t.Identifier>) {
       const {
         node: { name },
+        node,
         scope,
       } = path;
       if (scope.getBindingIdentifier(name)) return;
 
       callProvider({ kind: "global", name }, path);
+
+      maybeMark(path, node);
     },
 
     MemberExpression(path: NodePath<t.MemberExpression>) {
@@ -33,8 +89,12 @@ export default (
         if (binding && binding.path.isImportNamespaceSpecifier()) return;
       }
 
+      const { node } = path;
+
       const source = resolveSource(object);
-      return property(source.id, key, source.placement, path);
+      property(source.id, key, source.placement, path);
+
+      maybeMark(path, node);
     },
 
     ObjectPattern(path: NodePath<t.ObjectPattern>) {
