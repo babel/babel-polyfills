@@ -30,19 +30,27 @@ export default (callProvider: CallProvider) => {
     callProvider({ kind: "global", name }, path);
   }
 
+  function analyzeMemberExpression(path: NodePath<t.MemberExpression>) {
+    const key = resolveKey(path.get("property"), path.node.computed);
+    return { key, handleAsMemberExpression: !!key && key !== "prototype" };
+  }
+
   return {
     // Symbol(), new Promise
     ReferencedIdentifier(path: NodePath<t.Identifier>) {
-      if (path.parentPath.isMemberExpression({ object: path.node })) {
-        // Handled in the MemberExpression visitor
+      const { parentPath } = path;
+      if (
+        parentPath.isMemberExpression({ object: path.node }) &&
+        analyzeMemberExpression(parentPath).handleAsMemberExpression
+      ) {
         return;
       }
       handleReferencedIdentifier(path);
     },
 
     MemberExpression(path: NodePath<t.MemberExpression>) {
-      const key = resolveKey(path.get("property"), path.node.computed);
-      if (!key || key === "prototype") return;
+      const { key, handleAsMemberExpression } = analyzeMemberExpression(path);
+      if (!handleAsMemberExpression) return;
 
       const object = path.get("object");
       let objectIsGlobalIdentifier = object.isIdentifier();
