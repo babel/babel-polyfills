@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    [
+      "@@/polyfill-corejs3",
+      {
+        "method": "usage-pure",
+        "#__secret_key__@babel/runtime__compatibility": {
+          "useBabelRuntime": true
+        }
+      }
+    ]
+  ]
+}

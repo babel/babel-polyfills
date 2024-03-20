@@ -11,6 +11,7 @@ import {
   DecoratorMetadataDependencies,
   type CoreJSPolyfillDescriptor,
 } from "./built-in-definitions";
+import * as BabelRuntimePaths from "./babel-runtime-corejs3-paths";
 import canSkipPolyfill from "./usage-filters";
 
 import type { NodePath } from "@babel/traverse";
@@ -35,7 +36,6 @@ type Options = {
   [presetEnvCompat]?: { noRuntimeName: boolean };
   [runtimeCompat]: {
     useBabelRuntime: boolean;
-    babelRuntimePath: string;
     ext: string;
   };
 };
@@ -126,6 +126,16 @@ export default defineProvider<Options>(function (
         useProposalBase = true;
       } else if (name.startsWith("es.") && !available.has(name)) {
         useProposalBase = true;
+      }
+      if (
+        useBabelRuntime &&
+        !(
+          useProposalBase
+            ? BabelRuntimePaths.proposals
+            : BabelRuntimePaths.stable
+        ).has(desc.pure)
+      ) {
+        return;
       }
       const coreJSPureBase = getCoreJSPureBase(useProposalBase);
       return utils.injectDefaultImport(
