@@ -452,10 +452,10 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   },
 
   Map: {
-    from: define(null, ["esnext.map.from", ...MapDependencies]),
+    from: define("map/from", ["esnext.map.from", ...MapDependencies]),
     groupBy: define("map/group-by", ["es.map.group-by", ...MapDependencies]),
     keyBy: define("map/key-by", ["esnext.map.key-by", ...MapDependencies]),
-    of: define(null, ["esnext.map.of", ...MapDependencies]),
+    of: define("map/of", ["esnext.map.of", ...MapDependencies]),
   },
 
   Number: {
@@ -608,8 +608,8 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   },
 
   Set: {
-    from: define(null, ["esnext.set.from", ...SetDependencies]),
-    of: define(null, ["esnext.set.of", ...SetDependencies]),
+    from: define("set/from", ["esnext.set.from", ...SetDependencies]),
+    of: define("set/of", ["esnext.set.of", ...SetDependencies]),
   },
 
   String: {
@@ -707,13 +707,19 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   },
 
   WeakMap: {
-    from: define(null, ["esnext.weak-map.from", ...WeakMapDependencies]),
-    of: define(null, ["esnext.weak-map.of", ...WeakMapDependencies]),
+    from: define("weak-map/from", [
+      "esnext.weak-map.from",
+      ...WeakMapDependencies,
+    ]),
+    of: define("weak-map/of", ["esnext.weak-map.of", ...WeakMapDependencies]),
   },
 
   WeakSet: {
-    from: define(null, ["esnext.weak-set.from", ...WeakSetDependencies]),
-    of: define(null, ["esnext.weak-set.of", ...WeakSetDependencies]),
+    from: define("weak-set/from", [
+      "esnext.weak-set.from",
+      ...WeakSetDependencies,
+    ]),
+    of: define("weak-set/of", ["esnext.weak-set.of", ...WeakSetDependencies]),
   },
 
   Int8Array: TypedArrayStaticMethods("es.typed-array.int8-array"),
@@ -746,7 +752,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
 };
 
 export const InstanceProperties = {
-  asIndexedPairs: define("instance/asIndexedPairs", [
+  asIndexedPairs: define(null, [
     "esnext.async-iterator.as-indexed-pairs",
     ...AsyncIteratorDependencies,
     "esnext.iterator.as-indexed-pairs",

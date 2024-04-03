@@ -1,7 +1,6 @@
-var _context, _context2, _context3, _context4, _context5, _context6, _context7, _context8, _context9, _context10, _context11, _context12;
+var _context, _context2, _context3, _context4, _context5, _context6, _context7, _context8, _context9, _context10, _context11;
 import _findLastInstanceProperty from "core-js-pure/features/instance/find-last.js";
 import _findLastIndexInstanceProperty from "core-js-pure/features/instance/find-last-index.js";
-import _asIndexedPairsInstanceProperty from "core-js-pure/features/instance/asIndexedPairs.js";
 import _forEachInstanceProperty from "core-js-pure/features/instance/for-each.js";
 import _Iterator$from from "core-js-pure/features/iterator/from.js";
 import _mapInstanceProperty from "core-js-pure/features/instance/map.js";
@@ -29,19 +28,19 @@ import _structuredClone from "core-js-pure/features/structured-clone.js";
 import _withInstanceProperty from "core-js-pure/features/instance/with.js";
 _findLastInstanceProperty(_context = []).call(_context, fn);
 _findLastIndexInstanceProperty(_context2 = []).call(_context2, fn);
-_asIndexedPairsInstanceProperty(_context3 = []).call(_context3);
-_forEachInstanceProperty(_context4 = _Iterator$from({
+[].asIndexedPairs();
+_forEachInstanceProperty(_context3 = _Iterator$from({
   next: () => ({
     done: Math.random() > .9,
     value: Math.random() * 10 | 0
   })
-})).call(_context4, console.log).toArray();
-_mapInstanceProperty(_context5 = _groupByInstanceProperty(_context6 = _filterInstanceProperty(_context7 = _AsyncIterator$from([1, 2, 3, 4, 5, 6, 7]).drop(1).take(5)).call(_context7, it => it % 2)).call(_context6, it => id % 4)).call(_context5, it => it ** 2).toArray().then(console.log);
-_groupByInstanceProperty(_context8 = _uniqueByInstanceProperty(_context9 = [1, 2, 3, 4, 5, 6, 7, 7]).call(_context9, x => x)).call(_context8, x => x % 2);
+})).call(_context3, console.log).toArray();
+_mapInstanceProperty(_context4 = _groupByInstanceProperty(_context5 = _filterInstanceProperty(_context6 = _AsyncIterator$from([1, 2, 3, 4, 5, 6, 7]).drop(1).take(5)).call(_context6, it => it % 2)).call(_context5, it => id % 4)).call(_context4, it => it ** 2).toArray().then(console.log);
+_groupByInstanceProperty(_context7 = _uniqueByInstanceProperty(_context8 = [1, 2, 3, 4, 5, 6, 7, 7]).call(_context8, x => x)).call(_context7, x => x % 2);
 _Number$range(1, 2);
 _BigInt$range(1n, 2n);
 _Array$isTemplateObject((x => x)`a${x}z`);
-_emplaceInstanceProperty(_context10 = new _Map([['x', 1]])).call(_context10, 'x', {
+_emplaceInstanceProperty(_context9 = new _Map([['x', 1]])).call(_context9, 'x', {
   update: x => x + 1,
   insert: () => 0
 });
@@ -53,8 +52,8 @@ _Symbol$matchAll;
 _Symbol$metadata;
 _replaceAllInstanceProperty(_Symbol);
 new _URL(url);
-const foo = _groupByToMapInstanceProperty(_context11 = [1, 2, 3]).call(_context11, bar);
-const push = _unThisInstanceProperty(_context12 = [].push).call(_context12);
+const foo = _groupByToMapInstanceProperty(_context10 = [1, 2, 3]).call(_context10, bar);
+const push = _unThisInstanceProperty(_context11 = [].push).call(_context11);
 _Function$isConstructor;
 throw new _DOMException();
 _structuredClone(72);
