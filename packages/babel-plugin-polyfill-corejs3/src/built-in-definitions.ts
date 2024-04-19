@@ -130,29 +130,29 @@ const MapDependencies = [
 
 const SetDependencies = [
   "es.set",
+  "es.set.difference.v2",
+  "es.set.intersection.v2",
+  "es.set.is-disjoint-from.v2",
+  "es.set.is-subset-of.v2",
+  "es.set.is-superset-of.v2",
+  "es.set.symmetric-difference.v2",
+  "es.set.union.v2",
   "esnext.set.add-all",
   "esnext.set.delete-all",
   "esnext.set.difference",
-  "esnext.set.difference.v2",
   "esnext.set.every",
   "esnext.set.filter",
   "esnext.set.find",
   "esnext.set.intersection",
-  "esnext.set.intersection.v2",
   "esnext.set.is-disjoint-from",
-  "esnext.set.is-disjoint-from.v2",
   "esnext.set.is-subset-of",
-  "esnext.set.is-subset-of.v2",
   "esnext.set.is-superset-of",
-  "esnext.set.is-superset-of.v2",
   "esnext.set.join",
   "esnext.set.map",
   "esnext.set.reduce",
   "esnext.set.some",
   "esnext.set.symmetric-difference",
-  "esnext.set.symmetric-difference.v2",
   "esnext.set.union",
-  "esnext.set.union.v2",
   ...CommonIteratorsWithTag,
 ];
 
@@ -446,6 +446,10 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     sign: define("math/sign", ["es.math.sign"]),
     signbit: define("math/signbit", ["esnext.math.signbit"]),
     sinh: define("math/sinh", ["es.math.sinh"]),
+    sumPrecise: define("math/sum-precise", [
+      "esnext.math.sum-precise",
+      "es.array.iterator",
+    ]),
     tanh: define("math/tanh", ["es.math.tanh"]),
     trunc: define("math/trunc", ["es.math.trunc"]),
     umulh: define("math/umulh", ["esnext.math.umulh"]),
@@ -633,6 +637,9 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     asyncIterator: define("symbol/async-iterator", [
       "es.symbol.async-iterator",
     ]),
+    customMatcher: define("symbol/custom-matcher", [
+      "esnext.symbol.custom-matcher",
+    ]),
     dispose: define("symbol/dispose", [
       "esnext.symbol.dispose",
       "esnext.iterator.dispose",
@@ -704,6 +711,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
 
   URL: {
     canParse: define("url/can-parse", ["web.url.can-parse", "web.url"]),
+    parse: define("url/parse", ["web.url.parse", "web.url"]),
   },
 
   WeakMap: {
