@@ -53,6 +53,16 @@ const SuppressedErrorDependencies = [
   ...ErrorDependencies,
 ];
 
+const ArrayBufferDependencies = [
+  "es.array-buffer.constructor",
+  "es.array-buffer.slice",
+  "es.data-view",
+  "es.array-buffer.detached",
+  "es.array-buffer.transfer",
+  "es.array-buffer.transfer-to-fixed-length",
+  "es.object.to-string",
+];
+
 const TypedArrayDependencies = [
   "es.typed-array.at",
   "es.typed-array.copy-within",
@@ -85,15 +95,11 @@ const TypedArrayDependencies = [
   "es.typed-array.with",
   "es.object.to-string",
   "es.array.iterator",
-  "es.array-buffer.slice",
-  "es.data-view",
-  "es.array-buffer.detached",
-  "es.array-buffer.transfer",
-  "es.array-buffer.transfer-to-fixed-length",
   "esnext.typed-array.filter-reject",
   "esnext.typed-array.group-by",
   "esnext.typed-array.to-spliced",
   "esnext.typed-array.unique-by",
+  ...ArrayBufferDependencies,
 ];
 
 export const PromiseDependencies = ["es.promise", "es.object.to-string"];
@@ -222,15 +228,7 @@ const TypedArrayStaticMethods = (base: string) => ({
   of: define(null, ["es.typed-array.of", base, ...TypedArrayDependencies]),
 });
 
-const DataViewDependencies = [
-  "es.data-view",
-  "es.array-buffer.constructor",
-  "es.array-buffer.slice",
-  "es.array-buffer.detached",
-  "es.array-buffer.transfer",
-  "es.array-buffer.transfer-to-fixed-length",
-  "es.object.to-string",
-];
+const DataViewDependencies = ["es.data-view", ...ArrayBufferDependencies];
 
 export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   AsyncDisposableStack: define("async-disposable-stack/index", [
@@ -248,15 +246,7 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
     ...CommonIteratorsWithTag,
     "es.aggregate-error.cause",
   ]),
-  ArrayBuffer: define(null, [
-    "es.array-buffer.constructor",
-    "es.array-buffer.slice",
-    "es.data-view",
-    "es.array-buffer.detached",
-    "es.array-buffer.transfer",
-    "es.array-buffer.transfer-to-fixed-length",
-    "es.object.to-string",
-  ]),
+  ArrayBuffer: define(null, ArrayBufferDependencies),
   DataView: define(null, DataViewDependencies),
   Date: define(null, ["es.date.to-string"]),
   DOMException: define("dom-exception/index", DOMExceptionDependencies),
