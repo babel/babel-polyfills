@@ -305,6 +305,8 @@ import "core-js/modules/esnext.symbol.metadata.js";
 import "core-js/modules/esnext.typed-array.to-spliced.js";
 import "core-js/modules/esnext.uint8-array.from-base64.js";
 import "core-js/modules/esnext.uint8-array.from-hex.js";
+import "core-js/modules/esnext.uint8-array.set-from-base64.js";
+import "core-js/modules/esnext.uint8-array.set-from-hex.js";
 import "core-js/modules/esnext.uint8-array.to-base64.js";
 import "core-js/modules/esnext.uint8-array.to-hex.js";
 import "core-js/modules/web.atob.js";

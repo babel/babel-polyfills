@@ -266,6 +266,8 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   Iterator: define("iterator/index", IteratorDependencies),
   Uint8Array: typed(
     "es.typed-array.uint8-array",
+    "esnext.uint8-array.set-from-base64",
+    "esnext.uint8-array.set-from-hex",
     "esnext.uint8-array.to-base64",
     "esnext.uint8-array.to-hex",
   ),

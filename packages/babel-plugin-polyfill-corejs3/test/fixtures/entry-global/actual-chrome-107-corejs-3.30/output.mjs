@@ -51,6 +51,7 @@ import "core-js/modules/esnext.json.is-raw-json.js";
 import "core-js/modules/esnext.json.parse.js";
 import "core-js/modules/esnext.json.raw-json.js";
 import "core-js/modules/esnext.map.group-by.js";
+import "core-js/modules/esnext.promise.try.js";
 import "core-js/modules/esnext.set.difference.v2.js";
 import "core-js/modules/esnext.set.intersection.v2.js";
 import "core-js/modules/esnext.set.is-disjoint-from.v2.js";

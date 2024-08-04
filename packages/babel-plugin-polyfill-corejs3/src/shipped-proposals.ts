@@ -24,6 +24,7 @@ export default new Set<string>([
   "esnext.json.parse",
   "esnext.json.raw-json",
   "esnext.math.f16round",
+  "esnext.promise.try",
   "esnext.symbol.async-dispose",
   "esnext.symbol.dispose",
   "esnext.symbol.metadata",

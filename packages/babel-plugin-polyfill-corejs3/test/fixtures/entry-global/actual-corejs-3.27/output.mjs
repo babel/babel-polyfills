@@ -273,6 +273,7 @@ import "core-js/modules/esnext.iterator.take.js";
 import "core-js/modules/esnext.iterator.to-array.js";
 import "core-js/modules/esnext.iterator.to-async.js";
 import "core-js/modules/esnext.map.group-by.js";
+import "core-js/modules/esnext.promise.try.js";
 import "core-js/modules/esnext.set.difference.v2.js";
 import "core-js/modules/esnext.set.intersection.v2.js";
 import "core-js/modules/esnext.set.is-disjoint-from.v2.js";

@@ -58,6 +58,7 @@ import "core-js/modules/esnext.json.raw-json.js";
 import "core-js/modules/esnext.map.group-by.js";
 import "core-js/modules/esnext.math.f16round.js";
 import "core-js/modules/esnext.object.group-by.js";
+import "core-js/modules/esnext.promise.try.js";
 import "core-js/modules/esnext.promise.with-resolvers.js";
 import "core-js/modules/esnext.set.difference.v2.js";
 import "core-js/modules/esnext.set.intersection.v2.js";
