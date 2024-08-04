@@ -268,6 +268,7 @@ import "core-js/modules/esnext.iterator.take.js";
 import "core-js/modules/esnext.iterator.to-array.js";
 import "core-js/modules/esnext.iterator.to-async.js";
 import "core-js/modules/esnext.map.group-by.js";
+import "core-js/modules/esnext.promise.try.js";
 import "core-js/modules/esnext.symbol.async-dispose.js";
 import "core-js/modules/esnext.symbol.dispose.js";
 import "core-js/modules/esnext.symbol.metadata.js";
