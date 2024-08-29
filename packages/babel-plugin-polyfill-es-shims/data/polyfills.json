@@ -324,7 +324,13 @@
     "samsung": "9",
     "electron": "3"
   },
-  "ArrayBuffer.prototype.transfer": {},
+  "ArrayBuffer.prototype.transfer": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "firefox": "122",
+    "electron": "31"
+  },
   "Date.prototype.toISOString": {
     "chrome": "5",
     "opera": "10.50",
@@ -390,19 +396,84 @@
     "samsung": "1",
     "electron": "0.20"
   },
-  "Iterator": {},
-  "Iterator.from": {},
-  "Iterator.prototype.drop": {},
-  "Iterator.prototype.every": {},
-  "Iterator.prototype.filter": {},
-  "Iterator.prototype.find": {},
-  "Iterator.prototype.flatMap": {},
-  "Iterator.prototype.forEach": {},
-  "Iterator.prototype.map": {},
-  "Iterator.prototype.reduce": {},
-  "Iterator.prototype.some": {},
-  "Iterator.prototype.take": {},
-  "Iterator.prototype.toArray": {},
+  "Iterator": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.from": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.prototype.drop": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.prototype.every": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.prototype.filter": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.prototype.find": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.prototype.flatMap": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.prototype.forEach": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.prototype.map": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.prototype.reduce": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.prototype.some": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.prototype.take": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
+  "Iterator.prototype.toArray": {
+    "chrome": "126",
+    "opera": "112",
+    "edge": "126",
+    "electron": "31"
+  },
   "Map": {
     "chrome": "51",
     "opera": "38",
@@ -791,23 +862,74 @@
     "electron": "1.2"
   },
   "Set.prototype.difference": {
+    "chrome": "122",
+    "opera": "108",
+    "edge": "122",
+    "firefox": "127",
     "safari": "17",
-    "ios": "17"
+    "node": "22",
+    "ios": "17",
+    "electron": "29"
   },
   "Set.prototype.intersection": {
+    "chrome": "122",
+    "opera": "108",
+    "edge": "122",
+    "firefox": "127",
     "safari": "17",
-    "ios": "17"
+    "node": "22",
+    "ios": "17",
+    "electron": "29"
   },
-  "Set.prototype.isDisjointFrom": {},
-  "Set.prototype.isSubsetOf": {},
-  "Set.prototype.isSupersetOf": {},
-  "Set.prototype.symmetricDifference": {
+  "Set.prototype.isDisjointFrom": {
+    "chrome": "122",
+    "opera": "108",
+    "edge": "122",
+    "firefox": "127",
     "safari": "17",
-    "ios": "17"
+    "node": "22",
+    "ios": "17",
+    "electron": "29"
+  },
+  "Set.prototype.isSubsetOf": {
+    "chrome": "122",
+    "opera": "108",
+    "edge": "122",
+    "firefox": "127",
+    "safari": "17",
+    "node": "22",
+    "ios": "17",
+    "electron": "29"
+  },
+  "Set.prototype.isSupersetOf": {
+    "chrome": "122",
+    "opera": "108",
+    "edge": "122",
+    "firefox": "127",
+    "safari": "17",
+    "node": "22",
+    "ios": "17",
+    "electron": "29"
+  },
+  "Set.prototype.symmetricDifference": {
+    "chrome": "122",
+    "opera": "108",
+    "edge": "122",
+    "firefox": "127",
+    "safari": "17",
+    "node": "22",
+    "ios": "17",
+    "electron": "29"
   },
   "Set.prototype.union": {
+    "chrome": "122",
+    "opera": "108",
+    "edge": "122",
+    "firefox": "127",
     "safari": "17",
-    "ios": "17"
+    "node": "22",
+    "ios": "17",
+    "electron": "29"
   },
   "String.fromCodePoint": {
     "chrome": "41",

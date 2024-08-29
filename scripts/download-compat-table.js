@@ -3,7 +3,7 @@ const { existsSync, mkdirSync } = require("fs");
 const path = require("path");
 const rimraf = require("rimraf");
 
-const COMPAT_TABLE_COMMIT = "459ee154ee35e1cf55fc9179178d072badf8c67d";
+const COMPAT_TABLE_COMMIT = "fb3c71d4fea9b376c353752b28be38febd99688c";
 const COMPAT_TABLE_PATH = "build/compat-table";
 
 if (existsSync(COMPAT_TABLE_PATH)) {
