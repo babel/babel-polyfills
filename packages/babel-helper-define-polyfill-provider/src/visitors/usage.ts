@@ -30,7 +30,9 @@ export default (callProvider: CallProvider) => {
     callProvider({ kind: "global", name }, path);
   }
 
-  function analyzeMemberExpression(path: NodePath<t.MemberExpression>) {
+  function analyzeMemberExpression(
+    path: NodePath<t.MemberExpression | t.OptionalMemberExpression>,
+  ) {
     const key = resolveKey(path.get("property"), path.node.computed);
     return { key, handleAsMemberExpression: !!key && key !== "prototype" };
   }
@@ -48,7 +50,9 @@ export default (callProvider: CallProvider) => {
       handleReferencedIdentifier(path);
     },
 
-    MemberExpression(path: NodePath<t.MemberExpression>) {
+    "MemberExpression|OptionalMemberExpression"(
+      path: NodePath<t.MemberExpression | t.OptionalMemberExpression>,
+    ) {
       const { key, handleAsMemberExpression } = analyzeMemberExpression(path);
       if (!handleAsMemberExpression) return;
 
