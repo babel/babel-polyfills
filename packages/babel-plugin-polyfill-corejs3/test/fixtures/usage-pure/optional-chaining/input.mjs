@@ -9,6 +9,7 @@ a?.b.toSorted(x).c;
 a.b?.toSorted(x).c;
 a?.b.toSorted(x)?.c;
 a.b?.toSorted(x)?.c;
+a?.b.toSorted?.(x).c;
 
 a.b.c.toSorted?.d.e;
 a.b?.c.toSorted.d.e;

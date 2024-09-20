@@ -15,13 +15,15 @@ import * as BabelRuntimePaths from "./babel-runtime-corejs3-paths";
 import canSkipPolyfill from "./usage-filters";
 
 import type { NodePath } from "@babel/traverse";
-import { types as t } from "@babel/core";
+import { types as t, template } from "@babel/core";
 import {
   callMethod,
   coreJSModule,
   isCoreJSSource,
   coreJSPureHelper,
   BABEL_RUNTIME,
+  extractOptionalCheck,
+  maybeMemoizeContext,
 } from "./utils";
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
@@ -344,64 +346,40 @@ export default defineProvider<Options>(function (
         >;
 
         if (t.isOptionalCallExpression(parent) && parent.callee === node) {
-          if (parent.optional) {
-            parent.optional = false;
-            callMethod(path, id, true);
-          } else {
-            let optionalNode = node;
-            while (
-              !optionalNode.optional &&
-              t.isOptionalMemberExpression(optionalNode.object)
-            ) {
-              optionalNode = optionalNode.object;
-            }
-            parent.optional = true;
-            optionalNode.optional = false;
+          const wasOptional = parent.optional;
+          parent.optional = !wasOptional;
 
-            const ctx = path.scope.generateDeclaredUidIdentifier("context");
-            const assign = t.assignmentExpression(
-              "=",
-              ctx,
-              optionalNode.object,
+          if (!wasOptional) {
+            const check = extractOptionalCheck(
+              path.scope,
+              node as t.OptionalMemberExpression,
             );
-            optionalNode.object = t.cloneNode(ctx);
+            const [thisArg, thisArg2] = maybeMemoizeContext(node, path.scope);
 
             path.replaceWith(
-              t.conditionalExpression(
-                t.binaryExpression("==", assign, t.nullLiteral()),
-                t.nullLiteral(),
-                t.callExpression(
-                  t.memberExpression(
-                    t.memberExpression(
-                      t.identifier("Function"),
-                      t.identifier("call"),
-                    ),
-                    t.identifier("bind"),
-                  ),
-                  [t.callExpression(id, [node.object]), t.cloneNode(ctx)],
-                ),
-              ),
+              template.expression.ast`
+                ${check} ? null : Function.call.bind(${id}(${thisArg}), ${thisArg2})
+              `,
             );
+          } else if (t.isOptionalMemberExpression(node)) {
+            const check = extractOptionalCheck(
+              path.scope,
+              node as t.OptionalMemberExpression,
+            );
+            callMethod(path, id, true, c =>
+              t.conditionalExpression(check, t.nullLiteral(), c),
+            );
+          } else {
+            callMethod(path, id, true);
           }
         } else if (t.isCallExpression(parent) && parent.callee === node) {
           callMethod(path, id, false);
         } else if (t.isOptionalMemberExpression(node)) {
-          let optionalNode = node;
-          while (
-            !optionalNode.optional &&
-            t.isOptionalMemberExpression(optionalNode.object)
-          ) {
-            optionalNode = optionalNode.object;
-          }
-          optionalNode.optional = false;
-
-          const ctx = path.scope.generateDeclaredUidIdentifier("context");
-          const assign = t.assignmentExpression("=", ctx, optionalNode.object);
-          optionalNode.object = t.cloneNode(ctx);
+          const check = extractOptionalCheck(path.scope, node);
 
           path.replaceWith(
             t.conditionalExpression(
-              t.binaryExpression("==", assign, t.nullLiteral()),
+              check,
               t.nullLiteral(),
               t.callExpression(id, [node.object]),
             ),
