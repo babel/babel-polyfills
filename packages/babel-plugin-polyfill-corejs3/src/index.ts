@@ -111,9 +111,9 @@ export default defineProvider<Options>(function (
 
   function maybeInjectPure(
     desc: CoreJSPolyfillDescriptor,
-    hint,
-    utils,
-    object?,
+    hint: string,
+    utils: ReturnType<typeof getUtils>,
+    object?: string,
   ) {
     if (
       desc.pure &&
@@ -247,7 +247,9 @@ export default defineProvider<Options>(function (
 
       if (meta.kind === "property") {
         // We can't compile destructuring and updateExpression.
-        if (!path.isMemberExpression()) return;
+        if (!path.isMemberExpression() && !path.isOptionalMemberExpression()) {
+          return;
+        }
         if (!path.isReferenced()) return;
         if (path.parentPath.isUpdateExpression()) return;
         if (t.isSuper(path.node.object)) {
@@ -337,9 +339,52 @@ export default defineProvider<Options>(function (
         );
         if (!id) return;
 
-        const { node } = path as NodePath<t.MemberExpression>;
-        if (t.isCallExpression(path.parent, { callee: node })) {
-          callMethod(path, id);
+        const { node, parent } = path as NodePath<
+          t.MemberExpression | t.OptionalMemberExpression
+        >;
+
+        if (t.isOptionalCallExpression(parent) && parent.callee === node) {
+          if (parent.optional) {
+            parent.optional = false;
+            callMethod(path, id, true);
+          } else {
+            let optionalNode = node;
+            while (
+              !optionalNode.optional &&
+              t.isOptionalMemberExpression(optionalNode.object)
+            ) {
+              optionalNode = optionalNode.object;
+            }
+            parent.optional = true;
+            optionalNode.optional = false;
+
+            const ctx = path.scope.generateDeclaredUidIdentifier("context");
+            const assign = t.assignmentExpression(
+              "=",
+              ctx,
+              optionalNode.object,
+            );
+            optionalNode.object = t.cloneNode(ctx);
+
+            path.replaceWith(
+              t.conditionalExpression(
+                t.binaryExpression("==", assign, t.nullLiteral()),
+                t.nullLiteral(),
+                t.callExpression(
+                  t.memberExpression(
+                    t.memberExpression(
+                      t.identifier("Function"),
+                      t.identifier("call"),
+                    ),
+                    t.identifier("bind"),
+                  ),
+                  [t.callExpression(id, [node.object]), t.cloneNode(ctx)],
+                ),
+              ),
+            );
+          }
+        } else if (t.isCallExpression(parent) && parent.callee === node) {
+          callMethod(path, id, false);
         } else {
           path.replaceWith(t.callExpression(id, [node.object]));
         }

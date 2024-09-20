@@ -3,7 +3,11 @@ import corejsEntries from "../core-js-compat/entries.js";
 
 export const BABEL_RUNTIME = "@babel/runtime-corejs3";
 
-export function callMethod(path: any, id: t.Identifier) {
+export function callMethod(
+  path: any,
+  id: t.Identifier,
+  optionalCall?: boolean,
+) {
   const { object } = path.node;
 
   let context1, context2;
@@ -15,8 +19,13 @@ export function callMethod(path: any, id: t.Identifier) {
     context2 = t.assignmentExpression("=", t.cloneNode(context1), object);
   }
 
+  const callee = t.callExpression(id, [context2]);
+  const call = t.identifier("call");
+
   path.replaceWith(
-    t.memberExpression(t.callExpression(id, [context2]), t.identifier("call")),
+    optionalCall
+      ? t.optionalMemberExpression(callee, call, false, true)
+      : t.memberExpression(callee, call),
   );
 
   path.parentPath.unshiftContainer("arguments", context1);
