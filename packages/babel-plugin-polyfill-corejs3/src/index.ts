@@ -357,18 +357,15 @@ export default defineProvider<Options>(function (
             const [thisArg, thisArg2] = maybeMemoizeContext(node, path.scope);
 
             path.replaceWith(
-              template.expression.ast`
-                ${check} ? null : Function.call.bind(${id}(${thisArg}), ${thisArg2})
-              `,
+              check(
+                template.expression.ast`
+                  Function.call.bind(${id}(${thisArg}), ${thisArg2})
+                `,
+              ),
             );
           } else if (t.isOptionalMemberExpression(node)) {
-            const check = extractOptionalCheck(
-              path.scope,
-              node as t.OptionalMemberExpression,
-            );
-            callMethod(path, id, true, c =>
-              t.conditionalExpression(check, t.nullLiteral(), c),
-            );
+            const check = extractOptionalCheck(path.scope, node);
+            callMethod(path, id, true, check);
           } else {
             callMethod(path, id, true);
           }
@@ -376,14 +373,7 @@ export default defineProvider<Options>(function (
           callMethod(path, id, false);
         } else if (t.isOptionalMemberExpression(node)) {
           const check = extractOptionalCheck(path.scope, node);
-
-          path.replaceWith(
-            t.conditionalExpression(
-              check,
-              t.nullLiteral(),
-              t.callExpression(id, [node.object]),
-            ),
-          );
+          path.replaceWith(check(t.callExpression(id, [node.object])));
           if (t.isOptionalMemberExpression(parent)) parent.optional = true;
         } else {
           path.replaceWith(t.callExpression(id, [node.object]));

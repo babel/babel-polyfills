@@ -60,7 +60,12 @@ export function extractOptionalCheck(
   const assign = t.assignmentExpression("=", ctx, optionalNode.object);
   optionalNode.object = t.cloneNode(ctx);
 
-  return t.binaryExpression("==", assign, t.nullLiteral());
+  return ifNotNullish =>
+    t.conditionalExpression(
+      t.binaryExpression("==", assign, t.nullLiteral()),
+      t.unaryExpression("void", t.numericLiteral(0)),
+      ifNotNullish,
+    );
 }
 
 export function isCoreJSSource(source: string) {
