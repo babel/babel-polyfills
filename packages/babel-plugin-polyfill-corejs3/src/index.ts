@@ -385,6 +385,28 @@ export default defineProvider<Options>(function (
           }
         } else if (t.isCallExpression(parent) && parent.callee === node) {
           callMethod(path, id, false);
+        } else if (t.isOptionalMemberExpression(node)) {
+          let optionalNode = node;
+          while (
+            !optionalNode.optional &&
+            t.isOptionalMemberExpression(optionalNode.object)
+          ) {
+            optionalNode = optionalNode.object;
+          }
+          optionalNode.optional = false;
+
+          const ctx = path.scope.generateDeclaredUidIdentifier("context");
+          const assign = t.assignmentExpression("=", ctx, optionalNode.object);
+          optionalNode.object = t.cloneNode(ctx);
+
+          path.replaceWith(
+            t.conditionalExpression(
+              t.binaryExpression("==", assign, t.nullLiteral()),
+              t.nullLiteral(),
+              t.callExpression(id, [node.object]),
+            ),
+          );
+          if (t.isOptionalMemberExpression(parent)) parent.optional = true;
         } else {
           path.replaceWith(t.callExpression(id, [node.object]));
         }

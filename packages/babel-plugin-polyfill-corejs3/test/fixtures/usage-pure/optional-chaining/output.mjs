@@ -1,4 +1,4 @@
-var _context, _context2, _context3, _context4, _context5, _context6, _context7, _context8;
+var _context, _context2, _context3, _context4, _context5, _context6, _context7, _context8, _context9, _context10;
 import _toSortedInstanceProperty from "core-js-pure/stable/instance/to-sorted.js";
 import _Array$from from "core-js-pure/stable/array/from.js";
 _toSortedInstanceProperty(a).call(a, x);
@@ -12,8 +12,8 @@ _toSortedInstanceProperty(_context3 = a.b)?.call(_context3, x)?.c;
 ((_context7 = a) == null ? null : Function.call.bind(_toSortedInstanceProperty(_context7.b), _context7))?.(x)?.c;
 ((_context8 = a.b) == null ? null : Function.call.bind(_toSortedInstanceProperty(_context8), _context8))?.(x)?.c;
 _toSortedInstanceProperty(a.b.c)?.d.e;
-_toSortedInstanceProperty(a.b?.c).d.e;
-_toSortedInstanceProperty(a.b?.c)?.d.e;
+((_context9 = a.b) == null ? null : _toSortedInstanceProperty(_context9.c))?.d.e;
+((_context10 = a.b) == null ? null : _toSortedInstanceProperty(_context10.c))?.d.e;
 _Array$from(x);
 _Array$from?.(x);
 _Array$from?.(x).c;
