@@ -16,18 +16,20 @@ function isRemoved(path: NodePath) {
 }
 
 export default (callProvider: CallProvider) => {
+  const polyfilled = new WeakSet();
+
   function property(object, key, placement, path) {
     return callProvider({ kind: "property", object, key, placement }, path);
   }
 
   function handleReferencedIdentifier(path) {
-    const {
-      node: { name },
-      scope,
-    } = path;
+    const { node, scope } = path;
+    const { name } = node;
     if (scope.getBindingIdentifier(name)) return;
 
     callProvider({ kind: "global", name }, path);
+
+    if (path.node !== node) polyfilled.add(path.node);
   }
 
   function analyzeMemberExpression(
@@ -36,8 +38,52 @@ export default (callProvider: CallProvider) => {
     const key = resolveKey(path.get("property"), path.node.computed);
     return { key, handleAsMemberExpression: !!key && key !== "prototype" };
   }
-
   return {
+    LogicalExpression: {
+      exit(path: NodePath<t.LogicalExpression>) {
+        const { node } = path;
+        if (node.operator !== "||") return;
+        if (polyfilled.has(node.left)) {
+          path.get("right").remove();
+        } else if (
+          t.isUnaryExpression(node.left) &&
+          node.left.operator === "!" &&
+          polyfilled.has(node.left.argument)
+        ) {
+          path.replaceWith(node.right);
+        }
+      },
+    },
+    IfStatement: {
+      exit(path: NodePath<t.IfStatement>) {
+        const { node } = path;
+        if (polyfilled.has(node.test)) {
+          path.replaceWith(node.consequent);
+        } else if (
+          t.isUnaryExpression(node.test) &&
+          node.test.operator === "!"
+        ) {
+          if (polyfilled.has(node.test.argument)) {
+            path.replaceWith(node.alternate);
+          }
+        }
+      },
+    },
+    ConditionalExpression: {
+      exit(path: NodePath<t.ConditionalExpression>) {
+        const { node } = path;
+        if (polyfilled.has(node.test)) {
+          path.replaceWith(node.consequent);
+        } else if (
+          t.isUnaryExpression(node.test) &&
+          node.test.operator === "!"
+        ) {
+          if (polyfilled.has(node.test.argument)) {
+            path.replaceWith(node.alternate);
+          }
+        }
+      },
+    },
     // Symbol(), new Promise
     ReferencedIdentifier(path: NodePath<t.Identifier>) {
       const { parentPath } = path;
@@ -69,7 +115,12 @@ export default (callProvider: CallProvider) => {
       }
 
       const source = resolveSource(object);
+      const { node } = path;
       let skipObject = property(source.id, key, source.placement, path);
+      if (node !== path.node && !path.isCallExpression()) {
+        polyfilled.add(path.node);
+      }
+
       skipObject ||=
         !objectIsGlobalIdentifier ||
         path.shouldSkip ||
