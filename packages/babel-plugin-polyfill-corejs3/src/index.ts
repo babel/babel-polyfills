@@ -330,7 +330,31 @@ export default defineProvider<Options>(function (
           // @ts-expect-error
           meta.object,
         );
-        if (id) path.replaceWith(id);
+        if (id) {
+          path.replaceWith(id);
+          let { parentPath } = path;
+          if (
+            parentPath.isOptionalMemberExpression() ||
+            parentPath.isOptionalCallExpression()
+          ) {
+            do {
+              const parentAsNotOptional = parentPath as NodePath as NodePath<
+                t.MemberExpression | t.CallExpression
+              >;
+              parentAsNotOptional.type = parentAsNotOptional.node.type =
+                parentPath.type === "OptionalMemberExpression"
+                  ? "MemberExpression"
+                  : "CallExpression";
+              delete parentAsNotOptional.node.optional;
+
+              ({ parentPath } = parentPath);
+            } while (
+              (parentPath.isOptionalMemberExpression() ||
+                parentPath.isOptionalCallExpression()) &&
+              !parentPath.node.optional
+            );
+          }
+        }
       } else if (resolved.kind === "instance") {
         const id = maybeInjectPure(
           resolved.desc,

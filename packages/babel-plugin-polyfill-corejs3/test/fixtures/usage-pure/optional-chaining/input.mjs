@@ -31,4 +31,5 @@ Array?.from;
 Array?.from.x.y;
 Array.from?.x.y;
 Array?.from?.x.y;
-
+Array.from.x?.y;
+Array?.from.x().y?.();
