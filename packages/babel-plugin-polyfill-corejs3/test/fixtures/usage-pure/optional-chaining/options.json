@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "chrome": "30"
+  },
+  "plugins": [
+    [
+      "@@/polyfill-corejs3",
+      {
+        "method": "usage-pure",
+        "version": "3.38"
+      }
+    ]
+  ]
+}
