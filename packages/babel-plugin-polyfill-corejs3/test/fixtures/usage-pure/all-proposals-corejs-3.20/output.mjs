@@ -1,4 +1,4 @@
-var _context, _context2, _context3, _context4, _context5, _context6, _context7, _context8, _context9, _context10, _context11;
+var _context, _context2, _context3, _context4, _context5, _context6, _context7, _context8, _context9, _context10;
 import _findLastInstanceProperty from "core-js-pure/features/instance/find-last.js";
 import _findLastIndexInstanceProperty from "core-js-pure/features/instance/find-last-index.js";
 import _forEachInstanceProperty from "core-js-pure/features/instance/for-each.js";
@@ -11,7 +11,6 @@ import _uniqueByInstanceProperty from "core-js-pure/features/instance/unique-by.
 import _Number$range from "core-js-pure/features/number/range.js";
 import _BigInt$range from "core-js-pure/features/bigint/range.js";
 import _Array$isTemplateObject from "core-js-pure/features/array/is-template-object.js";
-import _emplaceInstanceProperty from "core-js-pure/features/instance/emplace.js";
 import _Map from "core-js-pure/features/map/index.js";
 import _Symbol$asyncDispose from "core-js-pure/features/symbol/async-dispose.js";
 import _Symbol$matcher from "core-js-pure/features/symbol/matcher.js";
@@ -40,7 +39,7 @@ _groupByInstanceProperty(_context7 = _uniqueByInstanceProperty(_context8 = [1, 2
 _Number$range(1, 2);
 _BigInt$range(1n, 2n);
 _Array$isTemplateObject((x => x)`a${x}z`);
-_emplaceInstanceProperty(_context9 = new _Map([['x', 1]])).call(_context9, 'x', {
+new _Map([['x', 1]]).emplace('x', {
   update: x => x + 1,
   insert: () => 0
 });
@@ -52,8 +51,8 @@ _Symbol$matchAll;
 _Symbol$metadata;
 _replaceAllInstanceProperty(_Symbol);
 new _URL(url);
-const foo = _groupByToMapInstanceProperty(_context10 = [1, 2, 3]).call(_context10, bar);
-const push = _unThisInstanceProperty(_context11 = [].push).call(_context11);
+const foo = _groupByToMapInstanceProperty(_context9 = [1, 2, 3]).call(_context9, bar);
+const push = _unThisInstanceProperty(_context10 = [].push).call(_context10);
 _Function$isConstructor;
 throw new _DOMException();
 _structuredClone(72);

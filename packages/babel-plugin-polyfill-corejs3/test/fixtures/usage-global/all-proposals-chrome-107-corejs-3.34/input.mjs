@@ -94,5 +94,14 @@ RegExp.escape(foo);
 
 Uint8Array.fromBase64(string);
 Uint8Array.fromHex(string);
+new Uint8Array(foo).setFromBase64(string);
+new Uint8Array(foo).setFromHex(string);
 new Uint8Array(foo).toBase64();
 new Uint8Array(foo).toHex();
+
+URL.parse(x);
+Math.sumPrecise(x);
+Symbol.customMatcher;
+
+Iterator.concat(a, b);
+new Map().getOrInsert(a, b);

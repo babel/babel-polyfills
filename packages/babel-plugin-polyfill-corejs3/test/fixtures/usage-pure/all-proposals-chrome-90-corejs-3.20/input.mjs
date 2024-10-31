@@ -46,6 +46,62 @@ throw new DOMException();
 
 structuredClone(72);
 
+btoa('hi');
+
 foo.indexed;
 bar.with;
 buz.push;
+fuz.__proto__;
+
+string.isWellFormed;
+string.toWellFormed;
+
+String.dedent`42`;
+
+self;
+SuppressedError
+DisposableStack;
+AsyncDisposableStack;
+
+Iterator.range(foo, bar);
+JSON.parse(foo);
+JSON.isRawJSON(foo);
+JSON.rawJSON(foo);
+Symbol.isWellKnown(foo);
+Symbol.isRegistered(foo);
+Function.demethodize();
+
+new URLSearchParams(string).size;
+new Set(array).intersection(otherSet);
+
+URL.canParse(foo);
+
+Symbol.isWellKnownSymbol(foo);
+Symbol.isRegisteredSymbol(foo);
+Symbol.metadata;
+Object.groupBy(a, b);
+Map.groupBy(a, b);
+Promise.withResolvers();
+new URLSearchParams().has(a, b);
+
+Math.f16round(foo);
+foo.getFloat16(0);
+foo.setFloat16(0, 1);
+foo.getUint8Clamped(0);
+foo.setUint8Clamped(0, 1);
+
+RegExp.escape(foo);
+
+Uint8Array.fromBase64(string);
+Uint8Array.fromHex(string);
+new Uint8Array(foo).setFromBase64(string);
+new Uint8Array(foo).setFromHex(string);
+new Uint8Array(foo).toBase64();
+new Uint8Array(foo).toHex();
+
+URL.parse(x);
+Math.sumPrecise(x);
+Symbol.customMatcher;
+
+Iterator.concat(a, b);
+new Map().getOrInsert(a, b);
