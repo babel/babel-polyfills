@@ -51,7 +51,6 @@ import "core-js/modules/esnext.number.range.js";
 import "core-js/modules/esnext.symbol.async-dispose.js";
 import "core-js/modules/esnext.symbol.matcher.js";
 import "core-js/modules/esnext.symbol.metadata.js";
-import "core-js/modules/esnext.weak-map.emplace.js";
 import "core-js/modules/web.dom-exception.stack.js";
 import "core-js/modules/web.structured-clone.js";
 [].findLast(fn);

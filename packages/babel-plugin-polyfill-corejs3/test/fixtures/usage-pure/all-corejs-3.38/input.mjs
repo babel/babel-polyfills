@@ -71,6 +71,9 @@ Symbol.isWellKnown(foo);
 Symbol.isRegistered(foo);
 Function.demethodize();
 
+new URLSearchParams(string).size;
+new Set(array).intersection(otherSet);
+
 URL.canParse(foo);
 
 Symbol.isWellKnownSymbol(foo);
@@ -99,3 +102,6 @@ new Uint8Array(foo).toHex();
 URL.parse(x);
 Math.sumPrecise(x);
 Symbol.customMatcher;
+
+Iterator.concat(a, b);
+new Map().getOrInsert(a, b);
