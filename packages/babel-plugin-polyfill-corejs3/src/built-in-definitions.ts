@@ -376,6 +376,13 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     now: define("date/now", ["es.date.now"]),
   },
 
+  Error: {
+    isError: define("error/is-error", [
+      "esnext.error.is-error",
+      "es.object.create",
+    ]),
+  },
+
   Function: {
     isCallable: define("function/is-callable", ["esnext.function.is-callable"]),
     isConstructor: define("function/is-constructor", [
@@ -757,6 +764,19 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     RuntimeError: define(null, ErrorDependencies),
   },
 };
+
+[
+  "AggregateError",
+  "EvalError",
+  "RangeError",
+  "ReferenceError",
+  "SuppressedError",
+  "SyntaxError",
+  "TypeError",
+  "URIError",
+].forEach(ERROR_SUBCLASS => {
+  StaticProperties[ERROR_SUBCLASS] = StaticProperties.Error;
+});
 
 export const InstanceProperties = {
   asIndexedPairs: define(null, [

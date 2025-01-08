@@ -7,6 +7,8 @@ export default new Set<string>([
   "esnext.array.group-to-map",
   "esnext.data-view.get-float16",
   "esnext.data-view.set-float16",
+  "esnext.error.is-error",
+  "esnext.iterator.dispose",
   "esnext.json.is-raw-json",
   "esnext.json.parse",
   "esnext.json.raw-json",

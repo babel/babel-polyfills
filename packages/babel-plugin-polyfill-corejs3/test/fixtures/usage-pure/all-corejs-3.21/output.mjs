@@ -96,3 +96,4 @@ Math.sumPrecise(x);
 _Symbol.customMatcher;
 _Iterator.concat(a, b);
 new _Map().getOrInsert(a, b);
+SyntaxError.isError(a);

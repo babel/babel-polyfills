@@ -26,3 +26,6 @@ queueMicrotask(() => globalThis);
 Observable.from(10);
 
 new Set(array).intersection(otherSet);
+
+SyntaxError.isError(a);
+
