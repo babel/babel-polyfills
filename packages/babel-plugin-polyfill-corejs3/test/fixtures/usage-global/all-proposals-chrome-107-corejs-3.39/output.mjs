@@ -203,3 +203,4 @@ Math.sumPrecise(x);
 Symbol.customMatcher;
 Iterator.concat(a, b);
 new Map().getOrInsert(a, b);
+SyntaxError.isError(a);

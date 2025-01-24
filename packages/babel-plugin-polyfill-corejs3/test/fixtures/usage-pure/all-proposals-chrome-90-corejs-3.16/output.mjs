@@ -90,3 +90,4 @@ Math.sumPrecise(x);
 Symbol.customMatcher;
 _Iterator.concat(a, b);
 new Map().getOrInsert(a, b);
+SyntaxError.isError(a);
