@@ -16,6 +16,7 @@ import "core-js/modules/es.set.js";
 import "core-js/modules/es.string.iterator.js";
 import "core-js/modules/es.string.match.js";
 import "core-js/modules/esnext.array.with.js";
+import "core-js/modules/esnext.iterator.constructor.js";
 import "core-js/modules/web.btoa.js";
 import "core-js/modules/web.dom-collections.iterator.js";
 import "core-js/modules/web.dom-exception.constructor.js";

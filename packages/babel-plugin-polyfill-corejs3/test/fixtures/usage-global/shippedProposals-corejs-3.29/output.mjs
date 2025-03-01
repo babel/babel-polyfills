@@ -6,6 +6,7 @@ import "core-js/modules/es.array.from.js";
 import "core-js/modules/es.array.iterator.js";
 import "core-js/modules/es.global-this.js";
 import "core-js/modules/es.map.js";
+import "core-js/modules/es.object.create.js";
 import "core-js/modules/es.object.to-string.js";
 import "core-js/modules/es.promise.js";
 import "core-js/modules/es.regexp.exec.js";
@@ -47,3 +48,4 @@ const foo = new Promise(resolve => {
 queueMicrotask(() => globalThis);
 Observable.from(10);
 new Set(array).intersection(otherSet);
+SyntaxError.isError(a);

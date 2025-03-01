@@ -152,4 +152,17 @@ describe("descriptors", () => {
     expect(path.type).toBe("BinaryExpression");
     expect(path.toString()).toBe("'values' in Object");
   });
+
+  it("optional chains", () => {
+    const [desc, path] = getDescriptor("a?.includes();", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "a",
+      key: "includes",
+      placement: "static",
+    });
+    expect(path.type).toBe("OptionalMemberExpression");
+    expect(path.toString()).toBe("a?.includes");
+  });
 });

@@ -297,6 +297,7 @@ import "core-js/modules/esnext.json.is-raw-json.js";
 import "core-js/modules/esnext.json.parse.js";
 import "core-js/modules/esnext.json.raw-json.js";
 import "core-js/modules/esnext.math.f16round.js";
+import "core-js/modules/esnext.math.sum-precise.js";
 import "core-js/modules/esnext.promise.try.js";
 import "core-js/modules/esnext.regexp.escape.js";
 import "core-js/modules/esnext.symbol.async-dispose.js";

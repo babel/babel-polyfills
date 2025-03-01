@@ -2,6 +2,7 @@ var _context, _context2, _context3, _context4, _context5;
 import _findLastInstanceProperty from "core-js-pure/stable/instance/find-last.js";
 import _findLastIndexInstanceProperty from "core-js-pure/stable/instance/find-last-index.js";
 import _forEachInstanceProperty from "core-js-pure/stable/instance/for-each.js";
+import _Iterator$from from "core-js-pure/features/iterator/from.js";
 import _mapInstanceProperty from "core-js-pure/stable/instance/map.js";
 import _filterInstanceProperty from "core-js-pure/stable/instance/filter.js";
 import _Map from "core-js-pure/stable/map/index.js";
@@ -17,16 +18,18 @@ import _withInstanceProperty from "core-js-pure/stable/instance/with.js";
 import _isWellFormedInstanceProperty from "core-js-pure/stable/instance/is-well-formed.js";
 import _toWellFormedInstanceProperty from "core-js-pure/stable/instance/to-well-formed.js";
 import _self from "core-js-pure/stable/self.js";
+import _Iterator from "core-js-pure/features/iterator/index.js";
+import _URLSearchParams from "core-js-pure/stable/url-search-params/index.js";
+import _Set from "core-js-pure/stable/set/index.js";
 import _URL$canParse from "core-js-pure/stable/url/can-parse.js";
 import _Object$groupBy from "core-js-pure/stable/object/group-by.js";
 import _Map$groupBy from "core-js-pure/stable/map/group-by.js";
 import _Promise$withResolvers from "core-js-pure/stable/promise/with-resolvers.js";
-import _URLSearchParams from "core-js-pure/stable/url-search-params/index.js";
 import _URL$parse from "core-js-pure/stable/url/parse.js";
 _findLastInstanceProperty(_context = []).call(_context, fn);
 _findLastIndexInstanceProperty(_context2 = []).call(_context2, fn);
 [].asIndexedPairs();
-_forEachInstanceProperty(_context3 = Iterator.from({
+_forEachInstanceProperty(_context3 = _Iterator$from({
   next: () => ({
     done: Math.random() > .9,
     value: Math.random() * 10 | 0
@@ -66,13 +69,15 @@ _self;
 SuppressedError;
 DisposableStack;
 AsyncDisposableStack;
-Iterator.range(foo, bar);
+_Iterator.range(foo, bar);
 JSON.parse(foo);
 JSON.isRawJSON(foo);
 JSON.rawJSON(foo);
 _Symbol.isWellKnown(foo);
 _Symbol.isRegistered(foo);
 Function.demethodize();
+new _URLSearchParams(string).size;
+new _Set(array).intersection(otherSet);
 _URL$canParse(foo);
 _Symbol.isWellKnownSymbol(foo);
 _Symbol.isRegisteredSymbol(foo);
@@ -96,3 +101,6 @@ new Uint8Array(foo).toHex();
 _URL$parse(x);
 Math.sumPrecise(x);
 _Symbol.customMatcher;
+_Iterator.concat(a, b);
+new _Map().getOrInsert(a, b);
+SyntaxError.isError(a);

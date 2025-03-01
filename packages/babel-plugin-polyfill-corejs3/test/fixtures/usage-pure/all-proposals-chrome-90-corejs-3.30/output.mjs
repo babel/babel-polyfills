@@ -1,4 +1,4 @@
-var _context, _context2, _context3, _context4, _context5, _context6, _context7, _context8;
+var _context, _context2, _context3, _context4, _context5, _context6, _context7;
 import _findLastInstanceProperty from "core-js-pure/features/instance/find-last.js";
 import _findLastIndexInstanceProperty from "core-js-pure/features/instance/find-last-index.js";
 import _Iterator$from from "core-js-pure/features/iterator/from.js";
@@ -8,7 +8,6 @@ import _uniqueByInstanceProperty from "core-js-pure/features/instance/unique-by.
 import _Number$range from "core-js-pure/features/number/range.js";
 import _BigInt$range from "core-js-pure/features/bigint/range.js";
 import _Array$isTemplateObject from "core-js-pure/features/array/is-template-object.js";
-import _emplaceInstanceProperty from "core-js-pure/features/instance/emplace.js";
 import _Symbol$asyncDispose from "core-js-pure/features/symbol/async-dispose.js";
 import _Symbol$matcher from "core-js-pure/features/symbol/matcher.js";
 import _Symbol$metadata from "core-js-pure/features/symbol/metadata.js";
@@ -33,6 +32,7 @@ import _Symbol$isRegistered from "core-js-pure/features/symbol/is-registered.js"
 import _demethodizeInstanceProperty from "core-js-pure/features/instance/demethodize.js";
 import _URL$canParse from "core-js-pure/features/url/can-parse.js";
 import _Map$groupBy from "core-js-pure/features/map/group-by.js";
+import _Iterator from "core-js-pure/features/iterator/index.js";
 _findLastInstanceProperty(_context = []).call(_context, fn);
 _findLastIndexInstanceProperty(_context2 = []).call(_context2, fn);
 [].asIndexedPairs();
@@ -47,7 +47,7 @@ _groupByInstanceProperty(_context4 = _uniqueByInstanceProperty(_context5 = [1, 2
 _Number$range(1, 2);
 _BigInt$range(1n, 2n);
 _Array$isTemplateObject((x => x)`a${x}z`);
-_emplaceInstanceProperty(_context6 = new Map([['x', 1]])).call(_context6, 'x', {
+new Map([['x', 1]]).emplace('x', {
   update: x => x + 1,
   insert: () => 0
 });
@@ -59,8 +59,8 @@ Symbol.matchAll;
 _Symbol$metadata;
 Symbol.replaceAll;
 new URL(url);
-const foo = _groupByToMapInstanceProperty(_context7 = [1, 2, 3]).call(_context7, bar);
-const push = _unThisInstanceProperty(_context8 = _pushInstanceProperty([])).call(_context8);
+const foo = _groupByToMapInstanceProperty(_context6 = [1, 2, 3]).call(_context6, bar);
+const push = _unThisInstanceProperty(_context7 = _pushInstanceProperty([])).call(_context7);
 _Function$isConstructor;
 throw new DOMException();
 _structuredClone(72);
@@ -83,6 +83,8 @@ _JSON$rawJSON(foo);
 _Symbol$isWellKnown(foo);
 _Symbol$isRegistered(foo);
 _demethodizeInstanceProperty(Function).call(Function);
+new URLSearchParams(string).size;
+new Set(array).intersection(otherSet);
 _URL$canParse(foo);
 Symbol.isWellKnownSymbol(foo);
 Symbol.isRegisteredSymbol(foo);
@@ -91,3 +93,21 @@ Object.groupBy(a, b);
 _Map$groupBy(a, b);
 Promise.withResolvers();
 new URLSearchParams().has(a, b);
+Math.f16round(foo);
+foo.getFloat16(0);
+foo.setFloat16(0, 1);
+foo.getUint8Clamped(0);
+foo.setUint8Clamped(0, 1);
+RegExp.escape(foo);
+Uint8Array.fromBase64(string);
+Uint8Array.fromHex(string);
+new Uint8Array(foo).setFromBase64(string);
+new Uint8Array(foo).setFromHex(string);
+new Uint8Array(foo).toBase64();
+new Uint8Array(foo).toHex();
+URL.parse(x);
+Math.sumPrecise(x);
+Symbol.customMatcher;
+_Iterator.concat(a, b);
+new Map().getOrInsert(a, b);
+SyntaxError.isError(a);

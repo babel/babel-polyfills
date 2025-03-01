@@ -15,13 +15,15 @@ import * as BabelRuntimePaths from "./babel-runtime-corejs3-paths";
 import canSkipPolyfill from "./usage-filters";
 
 import type { NodePath } from "@babel/traverse";
-import { types as t } from "@babel/core";
+import { types as t, template } from "@babel/core";
 import {
   callMethod,
   coreJSModule,
   isCoreJSSource,
   coreJSPureHelper,
   BABEL_RUNTIME,
+  extractOptionalCheck,
+  maybeMemoizeContext,
 } from "./utils";
 
 import defineProvider from "@babel/helper-define-polyfill-provider";
@@ -111,9 +113,9 @@ export default defineProvider<Options>(function (
 
   function maybeInjectPure(
     desc: CoreJSPolyfillDescriptor,
-    hint,
-    utils,
-    object?,
+    hint: string,
+    utils: ReturnType<typeof getUtils>,
+    object?: string,
   ) {
     if (
       desc.pure &&
@@ -247,7 +249,9 @@ export default defineProvider<Options>(function (
 
       if (meta.kind === "property") {
         // We can't compile destructuring and updateExpression.
-        if (!path.isMemberExpression()) return;
+        if (!path.isMemberExpression() && !path.isOptionalMemberExpression()) {
+          return;
+        }
         if (!path.isReferenced()) return;
         if (path.parentPath.isUpdateExpression()) return;
         if (t.isSuper(path.node.object)) {
@@ -326,7 +330,31 @@ export default defineProvider<Options>(function (
           // @ts-expect-error
           meta.object,
         );
-        if (id) path.replaceWith(id);
+        if (id) {
+          path.replaceWith(id);
+          let { parentPath } = path;
+          if (
+            parentPath.isOptionalMemberExpression() ||
+            parentPath.isOptionalCallExpression()
+          ) {
+            do {
+              const parentAsNotOptional = parentPath as NodePath as NodePath<
+                t.MemberExpression | t.CallExpression
+              >;
+              parentAsNotOptional.type = parentAsNotOptional.node.type =
+                parentPath.type === "OptionalMemberExpression"
+                  ? "MemberExpression"
+                  : "CallExpression";
+              delete parentAsNotOptional.node.optional;
+
+              ({ parentPath } = parentPath);
+            } while (
+              (parentPath.isOptionalMemberExpression() ||
+                parentPath.isOptionalCallExpression()) &&
+              !parentPath.node.optional
+            );
+          }
+        }
       } else if (resolved.kind === "instance") {
         const id = maybeInjectPure(
           resolved.desc,
@@ -337,9 +365,40 @@ export default defineProvider<Options>(function (
         );
         if (!id) return;
 
-        const { node } = path as NodePath<t.MemberExpression>;
-        if (t.isCallExpression(path.parent, { callee: node })) {
-          callMethod(path, id);
+        const { node, parent } = path as NodePath<
+          t.MemberExpression | t.OptionalMemberExpression
+        >;
+
+        if (t.isOptionalCallExpression(parent) && parent.callee === node) {
+          const wasOptional = parent.optional;
+          parent.optional = !wasOptional;
+
+          if (!wasOptional) {
+            const check = extractOptionalCheck(
+              path.scope,
+              node as t.OptionalMemberExpression,
+            );
+            const [thisArg, thisArg2] = maybeMemoizeContext(node, path.scope);
+
+            path.replaceWith(
+              check(
+                template.expression.ast`
+                  Function.call.bind(${id}(${thisArg}), ${thisArg2})
+                `,
+              ),
+            );
+          } else if (t.isOptionalMemberExpression(node)) {
+            const check = extractOptionalCheck(path.scope, node);
+            callMethod(path, id, true, check);
+          } else {
+            callMethod(path, id, true);
+          }
+        } else if (t.isCallExpression(parent) && parent.callee === node) {
+          callMethod(path, id, false);
+        } else if (t.isOptionalMemberExpression(node)) {
+          const check = extractOptionalCheck(path.scope, node);
+          path.replaceWith(check(t.callExpression(id, [node.object])));
+          if (t.isOptionalMemberExpression(parent)) parent.optional = true;
         } else {
           path.replaceWith(t.callExpression(id, [node.object]));
         }
