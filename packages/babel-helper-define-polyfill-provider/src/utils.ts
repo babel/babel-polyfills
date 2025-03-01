@@ -21,11 +21,9 @@ function resolveId(path): string {
     return path.node.name;
   }
 
-  if (path.isPure()) {
-    const { deopt } = path.evaluate();
-    if (deopt && deopt.isIdentifier()) {
-      return deopt.node.name;
-    }
+  const resolved = path.resolve();
+  if (resolved.isIdentifier()) {
+    return resolved.node.name;
   }
 }
 
@@ -84,29 +82,23 @@ export function resolveSource(obj: NodePath): {
     return { id, placement: "static" };
   }
 
-  if (obj.isRegExpLiteral()) {
-    return { id: "RegExp", placement: "prototype" };
-  } else if (obj.isFunction()) {
-    return { id: "Function", placement: "prototype" };
-  } else if (obj.isPure()) {
-    // @ts-expect-error no type for resolve
-    const path = obj.resolve() as NodePath;
-    switch (path?.type) {
-      case "RegExpLiteral":
-        return { id: "RegExp", placement: "prototype" };
-      case "FunctionExpression":
-        return { id: "Function", placement: "prototype" };
-      case "StringLiteral":
-        return { id: "String", placement: "prototype" };
-      case "NumberLiteral":
-        return { id: "Number", placement: "prototype" };
-      case "BooleanLiteral":
-        return { id: "Boolean", placement: "prototype" };
-      case "ObjectExpression":
-        return { id: "Object", placement: "prototype" };
-      case "ArrayExpression":
-        return { id: "Array", placement: "prototype" };
-    }
+  // @ts-expect-error no type for resolve
+  const path = obj.resolve() as NodePath;
+  switch (path.type) {
+    case "RegExpLiteral":
+      return { id: "RegExp", placement: "prototype" };
+    case "FunctionExpression":
+      return { id: "Function", placement: "prototype" };
+    case "StringLiteral":
+      return { id: "String", placement: "prototype" };
+    case "NumberLiteral":
+      return { id: "Number", placement: "prototype" };
+    case "BooleanLiteral":
+      return { id: "Boolean", placement: "prototype" };
+    case "ObjectExpression":
+      return { id: "Object", placement: "prototype" };
+    case "ArrayExpression":
+      return { id: "Array", placement: "prototype" };
   }
 
   return { id: null, placement: null };
