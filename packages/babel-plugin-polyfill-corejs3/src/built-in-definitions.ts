@@ -436,7 +436,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     degrees: define("math/degrees", ["esnext.math.degrees"]),
     expm1: define("math/expm1", ["es.math.expm1"]),
     fround: define("math/fround", ["es.math.fround"]),
-    f16round: define("math/f16round", ["esnext.math.f16round"]),
+    f16round: define("math/f16round", ["es.math.f16round"]),
     fscale: define("math/fscale", ["esnext.math.fscale"]),
     hypot: define("math/hypot", ["es.math.hypot"]),
     iaddh: define("math/iaddh", ["esnext.math.iaddh"]),
@@ -614,7 +614,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   },
 
   RegExp: {
-    escape: define("regexp/escape", ["esnext.regexp.escape"]),
+    escape: define("regexp/escape", ["es.regexp.escape"]),
   },
 
   Set: {
@@ -859,7 +859,7 @@ export const InstanceProperties = {
   ]),
   flat: define("instance/flat", ["es.array.flat", "es.array.unscopables.flat"]),
   getFloat16: define(null, [
-    "esnext.data-view.get-float16",
+    "es.data-view.get-float16",
     ...DataViewDependencies,
   ]),
   getUint8Clamped: define(null, [
@@ -939,7 +939,7 @@ export const InstanceProperties = {
   reverse: define("instance/reverse", ["es.array.reverse"]),
   search: define(null, ["es.string.search", "es.regexp.exec"]),
   setFloat16: define(null, [
-    "esnext.data-view.set-float16",
+    "es.data-view.set-float16",
     ...DataViewDependencies,
   ]),
   setUint8Clamped: define(null, [
