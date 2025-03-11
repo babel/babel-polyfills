@@ -13,7 +13,27 @@ export function has(object: any, key: string) {
   return Object.prototype.hasOwnProperty.call(object, key);
 }
 
-function resolveId(path): string {
+function resolve(
+  path: NodePath,
+  resolved: Set<NodePath> = new Set(),
+): NodePath | undefined {
+  if (resolved.has(path)) return;
+  resolved.add(path);
+
+  if (path.isVariableDeclarator()) {
+    if (path.get("id").isIdentifier()) {
+      return resolve(path.get("init"), resolved);
+    }
+  } else if (path.isReferencedIdentifier()) {
+    const binding = path.scope.getBinding(path.node.name);
+    if (!binding) return path;
+    if (!binding.constant) return;
+    return resolve(binding.path, resolved);
+  }
+  return path;
+}
+
+function resolveId(path: NodePath): string {
   if (
     path.isIdentifier() &&
     !path.scope.hasBinding(path.node.name, /* noGlobals */ true)
@@ -21,8 +41,8 @@ function resolveId(path): string {
     return path.node.name;
   }
 
-  const resolved = path.resolve();
-  if (resolved.isIdentifier()) {
+  const resolved = resolve(path);
+  if (resolved?.isIdentifier()) {
     return resolved.node.name;
   }
 }
@@ -82,9 +102,8 @@ export function resolveSource(obj: NodePath): {
     return { id, placement: "static" };
   }
 
-  // @ts-expect-error no type for resolve
-  const path = obj.resolve() as NodePath;
-  switch (path.type) {
+  const path = resolve(obj);
+  switch (path?.type) {
     case "RegExpLiteral":
       return { id: "RegExp", placement: "prototype" };
     case "FunctionExpression":
