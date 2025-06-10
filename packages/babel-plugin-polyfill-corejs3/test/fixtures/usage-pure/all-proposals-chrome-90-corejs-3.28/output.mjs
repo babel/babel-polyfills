@@ -32,6 +32,7 @@ import _Symbol$isRegistered from "core-js-pure/features/symbol/is-registered.js"
 import _demethodizeInstanceProperty from "core-js-pure/features/instance/demethodize.js";
 import _Map$groupBy from "core-js-pure/features/map/group-by.js";
 import _Iterator from "core-js-pure/features/iterator/index.js";
+import _Array$fromAsync from "core-js-pure/features/array/from-async.js";
 _findLastInstanceProperty(_context = []).call(_context, fn);
 _findLastIndexInstanceProperty(_context2 = []).call(_context2, fn);
 [].asIndexedPairs();
@@ -110,3 +111,9 @@ Symbol.customMatcher;
 _Iterator.concat(a, b);
 new Map().getOrInsert(a, b);
 SyntaxError.isError(a);
+_Array$fromAsync(a);
+_Iterator.zip(a, b);
+_Iterator.zipKeyed(a, b);
+a.chunks(b);
+a.windows(b);
+a.clamp(b, c);

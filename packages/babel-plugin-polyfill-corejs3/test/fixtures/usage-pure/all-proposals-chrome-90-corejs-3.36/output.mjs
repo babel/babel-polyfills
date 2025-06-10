@@ -39,6 +39,7 @@ import _Promise$withResolvers from "core-js-pure/features/promise/with-resolvers
 import _Math$f16round from "core-js-pure/features/math/f16round.js";
 import _RegExp$escape from "core-js-pure/features/regexp/escape.js";
 import _Iterator from "core-js-pure/features/iterator/index.js";
+import _Array$fromAsync from "core-js-pure/features/array/from-async.js";
 _findLastInstanceProperty(_context = []).call(_context, fn);
 _findLastIndexInstanceProperty(_context2 = []).call(_context2, fn);
 [].asIndexedPairs();
@@ -117,3 +118,9 @@ Symbol.customMatcher;
 _Iterator.concat(a, b);
 new Map().getOrInsert(a, b);
 SyntaxError.isError(a);
+_Array$fromAsync(a);
+_Iterator.zip(a, b);
+_Iterator.zipKeyed(a, b);
+a.chunks(b);
+a.windows(b);
+a.clamp(b, c);
