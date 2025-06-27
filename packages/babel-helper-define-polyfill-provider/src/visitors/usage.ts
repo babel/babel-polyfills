@@ -10,7 +10,7 @@ function isRemoved(path: NodePath) {
   if (path.listKey) {
     if (!path.parentPath.node?.[path.listKey]?.includes(path.node)) return true;
   } else {
-    if (path.parentPath.node[path.key] !== path.node) return true;
+    if (path.parentPath.node?.[path.key] !== path.node) return true;
   }
   return isRemoved(path.parentPath);
 }
