@@ -12,7 +12,7 @@ jobs:
       - name: Use Node.js latest
         uses: actions/setup-node@v3
         with:
-          cache: 'yarn'
+          cache: "yarn"
       - name: Update Yarn cache
         env:
           YARN_ENABLE_SCRIPTS: false # disable post-install scripts
@@ -31,7 +31,7 @@ jobs:
       - name: Use Node.js latest
         uses: actions/setup-node@v3
         with:
-          cache: 'yarn'
+          cache: "yarn"
       - name: Install
         run: yarn install
       - name: Lint
@@ -56,20 +56,28 @@ jobs:
       - name: Use Node.js latest
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache: "yarn"
+      - name: Downgrade Yarn and install
+        if: ${{ matrix.node-version < 18 }}
+        run: yarn set version 3 && yarn install --no-frozen-lockfile
       - name: Install
+        if: ${{ matrix.node-version >= 18 }}
         run: yarn install
       - name: Build
         run: yarn build
+        env:
+          BABEL_ENV: production
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: Test on Node.js ${{ matrix.node-version }}
         # `maxWorkers` cannot be 1 because we are using `process.exitCode` in our tests.
         run: yarn jest --ci --color --maxWorkers=2
         env:
           BABEL_TYPES_8_BREAKING: true
       - name: Test the esm build
-        run:
-          yarn test:esm
+        run: yarn test:esm
 
   test-windows:
     name: Test on Windows
@@ -82,7 +90,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: latest
-          cache: 'yarn'
+          cache: "yarn"
       - name: Install
         run: yarn install
       - name: Build with bash
@@ -96,5 +104,4 @@ jobs:
         env:
           BABEL_TYPES_8_BREAKING: true
       - name: Test the esm build
-        run:
-          yarn test:esm
+        run: yarn test:esm
