@@ -28,7 +28,10 @@ export default class ImportsCachedInjector {
     programPath: NodePath<t.Program>,
     url: string,
     moduleName: string,
-    getVal: (isScript: boolean, source: t.StringLiteral) => t.Node,
+    getVal: (
+      isScript: boolean,
+      source: t.StringLiteral,
+    ) => t.Statement | t.Declaration,
   ) {
     const key = this._normalizeKey(programPath, url);
     const imports = this._ensure<Set<string>>(
@@ -58,7 +61,7 @@ export default class ImportsCachedInjector {
       source: t.StringLiteral,
       // eslint-disable-next-line no-undef
       name: t.Identifier,
-    ) => { node: t.Node; name: string },
+    ) => { node: t.Statement | t.Declaration; name: string },
   ) {
     const key = this._normalizeKey(programPath, url, name);
     const imports = this._ensure<Map<string, any>>(
@@ -82,7 +85,7 @@ export default class ImportsCachedInjector {
 
   _injectImport(
     programPath: NodePath<t.Program>,
-    node: t.Node,
+    node: t.Statement | t.Declaration,
     moduleName: string,
   ) {
     const newIndex = this._getPreferredIndex(moduleName);
@@ -121,7 +124,7 @@ export default class ImportsCachedInjector {
       const [newPath] = last.insertAfter(node);
       lastImports.push({ path: newPath, index: newIndex });
     } else {
-      const [newPath] = programPath.unshiftContainer("body", node);
+      const [newPath] = programPath.unshiftContainer("body", [node]);
       this._lastImports.set(programPath, [{ path: newPath, index: newIndex }]);
     }
   }

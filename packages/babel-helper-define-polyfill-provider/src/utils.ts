@@ -141,7 +141,7 @@ export function getRequireSource({ node }: NodePath<t.Statement>) {
   }
 }
 
-function hoist(node: t.Node) {
+function hoist<T extends t.Node>(node: T): T {
   // @ts-expect-error
   node._blockHoist = 3;
   return node;
