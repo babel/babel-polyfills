@@ -26,7 +26,6 @@ _forEachInstanceProperty(_context = _Object$keys(_mod)).call(_context, function 
     }
   });
 });
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const exp = _bar.default + _fuz.baz;
-exports.exp = exp;
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const exp = exports.exp = _bar.default + _fuz.baz;
 (0, _includes.default)(_bar.default);

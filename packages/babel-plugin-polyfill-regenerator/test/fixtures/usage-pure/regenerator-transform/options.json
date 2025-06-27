@@ -1,4 +1,5 @@
 {
+  "externalHelpers": false,
   "targets": {
     "chrome": 40
   },

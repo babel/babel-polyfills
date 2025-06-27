@@ -1,4 +1,4 @@
-var _str, _str2, _str3, _str4, _str5, _str6, _str7, _str8, _str9, _str10, _str11, _str12, _str13;
+var _str, _str2, _str3, _str4, _str5, _str6, _str7, _str8, _str9, _str0, _str1, _str10, _str11;
 import _StringPrototypeAnchor from "es-string-html-methods/anchor";
 import _StringPrototypeBig from "es-string-html-methods/big";
 import _StringPrototypeBlink from "es-string-html-methods/blink";
@@ -21,7 +21,7 @@ import _StringPrototypeSup from "es-string-html-methods/sup";
 (_str7 = str, typeof _str7 === "string" ? _StringPrototypeFontsize : Function.call.bind(_str7.fontsize))(_str7);
 (_str8 = str, typeof _str8 === "string" ? _StringPrototypeItalics : Function.call.bind(_str8.italics))(_str8);
 (_str9 = str, typeof _str9 === "string" ? _StringPrototypeLink : Function.call.bind(_str9.link))(_str9);
-(_str10 = str, typeof _str10 === "string" ? _StringPrototypeSmall : Function.call.bind(_str10.small))(_str10);
-(_str11 = str, typeof _str11 === "string" ? _StringPrototypeStrike : Function.call.bind(_str11.strike))(_str11);
-(_str12 = str, typeof _str12 === "string" ? _StringPrototypeSub : Function.call.bind(_str12.sub))(_str12);
-(_str13 = str, typeof _str13 === "string" ? _StringPrototypeSup : Function.call.bind(_str13.sup))(_str13);
+(_str0 = str, typeof _str0 === "string" ? _StringPrototypeSmall : Function.call.bind(_str0.small))(_str0);
+(_str1 = str, typeof _str1 === "string" ? _StringPrototypeStrike : Function.call.bind(_str1.strike))(_str1);
+(_str10 = str, typeof _str10 === "string" ? _StringPrototypeSub : Function.call.bind(_str10.sub))(_str10);
+(_str11 = str, typeof _str11 === "string" ? _StringPrototypeSup : Function.call.bind(_str11.sup))(_str11);

@@ -24,7 +24,6 @@ Object.keys(_mod).forEach(function (key) {
   });
 });
 var _foo;
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-const exp = _bar.default + _fuz.baz;
-exports.exp = exp;
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+const exp = exports.exp = _bar.default + _fuz.baz;
 _foo = _bar.default, typeof _foo === "string" ? _stringPrototype.default.getPolyfill() : Array.isArray(_foo) ? _arrayIncludes.default.getPolyfill() : _foo.includes;

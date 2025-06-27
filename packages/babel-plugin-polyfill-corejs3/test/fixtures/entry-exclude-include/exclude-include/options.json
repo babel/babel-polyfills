@@ -1,4 +1,5 @@
 {
+  "externalHelpers": false,
   "plugins": [
     [
       "@@/polyfill-corejs3",
@@ -7,12 +8,8 @@
         "targets": {
           "chrome": 55
         },
-        "exclude": [
-          "es.string.pad-start"
-        ],
-        "include": [
-          "es.map"
-        ]
+        "exclude": ["es.string.pad-start"],
+        "include": ["es.map"]
       }
     ]
   ]

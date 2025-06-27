@@ -393,7 +393,7 @@ describe("injectors", () => {
 
           var _foo3 = require("./polyfill/foo");
           var _foo2 = _interopRequireDefault(require("./polyfill/foo"));
-          function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+          function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
           _foo2.default;
           _foo3;
         `);

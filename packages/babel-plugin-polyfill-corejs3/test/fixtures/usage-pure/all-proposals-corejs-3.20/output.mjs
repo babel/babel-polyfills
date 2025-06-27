@@ -1,4 +1,4 @@
-var _context, _context2, _context3, _context4, _context5, _context6, _context7, _context8, _context9, _context10;
+var _context, _context2, _context3, _context4, _context5, _context6, _context7, _context8, _context9, _context0;
 import _findLastInstanceProperty from "core-js-pure/features/instance/find-last.js";
 import _findLastIndexInstanceProperty from "core-js-pure/features/instance/find-last-index.js";
 import _forEachInstanceProperty from "core-js-pure/features/instance/for-each.js";
@@ -52,7 +52,7 @@ _Symbol$metadata;
 _replaceAllInstanceProperty(_Symbol);
 new _URL(url);
 const foo = _groupByToMapInstanceProperty(_context9 = [1, 2, 3]).call(_context9, bar);
-const push = _unThisInstanceProperty(_context10 = [].push).call(_context10);
+const push = _unThisInstanceProperty(_context0 = [].push).call(_context0);
 _Function$isConstructor;
 throw new _DOMException();
 _structuredClone(72);

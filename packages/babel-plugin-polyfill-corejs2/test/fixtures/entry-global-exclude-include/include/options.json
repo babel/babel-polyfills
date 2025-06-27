@@ -1,4 +1,5 @@
 {
+  "externalHelpers": false,
   "plugins": [
     [
       "@@/polyfill-corejs2",
@@ -7,10 +8,7 @@
         "targets": {
           "chrome": 55
         },
-        "include": [
-          "es6.map",
-          "es6.set"
-        ]
+        "include": ["es6.map", "es6.set"]
       }
     ]
   ]

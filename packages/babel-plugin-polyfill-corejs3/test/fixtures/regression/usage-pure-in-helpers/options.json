@@ -1,9 +1,10 @@
 {
-	"plugins": [
+  "externalHelpers": false,
+  "plugins": [
     "@babel/plugin-transform-class-properties",
     "@babel/plugin-transform-runtime",
-		["@@/polyfill-corejs3", { "method": "usage-pure" }],
-		"@babel/plugin-transform-classes",
+    ["@@/polyfill-corejs3", { "method": "usage-pure" }],
+    "@babel/plugin-transform-classes",
     "@babel/plugin-transform-spread"
-	]
+  ]
 }

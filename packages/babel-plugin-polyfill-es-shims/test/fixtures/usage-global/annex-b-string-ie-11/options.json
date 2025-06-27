@@ -1,4 +1,5 @@
 {
+  "externalHelpers": false,
   "validateLogs": true,
   "targets": { "ie": "11" },
   "plugins": [
