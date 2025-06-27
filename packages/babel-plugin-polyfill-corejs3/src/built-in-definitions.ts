@@ -49,7 +49,7 @@ const CommonIteratorsWithTag = ["es.object.to-string", ...CommonIterators];
 const ErrorDependencies = ["es.error.cause", "es.error.to-string"];
 
 const SuppressedErrorDependencies = [
-  "esnext.suppressed-error.constructor",
+  "es.suppressed-error.constructor",
   ...ErrorDependencies,
 ];
 
@@ -233,10 +233,10 @@ const DataViewDependencies = ["es.data-view", ...ArrayBufferDependencies];
 
 export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   AsyncDisposableStack: define("async-disposable-stack/index", [
-    "esnext.async-disposable-stack.constructor",
+    "es.async-disposable-stack.constructor",
     "es.object.to-string",
-    "esnext.async-iterator.async-dispose",
-    "esnext.iterator.dispose",
+    "es.async-iterator.async-dispose",
+    "es.iterator.dispose",
     ...PromiseDependencies,
     ...SuppressedErrorDependencies,
   ]),
@@ -252,9 +252,9 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   Date: define(null, ["es.date.to-string"]),
   DOMException: define("dom-exception/index", DOMExceptionDependencies),
   DisposableStack: define("disposable-stack/index", [
-    "esnext.disposable-stack.constructor",
+    "es.disposable-stack.constructor",
     "es.object.to-string",
-    "esnext.iterator.dispose",
+    "es.iterator.dispose",
     ...SuppressedErrorDependencies,
   ]),
   Error: define(null, ErrorDependencies),
@@ -351,7 +351,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   Array: {
     from: define("array/from", ["es.array.from", "es.string.iterator"]),
     fromAsync: define("array/from-async", [
-      "esnext.array.from-async",
+      "es.array.from-async",
       ...PromiseDependenciesWithIterators,
     ]),
     isArray: define("array/is-array", ["es.array.is-array"]),
@@ -378,7 +378,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
 
   Error: {
     isError: define("error/is-error", [
-      "esnext.error.is-error",
+      "es.error.is-error",
       "es.object.create",
     ]),
   },
@@ -404,7 +404,18 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     range: define("iterator/range", [
       "esnext.iterator.range",
       ...IteratorDependencies,
-      "es.object.to-string",
+    ]),
+    zip: define("iterator/zip", [
+      "esnext.iterator.zip",
+      ...IteratorDependencies,
+      ...CommonIterators,
+    ]),
+    zipKeyed: define("iterator/zip-keyed", [
+      "esnext.iterator.zip-keyed",
+      "es.object.create",
+      "es.reflect.own-keys",
+      ...IteratorDependencies,
+      ...CommonIterators,
     ]),
   },
 
@@ -637,8 +648,8 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
 
   Symbol: {
     asyncDispose: define("symbol/async-dispose", [
-      "esnext.symbol.async-dispose",
-      "esnext.async-iterator.async-dispose",
+      "es.symbol.async-dispose",
+      "es.async-iterator.async-dispose",
     ]),
     asyncIterator: define("symbol/async-iterator", [
       "es.symbol.async-iterator",
@@ -647,8 +658,8 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       "esnext.symbol.custom-matcher",
     ]),
     dispose: define("symbol/dispose", [
-      "esnext.symbol.dispose",
-      "esnext.iterator.dispose",
+      "es.symbol.dispose",
+      "es.iterator.dispose",
     ]),
     for: define("symbol/for", [], "es.symbol"),
     hasInstance: define("symbol/has-instance", [
@@ -801,6 +812,9 @@ export const InstanceProperties = {
   bind: define("instance/bind", ["es.function.bind"]),
   blink: define(null, ["es.string.blink"]),
   bold: define(null, ["es.string.bold"]),
+  chunks: define(null, ["esnext.iterator.chunks", ...IteratorDependencies]),
+  // TODO: add /instance/ entry
+  clamp: define(null, ["esnext.number.clamp"]),
   codePointAt: define("instance/code-point-at", ["es.string.code-point-at"]),
   codePoints: define("instance/code-points", ["esnext.string.code-points"]),
   concat: define("instance/concat", ["es.array.concat"], undefined, ["String"]),
@@ -1011,6 +1025,7 @@ export const InstanceProperties = {
   unshift: define("instance/unshift", ["es.array.unshift"]),
   unThis: define("instance/un-this", ["esnext.function.un-this"]),
   values: define("instance/values", ArrayNatureIteratorsWithTag),
+  windows: define(null, ["esnext.iterator.windows", ...IteratorDependencies]),
   with: define("instance/with", ["es.array.with"]),
   __defineGetter__: define(null, ["es.object.define-getter"]),
   __defineSetter__: define(null, ["es.object.define-setter"]),

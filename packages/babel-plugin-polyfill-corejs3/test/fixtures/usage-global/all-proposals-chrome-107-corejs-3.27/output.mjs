@@ -1,5 +1,6 @@
 import "core-js/modules/es.array.push.js";
 import "core-js/modules/esnext.suppressed-error.constructor.js";
+import "core-js/modules/esnext.array.from-async.js";
 import "core-js/modules/esnext.array.group-by.js";
 import "core-js/modules/esnext.array.group-by-to-map.js";
 import "core-js/modules/esnext.array.is-template-object.js";
@@ -167,3 +168,9 @@ Symbol.customMatcher;
 Iterator.concat(a, b);
 new Map().getOrInsert(a, b);
 SyntaxError.isError(a);
+Array.fromAsync(a);
+Iterator.zip(a, b);
+Iterator.zipKeyed(a, b);
+a.chunks(b);
+a.windows(b);
+a.clamp(b, c);

@@ -107,3 +107,13 @@ Iterator.concat(a, b);
 new Map().getOrInsert(a, b);
 
 SyntaxError.isError(a);
+
+Array.fromAsync(a);
+
+Iterator.zip(a, b);
+Iterator.zipKeyed(a, b);
+
+a.chunks(b);
+a.windows(b);
+
+a.clamp(b, c);
