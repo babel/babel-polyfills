@@ -1,6 +1,10 @@
 {
+  "externalHelpers": false,
   "plugins": [
-    ["@@/polyfill-corejs3", { "method": "usage-global", "version": "3.31.0", "proposals": true }],
+    [
+      "@@/polyfill-corejs3",
+      { "method": "usage-global", "version": "3.31.0", "proposals": true }
+    ],
     ["@babel/plugin-proposal-decorators", { "version": "2023-05" }],
     ["@babel/plugin-transform-runtime", { "version": "7.100.0" }]
   ]

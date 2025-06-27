@@ -2,7 +2,7 @@
   "private": true,
   "name": "@babel-internal/test-esm",
   "devDependencies": {
-    "@babel/core": "^7.17.8",
+    "@babel/core": "^7.27.7",
     "babel-plugin-polyfill-corejs2": "workspace:*",
     "babel-plugin-polyfill-corejs3": "workspace:*",
     "babel-plugin-polyfill-es-shims": "workspace:*",

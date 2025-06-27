@@ -17,5 +17,5 @@ _Object$keys(_mod).forEach(function (key) {
     }
   });
 });
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 _bar.default;
