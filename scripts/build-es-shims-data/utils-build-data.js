@@ -3,9 +3,9 @@
 "use strict";
 
 const fs = require("fs");
-const flatMap = require("lodash/flatMap");
-const mapValues = require("lodash/mapValues");
-const findLastIndex = require("lodash/findLastIndex");
+const flatMap = require("es-toolkit/compat/flatMap");
+const mapValues = require("es-toolkit/compat/mapValues");
+const findLastIndex = require("es-toolkit/compat/findLastIndex");
 const electronToChromiumVersions = require("electron-to-chromium").versions;
 
 const envs = require("../../build/compat-table/environments");

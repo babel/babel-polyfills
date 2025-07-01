@@ -36,7 +36,7 @@
     "@babel/helper-compilation-targets": "^7.27.2",
     "@babel/helper-plugin-utils": "^7.27.1",
     "debug": "^4.4.1",
-    "lodash.debounce": "^4.0.8",
+    "es-toolkit": "^1.39.5",
     "resolve": "^1.22.10"
   },
   "peerDependencies": {
