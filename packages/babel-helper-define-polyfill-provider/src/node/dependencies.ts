@@ -1,5 +1,5 @@
 import path from "path";
-import debounce from "lodash.debounce";
+import debounce from "es-toolkit/compat/debounce";
 import requireResolve from "resolve";
 
 const nativeRequireResolve = parseFloat(process.versions.node) >= 8.9;
