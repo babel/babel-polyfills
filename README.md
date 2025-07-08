@@ -13,7 +13,7 @@ The main Babel packages only transform JavaScript _syntax_: you also need to loa
 
 The easiest way to do so is to directly load the polyfill using a `<script ...>` tag:
 ```html
-<script src="https://unpkg.com/core-js-bundle@3.35.1/minified.js"></script>
+<script src="https://unpkg.com/core-js-bundle@3.44.0/minified.js"></script>
 ```
 
 However, this simple approach can potentially include a lot of unnecessary code. The Babel plugins implemented in this repository automatically inject the polyfills in your code, while trying to only load what is really needed. It does this based on your compilation targets and on what you are using in your code.
