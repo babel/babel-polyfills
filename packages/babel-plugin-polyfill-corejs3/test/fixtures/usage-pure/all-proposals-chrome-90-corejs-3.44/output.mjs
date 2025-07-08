@@ -129,5 +129,6 @@ _Array$fromAsync(a);
 _Iterator$zip(a, b);
 _Iterator$zipKeyed(a, b);
 a.chunks(b);
+a.sliding(b);
 a.windows(b);
 _clampInstanceProperty(a).call(a, b, c);

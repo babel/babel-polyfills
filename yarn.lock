@@ -214,7 +214,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-define-polyfill-provider@workspace:^0.6.4, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
+"@babel/helper-define-polyfill-provider@workspace:^0.6.5, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
   version: 0.0.0-use.local
   resolution: "@babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider"
   dependencies:
@@ -4506,7 +4506,7 @@ __metadata:
   dependencies:
     "@babel/compat-data": "npm:^7.27.7"
     "@babel/core": "npm:^7.27.7"
-    "@babel/helper-define-polyfill-provider": "workspace:^0.6.4"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.6.5"
     "@babel/helper-plugin-test-runner": "npm:^7.27.1"
     "@babel/plugin-transform-for-of": "npm:^7.27.1"
     "@babel/plugin-transform-modules-commonjs": "npm:^7.27.1"
@@ -4533,7 +4533,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-corejs3@workspace:packages/babel-plugin-polyfill-corejs3"
   dependencies:
     "@babel/core": "npm:^7.27.7"
-    "@babel/helper-define-polyfill-provider": "workspace:^0.6.4"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.6.5"
     "@babel/helper-plugin-test-runner": "npm:^7.27.1"
     "@babel/plugin-proposal-decorators": "npm:^7.27.1"
     "@babel/plugin-transform-class-properties": "npm:^7.27.1"
@@ -4542,9 +4542,9 @@ __metadata:
     "@babel/plugin-transform-modules-commonjs": "npm:^7.27.1"
     "@babel/plugin-transform-runtime": "npm:^7.27.4"
     "@babel/plugin-transform-spread": "npm:^7.27.1"
-    core-js: "npm:^3.43.0"
-    core-js-compat: "npm:^3.43.0"
-    core-js-pure: "npm:^3.43.0"
+    core-js: "npm:^3.44.0"
+    core-js-compat: "npm:^3.44.0"
+    core-js-pure: "npm:^3.44.0"
   peerDependencies:
     "@babel/core": ^7.4.0 || ^8.0.0-0 <8.0.0
   languageName: unknown
@@ -4555,7 +4555,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-es-shims@workspace:packages/babel-plugin-polyfill-es-shims"
   dependencies:
     "@babel/core": "npm:^7.27.7"
-    "@babel/helper-define-polyfill-provider": "workspace:^0.6.4"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.6.5"
     "@babel/helper-plugin-test-runner": "npm:^7.27.1"
     array.from: "npm:^1.1.6"
     math.clz32: "npm:^1.0.3"
@@ -4580,7 +4580,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-regenerator@workspace:packages/babel-plugin-polyfill-regenerator"
   dependencies:
     "@babel/core": "npm:^7.27.7"
-    "@babel/helper-define-polyfill-provider": "workspace:^0.6.4"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.6.5"
     "@babel/helper-plugin-test-runner": "npm:^7.27.1"
     "@babel/plugin-transform-regenerator": "npm:~7.14.5"
     regenerator-runtime: "npm:^0.14.1"
@@ -4936,7 +4936,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.24.0, browserslist@npm:^4.25.0":
+"browserslist@npm:^4.24.0, browserslist@npm:^4.25.1":
   version: 4.25.1
   resolution: "browserslist@npm:4.25.1"
   dependencies:
@@ -5831,26 +5831,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-compat@npm:^3.40.0, core-js-compat@npm:^3.43.0":
-  version: 3.43.0
-  resolution: "core-js-compat@npm:3.43.0"
+"core-js-compat@npm:^3.40.0, core-js-compat@npm:^3.44.0":
+  version: 3.44.0
+  resolution: "core-js-compat@npm:3.44.0"
   dependencies:
-    browserslist: "npm:^4.25.0"
-  checksum: 10/fa57a75e0e0798889f0a8d4dbc66bd276c799f265442eb0f6baa4113efaf0c4213e457c70f8f0f9d78f98b22c5c16dfd7e68d88e6f2484ae2120888a4bd08b68
+    browserslist: "npm:^4.25.1"
+  checksum: 10/41885423aaea9cd543ca821ace9fabfbaa5f5c202d60244a0baf150326db8f52bee6a01a3fd1b8f7e3026e63b311d93c92bc6ad219fe4a2b2f95df01fff0ea1c
   languageName: node
   linkType: hard
 
-"core-js-pure@npm:^3.43.0":
-  version: 3.43.0
-  resolution: "core-js-pure@npm:3.43.0"
-  checksum: 10/c45d667569ab64a0a30d6262ada926d30a5f7ad9f94d488e56484b351ca919b13481d4e2ed065bc6b11a8cca8288175a244b2f9efbcd02f9a8a52726aaf2a838
+"core-js-pure@npm:^3.44.0":
+  version: 3.44.0
+  resolution: "core-js-pure@npm:3.44.0"
+  checksum: 10/e1cda1abed0fe68e60a92e2a9c0f95fb18432f8597b8e06d441469385698fbca813eecbb81eaeaa1e7d7ebcfffb2718636415730d3805fd19baa6e0016d40f9e
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.43.0":
-  version: 3.43.0
-  resolution: "core-js@npm:3.43.0"
-  checksum: 10/514952992863266b1a6a2d3c985e905461d37fe72d131d9320d5dbf01ac7e746f6fc53004b548347518cc832f7d2602b9a228acf6b5183e5cbede9dd296d73d3
+"core-js@npm:^3.44.0":
+  version: 3.44.0
+  resolution: "core-js@npm:3.44.0"
+  checksum: 10/759ef4ab0d12c9a6e8a32537d2b0fe64c2d7be40e13e0d7eb9604a970c380d64f37489dee03bd1c286c169e47a69d3ca2a968e8fcde0f78094ea22a20465d763
   languageName: node
   linkType: hard
 

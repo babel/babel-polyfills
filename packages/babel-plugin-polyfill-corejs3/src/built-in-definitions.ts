@@ -813,8 +813,7 @@ export const InstanceProperties = {
   blink: define(null, ["es.string.blink"]),
   bold: define(null, ["es.string.bold"]),
   chunks: define(null, ["esnext.iterator.chunks", ...IteratorDependencies]),
-  // TODO: add /instance/ entry
-  clamp: define(null, ["esnext.number.clamp"]),
+  clamp: define("instance/clamp", ["esnext.number.clamp"]),
   codePointAt: define("instance/code-point-at", ["es.string.code-point-at"]),
   codePoints: define("instance/code-points", ["esnext.string.code-points"]),
   concat: define("instance/concat", ["es.array.concat"], undefined, ["String"]),
@@ -962,6 +961,7 @@ export const InstanceProperties = {
   ]),
   setYear: define(null, ["es.date.set-year"]),
   slice: define("instance/slice", ["es.array.slice"]),
+  sliding: define(null, ["esnext.iterator.sliding", ...IteratorDependencies]),
   small: define(null, ["es.string.small"]),
   some: define("instance/some", [
     "es.array.some",
