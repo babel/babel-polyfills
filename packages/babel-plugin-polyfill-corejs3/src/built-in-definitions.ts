@@ -848,7 +848,9 @@ export const InstanceProperties = {
     ...IteratorDependencies,
     // "esnext.async-iterator.filter",
   ]),
-  filterReject: define("instance/filterReject", ["esnext.array.filter-reject"]),
+  filterReject: define("instance/filter-reject", [
+    "esnext.array.filter-reject",
+  ]),
   finally: define(null, ["es.promise.finally", ...PromiseDependencies]),
   find: define("instance/find", [
     "es.array.find",
