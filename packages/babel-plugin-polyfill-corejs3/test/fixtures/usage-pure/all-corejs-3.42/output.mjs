@@ -32,6 +32,7 @@ import _Promise$withResolvers from "core-js-pure/stable/promise/with-resolvers.j
 import _Math$f16round from "core-js-pure/stable/math/f16round.js";
 import _RegExp$escape from "core-js-pure/stable/regexp/escape.js";
 import _URL$parse from "core-js-pure/stable/url/parse.js";
+import _Math$sumPrecise from "core-js-pure/features/math/sum-precise.js";
 import _SyntaxError$isError from "core-js-pure/features/error/is-error.js";
 import _Array$fromAsync from "core-js-pure/features/array/from-async.js";
 _findLastInstanceProperty(_context = []).call(_context, fn);
@@ -107,7 +108,7 @@ new Uint8Array(foo).setFromHex(string);
 new Uint8Array(foo).toBase64();
 new Uint8Array(foo).toHex();
 _URL$parse(x);
-Math.sumPrecise(x);
+_Math$sumPrecise(x);
 _Symbol.customMatcher;
 _Iterator.concat(a, b);
 new _Map().getOrInsert(a, b);

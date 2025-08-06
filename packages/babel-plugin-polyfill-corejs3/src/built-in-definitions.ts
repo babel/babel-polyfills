@@ -267,10 +267,10 @@ export const BuiltIns: ObjectMap<CoreJSPolyfillDescriptor> = {
   Iterator: define("iterator/index", IteratorDependencies),
   Uint8Array: typed(
     "es.typed-array.uint8-array",
-    "esnext.uint8-array.set-from-base64",
-    "esnext.uint8-array.set-from-hex",
-    "esnext.uint8-array.to-base64",
-    "esnext.uint8-array.to-hex",
+    "es.uint8-array.set-from-base64",
+    "es.uint8-array.set-from-hex",
+    "es.uint8-array.to-base64",
+    "es.uint8-array.to-hex",
   ),
   Uint8ClampedArray: typed("es.typed-array.uint8-clamped-array"),
   Uint16Array: typed("es.typed-array.uint16-array"),
@@ -464,7 +464,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
     signbit: define("math/signbit", ["esnext.math.signbit"]),
     sinh: define("math/sinh", ["es.math.sinh"]),
     sumPrecise: define("math/sum-precise", [
-      "esnext.math.sum-precise",
+      "es.math.sum-precise",
       "es.array.iterator",
     ]),
     tanh: define("math/tanh", ["es.math.tanh"]),
@@ -750,11 +750,11 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   Int8Array: TypedArrayStaticMethods("es.typed-array.int8-array"),
   Uint8Array: {
     fromBase64: define(null, [
-      "esnext.uint8-array.from-base64",
+      "es.uint8-array.from-base64",
       ...TypedArrayDependencies,
     ]),
     fromHex: define(null, [
-      "esnext.uint8-array.from-hex",
+      "es.uint8-array.from-hex",
       ...TypedArrayDependencies,
     ]),
     ...TypedArrayStaticMethods("es.typed-array.uint8-array"),
@@ -848,7 +848,9 @@ export const InstanceProperties = {
     ...IteratorDependencies,
     // "esnext.async-iterator.filter",
   ]),
-  filterReject: define("instance/filterReject", ["esnext.array.filter-reject"]),
+  filterReject: define("instance/filter-reject", [
+    "esnext.array.filter-reject",
+  ]),
   finally: define(null, ["es.promise.finally", ...PromiseDependencies]),
   find: define("instance/find", [
     "es.array.find",
@@ -913,7 +915,7 @@ export const InstanceProperties = {
   ]),
   indexOf: define("instance/index-of", ["es.array.index-of"]),
   isWellFormed: define("instance/is-well-formed", ["es.string.is-well-formed"]),
-  italic: define(null, ["es.string.italics"]),
+  italics: define(null, ["es.string.italics"]),
   join: define(null, ["es.array.join"]),
   keys: define("instance/keys", ArrayNatureIteratorsWithTag),
   lastIndex: define(null, ["esnext.array.last-index"]),
