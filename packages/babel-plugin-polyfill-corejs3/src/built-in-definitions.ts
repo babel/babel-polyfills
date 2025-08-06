@@ -915,7 +915,7 @@ export const InstanceProperties = {
   ]),
   indexOf: define("instance/index-of", ["es.array.index-of"]),
   isWellFormed: define("instance/is-well-formed", ["es.string.is-well-formed"]),
-  italic: define(null, ["es.string.italics"]),
+  italics: define(null, ["es.string.italics"]),
   join: define(null, ["es.array.join"]),
   keys: define("instance/keys", ArrayNatureIteratorsWithTag),
   lastIndex: define(null, ["esnext.array.last-index"]),
