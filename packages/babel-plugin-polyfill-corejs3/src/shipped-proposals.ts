@@ -6,5 +6,9 @@ export default new Set<string>([
   "esnext.json.is-raw-json",
   "esnext.json.parse",
   "esnext.json.raw-json",
+  "esnext.map.get-or-insert",
+  "esnext.map.get-or-insert-computed",
   "esnext.symbol.metadata",
+  "esnext.weak-map.get-or-insert",
+  "esnext.weak-map.get-or-insert-computed",
 ]);

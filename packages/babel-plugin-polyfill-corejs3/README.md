@@ -55,7 +55,7 @@ If you are a library author, specify a reasonably modern `core-js` version in yo
 ```json
 {
   "dependencies": {
-    "core-js": "^3.45.0"
+    "core-js": "^3.45.1"
   }
 }
 ```
