@@ -1,0 +1,15 @@
+{
+  "externalHelpers": false,
+  "plugins": [
+    [
+      "@@/polyfill-corejs3",
+      {
+        "version": "3.46",
+        "method": "entry-global",
+        "targets": {
+          "chrome": 107
+        }
+      }
+    ]
+  ]
+}
