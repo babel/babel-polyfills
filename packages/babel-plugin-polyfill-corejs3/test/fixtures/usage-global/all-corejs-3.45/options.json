@@ -1,0 +1,12 @@
+{
+  "externalHelpers": false,
+  "plugins": [
+    [
+      "@@/polyfill-corejs3",
+      {
+        "version": "3.45",
+        "method": "usage-global"
+      }
+    ]
+  ]
+}
