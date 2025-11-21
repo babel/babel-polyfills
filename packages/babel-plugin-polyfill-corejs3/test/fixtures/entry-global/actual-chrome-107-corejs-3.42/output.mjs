@@ -21,6 +21,7 @@ import "core-js/modules/es.iterator.reduce.js";
 import "core-js/modules/es.iterator.some.js";
 import "core-js/modules/es.iterator.take.js";
 import "core-js/modules/es.iterator.to-array.js";
+import "core-js/modules/es.json.stringify.js";
 import "core-js/modules/es.map.group-by.js";
 import "core-js/modules/es.math.f16round.js";
 import "core-js/modules/es.object.group-by.js";

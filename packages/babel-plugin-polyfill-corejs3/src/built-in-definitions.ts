@@ -392,7 +392,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
 
   Iterator: {
     concat: define("iterator/concat", [
-      "esnext.iterator.concat",
+      "es.iterator.concat",
       ...IteratorDependencies,
       ...CommonIterators,
     ]),
@@ -420,18 +420,17 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   },
 
   JSON: {
-    isRawJSON: define("json/is-raw-json", ["esnext.json.is-raw-json"]),
-    parse: define("json/parse", ["esnext.json.parse", "es.object.keys"]),
+    isRawJSON: define("json/is-raw-json", ["es.json.is-raw-json"]),
+    parse: define("json/parse", ["es.json.parse", "es.object.keys"]),
     rawJSON: define("json/raw-json", [
-      "esnext.json.raw-json",
+      "es.json.raw-json",
       "es.object.create",
       "es.object.freeze",
     ]),
-    stringify: define(
-      "json/stringify",
-      ["es.json.stringify", "es.date.to-json"],
-      "es.symbol",
-    ),
+    stringify: define("json/stringify", [
+      "es.json.stringify",
+      "es.date.to-json",
+    ]),
   },
 
   Math: {

@@ -3,6 +3,7 @@ import "core-js/modules/es.array.to-reversed.js";
 import "core-js/modules/es.array.to-sorted.js";
 import "core-js/modules/es.array.to-spliced.js";
 import "core-js/modules/es.array.with.js";
+import "core-js/modules/es.json.stringify.js";
 import "core-js/modules/es.map.group-by.js";
 import "core-js/modules/es.object.group-by.js";
 import "core-js/modules/es.promise.with-resolvers.js";

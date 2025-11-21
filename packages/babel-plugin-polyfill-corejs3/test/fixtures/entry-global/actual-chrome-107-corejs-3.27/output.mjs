@@ -1,4 +1,5 @@
 import "core-js/modules/es.array.push.js";
+import "core-js/modules/es.json.stringify.js";
 import "core-js/modules/es.regexp.flags.js";
 import "core-js/modules/esnext.suppressed-error.constructor.js";
 import "core-js/modules/esnext.array.from-async.js";
