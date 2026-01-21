@@ -117,14 +117,14 @@ const SymbolDependencies = [
 
 const MapDependencies = [
   "es.map",
+  "es.map.get-or-insert",
+  "es.map.get-or-insert-computed",
   "esnext.map.delete-all",
   "esnext.map.emplace",
   "esnext.map.every",
   "esnext.map.filter",
   "esnext.map.find",
   "esnext.map.find-key",
-  "esnext.map.get-or-insert",
-  "esnext.map.get-or-insert-computed",
   "esnext.map.includes",
   "esnext.map.key-of",
   "esnext.map.map-keys",
@@ -166,10 +166,10 @@ const SetDependencies = [
 
 const WeakMapDependencies = [
   "es.weak-map",
+  "es.weak-map.get-or-insert",
+  "es.weak-map.get-or-insert-computed",
   "esnext.weak-map.delete-all",
   "esnext.weak-map.emplace",
-  "esnext.weak-map.get-or-insert",
-  "esnext.weak-map.get-or-insert-computed",
   ...CommonIteratorsWithTag,
 ];
 

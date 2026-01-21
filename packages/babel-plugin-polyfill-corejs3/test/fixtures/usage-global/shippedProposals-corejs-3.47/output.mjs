@@ -107,6 +107,8 @@ import "core-js/modules/es.uint8-array.set-from-hex.js";
 import "core-js/modules/es.uint8-array.to-base64.js";
 import "core-js/modules/es.uint8-array.to-hex.js";
 import "core-js/modules/es.weak-map.js";
+import "core-js/modules/esnext.iterator.zip.js";
+import "core-js/modules/esnext.iterator.zip-keyed.js";
 import "core-js/modules/esnext.map.get-or-insert.js";
 import "core-js/modules/esnext.map.get-or-insert-computed.js";
 import "core-js/modules/esnext.symbol.metadata.js";

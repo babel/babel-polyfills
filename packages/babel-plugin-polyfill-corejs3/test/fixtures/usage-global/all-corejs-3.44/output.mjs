@@ -100,6 +100,8 @@ import "core-js/modules/esnext.iterator.concat.js";
 import "core-js/modules/esnext.json.is-raw-json.js";
 import "core-js/modules/esnext.json.parse.js";
 import "core-js/modules/esnext.json.raw-json.js";
+import "core-js/modules/esnext.map.get-or-insert.js";
+import "core-js/modules/esnext.map.get-or-insert-computed.js";
 import "core-js/modules/esnext.math.sum-precise.js";
 import "core-js/modules/esnext.uint8-array.from-base64.js";
 import "core-js/modules/esnext.uint8-array.from-hex.js";

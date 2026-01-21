@@ -107,6 +107,8 @@ import "core-js/modules/esnext.iterator.concat.js";
 import "core-js/modules/esnext.json.is-raw-json.js";
 import "core-js/modules/esnext.json.parse.js";
 import "core-js/modules/esnext.json.raw-json.js";
+import "core-js/modules/esnext.map.get-or-insert.js";
+import "core-js/modules/esnext.map.get-or-insert-computed.js";
 import "core-js/modules/web.btoa.js";
 import "core-js/modules/web.dom-collections.for-each.js";
 import "core-js/modules/web.dom-collections.iterator.js";
