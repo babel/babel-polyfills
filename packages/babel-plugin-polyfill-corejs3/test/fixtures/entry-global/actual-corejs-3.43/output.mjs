@@ -300,6 +300,8 @@ import "core-js/modules/esnext.async-iterator.to-array.js";
 import "core-js/modules/esnext.function.metadata.js";
 import "core-js/modules/esnext.iterator.concat.js";
 import "core-js/modules/esnext.iterator.to-async.js";
+import "core-js/modules/esnext.iterator.zip.js";
+import "core-js/modules/esnext.iterator.zip-keyed.js";
 import "core-js/modules/esnext.json.is-raw-json.js";
 import "core-js/modules/esnext.json.parse.js";
 import "core-js/modules/esnext.json.raw-json.js";

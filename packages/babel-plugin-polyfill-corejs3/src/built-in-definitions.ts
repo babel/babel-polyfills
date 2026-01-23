@@ -117,14 +117,14 @@ const SymbolDependencies = [
 
 const MapDependencies = [
   "es.map",
+  "es.map.get-or-insert",
+  "es.map.get-or-insert-computed",
   "esnext.map.delete-all",
   "esnext.map.emplace",
   "esnext.map.every",
   "esnext.map.filter",
   "esnext.map.find",
   "esnext.map.find-key",
-  "esnext.map.get-or-insert",
-  "esnext.map.get-or-insert-computed",
   "esnext.map.includes",
   "esnext.map.key-of",
   "esnext.map.map-keys",
@@ -166,10 +166,10 @@ const SetDependencies = [
 
 const WeakMapDependencies = [
   "es.weak-map",
+  "es.weak-map.get-or-insert",
+  "es.weak-map.get-or-insert-computed",
   "esnext.weak-map.delete-all",
   "esnext.weak-map.emplace",
-  "esnext.weak-map.get-or-insert",
-  "esnext.weak-map.get-or-insert-computed",
   ...CommonIteratorsWithTag,
 ];
 
@@ -392,7 +392,7 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
 
   Iterator: {
     concat: define("iterator/concat", [
-      "esnext.iterator.concat",
+      "es.iterator.concat",
       ...IteratorDependencies,
       ...CommonIterators,
     ]),
@@ -420,18 +420,17 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
   },
 
   JSON: {
-    isRawJSON: define("json/is-raw-json", ["esnext.json.is-raw-json"]),
-    parse: define("json/parse", ["esnext.json.parse", "es.object.keys"]),
+    isRawJSON: define("json/is-raw-json", ["es.json.is-raw-json"]),
+    parse: define("json/parse", ["es.json.parse", "es.object.keys"]),
     rawJSON: define("json/raw-json", [
-      "esnext.json.raw-json",
+      "es.json.raw-json",
       "es.object.create",
       "es.object.freeze",
     ]),
-    stringify: define(
-      "json/stringify",
-      ["es.json.stringify", "es.date.to-json"],
-      "es.symbol",
-    ),
+    stringify: define("json/stringify", [
+      "es.json.stringify",
+      "es.date.to-json",
+    ]),
   },
 
   Math: {

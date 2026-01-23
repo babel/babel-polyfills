@@ -3,6 +3,7 @@ import "core-js/modules/es.array.to-reversed.js";
 import "core-js/modules/es.array.to-sorted.js";
 import "core-js/modules/es.array.to-spliced.js";
 import "core-js/modules/es.array.with.js";
+import "core-js/modules/es.json.stringify.js";
 import "core-js/modules/es.regexp.flags.js";
 import "core-js/modules/es.typed-array.to-reversed.js";
 import "core-js/modules/es.typed-array.to-sorted.js";

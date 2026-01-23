@@ -6,6 +6,7 @@ import "core-js/modules/es.array.with.js";
 import "core-js/modules/es.array-buffer.detached.js";
 import "core-js/modules/es.array-buffer.transfer.js";
 import "core-js/modules/es.array-buffer.transfer-to-fixed-length.js";
+import "core-js/modules/es.json.stringify.js";
 import "core-js/modules/es.map.group-by.js";
 import "core-js/modules/es.object.group-by.js";
 import "core-js/modules/es.promise.with-resolvers.js";
