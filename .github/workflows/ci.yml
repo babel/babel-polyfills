@@ -91,7 +91,7 @@ jobs:
         shell: bash
         run: yarn build-es-shims-data
       - name: Build
-        run: yarn build-corejs3-shipped-proposals && gulp build && gulp bundle
+        run: yarn build-corejs3-shipped-proposals && gulp build
       - name: Test on Node.js latest
         # `maxWorkers` cannot be 1 because we are using `process.exitCode` in our tests.
         run: yarn jest --ci --color --maxWorkers=2
