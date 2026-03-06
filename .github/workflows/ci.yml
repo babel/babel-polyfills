@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18, 16, 14]
+        node-version: [20, 22, 24]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -57,11 +57,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: "yarn"
-      - name: Downgrade Yarn and install
-        if: ${{ matrix.node-version < 18 }}
-        run: yarn set version 3 && yarn install --no-frozen-lockfile
       - name: Install
-        if: ${{ matrix.node-version >= 18 }}
         run: yarn install
       - name: Build
         run: yarn build
