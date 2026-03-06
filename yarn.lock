@@ -204,7 +204,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-define-polyfill-provider@workspace:^0.6.6, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
+"@babel/helper-define-polyfill-provider@workspace:^0.6.7, @babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider":
   version: 0.0.0-use.local
   resolution: "@babel/helper-define-polyfill-provider@workspace:packages/babel-helper-define-polyfill-provider"
   dependencies:
@@ -4517,7 +4517,7 @@ __metadata:
   dependencies:
     "@babel/compat-data": "npm:^7.28.6"
     "@babel/core": "npm:^7.28.6"
-    "@babel/helper-define-polyfill-provider": "workspace:^0.6.6"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.6.7"
     "@babel/helper-plugin-test-runner": "npm:^7.27.1"
     "@babel/plugin-transform-for-of": "npm:^7.27.1"
     "@babel/plugin-transform-modules-commonjs": "npm:^7.28.6"
@@ -4544,7 +4544,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-corejs3@workspace:packages/babel-plugin-polyfill-corejs3"
   dependencies:
     "@babel/core": "npm:^7.28.6"
-    "@babel/helper-define-polyfill-provider": "workspace:^0.6.6"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.6.7"
     "@babel/helper-plugin-test-runner": "npm:^7.27.1"
     "@babel/plugin-proposal-decorators": "npm:^7.28.6"
     "@babel/plugin-transform-class-properties": "npm:^7.28.6"
@@ -4566,7 +4566,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-es-shims@workspace:packages/babel-plugin-polyfill-es-shims"
   dependencies:
     "@babel/core": "npm:^7.28.6"
-    "@babel/helper-define-polyfill-provider": "workspace:^0.6.6"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.6.7"
     "@babel/helper-plugin-test-runner": "npm:^7.27.1"
     array.from: "npm:^1.1.6"
     math.clz32: "npm:^1.0.3"
@@ -4591,7 +4591,7 @@ __metadata:
   resolution: "babel-plugin-polyfill-regenerator@workspace:packages/babel-plugin-polyfill-regenerator"
   dependencies:
     "@babel/core": "npm:^7.28.6"
-    "@babel/helper-define-polyfill-provider": "workspace:^0.6.6"
+    "@babel/helper-define-polyfill-provider": "workspace:^0.6.7"
     "@babel/helper-plugin-test-runner": "npm:^7.27.1"
     "@babel/plugin-transform-regenerator": "npm:~7.14.5"
     regenerator-runtime: "npm:^0.14.1"
