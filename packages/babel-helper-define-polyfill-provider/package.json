@@ -28,7 +28,6 @@
   "dependencies": {
     "@babel/helper-compilation-targets": "^7.28.6",
     "@babel/helper-plugin-utils": "^7.28.6",
-    "debug": "^4.4.3",
     "lodash.debounce": "^4.0.8"
   },
   "peerDependencies": {

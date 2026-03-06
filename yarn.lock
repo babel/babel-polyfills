@@ -215,7 +215,6 @@ __metadata:
     "@babel/plugin-transform-modules-commonjs": "npm:^7.28.6"
     "@babel/traverse": "npm:^7.28.6"
     babel-loader: "npm:^10.1.0"
-    debug: "npm:^4.4.3"
     lodash.debounce: "npm:^4.0.8"
     rollup: "npm:^2.79.2"
     rollup-plugin-babel: "npm:^4.4.0"
