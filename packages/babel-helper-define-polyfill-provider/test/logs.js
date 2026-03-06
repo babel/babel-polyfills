@@ -91,9 +91,9 @@ describe("missingDependencies", () => {
     expect(err).toMatchInlineSnapshot(`
       "src/main.js → output.js...
       (!) Unresolved dependencies
-      https://rollupjs.org/guide/en/#warning-treating-module-as-external-dependency
-      ___b___not_a_real_pkg___ (imported by src/main.js)
-      ___a___not_a_real_pkg___ (imported by src/dep.js)
+      https://rollupjs.org/troubleshooting/#warning-treating-module-as-external-dependency
+      ___b___not_a_real_pkg___ (imported by "src/main.js")
+      ___a___not_a_real_pkg___ (imported by "src/dep.js")
       created output.js in XXXms
 
       Some polyfills have been added but are not present in your dependencies.

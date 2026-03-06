@@ -1,4 +1,5 @@
-import babel from "rollup-plugin-babel";
+import babel from "@rollup/plugin-babel";
+import genericProvider from "../../helpers/generic-provider.js";
 
 export default {
   input: "src/main.js",
@@ -10,9 +11,10 @@ export default {
   ],
   plugins: [
     babel({
+      babelHelpers: "bundled",
       plugins: [
         [
-          require("../../helpers/generic-provider.js"),
+          genericProvider,
           {
             method: "usage-global",
             globals: {
