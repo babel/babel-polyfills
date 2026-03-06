@@ -81,6 +81,11 @@ export function resolveKey(
   }
 }
 
+export function resolveInstance(obj: NodePath): string | null {
+  const source = resolveSource(obj);
+  return source.placement === "prototype" ? source.id : null;
+}
+
 export function resolveSource(obj: NodePath): {
   id: string | null;
   placement: "prototype" | "static" | null;
@@ -103,21 +108,176 @@ export function resolveSource(obj: NodePath): {
   }
 
   const path = resolve(obj);
+
   switch (path?.type) {
+    case "NullLiteral":
+      return { id: null, placement: null };
     case "RegExpLiteral":
       return { id: "RegExp", placement: "prototype" };
-    case "FunctionExpression":
-      return { id: "Function", placement: "prototype" };
     case "StringLiteral":
+    case "TemplateLiteral":
       return { id: "String", placement: "prototype" };
-    case "NumberLiteral":
+    case "NumericLiteral":
       return { id: "Number", placement: "prototype" };
     case "BooleanLiteral":
       return { id: "Boolean", placement: "prototype" };
+    case "BigIntLiteral":
+      return { id: "BigInt", placement: "prototype" };
     case "ObjectExpression":
       return { id: "Object", placement: "prototype" };
     case "ArrayExpression":
       return { id: "Array", placement: "prototype" };
+    case "FunctionExpression":
+    case "ArrowFunctionExpression":
+    case "ClassExpression":
+      return { id: "Function", placement: "prototype" };
+    // new Constructor() -> resolve the constructor name
+    case "NewExpression": {
+      const calleeId = resolveId(
+        (path as NodePath<t.NewExpression>).get("callee"),
+      );
+      if (calleeId) return { id: calleeId, placement: "prototype" };
+      return { id: null, placement: null };
+    }
+    // Unary expressions -> result type depends on operator
+    case "UnaryExpression": {
+      const { operator } = path.node as t.UnaryExpression;
+      if (operator === "typeof")
+        return { id: "String", placement: "prototype" };
+      if (operator === "!" || operator === "delete")
+        return { id: "Boolean", placement: "prototype" };
+      // Unary + always produces Number (throws on BigInt)
+      if (operator === "+") return { id: "Number", placement: "prototype" };
+      // Unary - and ~ can produce Number or BigInt depending on operand
+      if (operator === "-" || operator === "~") {
+        const arg = resolveInstance(
+          (path as NodePath<t.UnaryExpression>).get("argument"),
+        );
+        if (arg === "BigInt") return { id: "BigInt", placement: "prototype" };
+        if (arg !== null) return { id: "Number", placement: "prototype" };
+        return { id: null, placement: null };
+      }
+      return { id: null, placement: null };
+    }
+    // ++i, i++ produce Number or BigInt depending on the argument
+    case "UpdateExpression": {
+      const arg = resolveInstance(
+        (path as NodePath<t.UpdateExpression>).get("argument"),
+      );
+      if (arg === "BigInt") return { id: "BigInt", placement: "prototype" };
+      if (arg !== null) return { id: "Number", placement: "prototype" };
+      return { id: null, placement: null };
+    }
+    // Binary expressions -> result type depends on operator
+    case "BinaryExpression": {
+      const { operator } = path.node as t.BinaryExpression;
+      if (
+        operator === "==" ||
+        operator === "!=" ||
+        operator === "===" ||
+        operator === "!==" ||
+        operator === "<" ||
+        operator === ">" ||
+        operator === "<=" ||
+        operator === ">=" ||
+        operator === "instanceof" ||
+        operator === "in"
+      ) {
+        return { id: "Boolean", placement: "prototype" };
+      }
+      // >>> always produces Number
+      if (operator === ">>>") {
+        return { id: "Number", placement: "prototype" };
+      }
+      // Arithmetic and bitwise operators can produce Number or BigInt
+      if (
+        operator === "-" ||
+        operator === "*" ||
+        operator === "/" ||
+        operator === "%" ||
+        operator === "**" ||
+        operator === "&" ||
+        operator === "|" ||
+        operator === "^" ||
+        operator === "<<" ||
+        operator === ">>"
+      ) {
+        const left = resolveInstance(
+          (path as NodePath<t.BinaryExpression>).get("left"),
+        );
+        const right = resolveInstance(
+          (path as NodePath<t.BinaryExpression>).get("right"),
+        );
+        if (left === "BigInt" && right === "BigInt") {
+          return { id: "BigInt", placement: "prototype" };
+        }
+        if (left !== null && right !== null) {
+          return { id: "Number", placement: "prototype" };
+        }
+        return { id: null, placement: null };
+      }
+      // + depends on operand types: string wins, otherwise number or bigint
+      if (operator === "+") {
+        const left = resolveInstance(
+          (path as NodePath<t.BinaryExpression>).get("left"),
+        );
+        const right = resolveInstance(
+          (path as NodePath<t.BinaryExpression>).get("right"),
+        );
+        if (left === "String" || right === "String") {
+          return { id: "String", placement: "prototype" };
+        }
+        if (left === "Number" && right === "Number") {
+          return { id: "Number", placement: "prototype" };
+        }
+        if (left === "BigInt" && right === "BigInt") {
+          return { id: "BigInt", placement: "prototype" };
+        }
+      }
+      return { id: null, placement: null };
+    }
+    // (a, b, c) -> the result is the last expression
+    case "SequenceExpression": {
+      const expressions = (path as NodePath<t.SequenceExpression>).get(
+        "expressions",
+      );
+      return resolveSource(expressions[expressions.length - 1]);
+    }
+    // a = b -> the result is the right side
+    case "AssignmentExpression": {
+      if ((path.node as t.AssignmentExpression).operator === "=") {
+        return resolveSource(
+          (path as NodePath<t.AssignmentExpression>).get("right"),
+        );
+      }
+      return { id: null, placement: null };
+    }
+    // a ? b : c -> if both branches resolve to the same type, use it
+    case "ConditionalExpression": {
+      const consequent = resolveSource(
+        (path as NodePath<t.ConditionalExpression>).get("consequent"),
+      );
+      const alternate = resolveSource(
+        (path as NodePath<t.ConditionalExpression>).get("alternate"),
+      );
+      if (consequent.id && consequent.id === alternate.id) {
+        return consequent;
+      }
+      return { id: null, placement: null };
+    }
+    // (expr) -> unwrap parenthesized expressions
+    case "ParenthesizedExpression":
+      return resolveSource(
+        (path as NodePath<t.ParenthesizedExpression>).get("expression"),
+      );
+    // TypeScript / Flow type wrappers -> unwrap to the inner expression
+    case "TSAsExpression":
+    case "TSSatisfiesExpression":
+    case "TSNonNullExpression":
+    case "TSInstantiationExpression":
+    case "TSTypeAssertion":
+    case "TypeCastExpression":
+      return resolveSource(path.get("expression") as NodePath);
   }
 
   return { id: null, placement: null };

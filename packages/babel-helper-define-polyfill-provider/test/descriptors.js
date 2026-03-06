@@ -165,4 +165,537 @@ describe("descriptors", () => {
     expect(path.type).toBe("OptionalMemberExpression");
     expect(path.toString()).toBe("a?.includes");
   });
+
+  it("instance property - numeric literal", () => {
+    const [desc] = getDescriptor("(1).toFixed;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - string literal", () => {
+    const [desc] = getDescriptor("'hello'.includes;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "String",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - template literal", () => {
+    const [desc] = getDescriptor("`hello`.includes;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "String",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - boolean literal", () => {
+    const [desc] = getDescriptor("true.toString;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Boolean",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - bigint literal", () => {
+    const [desc] = getDescriptor("(1n).toString;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - regexp literal", () => {
+    const [desc] = getDescriptor("/foo/.test;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "RegExp",
+      key: "test",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - object expression", () => {
+    const [desc] = getDescriptor("({}).hasOwnProperty;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Object",
+      key: "hasOwnProperty",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - function expression", () => {
+    const [desc] = getDescriptor("(function(){}).bind;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Function",
+      key: "bind",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - arrow function", () => {
+    const [desc] = getDescriptor("(() => {}).bind;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Function",
+      key: "bind",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - class expression", () => {
+    const [desc] = getDescriptor("(class {}).name;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Function",
+      key: "name",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - new expression with known constructor", () => {
+    const [desc] = getDescriptor("new Map().get;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Map",
+      key: "get",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - new expression with unknown constructor", () => {
+    const [desc] = getDescriptor(
+      "var Foo = class {}; new Foo().bar;",
+      "property",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "bar",
+      placement: null,
+    });
+  });
+
+  it("instance property - typeof produces string", () => {
+    const [desc] = getDescriptor("(typeof x).includes;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "String",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - logical not produces boolean", () => {
+    const [desc] = getDescriptor("(!0).toString;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Boolean",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - unary plus produces number", () => {
+    const [desc] = getDescriptor('(+"5").toFixed;');
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - unary minus on number literal produces number", () => {
+    const [desc] = getDescriptor("(-1).toFixed;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - unary minus on unknown is ambiguous", () => {
+    const [desc] = getDescriptor("(-x).foo;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "foo",
+      placement: null,
+    });
+  });
+
+  it("instance property - unary minus on bigint produces bigint", () => {
+    const [desc] = getDescriptor("(-1n).toString;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - unary minus on const bigint produces bigint", () => {
+    const [desc] = getDescriptor("const n = 1n; (-n).toString;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - bitwise not on number literal produces number", () => {
+    const [desc] = getDescriptor("(~1).toFixed;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - bitwise not on unknown is ambiguous", () => {
+    const [desc] = getDescriptor("(~x).foo;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "foo",
+      placement: null,
+    });
+  });
+
+  it("instance property - bitwise not on bigint produces bigint", () => {
+    const [desc] = getDescriptor("(~1n).toString;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - postfix increment on non-constant is ambiguous", () => {
+    const [desc] = getDescriptor("var i = 0; (i++).toFixed;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "toFixed",
+      placement: null,
+    });
+  });
+
+  it("instance property - subtraction of numbers produces number", () => {
+    const [desc] = getDescriptor(
+      "var a = 1, b = 2; (a - b).toFixed;",
+      "property",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - subtraction of bigints produces bigint", () => {
+    const [desc] = getDescriptor("(1n - 2n).toString;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - subtraction of bigint variables produces bigint", () => {
+    const [desc] = getDescriptor(
+      "const a = 1n, b = 2n; (a - b).toString;",
+      "property",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - subtraction with unknown operands is ambiguous", () => {
+    const [desc] = getDescriptor("var a; var b; (a - b).foo;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "foo",
+      placement: null,
+    });
+  });
+
+  it("instance property - multiplication produces number", () => {
+    const [desc] = getDescriptor(
+      "var a = 1, b = 2; (a * b).toFixed;",
+      "property",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - bitwise and produces number", () => {
+    const [desc] = getDescriptor(
+      "var a = 1, b = 2; (a & b).toFixed;",
+      "property",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - unsigned right shift always produces number", () => {
+    const [desc] = getDescriptor("(x >>> 1).toFixed;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - strict equality produces boolean", () => {
+    const [desc] = getDescriptor(
+      "var a = 1, b = 2; (a === b).toString;",
+      "property",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Boolean",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - instanceof produces boolean", () => {
+    const [desc] = getDescriptor(
+      "var a = []; (a instanceof Array).toString;",
+      "property",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Boolean",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition of two numbers produces number", () => {
+    const [desc] = getDescriptor("(1 + 2).toFixed;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition with string produces string", () => {
+    const [desc] = getDescriptor('("a" + 1).includes;');
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "String",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition string on right produces string", () => {
+    const [desc] = getDescriptor('(1 + "b").includes;');
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "String",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition of two strings produces string", () => {
+    const [desc] = getDescriptor('("a" + "b").includes;');
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "String",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition of template literal and number produces string", () => {
+    const [desc] = getDescriptor("(`a` + 1).includes;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "String",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition of two bigints produces bigint", () => {
+    const [desc] = getDescriptor("(1n + 2n).toString;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition of number variables produces number", () => {
+    const [desc] = getDescriptor(
+      "const a = 1, b = 2; (a + b).toFixed;",
+      "property",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition with unknown operands is ambiguous", () => {
+    const [desc] = getDescriptor("var a; var b; (a + b).foo;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "foo",
+      placement: null,
+    });
+  });
+
+  it("instance property - sequence expression resolves last element", () => {
+    const [desc] = getDescriptor("var a; (a, []).includes;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Array",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - assignment expression resolves right side", () => {
+    const [desc] = getDescriptor("var a; (a = []).includes;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Array",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - conditional same type on both branches", () => {
+    const [desc] = getDescriptor("var a; (a ? [] : []).includes;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Array",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - conditional different types on branches", () => {
+    const [desc] = getDescriptor("var a; (a ? [] : {}).foo;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "foo",
+      placement: null,
+    });
+  });
+
+  it("instance property - resolved through variable", () => {
+    const [desc] = getDescriptor("const x = []; x.includes;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Array",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - resolved through multiple variables", () => {
+    const [desc] = getDescriptor(
+      "const x = []; const y = x; y.includes;",
+      "property",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Array",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
 });
