@@ -4165,21 +4165,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.15.0, acorn@npm:^8.16.0":
+"acorn@npm:^8.15.0, acorn@npm:^8.16.0, acorn@npm:^8.9.0":
   version: 8.16.0
   resolution: "acorn@npm:8.16.0"
   bin:
     acorn: bin/acorn
   checksum: 10/690c673bb4d61b38ef82795fab58526471ad7f7e67c0e40c4ff1e10ecd80ce5312554ef633c9995bfc4e6d170cef165711f9ca9e49040b62c0c66fbf2dd3df2b
-  languageName: node
-  linkType: hard
-
-"acorn@npm:^8.9.0":
-  version: 8.15.0
-  resolution: "acorn@npm:8.15.0"
-  bin:
-    acorn: bin/acorn
-  checksum: 10/77f2de5051a631cf1729c090e5759148459cdb76b5f5c70f890503d629cf5052357b0ce783c0f976dd8a93c5150f59f6d18df1def3f502396a20f81282482fa4
   languageName: node
   linkType: hard
 
@@ -6635,21 +6626,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"envinfo@npm:^7.14.0":
+"envinfo@npm:^7.14.0, envinfo@npm:^7.3.1":
   version: 7.21.0
   resolution: "envinfo@npm:7.21.0"
   bin:
     envinfo: dist/cli.js
   checksum: 10/2469a72802ded4e43c007dcd1c5dd44d8049b7d18276874dcc3f3f14a54bc72806fa35e82760974ca1442d82f5f9df3651048204e72791f81bcdd5f07422a561
-  languageName: node
-  linkType: hard
-
-"envinfo@npm:^7.3.1":
-  version: 7.5.0
-  resolution: "envinfo@npm:7.5.0"
-  bin:
-    envinfo: dist/cli.js
-  checksum: 10/31d9933fc384fdce48feac7d3c6b83876caefe6d4238e1e49939c26388c61b064da0404e3e770e5388e12bb86780422d5285f1c19af03d9a9128892031ecd483
   languageName: node
   linkType: hard
 
@@ -10843,13 +10825,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-db@npm:1.43.0":
-  version: 1.43.0
-  resolution: "mime-db@npm:1.43.0"
-  checksum: 10/a582d9c60a31c51591773f92ccfb6da1c05b730ba844d11c986bf9728030082010b9bc80f9e34243fcdfdc71de5aa5a9e2a67cfd193c8cd7e00e0a484a4f3ccb
-  languageName: node
-  linkType: hard
-
 "mime-db@npm:1.52.0":
   version: 1.52.0
   resolution: "mime-db@npm:1.52.0"
@@ -10857,16 +10832,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-types@npm:^2.1.12, mime-types@npm:~2.1.19":
-  version: 2.1.26
-  resolution: "mime-types@npm:2.1.26"
-  dependencies:
-    mime-db: "npm:1.43.0"
-  checksum: 10/464e9037c99286d314402cb929490a78c4d001afd51e26c9125ece0a80f7c3554324f54917d5d0a0d13b280c1505b4f4d0404609671fcdaf9e1bb0fea4ea643b
-  languageName: node
-  linkType: hard
-
-"mime-types@npm:^2.1.27":
+"mime-types@npm:^2.1.12, mime-types@npm:^2.1.27, mime-types@npm:~2.1.19":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
   dependencies:
