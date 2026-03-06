@@ -81,6 +81,11 @@ export function resolveKey(
   }
 }
 
+export function resolveInstance(obj: NodePath): string | null {
+  const source = resolveSource(obj);
+  return source.placement === "prototype" ? source.id : null;
+}
+
 export function resolveSource(obj: NodePath): {
   id: string | null;
   placement: "prototype" | "static" | null;
@@ -141,13 +146,28 @@ export function resolveSource(obj: NodePath): {
         return { id: "String", placement: "prototype" };
       if (operator === "!" || operator === "delete")
         return { id: "Boolean", placement: "prototype" };
-      if (operator === "+" || operator === "-" || operator === "~")
-        return { id: "Number", placement: "prototype" };
+      // Unary + always produces Number (throws on BigInt)
+      if (operator === "+") return { id: "Number", placement: "prototype" };
+      // Unary - and ~ can produce Number or BigInt depending on operand
+      if (operator === "-" || operator === "~") {
+        const arg = resolveInstance(
+          (path as NodePath<t.UnaryExpression>).get("argument"),
+        );
+        if (arg === "BigInt") return { id: "BigInt", placement: "prototype" };
+        if (arg !== null) return { id: "Number", placement: "prototype" };
+        return { id: null, placement: null };
+      }
       return { id: null, placement: null };
     }
-    // ++i, i++ always produce a number
-    case "UpdateExpression":
-      return { id: "Number", placement: "prototype" };
+    // ++i, i++ produce Number or BigInt depending on the argument
+    case "UpdateExpression": {
+      const arg = resolveInstance(
+        (path as NodePath<t.UpdateExpression>).get("argument"),
+      );
+      if (arg === "BigInt") return { id: "BigInt", placement: "prototype" };
+      if (arg !== null) return { id: "Number", placement: "prototype" };
+      return { id: null, placement: null };
+    }
     // Binary expressions -> result type depends on operator
     case "BinaryExpression": {
       const { operator } = path.node as t.BinaryExpression;
@@ -165,6 +185,11 @@ export function resolveSource(obj: NodePath): {
       ) {
         return { id: "Boolean", placement: "prototype" };
       }
+      // >>> always produces Number
+      if (operator === ">>>") {
+        return { id: "Number", placement: "prototype" };
+      }
+      // Arithmetic and bitwise operators can produce Number or BigInt
       if (
         operator === "-" ||
         operator === "*" ||
@@ -175,26 +200,37 @@ export function resolveSource(obj: NodePath): {
         operator === "|" ||
         operator === "^" ||
         operator === "<<" ||
-        operator === ">>" ||
-        operator === ">>>"
+        operator === ">>"
       ) {
-        return { id: "Number", placement: "prototype" };
+        const left = resolveInstance(
+          (path as NodePath<t.BinaryExpression>).get("left"),
+        );
+        const right = resolveInstance(
+          (path as NodePath<t.BinaryExpression>).get("right"),
+        );
+        if (left === "BigInt" && right === "BigInt") {
+          return { id: "BigInt", placement: "prototype" };
+        }
+        if (left !== null && right !== null) {
+          return { id: "Number", placement: "prototype" };
+        }
+        return { id: null, placement: null };
       }
       // + depends on operand types: string wins, otherwise number or bigint
       if (operator === "+") {
-        const left = resolveSource(
+        const left = resolveInstance(
           (path as NodePath<t.BinaryExpression>).get("left"),
         );
-        const right = resolveSource(
+        const right = resolveInstance(
           (path as NodePath<t.BinaryExpression>).get("right"),
         );
-        if (left.id === "String" || right.id === "String") {
+        if (left === "String" || right === "String") {
           return { id: "String", placement: "prototype" };
         }
-        if (left.id === "Number" && right.id === "Number") {
+        if (left === "Number" && right === "Number") {
           return { id: "Number", placement: "prototype" };
         }
-        if (left.id === "BigInt" && right.id === "BigInt") {
+        if (left === "BigInt" && right === "BigInt") {
           return { id: "BigInt", placement: "prototype" };
         }
       }

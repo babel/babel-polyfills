@@ -334,8 +334,8 @@ describe("descriptors", () => {
     });
   });
 
-  it("instance property - unary minus produces number", () => {
-    const [desc] = getDescriptor("(-x).toFixed;", "property");
+  it("instance property - unary minus on number literal produces number", () => {
+    const [desc] = getDescriptor("(-1).toFixed;");
 
     expect(desc).toEqual({
       kind: "property",
@@ -345,8 +345,41 @@ describe("descriptors", () => {
     });
   });
 
-  it("instance property - bitwise not produces number", () => {
-    const [desc] = getDescriptor("(~x).toFixed;", "property");
+  it("instance property - unary minus on unknown is ambiguous", () => {
+    const [desc] = getDescriptor("(-x).foo;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "foo",
+      placement: null,
+    });
+  });
+
+  it("instance property - unary minus on bigint produces bigint", () => {
+    const [desc] = getDescriptor("(-1n).toString;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - unary minus on const bigint produces bigint", () => {
+    const [desc] = getDescriptor("const n = 1n; (-n).toString;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - bitwise not on number literal produces number", () => {
+    const [desc] = getDescriptor("(~1).toFixed;");
 
     expect(desc).toEqual({
       kind: "property",
@@ -356,18 +389,40 @@ describe("descriptors", () => {
     });
   });
 
-  it("instance property - postfix increment produces number", () => {
+  it("instance property - bitwise not on unknown is ambiguous", () => {
+    const [desc] = getDescriptor("(~x).foo;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "foo",
+      placement: null,
+    });
+  });
+
+  it("instance property - bitwise not on bigint produces bigint", () => {
+    const [desc] = getDescriptor("(~1n).toString;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - postfix increment on non-constant is ambiguous", () => {
     const [desc] = getDescriptor("var i = 0; (i++).toFixed;", "property");
 
     expect(desc).toEqual({
       kind: "property",
-      object: "Number",
+      object: null,
       key: "toFixed",
-      placement: "prototype",
+      placement: null,
     });
   });
 
-  it("instance property - subtraction produces number", () => {
+  it("instance property - subtraction of numbers produces number", () => {
     const [desc] = getDescriptor(
       "var a = 1, b = 2; (a - b).toFixed;",
       "property",
@@ -378,6 +433,42 @@ describe("descriptors", () => {
       object: "Number",
       key: "toFixed",
       placement: "prototype",
+    });
+  });
+
+  it("instance property - subtraction of bigints produces bigint", () => {
+    const [desc] = getDescriptor("(1n - 2n).toString;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - subtraction of bigint variables produces bigint", () => {
+    const [desc] = getDescriptor(
+      "const a = 1n, b = 2n; (a - b).toString;",
+      "property",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - subtraction with unknown operands is ambiguous", () => {
+    const [desc] = getDescriptor("var a; var b; (a - b).foo;", "property");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "foo",
+      placement: null,
     });
   });
 
@@ -400,6 +491,17 @@ describe("descriptors", () => {
       "var a = 1, b = 2; (a & b).toFixed;",
       "property",
     );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - unsigned right shift always produces number", () => {
+    const [desc] = getDescriptor("(x >>> 1).toFixed;", "property");
 
     expect(desc).toEqual({
       kind: "property",
