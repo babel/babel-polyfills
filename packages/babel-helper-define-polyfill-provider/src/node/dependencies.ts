@@ -1,22 +1,11 @@
 import path from "path";
 import debounce from "lodash.debounce";
-import requireResolve from "resolve";
-
-const nativeRequireResolve = parseFloat(process.versions.node) >= 8.9;
 
 import { createRequire } from "module";
 const require = createRequire(import /*::(_)*/.meta.url); // eslint-disable-line
 
 function myResolve(name: string, basedir: string) {
-  if (nativeRequireResolve) {
-    return require
-      .resolve(name, {
-        paths: [basedir],
-      })
-      .replace(/\\/g, "/");
-  } else {
-    return requireResolve.sync(name, { basedir }).replace(/\\/g, "/");
-  }
+  return require.resolve(name, { paths: [basedir] }).replace(/\\/g, "/");
 }
 
 export function resolve(
