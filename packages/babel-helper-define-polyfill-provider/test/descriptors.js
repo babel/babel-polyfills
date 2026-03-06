@@ -437,8 +437,88 @@ describe("descriptors", () => {
     });
   });
 
-  it("instance property - addition is ambiguous", () => {
-    const [desc] = getDescriptor("var a = 1, b = 2; (a + b).foo;", "property");
+  it("instance property - addition of two numbers produces number", () => {
+    const [desc] = getDescriptor("(1 + 2).toFixed;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition with string produces string", () => {
+    const [desc] = getDescriptor('("a" + 1).includes;');
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "String",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition string on right produces string", () => {
+    const [desc] = getDescriptor('(1 + "b").includes;');
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "String",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition of two strings produces string", () => {
+    const [desc] = getDescriptor('("a" + "b").includes;');
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "String",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition of template literal and number produces string", () => {
+    const [desc] = getDescriptor("(`a` + 1).includes;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "String",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition of two bigints produces bigint", () => {
+    const [desc] = getDescriptor("(1n + 2n).toString;");
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "BigInt",
+      key: "toString",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition of number variables produces number", () => {
+    const [desc] = getDescriptor(
+      "const a = 1, b = 2; (a + b).toFixed;",
+      "property",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Number",
+      key: "toFixed",
+      placement: "prototype",
+    });
+  });
+
+  it("instance property - addition with unknown operands is ambiguous", () => {
+    const [desc] = getDescriptor("var a; var b; (a + b).foo;", "property");
 
     expect(desc).toEqual({
       kind: "property",

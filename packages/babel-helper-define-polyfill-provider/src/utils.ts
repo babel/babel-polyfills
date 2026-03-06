@@ -180,7 +180,24 @@ export function resolveSource(obj: NodePath): {
       ) {
         return { id: "Number", placement: "prototype" };
       }
-      // + is ambiguous (string or number), so we can't determine the type
+      // + depends on operand types: string wins, otherwise number or bigint
+      if (operator === "+") {
+        const left = resolveSource(
+          (path as NodePath<t.BinaryExpression>).get("left"),
+        );
+        const right = resolveSource(
+          (path as NodePath<t.BinaryExpression>).get("right"),
+        );
+        if (left.id === "String" || right.id === "String") {
+          return { id: "String", placement: "prototype" };
+        }
+        if (left.id === "Number" && right.id === "Number") {
+          return { id: "Number", placement: "prototype" };
+        }
+        if (left.id === "BigInt" && right.id === "BigInt") {
+          return { id: "BigInt", placement: "prototype" };
+        }
+      }
       return { id: null, placement: null };
     }
     // (a, b, c) -> the result is the last expression
