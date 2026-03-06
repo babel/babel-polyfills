@@ -80,7 +80,7 @@ export default defineProvider<Options>(function (
     instance: InstanceProperties,
   });
 
-  const available = new Set(getModulesListForTargetVersion(version));
+  const available = new Set(getModulesListForTargetVersion(String(version)));
 
   function getCoreJSPureBase(useProposalBase) {
     return useBabelRuntime
