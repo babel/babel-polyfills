@@ -1,3 +1,5 @@
+// This test is skipped on CI for Node.js 20, since it imports ../src/built-in-definitions.ts
+
 import corejs3Entries from "core-js-compat/entries.json" with { type: "json" };
 
 import {

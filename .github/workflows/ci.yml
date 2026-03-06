@@ -67,6 +67,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Delete tests that import .ts files
+        if: matrix.node-version == '20'
+        run: rm packages/babel-helper-define-polyfill-provider/test/meta-resolver.js packages/babel-plugin-polyfill-corejs3/test/check-builtin-definitions.test.js
       - name: Test on Node.js ${{ matrix.node-version }}
         # `maxWorkers` cannot be 1 because we are using `process.exitCode` in our tests.
         run: yarn jest --ci --color --maxWorkers=2
