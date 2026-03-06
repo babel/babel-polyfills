@@ -4,7 +4,7 @@ import defineProvider, {
 } from "@babel/helper-define-polyfill-provider";
 import type { NodePath } from "@babel/traverse";
 
-import polyfills from "../data/polyfills.js";
+import polyfills from "../data/polyfills.json" with { type: "json" };
 
 import {
   type Descriptor,
