@@ -27,7 +27,5 @@ import "core-js/modules/es.typed-array.sort.js";
 import "core-js/modules/es.typed-array.subarray.js";
 import "core-js/modules/es.typed-array.to-locale-string.js";
 import "core-js/modules/es.typed-array.to-string.js";
-import "core-js/modules/esnext.array.at.js";
-import "core-js/modules/esnext.string.at.js";
 import "core-js/modules/esnext.typed-array.at.js";
 new Int8Array(1).at(-1);

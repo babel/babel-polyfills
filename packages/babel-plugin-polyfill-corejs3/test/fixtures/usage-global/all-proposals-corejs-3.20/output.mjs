@@ -17,8 +17,6 @@ import "core-js/modules/es.string.iterator.js";
 import "core-js/modules/es.string.match.js";
 import "core-js/modules/esnext.array.group-by-to-map.js";
 import "core-js/modules/esnext.array.with.js";
-import "core-js/modules/esnext.async-iterator.constructor.js";
-import "core-js/modules/esnext.iterator.constructor.js";
 import "core-js/modules/esnext.map.delete-all.js";
 import "core-js/modules/esnext.map.emplace.js";
 import "core-js/modules/esnext.map.every.js";
