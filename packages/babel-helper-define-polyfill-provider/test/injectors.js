@@ -1,5 +1,5 @@
 import * as babel from "@babel/core";
-import definePolyfillProvider from "../lib";
+import definePolyfillProvider from "../lib/index.node.js";
 import astToCode from "./helpers/ast-to-code-serializer.js";
 import pluginCJS from "@babel/plugin-transform-modules-commonjs";
 

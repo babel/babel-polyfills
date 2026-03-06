@@ -1,10 +1,12 @@
-import corejs3Entries from "../core-js-compat/entries";
+// This test is skipped on CI for Node.js 20, since it imports ../src/built-in-definitions.ts
+
+import corejs3Entries from "core-js-compat/entries.json" with { type: "json" };
 
 import {
   BuiltIns,
   StaticProperties,
   InstanceProperties,
-} from "../src/built-in-definitions";
+} from "../src/built-in-definitions.ts";
 
 const supportedCorejs3Modules = new Set();
 
@@ -62,7 +64,7 @@ is not in "core-js-compat/entries": This is very likely a typo`,
     // The allowlist should only be added when we decide we don't support
     // the feature in `src/builtin-definitions.js`
     expect(allowList).toMatchInlineSnapshot(`
-      Array [
+      [
         "esnext.array.filter-out",
         "esnext.map.update-or-insert",
         "esnext.map.upsert",

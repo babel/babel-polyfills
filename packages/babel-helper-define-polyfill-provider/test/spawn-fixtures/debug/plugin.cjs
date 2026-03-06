@@ -1,4 +1,4 @@
-const defineProvider = require("../../..").default;
+const defineProvider = require("../../../lib/index.node.js").default;
 
 module.exports = defineProvider(({ debug }) => {
   return {

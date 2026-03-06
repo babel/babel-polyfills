@@ -1,4 +1,6 @@
-import createMetaResolver from "../src/meta-resolver";
+// This test is skipped on CI for Node.js 20, since it imports ../src/meta-resolver.ts
+
+import createMetaResolver from "../src/meta-resolver.ts";
 
 describe("createMetaResolver", () => {
   const resolver = createMetaResolver({

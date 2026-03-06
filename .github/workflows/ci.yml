@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18, 16, 14]
+        node-version: [20, 22, 24]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -57,11 +57,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: "yarn"
-      - name: Downgrade Yarn and install
-        if: ${{ matrix.node-version < 18 }}
-        run: yarn set version 3 && yarn install --no-frozen-lockfile
       - name: Install
-        if: ${{ matrix.node-version >= 18 }}
         run: yarn install
       - name: Build
         run: yarn build
@@ -71,6 +67,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Delete tests that import .ts files
+        if: matrix.node-version == '20'
+        run: rm packages/babel-helper-define-polyfill-provider/test/meta-resolver.js packages/babel-plugin-polyfill-corejs3/test/check-builtin-definitions.test.js
       - name: Test on Node.js ${{ matrix.node-version }}
         # `maxWorkers` cannot be 1 because we are using `process.exitCode` in our tests.
         run: yarn jest --ci --color --maxWorkers=2
@@ -95,7 +94,7 @@ jobs:
         shell: bash
         run: yarn build-es-shims-data
       - name: Build
-        run: yarn build-corejs3-shipped-proposals && gulp build && gulp bundle
+        run: yarn build-corejs3-shipped-proposals && gulp build
       - name: Test on Node.js latest
         # `maxWorkers` cannot be 1 because we are using `process.exitCode` in our tests.
         run: yarn jest --ci --color --maxWorkers=2
