@@ -3,6 +3,7 @@ import { types as t } from "@babel/core";
 import type { CallProvider } from "./index";
 
 import { resolveKey, resolveSource } from "../utils";
+import { PossibleGlobalObjects } from "../meta-resolver";
 
 function isRemoved(path: NodePath) {
   if (path.removed) return true;
@@ -69,14 +70,19 @@ export default (callProvider: CallProvider) => {
       }
 
       const source = resolveSource(object);
-      let skipObject = property(source.id, key, source.placement, path);
-      skipObject ||=
-        !objectIsGlobalIdentifier ||
-        path.shouldSkip ||
-        object.shouldSkip ||
-        isRemoved(object);
+      const skipObject = property(source.id, key, source.placement, path);
+      const canHandleObject =
+        objectIsGlobalIdentifier &&
+        !path.shouldSkip &&
+        !object.shouldSkip &&
+        !isRemoved(object);
 
-      if (!skipObject) handleReferencedIdentifier(object);
+      if (
+        canHandleObject &&
+        (!skipObject || PossibleGlobalObjects.has(source.id))
+      ) {
+        handleReferencedIdentifier(object);
+      }
     },
 
     ObjectPattern(path: NodePath<t.ObjectPattern>) {

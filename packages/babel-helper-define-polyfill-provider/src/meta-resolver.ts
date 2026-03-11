@@ -8,7 +8,7 @@ import { has } from "./utils.ts";
 
 type ResolverFn<T> = (meta: MetaDescriptor) => void | ResolvedPolyfill<T>;
 
-const PossibleGlobalObjects = new Set<string>([
+export const PossibleGlobalObjects = new Set<string>([
   "global",
   "globalThis",
   "self",

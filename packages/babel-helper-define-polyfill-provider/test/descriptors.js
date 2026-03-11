@@ -698,4 +698,117 @@ describe("descriptors", () => {
       placement: "prototype",
     });
   });
+
+  it("globalThis.X produces both property and global descriptors", () => {
+    const fn = jest.fn();
+
+    transform("globalThis.Promise;", "usage-global", {
+      usageGlobal: fn,
+    });
+
+    expect(fn).toHaveBeenCalledWith(
+      expect.objectContaining({
+        kind: "property",
+        object: "globalThis",
+        key: "Promise",
+        placement: "static",
+      }),
+      expect.anything(),
+      expect.anything(),
+    );
+    expect(fn).toHaveBeenCalledWith(
+      expect.objectContaining({ kind: "global", name: "globalThis" }),
+      expect.anything(),
+      expect.anything(),
+    );
+  });
+
+  it("window.X produces both property and global descriptors", () => {
+    const fn = jest.fn();
+
+    transform("window.Promise;", "usage-global", {
+      usageGlobal: fn,
+    });
+
+    expect(fn).toHaveBeenCalledWith(
+      expect.objectContaining({
+        kind: "property",
+        object: "window",
+        key: "Promise",
+        placement: "static",
+      }),
+      expect.anything(),
+      expect.anything(),
+    );
+    expect(fn).toHaveBeenCalledWith(
+      expect.objectContaining({ kind: "global", name: "window" }),
+      expect.anything(),
+      expect.anything(),
+    );
+  });
+
+  it("globalThis.X reports globalThis even when provider skips object", () => {
+    const fn = jest.fn(meta => {
+      if (meta.kind === "property") return true;
+    });
+
+    transform("globalThis.Promise;", "usage-global", {
+      usageGlobal: fn,
+    });
+
+    expect(fn).toHaveBeenCalledTimes(2);
+    expect(fn).toHaveBeenCalledWith(
+      expect.objectContaining({
+        kind: "property",
+        object: "globalThis",
+        key: "Promise",
+      }),
+      expect.anything(),
+      expect.anything(),
+    );
+    expect(fn).toHaveBeenCalledWith(
+      expect.objectContaining({ kind: "global", name: "globalThis" }),
+      expect.anything(),
+      expect.anything(),
+    );
+  });
+
+  it("non-global-object property does not report object when provider skips", () => {
+    const fn = jest.fn(meta => {
+      if (meta.kind === "property") return true;
+    });
+
+    transform("Promise.all;", "usage-global", {
+      usageGlobal: fn,
+    });
+
+    expect(fn).toHaveBeenCalledTimes(1);
+    expect(fn).toHaveBeenCalledWith(
+      expect.objectContaining({
+        kind: "property",
+        object: "Promise",
+        key: "all",
+      }),
+      expect.anything(),
+      expect.anything(),
+    );
+  });
+
+  it("usage-pure: globalThis.X does not report globalThis when provider replaces path", () => {
+    const fn = jest.fn((meta, utils, path) => {
+      if (meta.kind === "property") {
+        path.replaceWith(path.scope.generateUidIdentifier("polyfilled"));
+      }
+    });
+
+    transform("globalThis.Promise;", "usage-pure", {
+      usagePure: fn,
+    });
+
+    expect(fn).not.toHaveBeenCalledWith(
+      expect.objectContaining({ kind: "global", name: "globalThis" }),
+      expect.anything(),
+      expect.anything(),
+    );
+  });
 });
