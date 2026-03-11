@@ -811,4 +811,88 @@ describe("descriptors", () => {
       expect.anything(),
     );
   });
+
+  it("static property through global object - window.Object.values", () => {
+    const [desc] = getDescriptor(
+      "window.Object.values;",
+      d => d.kind === "property" && d.key === "values",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Object",
+      key: "values",
+      placement: "static",
+    });
+  });
+
+  it("static property through global object - globalThis.Object.keys", () => {
+    const [desc] = getDescriptor(
+      "globalThis.Object.keys;",
+      d => d.kind === "property" && d.key === "keys",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Object",
+      key: "keys",
+      placement: "static",
+    });
+  });
+
+  it("static property through global object - self.Array.from", () => {
+    const [desc] = getDescriptor(
+      "self.Array.from;",
+      d => d.kind === "property" && d.key === "from",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Array",
+      key: "from",
+      placement: "static",
+    });
+  });
+
+  it("prototype property through global object - window.Array.prototype.includes", () => {
+    const [desc] = getDescriptor(
+      "window.Array.prototype.includes;",
+      d => d.kind === "property" && d.key === "includes",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: "Array",
+      key: "includes",
+      placement: "prototype",
+    });
+  });
+
+  it("global object property does not resolve through non-global objects", () => {
+    const [desc] = getDescriptor(
+      "something.Object.values;",
+      d => d.kind === "property" && d.key === "values",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "values",
+      placement: null,
+    });
+  });
+
+  it("global object property does not resolve through local bindings", () => {
+    const [desc] = getDescriptor(
+      "var window = {}; window.Object.values;",
+      d => d.kind === "property" && d.key === "values",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "values",
+      placement: null,
+    });
+  });
 });

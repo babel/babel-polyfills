@@ -2,8 +2,7 @@ import type { NodePath } from "@babel/traverse";
 import { types as t } from "@babel/core";
 import type { CallProvider } from "./index";
 
-import { resolveKey, resolveSource } from "../utils";
-import { PossibleGlobalObjects } from "../meta-resolver";
+import { resolveKey, resolveSource, PossibleGlobalObjects } from "../utils";
 
 function isRemoved(path: NodePath) {
   if (path.removed) return true;
