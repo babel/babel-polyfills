@@ -4,16 +4,9 @@ import type {
   ResolvedPolyfill,
 } from "./types";
 
-import { has } from "./utils";
+import { has, PossibleGlobalObjects } from "./utils";
 
 type ResolverFn<T> = (meta: MetaDescriptor) => void | ResolvedPolyfill<T>;
-
-const PossibleGlobalObjects = new Set<string>([
-  "global",
-  "globalThis",
-  "self",
-  "window",
-]);
 
 export default function createMetaResolver<T>(
   polyfills: ResolverPolyfills<T>,

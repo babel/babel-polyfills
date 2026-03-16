@@ -1,0 +1,10 @@
+import "core-js/modules/es.array.from.js";
+import "core-js/modules/es.global-this.js";
+import "core-js/modules/es.object.keys.js";
+import "core-js/modules/es.object.values.js";
+import "core-js/modules/es.string.iterator.js";
+import "core-js/modules/web.self.js";
+Object.values;
+window.Object.values;
+globalThis.Object.keys;
+self.Array.from;
