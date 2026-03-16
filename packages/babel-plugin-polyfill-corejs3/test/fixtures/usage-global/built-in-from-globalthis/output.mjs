@@ -1,0 +1,4 @@
+import "core-js/modules/es.global-this.js";
+import "core-js/modules/es.object.to-string.js";
+import "core-js/modules/es.promise.js";
+globalThis.Promise;

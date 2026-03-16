@@ -3,6 +3,13 @@ import type { NodePath } from "@babel/traverse";
 import type { Utils } from "./types";
 import type ImportsCachedInjector from "./imports-injector";
 
+export const PossibleGlobalObjects = new Set<string>([
+  "global",
+  "globalThis",
+  "self",
+  "window",
+]);
+
 export function intersection<T>(a: Set<T>, b: Set<T>): Set<T> {
   const result = new Set<T>();
   a.forEach(v => b.has(v) && result.add(v));
@@ -39,6 +46,22 @@ function resolveId(path: NodePath): string {
     !path.scope.hasBinding(path.node.name, /* noGlobals */ true)
   ) {
     return path.node.name;
+  }
+
+  // globalThis.Object / window.Array / self.Map / global.Set -> resolve to
+  // the property name, because accessing a built-in through a global object
+  // reference is equivalent to accessing it directly.
+  if (path.isMemberExpression() && !path.node.computed) {
+    const object = path.get("object");
+    const property = path.get("property");
+    if (
+      object.isIdentifier() &&
+      !object.scope.hasBinding(object.node.name, /* noGlobals */ true) &&
+      PossibleGlobalObjects.has(object.node.name) &&
+      property.isIdentifier()
+    ) {
+      return property.node.name;
+    }
   }
 
   const resolved = resolve(path);
