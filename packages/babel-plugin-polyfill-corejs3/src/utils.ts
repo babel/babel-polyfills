@@ -37,7 +37,11 @@ export function maybeMemoizeContext(
     context1 = t.cloneNode(object);
   } else {
     context2 = scope.generateDeclaredUidIdentifier("context");
-    context1 = t.assignmentExpression("=", t.cloneNode(context2), object);
+    context1 = t.assignmentExpression(
+      "=",
+      t.cloneNode(context2),
+      object as t.Expression,
+    );
   }
 
   return [context1, context2];

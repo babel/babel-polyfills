@@ -1,11 +1,10 @@
 import { declare } from "@babel/helper-plugin-utils";
 import type { NodePath } from "@babel/traverse";
 
-import _getTargets, {
+import getTargets, {
   isRequired,
   getInclusionReasons,
 } from "@babel/helper-compilation-targets";
-const getTargets = _getTargets.default || _getTargets;
 
 import { createUtilsGetter } from "./utils";
 import ImportsCachedInjector from "./imports-injector";
