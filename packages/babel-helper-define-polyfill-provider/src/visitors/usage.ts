@@ -68,7 +68,7 @@ export default (callProvider: CallProvider) => {
         }
       }
 
-      const source = resolveSource(object);
+      const source = resolveSource(object, new Set());
       const skipObject = property(source.id, key, source.placement, path);
       const canHandleObject =
         objectIsGlobalIdentifier &&
@@ -107,7 +107,7 @@ export default (callProvider: CallProvider) => {
 
       let id = null;
       let placement = null;
-      if (obj) ({ id, placement } = resolveSource(obj));
+      if (obj) ({ id, placement } = resolveSource(obj, new Set()));
 
       for (const prop of path.get("properties")) {
         if (prop.isObjectProperty()) {
@@ -120,7 +120,7 @@ export default (callProvider: CallProvider) => {
     BinaryExpression(path: NodePath<t.BinaryExpression>) {
       if (path.node.operator !== "in") return;
 
-      const source = resolveSource(path.get("right"));
+      const source = resolveSource(path.get("right"), new Set());
       const key = resolveKey(path.get("left"), true);
 
       if (!key) return;

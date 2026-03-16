@@ -22,20 +22,20 @@ export function has(object: any, key: string) {
 
 function resolve(
   path: NodePath,
-  resolved: Set<NodePath> = new Set(),
+  seen: Set<NodePath> = new Set(),
 ): NodePath | undefined {
-  if (resolved.has(path)) return;
-  resolved.add(path);
+  if (seen.has(path)) return;
+  seen.add(path);
 
   if (path.isVariableDeclarator()) {
     if (path.get("id").isIdentifier()) {
-      return resolve(path.get("init"), resolved);
+      return resolve(path.get("init"), seen);
     }
   } else if (path.isReferencedIdentifier()) {
     const binding = path.scope.getBinding(path.node.name);
     if (!binding) return path;
     if (!binding.constant) return;
-    return resolve(binding.path, resolved);
+    return resolve(binding.path, seen);
   }
   return path;
 }
@@ -104,15 +104,23 @@ export function resolveKey(
   }
 }
 
-export function resolveInstance(obj: NodePath): string | null {
-  const source = resolveSource(obj);
+function resolveInstance(obj: NodePath, seen: Set<NodePath>): string | null {
+  const source = resolveSource(obj, seen);
   return source.placement === "prototype" ? source.id : null;
 }
 
-export function resolveSource(obj: NodePath): {
+export function resolveSource(
+  obj: NodePath,
+  seen: Set<NodePath>,
+): {
   id: string | null;
   placement: "prototype" | "static" | null;
 } {
+  if (seen.has(obj)) {
+    return { id: null, placement: null };
+  }
+  seen.add(obj);
+
   if (
     obj.isMemberExpression() &&
     obj.get("property").isIdentifier({ name: "prototype" })
@@ -175,6 +183,7 @@ export function resolveSource(obj: NodePath): {
       if (operator === "-" || operator === "~") {
         const arg = resolveInstance(
           (path as NodePath<t.UnaryExpression>).get("argument"),
+          seen,
         );
         if (arg === "BigInt") return { id: "BigInt", placement: "prototype" };
         if (arg !== null) return { id: "Number", placement: "prototype" };
@@ -186,6 +195,7 @@ export function resolveSource(obj: NodePath): {
     case "UpdateExpression": {
       const arg = resolveInstance(
         (path as NodePath<t.UpdateExpression>).get("argument"),
+        seen,
       );
       if (arg === "BigInt") return { id: "BigInt", placement: "prototype" };
       if (arg !== null) return { id: "Number", placement: "prototype" };
@@ -227,9 +237,11 @@ export function resolveSource(obj: NodePath): {
       ) {
         const left = resolveInstance(
           (path as NodePath<t.BinaryExpression>).get("left"),
+          seen,
         );
         const right = resolveInstance(
           (path as NodePath<t.BinaryExpression>).get("right"),
+          seen,
         );
         if (left === "BigInt" && right === "BigInt") {
           return { id: "BigInt", placement: "prototype" };
@@ -243,9 +255,11 @@ export function resolveSource(obj: NodePath): {
       if (operator === "+") {
         const left = resolveInstance(
           (path as NodePath<t.BinaryExpression>).get("left"),
+          seen,
         );
         const right = resolveInstance(
           (path as NodePath<t.BinaryExpression>).get("right"),
+          seen,
         );
         if (left === "String" || right === "String") {
           return { id: "String", placement: "prototype" };
@@ -264,13 +278,14 @@ export function resolveSource(obj: NodePath): {
       const expressions = (path as NodePath<t.SequenceExpression>).get(
         "expressions",
       );
-      return resolveSource(expressions[expressions.length - 1]);
+      return resolveSource(expressions[expressions.length - 1], seen);
     }
     // a = b -> the result is the right side
     case "AssignmentExpression": {
       if ((path.node as t.AssignmentExpression).operator === "=") {
         return resolveSource(
           (path as NodePath<t.AssignmentExpression>).get("right"),
+          seen,
         );
       }
       return { id: null, placement: null };
@@ -279,9 +294,11 @@ export function resolveSource(obj: NodePath): {
     case "ConditionalExpression": {
       const consequent = resolveSource(
         (path as NodePath<t.ConditionalExpression>).get("consequent"),
+        seen,
       );
       const alternate = resolveSource(
         (path as NodePath<t.ConditionalExpression>).get("alternate"),
+        seen,
       );
       if (consequent.id && consequent.id === alternate.id) {
         return consequent;
@@ -292,6 +309,7 @@ export function resolveSource(obj: NodePath): {
     case "ParenthesizedExpression":
       return resolveSource(
         (path as NodePath<t.ParenthesizedExpression>).get("expression"),
+        seen,
       );
     // TypeScript / Flow type wrappers -> unwrap to the inner expression
     case "TSAsExpression":
@@ -300,7 +318,7 @@ export function resolveSource(obj: NodePath): {
     case "TSInstantiationExpression":
     case "TSTypeAssertion":
     case "TypeCastExpression":
-      return resolveSource(path.get("expression") as NodePath);
+      return resolveSource(path.get("expression") as NodePath, seen);
   }
 
   return { id: null, placement: null };
