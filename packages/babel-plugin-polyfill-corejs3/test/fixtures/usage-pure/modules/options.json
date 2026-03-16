@@ -8,5 +8,8 @@
       }
     ],
     "@babel/plugin-transform-modules-commonjs"
-  ]
+  ],
+  "targets": {
+    "ie": "5"
+  }
 }

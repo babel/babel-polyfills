@@ -1,1 +1,0 @@
-regeneratorRuntime.wrap(function() {});
