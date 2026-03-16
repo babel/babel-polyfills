@@ -895,4 +895,18 @@ describe("descriptors", () => {
       placement: null,
     });
   });
+
+  it("instance property on self-referencing variable", () => {
+    const [desc] = getDescriptor(
+      "var n = n ? n : {}; n.foo;",
+      d => d.kind === "property" && d.key === "foo",
+    );
+
+    expect(desc).toEqual({
+      kind: "property",
+      object: null,
+      key: "foo",
+      placement: null,
+    });
+  });
 });
