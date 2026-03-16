@@ -9,5 +9,8 @@
         "proposals": true
       }
     ]
-  ]
+  ],
+  "targets": {
+    "ie": "5"
+  }
 }

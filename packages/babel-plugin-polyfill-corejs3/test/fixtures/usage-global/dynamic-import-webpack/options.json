@@ -11,5 +11,8 @@
   "caller": {
     "name": "babel-loader",
     "supportsDynamicImport": true
+  },
+  "targets": {
+    "ie": "5"
   }
 }

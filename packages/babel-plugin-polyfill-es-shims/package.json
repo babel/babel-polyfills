@@ -26,12 +26,12 @@
     "@babel/helper-define-polyfill-provider": "workspace:^0.6.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.6",
-    "@babel/helper-plugin-test-runner": "^7.27.1",
+    "@babel/core": "^8.0.0-rc.3 <8.0.0",
+    "@babel/helper-plugin-test-runner": "^8.0.0-rc.3 <8.0.0",
     "array.from": "^1.1.6",
     "math.clz32": "^1.0.3"
   },
   "peerDependencies": {
-    "@babel/core": "^7.4.0 || ^8.0.0-0 <8.0.0"
+    "@babel/core": "^7.4.0 || ^8.0.0-rc.3"
   }
 }

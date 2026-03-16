@@ -26,19 +26,19 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@babel/helper-compilation-targets": "^7.28.6",
-    "@babel/helper-plugin-utils": "^7.28.6",
+    "@babel/helper-compilation-targets": "^8.0.0-rc.3 <8.0.0",
+    "@babel/helper-plugin-utils": "^8.0.0-rc.3 <8.0.0",
     "lodash.debounce": "^4.0.8"
   },
   "peerDependencies": {
-    "@babel/core": "^7.4.0 || ^8.0.0-0 <8.0.0"
+    "@babel/core": "^7.4.0 || ^8.0.0-rc.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.6",
-    "@babel/core": "^7.28.6",
-    "@babel/generator": "^7.28.6",
-    "@babel/plugin-transform-modules-commonjs": "^7.28.6",
-    "@babel/traverse": "^7.28.6",
+    "@babel/cli": "^8.0.0-rc.3 <8.0.0",
+    "@babel/core": "^8.0.0-rc.3 <8.0.0",
+    "@babel/generator": "^8.0.0-rc.3 <8.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^8.0.0-rc.3 <8.0.0",
+    "@babel/traverse": "^8.0.0-rc.3 <8.0.0",
     "@rollup/plugin-babel": "^7.0.0",
     "babel-loader": "^10.1.0",
     "rollup": "^4.59.0",

@@ -8,5 +8,8 @@
         "shippedProposals": true
       }
     ]
-  ]
+  ],
+  "targets": {
+    "ie": "5"
+  }
 }

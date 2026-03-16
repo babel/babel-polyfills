@@ -1,16 +1,6 @@
 import defineProvider from "@babel/helper-define-polyfill-provider";
-import type { PluginPass } from "@babel/core";
 
-const runtimeCompat = "#__secret_key__@babel/runtime__compatibility";
-
-type Options = {
-  "#__secret_key__@babel/runtime__compatibility": void | {
-    useBabelRuntime: boolean;
-    moduleName: string;
-  };
-};
-
-export default defineProvider<Options>(({ debug, targets, babel }, options) => {
+export default defineProvider(({ debug, targets, babel }) => {
   if (!shallowEqual(targets, babel.targets())) {
     throw new Error(
       "This plugin does not use the targets option. Only preset-env's targets" +
@@ -19,10 +9,6 @@ export default defineProvider<Options>(({ debug, targets, babel }, options) => {
         " details.",
     );
   }
-
-  const {
-    [runtimeCompat]: { moduleName = null, useBabelRuntime = false } = {},
-  } = options;
 
   return {
     name: "regenerator",
@@ -37,19 +23,11 @@ export default defineProvider<Options>(({ debug, targets, babel }, options) => {
     },
     usagePure(meta, utils, path) {
       if (isRegenerator(meta)) {
-        let pureName = "regenerator-runtime";
-        if (useBabelRuntime) {
-          const runtimeName =
-            moduleName ??
-            ((path.hub as any).file as PluginPass).get(
-              "runtimeHelpersModuleName",
-            ) ??
-            "@babel/runtime";
-          pureName = `${runtimeName}/regenerator`;
-        }
-
         path.replaceWith(
-          utils.injectDefaultImport(pureName, "regenerator-runtime"),
+          utils.injectDefaultImport(
+            "regenerator-runtime",
+            "regenerator-runtime",
+          ),
         );
       }
     },

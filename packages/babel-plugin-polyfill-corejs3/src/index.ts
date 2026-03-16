@@ -270,7 +270,7 @@ export default defineProvider<Options>(function (
                     coreJSPureHelper("get-iterator", useBabelRuntime, ext),
                     "getIterator",
                   ),
-                  [node.object],
+                  [node.object as t.Expression],
                 ),
               );
               path.skip();
@@ -345,7 +345,7 @@ export default defineProvider<Options>(function (
                 parentPath.type === "OptionalMemberExpression"
                   ? "MemberExpression"
                   : "CallExpression";
-              delete parentAsNotOptional.node.optional;
+              delete parentPath.node.optional;
 
               ({ parentPath } = parentPath);
             } while (
@@ -400,7 +400,7 @@ export default defineProvider<Options>(function (
           path.replaceWith(check(t.callExpression(id, [node.object])));
           if (t.isOptionalMemberExpression(parent)) parent.optional = true;
         } else {
-          path.replaceWith(t.callExpression(id, [node.object]));
+          path.replaceWith(t.callExpression(id, [node.object as t.Expression]));
         }
       }
     },

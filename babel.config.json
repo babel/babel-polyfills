@@ -1,7 +1,7 @@
 {
   "sourceType": "unambiguous",
   "presets": [
-    ["@babel/preset-env", { "loose": true }],
+    "@babel/preset-env",
     "@babel/preset-typescript"
   ],
   "plugins": ["./scripts/babel-plugin-compat-core-import"],

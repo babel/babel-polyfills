@@ -1,5 +1,6 @@
 {
   "externalHelpers": false,
+  "targets": { "ie": "5" },
   "plugins": [
     [
       "@@/polyfill-corejs3",

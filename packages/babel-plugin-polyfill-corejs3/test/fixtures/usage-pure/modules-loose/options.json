@@ -13,5 +13,8 @@
         "loose": true
       }
     ]
-  ]
+  ],
+  "targets": {
+    "ie": "5"
+  }
 }

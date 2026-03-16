@@ -13,5 +13,8 @@
       }
     ],
     "@babel/plugin-transform-for-of"
-  ]
+  ],
+  "targets": {
+    "ie": "5"
+  }
 }
