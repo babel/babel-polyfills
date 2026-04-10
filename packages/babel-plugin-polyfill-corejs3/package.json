@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-polyfill-corejs3",
-  "version": "0.14.1",
+  "version": "1.0.0-rc.1",
   "description": "A Babel plugin to inject imports to core-js@3 polyfills",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "babel-plugin"
   ],
   "dependencies": {
-    "@babel/helper-define-polyfill-provider": "workspace:^0.6.7",
+    "@babel/helper-define-polyfill-provider": "workspace:^1.0.0-rc.1",
     "core-js-compat": "^3.48.0"
   },
   "devDependencies": {
