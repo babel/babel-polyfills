@@ -28,7 +28,7 @@ import type {
 } from "./types";
 
 import * as v from "./visitors";
-import * as deps from "./node/dependencies";
+import * as deps from "#dependencies";
 
 import createMetaResolver from "./meta-resolver";
 
