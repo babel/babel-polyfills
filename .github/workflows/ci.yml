@@ -76,6 +76,43 @@ jobs:
       - name: Test the esm build
         run: yarn test:esm
 
+  test-babel7:
+    name: Test with Babel 7
+    needs: prepare-yarn-cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Use Node.js latest
+        uses: actions/setup-node@v3
+        with:
+          cache: "yarn"
+      - name: Install
+        run: yarn install
+      - name: Build
+        run: yarn build
+        env:
+          BABEL_ENV: production
+      - name: Downgrade to Babel 7
+        run: |
+          node scripts/downgrade-babel-to-v7.mjs
+          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install
+      - name: Delete tests that import .ts files
+        run: rm packages/babel-helper-define-polyfill-provider/test/meta-resolver.js packages/babel-plugin-polyfill-corejs3/test/check-builtin-definitions.test.js
+      - name: Remove Babel 8-specific fixtures
+        run: |
+          # These fixtures produce different output with Babel 7 due to
+          # behavioral changes in @babel/helper-compilation-targets and
+          # @babel/plugin-transform-classes between Babel 7 and 8.
+          rm -rf packages/babel-plugin-polyfill-corejs3/test/fixtures/regression/usage-pure-in-helpers
+          rm -rf packages/babel-plugin-polyfill-corejs3/test/fixtures/usage-global/browserslist-config-ignore
+          rm -rf packages/babel-plugin-polyfill-corejs3/test/fixtures/usage-global/dynamic-import
+          rm -rf packages/babel-plugin-polyfill-corejs3/test/fixtures/usage-global/dynamic-import-webpack
+      - name: Test
+        run: yarn jest --ci --color --maxWorkers=2
+      - name: Test the esm build
+        run: yarn test:esm
+
   test-windows:
     name: Test on Windows
     needs: prepare-yarn-cache
