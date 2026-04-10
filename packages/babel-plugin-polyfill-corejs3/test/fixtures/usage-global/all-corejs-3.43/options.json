@@ -8,5 +8,8 @@
         "method": "usage-global"
       }
     ]
-  ]
+  ],
+  "targets": {
+    "ie": "5"
+  }
 }

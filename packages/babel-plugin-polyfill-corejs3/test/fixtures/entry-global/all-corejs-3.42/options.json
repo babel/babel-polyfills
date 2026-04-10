@@ -8,5 +8,8 @@
         "method": "entry-global"
       }
     ]
-  ]
+  ],
+  "targets": {
+    "ie": "5"
+  }
 }

@@ -8,5 +8,8 @@
         "absoluteImports": true
       }
     ]
-  ]
+  ],
+  "targets": {
+    "ie": "5"
+  }
 }
