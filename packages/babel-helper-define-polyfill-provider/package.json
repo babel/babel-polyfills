@@ -1,6 +1,6 @@
 {
   "name": "@babel/helper-define-polyfill-provider",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "description": "Babel helper to create your own polyfill provider",
   "repository": {
     "type": "git",
