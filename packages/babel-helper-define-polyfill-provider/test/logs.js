@@ -3,6 +3,8 @@ import fs from "fs";
 import path from "path";
 import stripAnsi from "strip-ansi";
 import { fileURLToPath } from "url";
+import * as babel from "@babel/core";
+import definePolyfillProvider from "../lib/index.node.js";
 
 function execP(cmd, opts) {
   const normalize = buff => stripAnsi(buff + "").trim();
@@ -132,5 +134,49 @@ describe("debug", () => {
     `);
 
     expect(exitCode).toBe(0);
+  });
+
+  it("logs later polyfills when one matches the provider name", () => {
+    const plugin = definePolyfillProvider(({ debug }) => ({
+      name: "test",
+      polyfills: ["test", "alpha"],
+
+      entryGlobal(meta, utils, path) {
+        if (meta.kind !== "import" || meta.source !== "polyfill") return;
+
+        debug("test");
+        utils.injectGlobalImport("test", "test");
+        debug("alpha");
+        utils.injectGlobalImport("alpha", "alpha");
+        path.remove();
+      },
+    }));
+
+    const logSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+    let logs;
+
+    try {
+      babel.transformSync(`import "polyfill";`, {
+        babelrc: false,
+        configFile: false,
+        filename: "input.mjs",
+        plugins: [
+          [
+            plugin,
+            {
+              method: "entry-global",
+              debug: true,
+              missingDependencies: false,
+            },
+          ],
+        ],
+      });
+      logs = logSpy.mock.calls.map(([message]) => message).join("\n");
+    } finally {
+      logSpy.mockRestore();
+    }
+
+    expect(logs).toContain("  test");
+    expect(logs).toContain("  alpha");
   });
 });

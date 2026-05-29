@@ -219,7 +219,7 @@ function instantiateProvider<Options>(
 
       if (!debug || !name) return;
 
-      if (debugLog().polyfills.has(providerName)) return;
+      if (debugLog().polyfills.has(name)) return;
       debugLog().polyfills.add(name);
       debugLog().polyfillsSupport ??= polyfillsSupport;
     },
