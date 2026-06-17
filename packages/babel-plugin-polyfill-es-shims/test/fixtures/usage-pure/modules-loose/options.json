@@ -12,14 +12,13 @@
         }
       }
     ],
-    [
-      "@babel/plugin-transform-modules-commonjs",
-      {
-        "loose": true
-      }
-    ]
+    "@babel/plugin-transform-modules-commonjs"
   ],
   "targets": {
     "ie": "5"
+  },
+  "assumptions": {
+    "constantReexports": true,
+    "enumerableModuleMeta": true
   }
 }
