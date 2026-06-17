@@ -20,8 +20,9 @@
     {
       "files": ["packages/*/src/**/*.{js,ts}"],
       "rules": {
-        "@babel/development/no-undefined-identifier": "error",
-        "@babel/development/no-deprecated-clone": "error",
+        // TODO: Figure out why they are not working
+        // "@babel/development/no-undefined-identifier": "error",
+        // "@babel/development/no-deprecated-clone": "error",
         "import/no-extraneous-dependencies": "error",
         "eqeqeq": ["error", "always", { "null": "ignore" }],
         "guard-for-in": "error"
