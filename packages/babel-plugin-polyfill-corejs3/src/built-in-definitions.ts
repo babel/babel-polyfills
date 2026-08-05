@@ -406,12 +406,12 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
       ...IteratorDependencies,
     ]),
     zip: define("iterator/zip", [
-      "esnext.iterator.zip",
+      "es.iterator.zip",
       ...IteratorDependencies,
       ...CommonIterators,
     ]),
     zipKeyed: define("iterator/zip-keyed", [
-      "esnext.iterator.zip-keyed",
+      "es.iterator.zip-keyed",
       "es.object.create",
       "es.reflect.own-keys",
       ...IteratorDependencies,
@@ -553,8 +553,18 @@ export const StaticProperties: ObjectMap2<CoreJSPolyfillDescriptor> = {
 
   Promise: {
     all: define(null, PromiseDependenciesWithIterators),
+    allKeyed: define("promise/all-keyed", [
+      "esnext.promise.all-keyed",
+      "es.reflect.own-keys",
+      ...PromiseDependenciesWithIterators,
+    ]),
     allSettled: define("promise/all-settled", [
       "es.promise.all-settled",
+      ...PromiseDependenciesWithIterators,
+    ]),
+    allSettledKeyed: define("promise/all-settled-keyed", [
+      "esnext.promise.all-settled-keyed",
+      "es.reflect.own-keys",
       ...PromiseDependenciesWithIterators,
     ]),
     any: define("promise/any", [
@@ -905,6 +915,8 @@ export const InstanceProperties = {
   includes: define("instance/includes", [
     "es.array.includes",
     "es.string.includes",
+    "esnext.iterator.includes",
+    ...IteratorDependencies,
   ]),
   indexed: define(null, [
     "esnext.async-iterator.indexed",
@@ -915,7 +927,11 @@ export const InstanceProperties = {
   indexOf: define("instance/index-of", ["es.array.index-of"]),
   isWellFormed: define("instance/is-well-formed", ["es.string.is-well-formed"]),
   italics: define(null, ["es.string.italics"]),
-  join: define(null, ["es.array.join"]),
+  join: define(null, [
+    "es.array.join",
+    "esnext.iterator.join",
+    ...IteratorDependencies,
+  ]),
   keys: define("instance/keys", ArrayNatureIteratorsWithTag),
   lastIndex: define(null, ["esnext.array.last-index"]),
   lastIndexOf: define("instance/last-index-of", ["es.array.last-index-of"]),

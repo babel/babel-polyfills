@@ -132,3 +132,7 @@ a.chunks(b);
 a.sliding(b);
 a.windows(b);
 _clampInstanceProperty(a).call(a, b, c);
+Promise.allKeyed(a);
+Promise.allSettledKeyed(a);
+a.includes();
+a.join();

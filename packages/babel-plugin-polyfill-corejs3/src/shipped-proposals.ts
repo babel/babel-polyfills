@@ -3,7 +3,9 @@
 export default new Set<string>([
   "esnext.array.group",
   "esnext.array.group-to-map",
-  "esnext.iterator.zip",
-  "esnext.iterator.zip-keyed",
+  "esnext.iterator.chunks",
+  "esnext.iterator.includes",
+  "esnext.iterator.join",
+  "esnext.iterator.windows",
   "esnext.symbol.metadata",
 ]);

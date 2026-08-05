@@ -219,3 +219,7 @@ a.chunks(b);
 a.sliding(b);
 a.windows(b);
 a.clamp(b, c);
+Promise.allKeyed(a);
+Promise.allSettledKeyed(a);
+a.includes();
+a.join();
